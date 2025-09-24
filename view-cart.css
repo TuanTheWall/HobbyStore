@@ -1,0 +1,14 @@
+.ref-summary{
+    padding: 15px !important;   
+    background-color: #ffffff7b; /* Màu nền nhạt */
+    color: #222; /* Màu chữ */
+}
+.ref-products{
+    padding-bottom: 15px !important;
+    background-color: #ffffff83; /* Màu nền khác */
+}
+.ref-totals{
+    padding-top: 15px !important;
+    background-color: #ffffff99; /* Màu nền tổng kết */
+    color: #222;
+}
