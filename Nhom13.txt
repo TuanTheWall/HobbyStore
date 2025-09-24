@@ -1,5 +1,0 @@
-|   MSSV     |       Họ                |    Tên	   | Nhóm | Sản phẩm sẽ bán |               GitHub                   |
---------------------------------------------------------------------------------------------------------------------------
-| 3122410076 | Nguyễn Hồ Vũ Ngọc Tuấn  |    Anh    |   13 |     Đồ chơi     |https://github.com/TuanTheWall/DrinkStore.git
-| 3124411229 | Trần Ngọc               |    Phong  |   13 |     Đồ chơi     |https://github.com/TuanTheWall/DrinkStore.git
-| 3124411328 | Phạm Quang              |    Trung  |   13 |     Đồ chơi     |https://github.com/TuanTheWall/DrinkStore.git 
