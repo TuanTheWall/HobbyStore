@@ -14,6 +14,49 @@
   <link rel="stylesheet" href="assets/css/settings.css">
   <link rel="stylesheet" href="assets/css/product-page.css">
   <link rel="stylesheet" href="assets/css/view-cart.css">
+<style>
+.category-grid {
+  display: flex;
+  justify-content: center;  /* căn giữa ngang */
+  gap: 40px;                /* khoảng cách giữa ảnh */
+  flex-wrap: wrap;
+}
+
+.category-grid img {
+  width: 250px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.category-grid img:hover {
+  transform: scale(1.05);
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  justify-items: center;
+  }
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+</style>
 </head>
  <a href="index.html" class="rounded-pill">
   <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:60px;">
@@ -32,16 +75,238 @@
   <div class="container">
     <button><div data-reflow-type="view-cart" data-reflow-summary-type="dropdown" data-reflow-summary-position="left" data-reflow-shoppingcart-url="cart.html">Cart</div></button>
     <h2>Chọn Loại Sản Phẩm</h2>
-   <section class="product-section">
-      <div class="product-grid">
+    <section class="product-section">
+      <div class="category-grid">
           <a href="index.html">
           <img class="card-img" src="assets/img/wallhaven-wyjj7x_1920x1080.png" alt="product-image"></a>
           <a href="nuocngot.html">
           <img class="card-img" src="assets/img/129054634_p0_master1200.jpg"alt="product-image"></a>
       </div>
     </section>
-   <h2 style="margin-top: -100px;">Sản Phẩm</h2>
-  </div>
+    <h2>Sản Phẩm</h2>
+<section class="product-section">
+      <div class="product-grid">
+        <div class="card">
+          <div class="card-pill">
+            Sale
+          </div>
+          <img class="card-img" src="assets/img/Minimal Universe Space Music Album Cover.png" alt="product-image">
+          <div class="flex-row space-between w-full mb-sm">
+            <p class="product-brand">EP - Romyle & StevenTed</p>
+            <p class="product-cat hide">Skateboarding</p>
+          </div>
+          <h1 class="product-name">The Breathe EP - Deluxe Signed Edition</h1>
+          <div class="flex-row">
+            <p class="price strike">$<span>94.95</span></p>
+            <p class="price">$<span>79.95</span></p>
+          </div>
+          <div class="btn-col">
+            <a href="products/product-1.html" class="icon-link">
+              Purchase
+              <svg fill="none" class="rubicons arrow-right-up" xmlns="http://www.w3.org/2000/svg" width="auto"
+                height="auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M17.9645 12.9645l.071-7h-7.071" stroke-linecap="round"></path>
+                <path d="M5.9645 17.9645l12-12" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-pill">
+            Sale
+          </div>
+          <img class="card-img" src="assets/img/Minimal Universe Space Music Album Cover.png" alt="product-image">
+          <div class="flex-row space-between w-full mb-sm">
+            <p class="product-brand">EP - Romyle & StevenTed</p>
+            <p class="product-cat hide">Skateboarding</p>
+          </div>
+          <h1 class="product-name">The Breathe EP - Deluxe Signed Edition</h1>
+          <div class="flex-row">
+            <p class="price strike">$<span>94.95</span></p>
+            <p class="price">$<span>79.95</span></p>
+          </div>
+          <div class="btn-col">
+            <a href="products/product-1.html" class="icon-link">
+              Purchase
+              <svg fill="none" class="rubicons arrow-right-up" xmlns="http://www.w3.org/2000/svg" width="auto"
+                height="auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M17.9645 12.9645l.071-7h-7.071" stroke-linecap="round"></path>
+                <path d="M5.9645 17.9645l12-12" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-pill">
+            Sale
+          </div>
+          <img class="card-img" src="assets/img/Minimal Universe Space Music Album Cover.png" alt="product-image">
+          <div class="flex-row space-between w-full mb-sm">
+            <p class="product-brand">EP - Romyle & StevenTed</p>
+            <p class="product-cat hide">Skateboarding</p>
+          </div>
+          <h1 class="product-name">The Breathe EP - Deluxe Signed Edition</h1>
+          <div class="flex-row">
+            <p class="price strike">$<span>94.95</span></p>
+            <p class="price">$<span>79.95</span></p>
+          </div>
+          <div class="btn-col">
+            <a href="products/product-1.html" class="icon-link">
+              Purchase
+              <svg fill="none" class="rubicons arrow-right-up" xmlns="http://www.w3.org/2000/svg" width="auto"
+                height="auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M17.9645 12.9645l.071-7h-7.071" stroke-linecap="round"></path>
+                <path d="M5.9645 17.9645l12-12" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-pill">
+            Sale
+          </div>
+          <img class="card-img" src="assets/img/Minimal Universe Space Music Album Cover.png" alt="product-image">
+          <div class="flex-row space-between w-full mb-sm">
+            <p class="product-brand">EP - Romyle & StevenTed</p>
+            <p class="product-cat hide">Skateboarding</p>
+          </div>
+          <h1 class="product-name">The Breathe EP - Deluxe Signed Edition</h1>
+          <div class="flex-row">
+            <p class="price strike">$<span>94.95</span></p>
+            <p class="price">$<span>79.95</span></p>
+          </div>
+          <div class="btn-col">
+            <a href="products/product-1.html" class="icon-link">
+              Purchase
+              <svg fill="none" class="rubicons arrow-right-up" xmlns="http://www.w3.org/2000/svg" width="auto"
+                height="auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M17.9645 12.9645l.071-7h-7.071" stroke-linecap="round"></path>
+                <path d="M5.9645 17.9645l12-12" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-pill">
+            Sale
+          </div>
+          <img class="card-img" src="assets/img/Minimal Universe Space Music Album Cover.png" alt="product-image">
+          <div class="flex-row space-between w-full mb-sm">
+            <p class="product-brand">EP - Romyle & StevenTed</p>
+            <p class="product-cat hide">Skateboarding</p>
+          </div>
+          <h1 class="product-name">The Breathe EP - Deluxe Signed Edition</h1>
+          <div class="flex-row">
+            <p class="price strike">$<span>94.95</span></p>
+            <p class="price">$<span>79.95</span></p>
+          </div>
+          <div class="btn-col">
+            <a href="products/product-1.html" class="icon-link">
+              Purchase
+              <svg fill="none" class="rubicons arrow-right-up" xmlns="http://www.w3.org/2000/svg" width="auto"
+                height="auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M17.9645 12.9645l.071-7h-7.071" stroke-linecap="round"></path>
+                <path d="M5.9645 17.9645l12-12" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-pill hide">
+            Sale
+          </div>
+          <img class="card-img"
+            src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/c15bdccf-e742-4ad2-9110-e50940765f66/sb-charge-canvas-skate-shoe-80KN54.jpg"
+            alt="product-image">
+          <div class="flex-row space-between w-full mb-sm">
+            <p class="product-brand">Nike SB</p>
+            <p class="product-cat hide">Skateboarding</p>
+          </div>
+          <h1 class="product-name">Charge Canvas</h1>
+          <div class="flex-row">
+            <p class="price strike hide">$<span>94.95</span></p>
+            <p class="price">$<span>65</span></p>
+          </div>
+          <div class="btn-col">
+            <a href="#" class="icon-link">
+              Purchase
+              <svg fill="none" class="rubicons arrow-right-up" xmlns="http://www.w3.org/2000/svg" width="auto"
+                height="auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M17.9645 12.9645l.071-7h-7.071" stroke-linecap="round"></path>
+                <path d="M5.9645 17.9645l12-12" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-pill hide">
+            Sale
+          </div>
+          <img class="card-img"
+            src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/8968297e-7aa4-447b-88e9-d79ba90b6fc3/sb-shane-skate-shoe-m56jq0.jpg"
+            alt="product-image">
+          <div class="flex-row space-between w-full mb-sm">
+            <p class="product-brand">Nike SB</p>
+            <p class="product-cat hide">Skateboarding</p>
+          </div>
+          <h1 class="product-name">Shane O'Neill</h1>
+          <div class="flex-row">
+            <p class="price strike hide">$<span>94.95</span></p>
+            <p class="price">$<span>80</span></p>
+          </div>
+          <div class="btn-col">
+            <a href="#" class="icon-link">
+              Purchase
+              <svg fill="none" class="rubicons arrow-right-up" xmlns="http://www.w3.org/2000/svg" width="auto"
+                height="auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M17.9645 12.9645l.071-7h-7.071" stroke-linecap="round"></path>
+                <path d="M5.9645 17.9645l12-12" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-pill hide">
+            Sale
+          </div>
+          <img class="card-img"
+            src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/3db0b166-c4c0-4321-9ef4-800314582af3/sb-blzr-court-skate-shoe-R6bVLk.jpg"
+            alt="product-image">
+          <div class="flex-row space-between w-full mb-sm">
+            <p class="product-brand">Nike SB</p>
+            <p class="product-cat hide">Skateboarding</p>
+          </div>
+          <h1 class="product-name">BLZR Court</h1>
+          <div class="flex-row">
+            <p class="price strike hide">$<span>94.95</span></p>
+            <p class="price">$<span>65</span></p>
+          </div>
+          <div class="btn-col">
+            <a href="#" class="icon-link">
+              Purchase
+              <svg fill="none" class="rubicons arrow-right-up" xmlns="http://www.w3.org/2000/svg" width="auto"
+                height="auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M17.9645 12.9645l.071-7h-7.071" stroke-linecap="round"></path>
+                <path d="M5.9645 17.9645l12-12" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+ 	
+ 	
+<div class="pagination">
+  <a href="mau2.html">&laquo;</a>
+  <a href="mau2.html">1</a>
+  <a href="mau2.html">2</a>
+  <a href="mau2.html">3</a>
+  <a href="mau2.html">4</a>
+  <a href="mau2.html">5</a>
+  <a href="mau2.html">6</a>
+  <a href="mau2.html">&raquo;</a>
+</div>
+ 	
  	
   <footer class="footer">
     <div class="waves">
