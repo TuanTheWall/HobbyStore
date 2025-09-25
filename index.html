@@ -38,30 +38,55 @@
   justify-items: center;
   }
 
-.pagination {
-  display: inline-block;
+.pagination{
+	text-align:center;
+	
+}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+.pagination a.active{
+	background-color: green;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+	background-color: gray;
+	border-radius: 5px;
+}
+.card{
+   padding: 10px;
+   
+}
+.product-section{
+	margin: 10px;
+}
+.search{
+	text-align:center;
+	margin: 20px;
+}
+.search-advanced {
+  text-align: center; /* canh giữa nội dung bên trong form */
+  margin: 20px 0;     /* khoảng cách trên/dưới */
 }
 
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
+.search-advanced button {
+  background-color: blue;
   color: white;
-  border: 1px solid #4CAF50;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 </style>
 </head>
- <a href="index.html" class="rounded-pill">
-  <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:60px;">
-  <nav class="navbar">
-  </a>
+<a href="index.html" class="rounded-pill">
+  <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:60px;"></a>
+<nav class="navbar">
     <div class="nav-links">
       <ul>
         <li class="active"><a href="#">Trang chủ</a></li>
@@ -69,9 +94,8 @@
         <li><a href="contact.html">Liên lạc</a></li>
       </ul>
     </div>
-</style>
   </nav>
-  <img src="assets/img/wallhaven-wyjj7x_m.png" width="1520" height="200" >
+    <img src="assets/img/wallhaven-wyjj7x_m.png" width="1520" height="200" >
   <div class="container">
     <button><div data-reflow-type="view-cart" data-reflow-summary-type="dropdown" data-reflow-summary-position="left" data-reflow-shoppingcart-url="cart.html">Cart</div></button>
     <h2>Chọn Loại Sản Phẩm</h2>
@@ -83,13 +107,21 @@
           <img class="card-img" src="assets/img/129054634_p0_master1200.jpg"alt="product-image"></a>
       </div>
     </section>
+    <form action="1index.html" method="get">
+      <div class="search">
+	<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px;">
+	<button type="submit" style="background-color:blue;">Tìm</button>
+	</div>
+	</form>
+	
+		<form action="search.html" class="search-advanced">
+		<button type="submit" style="background-color:blue;margin:0 auto;">Tìm kiếm nâng cao </button>
+		</form>
+  </div>
     <h2>Sản Phẩm</h2>
 <section class="product-section">
       <div class="product-grid">
         <div class="card">
-          <div class="card-pill">
-            Sale
-          </div>
           <img class="card-img" src="assets/img/Minimal Universe Space Music Album Cover.png" alt="product-image">
           <div class="flex-row space-between w-full mb-sm">
             <p class="product-brand">EP - Romyle & StevenTed</p>
@@ -112,9 +144,6 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-pill">
-            Sale
-          </div>
           <img class="card-img" src="assets/img/Minimal Universe Space Music Album Cover.png" alt="product-image">
           <div class="flex-row space-between w-full mb-sm">
             <p class="product-brand">EP - Romyle & StevenTed</p>
@@ -137,9 +166,7 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-pill">
-            Sale
-          </div>
+
           <img class="card-img" src="assets/img/Minimal Universe Space Music Album Cover.png" alt="product-image">
           <div class="flex-row space-between w-full mb-sm">
             <p class="product-brand">EP - Romyle & StevenTed</p>
@@ -162,9 +189,6 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-pill">
-            Sale
-          </div>
           <img class="card-img" src="assets/img/Minimal Universe Space Music Album Cover.png" alt="product-image">
           <div class="flex-row space-between w-full mb-sm">
             <p class="product-brand">EP - Romyle & StevenTed</p>
@@ -187,9 +211,6 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-pill">
-            Sale
-          </div>
           <img class="card-img" src="assets/img/Minimal Universe Space Music Album Cover.png" alt="product-image">
           <div class="flex-row space-between w-full mb-sm">
             <p class="product-brand">EP - Romyle & StevenTed</p>
@@ -212,9 +233,6 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-pill hide">
-            Sale
-          </div>
           <img class="card-img"
             src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/c15bdccf-e742-4ad2-9110-e50940765f66/sb-charge-canvas-skate-shoe-80KN54.jpg"
             alt="product-image">
@@ -239,9 +257,7 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-pill hide">
-            Sale
-          </div>
+
           <img class="card-img"
             src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/8968297e-7aa4-447b-88e9-d79ba90b6fc3/sb-shane-skate-shoe-m56jq0.jpg"
             alt="product-image">
@@ -266,9 +282,6 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-pill hide">
-            Sale
-          </div>
           <img class="card-img"
             src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/3db0b166-c4c0-4321-9ef4-800314582af3/sb-blzr-court-skate-shoe-R6bVLk.jpg"
             alt="product-image">
@@ -294,61 +307,19 @@
         </div>
       </div>
     </section>
- 	
- 	
 <div class="pagination">
-  <a href="mau2.html">&laquo;</a>
-  <a href="mau2.html">1</a>
-  <a href="mau2.html">2</a>
-  <a href="mau2.html">3</a>
-  <a href="mau2.html">4</a>
-  <a href="mau2.html">5</a>
-  <a href="mau2.html">6</a>
-  <a href="mau2.html">&raquo;</a>
+  <a href="1index.html">&laquo;</a>
+  <a href="1index.html" class="active">1</a>
+  <a href="1index.html">2</a>
+  <a href="1index.html">3</a>
+  <a href="1index.html">4</a>
+  <a href="1index.html">5</a>
+  <a href="1index.html">6</a>
+  <a href="1index.html">&raquo;</a>
 </div>
- 	
- 	
-  <footer class="footer">
-    <div class="waves">
-      <div class="wave" id="wave1"></div>
-      <div class="wave" id="wave2"></div>
-      <div class="wave" id="wave3"></div>
-      <div class="wave" id="wave4"></div>
-    </div>
-    <ul class="social-icon">
-      <li class="social-icon__item"><a class="social-icon__link" href="#">
-          <ion-icon name="logo-facebook"></ion-icon>
-        </a></li>
-      <li class="social-icon__item"><a class="social-icon__link" href="#">
-          <ion-icon name="logo-twitter"></ion-icon>
-        </a></li>
-      <li class="social-icon__item"><a class="social-icon__link" href="#">
-          <ion-icon name="logo-linkedin"></ion-icon>
-        </a></li>
-      <li class="social-icon__item"><a class="social-icon__link" href="#">
-          <ion-icon name="logo-instagram"></ion-icon>
-        </a></li>
-    </ul>
-    <ul class="menu">
-      <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
-      <li class="menu__item"><a class="menu__link" href="#">About</a></li>
-      <li class="menu__item"><a class="menu__link" href="#">Legal</a></li>
-      <li class="menu__item"><a class="menu__link" href="cgv.html">Terms & Condtions</a></li>
-      <li class="menu__item"><a class="menu__link" href="refundpolicy.html">Refund Policy</a></li>
-
-    </ul>
-    <p>&copy; 2025 Wartermain | All Rights Reserved| For better water</p>
-  </footer>
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-  <script src="assets/js/app.js"></script>
-  <script
-  src="https://cdn.reflowhq.com/v2/toolkit.min.js"
-  data-reflow-project="1590878356"
-  data-testmode="true"
-  defer
 ></script>
-</body>
 
+
+
+</body>
 </html>
