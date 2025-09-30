@@ -1,6 +1,7 @@
 |   MSSV     |       Họ                |    Tên	   | Nhóm | Sản phẩm sẽ bán |               GitHub                   |
 --------------------------------------------------------------------------------------------------------------------------
-| 3122410076 | Nguyễn Hồ Vũ Ngọc Tuấn  |    Anh    |   13 |     Nước uống     |https://github.com/TuanTheWall/HobbyStore
-| 3124411229 | Trần Ngọc               |    Phong  |   13 |     Nước uống     |https://github.com/TuanTheWall/HobbyStore
-| 3124411328 | Phạm Quang              |    Trung  |   13 |     Nước uống     |https://github.com/TuanTheWall/HobbyStore 
+| 3122410076 | Nguyễn Hồ Vũ Ngọc Tuấn  |    Anh    |   13 |     Mô hình       |https://github.com/TuanTheWall/HobbyStore
+| 3124411229 | Trần Ngọc               |    Phong  |   13 |     Mô hình       |https://github.com/TuanTheWall/HobbyStore
+| 3124411328 | Phạm Quang              |    Trung  |   13 |     Mô hình     |https://github.com/TuanTheWall/HobbyStore 
+
 
