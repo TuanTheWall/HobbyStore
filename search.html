@@ -15,16 +15,25 @@
   <link rel="stylesheet" href="assets/css/product-page.css">
   <link rel="stylesheet" href="assets/css/view-cart.css">
 <style>
-.search-advanced {
-  text-align: center; /* canh giữa nội dung bên trong form */
-  margin: 20px 0;     /* khoảng cách trên/dưới */
+.category-grid {
+  display: flex;
+  justify-content: center;  /* căn giữa ngang */
+  gap: 40px;                /* khoảng cách giữa ảnh */
+  flex-wrap: wrap;
 }
-.search-advanced input {
-  margin: 10px;   /* thêm khoảng cách xung quanh */
-  padding: 6px 10px; /* cho đẹp hơn */
-  font-size: 14px;
+.category-grid img {
+  width: 250px;
+  border-radius: 10px;
+  transition: transform 0.3s;
 }
-
+.category-grid img:hover {
+  transform: scale(1.05);
+}
+.product-section{
+    display:flex;
+    justify-content: center; 
+	margin-top: -10px; 
+}
 .search{
 	text-align:center;
 	margin: 20px;
@@ -33,7 +42,6 @@
   text-align: center; /* canh giữa nội dung bên trong form */
   margin: 20px 0;     /* khoảng cách trên/dưới */
 }
-
 .search-advanced button {
   background-color: blue;
   color: white;
@@ -43,71 +51,166 @@
   border-radius: 6px;
   cursor: pointer;
 }
+.product-card {
+  height: 380px;
+  width: 220px;         /* chỉnh chiều rộng card */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  background: #DDDDDD;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;              /* ép ảnh cùng chiều cao */
+  object-fit: cover;          /* cắt ảnh cho vừa khung */
+  border-radius: 8px;
+}
+.product-name {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0;
+  min-height: 40px;             /* giữ chiều cao tên đều nhau */
+}
+.cch{
+ color:black;
+}
+.cch:hover{
+color:red;
+}
+.navbar{
+background-color:cyan;
+height:80px;
+}
+.navbar img {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  background: none !important;
+}
+.btn-col{
+margin-top:auto;
+}
+.price {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.timnangcao {
+  margin-top: -100px;   /* nâng cụm lọc lên cao */
+}
+
+.search-advanced {
+  display: flex;
+  justify-content: center;   /* căn giữa ngang */
+  align-items: center;       /* căn giữa dọc */
+  gap: 20px;                 /* khoảng cách giữa các mục */
+  flex-wrap: wrap;           /* xuống dòng gọn khi màn nhỏ */
+}
+
+.search-advanced label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.search-advanced select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  min-width: 200px;          /* tất cả select có cùng độ rộng */
+}
+
+.btn-tim {
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
 </style>
 </head>
-<a href="index.html" class="rounded-pill">
-  <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:60px;"></a>
+<body>
 <nav class="navbar">
     <div class="nav-links">
       <ul>
-        <li class="active"><a href="#">Trang chủ</a></li>
-        <li><a href="about.html">Về chúng tôi</a></li>
-        <li><a href="contact.html">Liên lạc</a></li>
+      <a href="index.html" class="rounded-pill">
+  <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:70px;"></a>
+        <li style="font-size:20px;padding-top:25px;"><a href="#" >Trang chủ</a></li>
+        <li style="font-size:20px;padding-top:25px;"><a href="about.html">Về chúng tôi</a></li>
+        <li style="font-size:20px;padding-top:25px;"><a href="contact.html">Liên lạc</a></li>
+        <li>
+        </li>
       </ul>
+    
     </div>
   </nav>
-    <img src="assets/img/wallhaven-wyjj7x_m.png" width="1520" height="200" >
+    <img src="assets/img/wallhaven-wyjj7x_m.png" width="1521" height="220" >
   <div class="container">
-  
-     <form action="index.html" method="get">
+    <section class="product-section"">
+      <div class="category-grid">
+          <a href="hg.html">
+          <img class="card-img" src="assets/img/HGlogo.jpg" alt="product-image" width="610" height="100">
+          <p class="cch">High Grade</p>
+          </a>
+          <a href="rg.html">
+          <img class="card-img" src="assets/img/RGlogo.webp"alt="product-image" width="610" height="100" >
+          <p class="cch">Real Grade</p>
+          </a>
+          <a href="mg.html">
+          <img class="card-img" src="assets/img/MGlogo.webp"alt="product-image" width="610" height="100" >
+          <p class="cch">Master Grade</p>
+          </a>
+          <a href="pg.html">
+          <img class="card-img" src="assets/img/PGGundamLogo.webp"alt="product-image" width="610" height="100">
+          <p class="cch">Perfect Grade</p>
+          </a>
+          <a href="ani.html">
+          <img class="card-img" src="assets/img/db1b3nurblef1.jpeg"alt="product-image" width="610" height="100" >
+          <p class="cch">Anime Figure</p>
+          </a>
+      </div>
+    </section>
+  </div>	
+	<div class="timnangcao">
+	        <form action="index.html" method="get">
       <div class="search">
-	<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px;">
-	<button type="submit" style="background-color:blue;">Tìm</button>
+	<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
+	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;";">Tìm</button>
 	</div>
 	</form>
-<form action="index.html" class="search-advanced">
-  <label for="drinks">Chọn kích thước:</label>
-  <select id="drinks" name="drink">
-    <option value="ckt">[Chọn kích thước]</option>
-    <option value="500">500&lt;=</option>
-    <option value="100">500=&gt; &lt;=1500</option>
-  </select>
-</form>
+  <form action="index.html" class="search-advanced">
+    <label for="gia">Giá:</label>
+    <select id="gia" name="gia">
+      <option value="ckt">[Chọn giá]</option>
+      <option value="500">500.000VNĐ &lt;=</option>
+      <option value="100">500.000VNĐ =&gt; &lt;=1.000.000VNĐ</option>
+      <option value="100">1.000.000VNĐ =&gt;</option>
+    </select>
 
-<form action="index.index" class="search-advanced">
-  <label for="drinks">Chọn loại:</label>
-  <select id="chat" name="chat">
-  <option value="cl">[Chọn loại]</option>
-    <option value="ngot">Nước lọc</option>
-    <option value="thuong">Nước lọc</option>
-  </select>
-</form>
+    <label for="chat">Chọn dòng:</label>
+    <select id="chat" name="chat">
+      <option value="cl">[Chọn dòng]</option>
+      <option value="hg">High Grade</option>
+      <option value="rg">Real Grade</option>
+      <option value="mg">Master Grade</option>
+      <option value="pg">Perfect Grade</option>
+      <option value="ag">Anime Figure</option>
+    </select>
 
-<form action="index.index" class="search-advanced">
-  <label for="drinks">Dơn vị:</label>
-  <select id="donvi" name="donvi">
-  <option value="dv">[Đơn vị]</option>
-    <option value="chai">Chai</option>
-    <option value="lon">Lon</option>
-    <option value="loc">Lốc</option>
-    <option value="thung">Thùng</option>
-  </select>
-</form>
+    <label for="hang">Chọn hãng:</label>
+    <select id="hang" name="hang">
+      <option value="hang">[Chọn hãng]</option>
+      <option value="bandai">Bandai</option>
+      <option value="sega">Sega</option>
+    </select>
 
-<form action="index.html" class="search-advanced">
-  <label for="drinks">Chọn hãng:</label>
-  <select id="hang" name="hang">
-  <option value="hang">[Chọn hãng]</option>
-    <option value="coca">Coca-Cola</option>
-    <option value="pepsi">Pepsi</option>
-    <option value="fanta">Fanta</option>
-    <option value="7up">7UP</option>
-    <option value="aqa">Aquafina</option>
-    <option value="lavie">Lavie</option>
-    <option value="satori">Satori</option>
-  </select>
-  <button type="submit" style="background-color:blue;margin:0 auto;">Tìm</button>
-</form>
-></script>
+    <button type="submit" class="btn-tim">Tìm</button>
+  </form>
+</div>
+
 </body>
 </html>
