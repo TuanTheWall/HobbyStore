@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.reflowhq.com/v2/toolkit.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/product-page.css">
+  <link rel="stylesheet" href="assets/css/view-cart.css">
+<style>
+.category-grid {
+  display: flex;
+  justify-content: center;  /* căn giữa ngang */
+  gap: 40px;                /* khoảng cách giữa ảnh */
+  flex-wrap: wrap;
+}
+.category-grid img {
+  width: 250px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.category-grid img:hover {
+  transform: scale(1.05);
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-items: center;
+  max-width: 1200px;   /* Giới hạn chiều rộng */
+  margin: 0 auto;      /* Căn giữa lưới */
+}
+.pagination{
+	text-align:center;
+}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+.pagination a.active{
+	background-color: green;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+	background-color: gray;
+	border-radius: 5px;
+}
+.card{
+   padding: 10px; 
+}
+.product-section{
+    display:flex;
+    justify-content: center; 
+	margin-top: -10px; 
+}
+.search{
+	text-align:center;
+	margin: 20px;
+}
+.search-advanced {
+  text-align: center; /* canh giữa nội dung bên trong form */
+  margin: 20px 0;     /* khoảng cách trên/dưới */
+}
+.search-advanced button {
+  background-color: blue;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.product-card {
+  height: 380px;
+  width: 220px;         /* chỉnh chiều rộng card */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  background: #DDDDDD;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;              /* ép ảnh cùng chiều cao */
+  object-fit: cover;          /* cắt ảnh cho vừa khung */
+  border-radius: 8px;
+}
+.product-name {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0;
+  min-height: 40px;             /* giữ chiều cao tên đều nhau */
+}
+.cch{
+ color:black;
+}
+.cch:hover{
+color:red;
+}
+.navbar{
+background-color:cyan;
+height:80px;
+}
+.navbar img {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  background: none !important;
+}
+.btn-col{
+margin-top:auto;
+}
+.price {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.xoa{
+display:flex;
+}
+.tools{
+  background:black;
+  height: 80px;
+  width: 220px;        
+}
+.navbar2{
+background-color:#667bb3;
+height:80px;
+margin-bottom:100px;
+margin-top:-110px;
+}
+.navbar2 a {
+  color: black;          /* đổi màu chữ */
+  text-decoration: none; /* bỏ gạch chân nếu muốn */
+}
+.add-img{
+padding-bottom:50px;
+}
+.left-po{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+.add-info{
+margin-top:-500px;
+font-size:25px;
+padding-bottom:10px;
+}
+
+.add-info input,
+.add-info select {
+  display: block;
+  margin-bottom: 1px;
+  font-size: 20px;
+}
+textarea::placeholder {
+  color: gray;
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-links">
+      <ul>
+      <a href="admin/admin.html" class="rounded-pill">
+  <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:70px;"></a>
+        <li style="font-size:20px;padding-top:25px;"><a href="#" >Trang chủ</a></li>
+      </ul>
+    </div>
+        <form action="admin.html" method="get">
+      <div class="search">
+	<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
+	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;";">Tìm</button>
+	</div>
+	</form>
+	<form action="search.html" style="margin-left:10px;">
+	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
+	</form>
+  </nav>
+    <img src="assets/img/wallhaven-wyjj7x_m.png" width="1521" height="220" >
+    
+    <div class="add-img">
+    <input type="file" id="fileInput" style="display:none;">
+    <button style="background:cyan;" onclick="document.getElementById('fileInput').click()"><img src="assets/img/folder-icon-in-line-style-design-isolated-on-white-background-editable-stroke-vector.jpg" style="width:200px;height:380px;"></button>
+	<button style="display:flex;width:240px;justify-content:center;font-size:30px;" onclick="document.getElementById('fileInput').click()">Chọn file</button>
+    </div>
+    
+    
+  <div class="add-info" >
+   <div class="left-po">
+  	<form action="addfin.html">
+  	<label for="fname">Tên sản phẩm:</label><br>
+  	<input style="color:gray;" type="text" id="fname" name="fname" placeholder="Name" style="font-size:20px;"><br>
+  	<label for="chat">Chọn dòng:</label>
+  	<label for="fname">Mã sản phẩm:</label><br>
+  	
+  	<input style="color:gray;" type="text" id="fname" name="fname" placeholder="Name" style="font-size:20px;"><br>
+  	<label for="chat">Chọn dòng:</label>
+    <select id="chat" name="chat" style="font-size:20px;">
+      <option style="color:gray;"value="cl">[Chọn dòng]</option><br>
+      <option value="hg">High Grade</option>
+      <option value="rg">Real Grade</option>
+      <option value="mg">Master Grade</option>
+      <option value="pg">Perfect Grade</option>
+      <option value="ag">Anime Figure</option>
+    </select><br>
+
+    <label for="hang">Chọn hãng:</label>
+    <select id="hang" name="hang" style="font-size:20px;">
+      <option style="color:gray;" value="hang">[Chọn hãng]</option><br>
+      <option value="bandai">Bandai</option>
+      <option value="sega">Sega</option>
+    </select><br>
+   	
+   	<lable for="info">Mô tả sản phẩm:></lable><br>
+   	<textarea id="info" name="info" 
+          style="color:gray; width:500px; height:300px; font-size:16px;" placeholder="Mô tả sản phẩm"></textarea><br>
+          <input type="submit" value="Submit">
+  	</form>
+  	</div>
+  </div>
+</body>
+</html>
