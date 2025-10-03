@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your cart</title>
-    <link rel="stylesheet" href="assets/css/settings.css">
-    <link rel="stylesheet" href="assets/css/cart.css">
-    <link href="https://cdn.reflowhq.com/v2/toolkit.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your cart</title>
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/cart.css">
 </head>
 <body>
-    <a href="index.html" class="back-home">Trở về Trang chủ</a>
-    <div data-reflow-type="shopping-cart"></div>
-
-    <script
-    src="https://cdn.reflowhq.com/v2/toolkit.min.js"
-    data-reflow-project="1590878356"
-    data-testmode="true"
-    defer
-  ></script>
+  <a href="indexlogin.html" class="back-home">Trở về Trang chủ</a>
+  <div class="product-card" style="margin: 20px auto; width: 280px; text-align:center;">
+    <img src="assets/img/rx782origin.jpg" alt="product-image" style="width:100%; border-radius:8px;">
+    <h1 class="product-name">HG GTO 1/144 Rx-78-02 Gundam</h1>
+    <p class="price">560.000 VNĐ</p>
+    <div style="margin:10px 0;">
+      <label for="quantity">Số lượng: </label>
+      <input type="number" id="quantity" name="quantity" value="1" min="1" style="width:60px; text-align:center;">
+    </div>
+    <button style="padding:10px 20px; background:blue; color:white; border:none; border-radius:5px; cursor:pointer;">
+      Thanh toán
+    </button>
+  </div>
+  <div style="text-align:center; margin-top:20px;">
+    <p><strong>Tổng cộng: 560.000 VNĐ</strong></p>
+    <a href="indexlogin.html" style="display:inline-block; margin-top:10px; padding:10px 20px; background:green; color:white; border-radius:5px; text-decoration:none;">
+      Tiếp tục mua hàng
+    </a>
+  </div>
 </body>
 </html>

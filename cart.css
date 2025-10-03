@@ -1,42 +1,135 @@
-body{
+body {
     margin: 40px !important;
+    font-family: "Josefin Sans", sans-serif;
+    background: linear-gradient(135deg, #f0faff, #e0f7ff);
+    color: #333;
 }
 
+/* Nút trở về trang chủ */
 a.back-home {
-    background-color: #18f2f2 !important;
+    display: inline-block;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
     text-decoration: none;
     color: #ffffff;
     border: 0 !important;
-    padding: 8px 16px;
-    border-radius: 4px;
+    padding: 10px 20px;
+    border-radius: 25px;
     font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+a.back-home::before {
+    content: "🏠 ";
 }
 a.back-home:hover {
-    background: #65dedecf;
-    color: #ffffffca;
+    background: linear-gradient(90deg, #0072ff, #00c6ff);
+    transform: translateY(-2px);
 }
-.ref-button{
-    background-color: rgb(96, 215, 255) !important;
-    color: rgb(255, 255, 255) !important;
-    border: 0 !important;   
+
+/* Các nút checkout */
+.ref-button {
+    background: linear-gradient(90deg, #36d1dc, #5b86e5) !important;
+    color: #fff !important;
+    border: 0 !important;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background 0.3s;
 }
+.ref-button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #5b86e5, #36d1dc) !important;
+}
+
+/* Form field */
 fieldset {
-    border-radius: 10px;
+    border-radius: 12px;
+    padding: 15px;
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    border: none;
+    margin-bottom: 20px;
 }
-.ref-field-toggle-title{
-    color: rgb(0, 0, 0) !important;
+.ref-field-toggle-title {
+    color: #0072ff !important;
+    font-weight: 600;
+    font-size: 16px;
 }
-.ref-checkout-summary{
-    border-radius: 10px;
+
+/* Checkout summary */
+.ref-checkout-summary {
+    border-radius: 12px;
+    background: #fdfdfd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    padding: 15px;
 }
-.ref-checkout-summary.open{
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+.ref-checkout-summary.open {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 }
-.ref-summary-toggle{
-    border-radius: 10px;
+
+/* Toggle summary */
+.ref-summary-toggle {
+    border-radius: 12px;
+    background: #00c6ff;
+    color: #fff;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
 }
-.ref-summary-toggle.open{
+.ref-summary-toggle:hover {
+    background: #0072ff;
+}
+.ref-summary-toggle.open {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+/* Sản phẩm trong giỏ hàng demo */
+.product-card {
+    margin: 30px auto;
+    width: 280px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #ffffff;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+}
+.product-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+.product-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 8px 0;
+    color: #333;
+}
+.price {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0072ff;
+    margin-bottom: 12px;
+}
+.product-card button {
+    background: linear-gradient(90deg, #36d1dc, #5b86e5);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s, background 0.3s;
+}
+.product-card button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #5b86e5, #36d1dc);
 }
