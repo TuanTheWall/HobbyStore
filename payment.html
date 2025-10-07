@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thanh toán</title>
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/cart.css">
+  <style>
+    body {
+      font-family: "Josefin Sans", sans-serif;
+      background: linear-gradient(135deg, #f0faff, #e0f7ff);
+      margin: 40px;
+    }
+    .checkout-container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #0072ff;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      background: linear-gradient(90deg, #36d1dc, #5b86e5);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      width: 100%;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+    <a href="indexlogin.html" class="back-home">Trở về Trang chủ</a>
+    <div class="checkout-container">
+    <h1>Thông tin thanh toán</h1>
+    <form>
+      <label>Họ và tên</label>
+      <input type="text" placeholder="Nhập họ tên của bạn" required>
+
+      <label>Địa chỉ giao hàng</label>
+      <input type="text" placeholder="Nhập địa chỉ" required>
+
+      <label>Số điện thoại</label>
+      <input type="tel" placeholder="VD: 0901234567" required>
+
+      <label>Phương thức thanh toán</label>
+      <select required>
+        <option>Thanh toán khi nhận hàng (COD)</option>
+        <option>Chuyển khoản ngân hàng</option>
+      </select>
+
+      <button type="submit">Xác nhận đặt hàng</button>
+    </form>
+  </div>
+</body>
+</html>
