@@ -51,20 +51,20 @@ margin-top:-110px;
   color: black;          /* đổi màu chữ */
   text-decoration: none; /* bỏ gạch chân nếu muốn */
 }
-table{
+.tunfin{
 border-collapse: collapse;
 width:100%;
-  border: none;
+border: 3px solid black;
 }
-td, th {
-  border: 1px solid #dddddd;
+.tunfin td,.tunfin th {
+  border: 2px solid black;
   text-align: left;
 }
-button{
+.tunfin button{
 margin-bottom:20px;
 height:30px;
 }
-input{
+.tunfin input{
 height:30px;
 width:270px;
 }
@@ -128,8 +128,8 @@ width:270px;
 </div>
 
 <h2>Phiếu nhập hoàn thành</h2>
-<div class="fin">
-	<table>
+<div class="unfin">
+	<table class="tunfin">
 		<tr>
 			<th>Mã phiếu nhập</th>
 			<th>Tên sản phẩm</th>
@@ -138,7 +138,7 @@ width:270px;
 			<th>Ngày nhập</th>
 		</tr>
 		<tr>
-			<th><input type="text" value="PN004" disabled</th>
+			<th><input type="text" value="PN004" disabled></th>
 			<th><input type="text" value="RG 1/144 GOD GUNDAM" disabled></th>
 			<th><input type="number" value="915000"disabled></th>
 			<th><input type="number" value="5"disabled></th>
@@ -146,7 +146,7 @@ width:270px;
 			<th><button>Sửa</button></th>
 		</tr>
 		<tr>
-			<th><input type="text" value="PN005"></th>
+			<th><input type="text" value="PN005" disabled></th>
 			<th><input type="text" value="MGEX 1/100 Strike Freedom Gundam" disabled></th>
 			<th><input type="number" value="3900000"disabled></th>
 			<th><input type="number" value="1"disabled></th>

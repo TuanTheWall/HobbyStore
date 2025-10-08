@@ -15,6 +15,23 @@
   <link rel="stylesheet" href="assets/css/product-page.css">
   <link rel="stylesheet" href="assets/css/view-cart.css">
 <style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.reflowhq.com/v2/toolkit.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/product-page.css">
+  <link rel="stylesheet" href="assets/css/view-cart.css">
+<style>
 .category-grid {
   display: flex;
   justify-content: center;  /* căn giữa ngang */
@@ -54,9 +71,6 @@
 .pagination a:hover:not(.active){
 	background-color: gray;
 	border-radius: 5px;
-}
-.card{
-   padding: 10px; 
 }
 .product-section{
     display:flex;
@@ -143,8 +157,9 @@ margin-top:-110px;
   color: black;          /* đổi màu chữ */
   text-decoration: none; /* bỏ gạch chân nếu muốn */
 }
-.add-img{
-padding-bottom:50px;
+textarea::placeholder {
+  color: gray;
+  font-style: italic;
 }
 .left-po{
 display:flex;
@@ -152,9 +167,7 @@ flex-direction:column;
 align-items:center;
 }
 .add-info{
-margin-top:-500px;
 font-size:25px;
-padding-bottom:10px;
 }
 
 .add-info input,
@@ -163,71 +176,86 @@ padding-bottom:10px;
   margin-bottom: 1px;
   font-size: 20px;
 }
-textarea::placeholder {
-  color: gray;
-  font-style: italic;
+.tunfin{
+border-collapse: collapse;
+width:100%;
+border: 3px solid black;
+padding: 10px 10px;
+}
+.tunfin td,.tunfin th {
+  border: 2px solid black;
+  text-align: left;
+  padding: 10px 10px;
+}
+.tunfin button{
+margin-bottom:20px;
+height:30px;
+}
+.tunfin input{
+height:30px;
+width:270px;
 }
 </style>
 </head>
 <body>
 <nav class="navbar">
-    <div class="nav-links">
-      <ul>
-      <a href="admin.html" class="rounded-pill">
-  <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:70px;"></a>
-        <li style="font-size:20px;padding-top:25px;"><a href="#" >Trang chủ</a></li>
-      </ul>
+	<div class="nav-links">
+		<ul>
+      		<a href="admin.html" class="rounded-pill">
+				<img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:70px;"></a>
+					<li style="font-size:20px;padding-top:25px;"><a href="#" >Trang chủ</a></li>
+     	</ul>
     </div>
-        <form action="admin.html" method="get">
-      <div class="search">
-	<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
-	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">Tìm</button>
-	</div>
+    <form action="admin.html" method="get">
+		<div class="search">
+			<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
+				<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;";">Tìm</button>
+		</div>
 	</form>
-	<form action="search.html" style="margin-left:10px;">
-	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
+		<form action="search.html" style="margin-left:10px;">
+		<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
 	</form>
-  </nav>
-    <img src="assets/img/wallhaven-wyjj7x_m.png" width="1521" height="220" >
-    
-    <div class="add-img">
-    <input type="file" id="fileInput" style="display:none;">
-    <button style="background:cyan;" onclick="document.getElementById('fileInput').click()"><img src="assets/img/folder-icon-in-line-style-design-isolated-on-white-background-editable-stroke-vector.jpg" style="width:200px;height:380px;"></button>
-	<button style="display:flex;width:240px;justify-content:center;font-size:30px;" onclick="document.getElementById('fileInput').click()">Chọn file</button>
-    </div>
-    
-    
-  <div class="add-info" >
-   <div class="left-po">
-  	<form>
-  	<label for="fname">Tên sản phẩm:</label><br>
-  	<input style="color:gray;" type="text" id="fname" name="fname" placeholder="Name" style="font-size:20px;"><br>
-  	<label for="fname">Mã sản phẩm:</label><br>
-  	
-  	<input style="color:gray;" type="text" id="fname" name="fname" placeholder="Name" style="font-size:20px;"><br>
-  	<label for="chat">Chọn dòng:</label>
-    <select id="chat" name="chat" style="font-size:20px;">
-      <option style="color:gray;"value="cl">[Chọn dòng]</option><br>
-      <option value="hg">High Grade</option>
-      <option value="rg">Real Grade</option>
-      <option value="mg">Master Grade</option>
-      <option value="pg">Perfect Grade</option>
-      <option value="ag">Anime Figure</option>
-    </select><br>
+</nav>
 
-    <label for="hang">Chọn hãng:</label>
-    <select id="hang" name="hang" style="font-size:20px;">
-      <option style="color:gray;" value="hang">[Chọn hãng]</option><br>
-      <option value="bandai">Bandai</option>
-      <option value="sega">Sega</option>
-    </select><br>
-   	
-   	<lable for="info">Mô tả sản phẩm:></lable><br>
-   	<textarea id="info" name="info" 
-          style="color:gray; width:500px; height:300px; font-size:16px;" placeholder="Mô tả sản phẩm"></textarea><br>
-          <input type="submit" value="Submit" style="background:black;color:white;">
-  	</form>
-  	</div>
-  </div>
+<h2>Phiếu nhập chưa hoàn thành</h2>
+<div class="unfin">
+	<table class="tunfin">
+		<tr>
+			<th>Mã sản phẩm</td>
+			<th>Tên sản phẩm</td>
+			<th>Loại</td>
+			<th>Giá vốn</td>
+			<th>Lợi nhuận</td>
+			<th>Giá bán</td>
+		</tr>
+		<tr>
+			<td>SP001</td>
+			<td>HG GTO 1/144 Rx-78-02 Gundam</td>
+			<td>HG</td>
+			<td><input style="font-size:15px;" type="number" value="448000">VNĐ</td>
+			<td>25%</td>
+			<td>560000</td>
+		</tr>
+		<tr>
+			<td>SP008</td>
+			<td>MG 1/100 MSM-04 ACGUY</td>
+			<td>MG</td>
+			<td><input style="font-size:15px;" type="number" value="720000">VNĐ</td>
+			<td>25%</td>
+			<td>900000</td>
+		</tr>
+			<td>SP010</td>
+			<td>Hatsune Miku Classical Tuning Swan Lake Banpresto Evolve</td>
+			<td>Anime Figure</td>
+			<td><input style="font-size:15px;" "type="number" value="400000">VNĐ</td>
+			<td>25%</td>
+			<td>500000</td>
+		<tr
+		</tr>
+	</table>
+</div>
+
+
+
 </body>
 </html>
