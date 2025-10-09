@@ -1,32 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your cart</title>
   <link rel="stylesheet" href="assets/css/settings.css">
   <link rel="stylesheet" href="assets/css/cart.css">
+  <style>
+    /* Nhỏ gọn để đảm bảo khớp kiểu với index nếu thiếu */
+    body { font-family: "Josefin Sans", Arial, sans-serif; background:#c7ebf5; color:#222; margin:0; padding:20px; }
+    .container { max-width:1100px; margin:0 auto; }
+    .back-home { display:inline-block; margin-bottom:16px; color:#0066cc; text-decoration:none; }
+    .cart-list { background:#fff; border-radius:10px; padding:18px; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+    .cart-item { display:flex; gap:16px; align-items:center; padding:12px 8px; border-bottom:1px solid #f0f0f0; }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-item img { width:90px; height:90px; object-fit:cover; border-radius:8px; }
+    .item-info { flex:1; }
+    .item-title { font-size:16px; margin:0 0 6px 0; font-weight:600; }
+    .price { color:#333; margin:0 0 6px 0; }
+    .controls { display:flex; align-items:center; gap:10px; }
+    .qty { width:70px; padding:6px 8px; border:1px solid #ddd; border-radius:6px; text-align:center; }
+    .btn { padding:8px 12px; border:none; border-radius:6px; cursor:pointer; }
+    .btn-pay { background:linear-gradient(90deg,#0077ff,#005bd6); color:#fff; text-decoration:none; display:inline-block; padding:10px 16px; border-radius:8px; }
+    .btn-continue { background:#28a745; color:#fff; padding:10px 16px; border-radius:8px; text-decoration:none; }
+    .btn-delete { background:#e94b3c; color:#fff; border:none; padding:8px 10px; border-radius:6px; }
+    .summary { text-align:right; margin-top:16px; }
+    @media (max-width:700px){
+      .cart-item{ flex-direction:column; align-items:flex-start; }
+      .summary { text-align:left; }
+    }
+  </style>
 </head>
 <body>
-  <a href="indexlogin.html" class="back-home">Trở về Trang chủ</a>
-  <div class="product-card" style="margin: 20px auto; width: 280px; text-align:center;">
-    <img src="assets/img/rx782origin.jpg" alt="product-image" style="width:35%; border-radius:36px;">
-    <h1 class="product-name">HG GTO 1/144 Rx-78-02 Gundam</h1>
-    <p class="price">560.000 VNĐ</p>
-    <div style="margin:10px 0;">
-      <label for="quantity">Số lượng: </label>
-      <input type="number" id="quantity" name="quantity" value="1" min="1" style="width:60px; text-align:center;">
+  <div class="container">
+    <div style="display:inline; gap:12px; justify-content:flex-end; flex-wrap:wrap;">
+        <a href="indexlogin.html" class="btn-continue">Trở về trang chủ🏠</a>
+    <div class="cart-list" id="cart">
+      <!-- Cart item template -->
+      <div class="cart-item" data-price="560000">
+        <img src="assets/img/rx782origin.jpg" alt="HG GTO">
+        <div class="item-info">
+          <p class="item-title">HG GTO 1/144 Rx-78-02 Gundam</p>
+          <p class="price">560.000 VNĐ</p>
+        </div>
+        <div class="controls">
+          <label style="font-size:14px;">Số lượng</label>
+          <input class="qty" type="number" max="1" min="1" value="1">
+          <button class="btn-delete btn" type="button" title="Xóa sản phẩm">Xóa</button>
+        </div>
+      </div>
+
+      <!-- Thêm sản phẩm khác theo cùng cấu trúc nếu cần -->
     </div>
-    <a href="payment.html" style="text-decoration:none;">
-    <button style="padding:10px 20px; background:blue; color:white; border:none; border-radius:5px; cursor:pointer;">
-    Thanh toán 
-    </button>
+
+    <div class="summary" id="summary">
+      <p style="font-size:18px; margin:0 0 10px;"><strong>Tổng cộng: <span id="total">560.000 VNĐ</span></strong></p>
+      <div style="display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap;">
+        <a href="indexlogin.html" class="btn-continue">Tiếp tục mua hàng</a>
+        <a href="payment.html" class="btn-pay" id="checkout">Thanh toán</a>
+      </div>
+    </div>
   </div>
-  <div style="text-align:center; margin-top:20px;">
-    <p><strong>Tổng cộng: 560.000 VNĐ</strong></p>
-    <a href="indexlogin.html" style="display:inline-block; margin-top:10px; padding:10px 20px; background:green; color:white; border-radius:5px; text-decoration:none;">
-      Tiếp tục mua hàng
-    </a>
-  </div>
+
+  <script>
+  //   // Cập nhật tổng theo giá (data-price) và số lượng
+  //   function formatVND(n){
+  //     return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VNĐ";
+  //   }
+
+  //   function calculateTotal(){
+  //     const items = document.querySelectorAll('.cart-item');
+  //     let total = 0;
+  //     items.forEach(it => {
+  //       const price = Number(it.getAttribute('data-price') || 0);
+  //       const qty = Number(it.querySelector('.qty').value || 0);
+  //       total += price * qty;
+  //     });
+  //     document.getElementById('total').textContent = formatVND(total);
+  //     // Nếu không còn item thì ẩn nút thanh toán
+  //     const checkout = document.getElementById('checkout');
+  //     checkout.style.display = total > 0 ? 'inline-block' : 'none';
+  //   }
+
+  //   // Xử lý thay đổi số lượng
+  //   document.querySelectorAll('.qty').forEach(input => {
+  //     input.addEventListener('change', e => {
+  //       if (e.target.value < 1) e.target.value = 1;
+  //       calculateTotal();
+  //     });
+  //   });
+
+  //   // Xử lý xóa sản phẩm
+  //   document.querySelectorAll('.btn-delete').forEach(btn => {
+  //     btn.addEventListener('click', e => {
+  //       const item = e.target.closest('.cart-item');
+  //       if (!item) return;
+  //       // Hỏi xác nhận
+  //       if (confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')) {
+  //         item.remove();
+  //         calculateTotal();
+  //       }
+  //     });
+  //   });
+
+  //   // Khởi tạo tổng ban đầu
+  //   calculateTotal();
+  // </script>
 </body>
 </html>
