@@ -56,7 +56,14 @@
       <div class="toolbar">
         <div class="filters">
           <!-- Search & filter are visual only (no JS) -->
-          <input id="q" class="search" placeholder="Tìm theo mã, tên khách, hoặc email" aria-label="Tìm kiếm">
+          <form action="shiping.html" method="get" style="display: flex;">
+  <input class="search" id="search" name="query" placeholder="Tìm theo tên hoặc email"
+         style="padding: 12px 20px; font-size: 15px; width: 300px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
+  <button type="submit"
+          style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">
+    Tìm
+  </button>
+</form>
           <select id="statusFilter" aria-label="Lọc trạng thái">
             <option value="">Tất cả trạng thái</option>
             <option value="pending">Chờ xử lý</option>
