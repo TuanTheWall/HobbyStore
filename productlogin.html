@@ -12,6 +12,10 @@
       background: linear-gradient(135deg, #e0f7ff, #f0faff);
       color: #333;
     }
+    /* product meta */
+    .meta-info { display:flex; gap:10px; align-items:center; margin-bottom:8px; color:#555; font-size:14px; }
+    .badge { background:#eef6ff; color:#0b66d1; padding:6px 10px; border-radius:999px; font-weight:700; font-size:13px; }
+    .small-muted { color:#777; font-size:13px; }
 
     /* Navbar */
     .navbar {
@@ -138,6 +142,24 @@
       color: #0066cc;
     }
 
+    /* toast */
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: #111;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all .18s ease;
+      z-index: 9999;
+      display: none;
+      font-weight:600;
+    }
+    .toast.show { display: block; opacity:1; transform:none; }
+
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
@@ -161,8 +183,25 @@
         <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li>
       </ul>
     </div>
-  </nav>
 
+  <!-- FIX: form properly opened and closed -->
+  <form action="indexlogin.html" method="get" style="display:flex;gap:0;align-items:center;">
+    <input type="text" name="search" placeholder="Search.." 
+           style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
+    <button type="submit"
+            style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">
+      Tìm
+    </button>
+  </form>
+
+  <div style="display:flex;align-items:center;gap:8px;">
+    <a href="cart.html" style="display:inline-block; margin-top:10px; padding:10px 20px; background:green; color:white; border-radius:5px; text-decoration:none;"> Giỏ hàng </a>
+    <form action="searchlogin.html" style="margin-left:5px;">
+      <button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
+    </form>
+  </div>
+</nav>
+  
   <a href="indexlogin.html" class="back-home">← Trở về</a>
 
   <div class="container">
@@ -173,6 +212,13 @@
    <div class="product-details">
       <h2>HG GTO 1/144 RX-78-02 Gundam</h2>
       <div class="price" id="base-price">560.000 VNĐ</div>
+
+     <!-- Thông tin nhỏ: danh mục / tỉ lệ / nhà sản xuất -->
+     <div class="meta-info" aria-hidden="true">
+       <div class="badge">High Grade (HG)</div>
+       <div class="small-muted">Tỉ lệ: 1/144 • Thể loại: Gundam / Model kit • Nhà sản xuất: Bandai</div>
+     </div>
+
       <label for="addon">Chọn phụ kiện thêm:</label>
       <select id="addon" name="addon">
         <option value="none">Không thêm phụ kiện</option>
@@ -184,32 +230,62 @@
       <input type="number" id="quantity" name="quantity" value="1" min="1" max="1">
       <div id="total-price">Tổng: 560.000 VNĐ</div>
 
-      <button onclick="window.location.href='cart.html'">Thêm vào giỏ hàng</button>
+      <button type="button" id="addCartBtn">Thêm vào giỏ hàng</button>
       <br><br>
       <div class="title-head-tab">Mô tả sản phẩm
-	</div>
-	<div class="product-description-tab">
-		<div class="content-entry add-height-img max-height-ct lazyload-addclass">
-			<div>
-				<h1>Giới thiệu mô hình:</h1><ul><li>Xuất hiện trong&nbsp;MOBILE SUIT GUNDAM THE ORIGIN</li><li>Bộ kit này mang đến một khuôn mẫu và định nghĩa hoàn toàn mới cho Gundam The Origin's RX-78-02, được trang bị nhiều loại vũ khí và gimmicks.</li><li>Màu sắc và khả năng&nbsp;tháo lắp&nbsp;các bộ phận của bộ kit này cũng được cải&nbsp;tiến&nbsp;tốt hơn so với các dòng HG còn lại trong&nbsp;dòng GTO.</li><li>Được cung cấp nhiều bộ phận chuyển đổi để tạo ra các biến thể của RX-78-02 Gundam và để đại diện cho tất cả các thiết kế có sẵn cho chính Gundam đó.</li></ul><h1>Thông tin&nbsp;mô hình:</h1><ul><li>Cấp độ: HG</li><li>Yêu cầu tự lắp</li><li>Chiều cao mô hình:&nbsp;</li><li>Tỉ lệ: 1/144</li></ul>
-			</div>
-		</div>
-		<div class="view-all-btn">
-		</div>
-  <!-- <script>
-    // Tự động cập nhật tổng tiền khi chọn phụ kiện
-    const basePrice = 560000;
-    const addonSelect = document.getElementById('addon');
-    const totalPrice = document.getElementById('total-price');
+  </div>
+  <div class="product-description-tab">
+    <div class="content-entry add-height-img max-height-ct lazyload-addclass">
+      <div>
+        <h1>Giới thiệu mô hình:</h1><ul><li>Xuất hiện trong&nbsp;MOBILE SUIT GUNDAM THE ORIGIN</li><li>Bộ kit này mang đến một khuôn mẫu và định nghĩa hoàn toàn mới cho Gundam The Origin's RX-78-02, được trang bị nhiều loại vũ khí và gimmicks.</li><li>Màu sắc và khả năng&nbsp;tháo lắp&nbsp;các bộ phận của bộ kit này cũng được cải&nbsp;tiến&nbsp;tốt hơn so với các dòng HG còn lại trong&nbsp;dòng GTO.</li><li>Được cung cấp nhiều bộ phận chuyển đổi để tạo ra các biến thể của RX-78-02 Gundam và để đại diện cho tất cả các thiết kế có sẵn cho chính Gundam đó.</li></ul><h1>Thông tin&nbsp;mô hình:</h1><ul><li>Cấp độ: HG</li><li>Yêu cầu tự lắp</li><li>Chiều cao mô hình:&nbsp;</li><li>Tỉ lệ: 1/144</li></ul>
+      </div>
+    </div>
+    <div class="view-all-btn">
+    </div>
 
-    addonSelect.addEventListener('change', function () {
-      let add = 0;
-      if (this.value === 'decal') add = 20000;
-      else if (this.value === 'kim') add = 50000;
-      else if (this.value === 'combo') add = 65000;
-      const total = basePrice + add;
-      totalPrice.textContent = 'Tổng: ' + total.toLocaleString('vi-VN') + ' VNĐ';
-    });
-  </script> -->
+  </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Đã thêm vô giỏ hàng</div>
+
+  <script>
+    (function(){
+      const toast = document.getElementById('toast');
+      const btn = document.getElementById('addCartBtn');
+
+      function show(text){
+        toast.textContent = text;
+        toast.classList.add('show');
+        clearTimeout(toast._h);
+        toast._h = setTimeout(()=> {
+          toast.classList.remove('show');
+        }, 1400);
+      }
+
+      if(btn){
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          btn.disabled = true;
+          btn.style.transform = 'translateY(1px)';
+          show('Đã thêm vô giỏ hàng');
+          setTimeout(()=>{ btn.disabled = false; btn.style.transform = ''; }, 700);
+        });
+      }
+
+      const basePrice = 560000;
+      const addon = document.getElementById('addon');
+      const totalPrice = document.getElementById('total-price');
+      if(addon && totalPrice){
+        addon.addEventListener('change', function(){
+          let add = 0;
+          if(this.value === 'decal') add = 20000;
+          else if(this.value === 'kim') add = 50000;
+          else if(this.value === 'combo') add = 65000;
+          const total = basePrice + add;
+          totalPrice.textContent = 'Tổng: ' + total.toLocaleString('vi-VN') + ' VNĐ';
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
