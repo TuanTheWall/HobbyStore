@@ -3,13 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chỉnh sửa thông tin</title>
+  <title>Chi tiết đơn hàng</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/settings.css">
-    <style>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
     body {
       background-image: url(assets/img/loginbackground.png);
       background-repeat: no-repeat;
@@ -27,14 +25,8 @@
       padding: 0 40px;
     }
     .navbar img {
-  filter: none !important;
-  mix-blend-mode: normal !important;
-  background: none !important;
-}
-    .navbar img {
       width: 70px;
     }
-
     .navbar ul {
       list-style: none;
       display: flex;
@@ -42,20 +34,17 @@
       margin: 0;
       padding: 0;
     }
-
     .navbar ul li a {
       text-decoration: none;
       font-weight: bold;
       color: black;
     }
-
     .navbar ul li a:hover {
       color: red;
     }
 
     .border {
       width: 1000px;
-      height: auto;
       border: 1px solid #aaa;
       border-radius: 6px;
       padding: 40px;
@@ -77,66 +66,84 @@
       margin-bottom: 20px;
     }
 
-    .subhead {
-      font-size: 18px;
-      padding-left: 20px;
-      color: #444;
-    }
-
-    .info {
+    .order-info {
       display: flex;
-      justify-content: center;
-      gap: 180px;
+      justify-content: space-between;
       font-size: 16px;
-      padding: 15px 10px;
-      border-bottom: 1px solid #ddd;
+      margin-bottom: 30px;
     }
 
-    .info:last-of-type {
-      border-bottom: none;
+    .address, .status {
+      width: 48%;
     }
 
-    .label {
-      font-weight: 500;
-      color: #111827;
-      width: 220px;
-      text-align: left;
+    .address h3 {
+      margin-top: 0;
+      font-size: 18px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
     }
 
-    .value {
-      color: #374151;
-      flex: 1;
-      text-align: left;
+    .status h3 {
+      margin-top: 0;
+      font-size: 18px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
     }
 
-.sidebar {
-    width: 150px;
-    height: 100vh;
-    background-color: #2c3e50;
-    color: white;
-    padding-top: 20px;
-    position: fixed;
-  }
+    .timeline {
+      padding-left: 20px;
+      font-size: 15px;
+      color: #333;
+    }
 
-  .sidebar h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+    .timeline p {
+      margin: 6px 0;
+    }
 
-  .sidebar a {
-    display: block;
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-  }
+    .done {
+      color: green;
+      font-weight: 600;
+    }
 
-  .sidebar a:hover {
-    background-color: #34495e;
-  }
+    .sidebar {
+      width: 150px;
+      height: 100vh;
+      background-color: #2c3e50;
+      color: white;
+      padding-top: 20px;
+      position: fixed;
+    }
 
+    .sidebar a {
+      display: block;
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      background-color: #34495e;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .back-btn:hover {
+      background-color: #2980b9;
+    }
   </style>
 </head>
-<nav class="navbar">
+
+<body>
+  <nav class="navbar">
     <div class="nav-links">
       <ul>
       <a href="indexlogin.html" class="rounded-pill">
@@ -144,7 +151,7 @@
         <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
         <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li></ul>
     </div>
-        <form action="1index.html" method="get">
+        <form action="indexlogin.html" method="get">
       <div class="search">
 	<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
 	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">Tìm</button>
@@ -154,43 +161,39 @@
 	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
 	</form>
   </nav>
-<body>
 
   <div class="border">
-    <div class="header">Chỉnh sửa thông tin cá nhân</div>
-    <div class="info">
-      <span class="label">Tên người dùng</span>
-      <span class="value">khachhang21312309</span>
-      <button class="edit-btn">Sửa</button>
+    <div class="header">Chi tiết đơn hàng #DH001</div>
+
+    <div class="order-info">
+      <div class="address">
+        <h3>Địa chỉ nhận hàng</h3>
+        <p><strong>Nguyễn Văn A</strong></p>
+        <p>Ấp Lmao, Xã Có Thật, Huyện Có Người, Trái Đất</p>
+        <p>SĐT: 6218.321.285</p>
+      </div>
+
+      <div class="status">
+        <h3>Trạng thái giao hàng</h3>
+        <div class="timeline">
+          <p><span class="done">+14:53 16-08-2025 — Đã giao</span></p>
+          <p>+Giao hàng thành công</p>
+          <br>
+          <p>+08:08 16-08-2025 — Đang vận chuyển</p>
+          <p>+Đơn hàng sẽ sớm được giao, vui lòng chú ý điện thoại</p>
+          <p>+13:01 15-08-2025 — Đơn hàng đã đến trạm giao hàng tại Trái Đất</p>
+          <p>+20:49 11-08-2025 — Đơn hàng đã đến bưu cục</p>
+          <p>+17:55 11-08-2025 — Đơn hàng đã đến bưu cục MX592, Cảng Liên Hà</p>
+        </div>
+      </div>
     </div>
-    <div class="info">
-      <span class="label">Mật khẩu</span>
-      <span class="value">************</span>
-      <button class="edit-btn">Sửa</button>
-    </div>
-    <div class="info">
-      <span class="label">Địa chỉ</span>
-      <span class="value">123 Đường Vĩnh Viễn</span>
-      <button class="edit-btn">Sửa</button>
-    </div>
-    <div class="info">
-      <span class="label">Gmail</span>
-      <span class="value">21312309@gmail.com</span>
-      <button class="edit-btn">Sửa</button>
-    </div>
-    <div class="info">
-      <span class="label">Số điện thoại</span>
-      <span class="value">089235579</span>
-      <button class="edit-btn">Sửa</button>
-    </div>
-    <button>
-		<i class="fa fa-plus-circle"></i> Lưu
-	</button>
+
+    <a href="history.html" class="back-btn">← Quay lại lịch sử mua hàng</a>
   </div>
 
   <div class="sidebar">
-    <br>  </br>
-    <br>  </br>
+    <br></br>
+    <br></br>
     <a href="profile.html">Thông tin cá nhân</a>
     <a href="history.html">Lịch sử mua hàng</a>
     <a href="edit.html">Chỉnh sửa</a>
