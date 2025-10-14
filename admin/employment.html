@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quản lý nhân viên — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6f8fb; --card:#ffffff; --muted:#666; --primary:#2c7be5; --danger:#e94b3c; 
+      --success:#28a745; --warning:#ffc107;
+    }
+    body{font-family:"Josefin Sans", Arial, sans-serif;background:var(--bg);margin:0;padding:28px;color:#222;}
+    .wrap{max-width:1100px;margin:0 auto;}
+    h1{margin:0 0 18px;font-size:22px;}
+    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(30,40,60,.06);}
+    table{width:100%;border-collapse:collapse;font-size:14px;}
+    thead th{text-align:left;padding:12px 8px;border-bottom:1px solid #eceff4;color:var(--muted);font-weight:600;}
+    tbody td{padding:12px 8px;border-bottom:1px solid #f1f3f6;vertical-align:middle;}
+    .avatar{width:40px;height:40px;border-radius:6px;background:#e9eef8;display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:#2c5aa0}
+    .meta{display:flex;gap:10px;align-items:center}
+    .small{font-size:13px;color:var(--muted)}
+    .btn{padding:8px 10px;border-radius:6px;border:none;cursor:pointer;font-weight:600;margin-left:8px;opacity:1;transition:transform .12s ease, box-shadow .12s ease}
+    .btn:active{transform:translateY(1px)}
+    .btn.clicked{transform:translateY(2px);box-shadow:inset 0 0 0 2px rgba(0,0,0,0.04)}
+    .btn-view{background:#6c757d;color:#fff}
+    .btn-lock{background:var(--primary);color:#fff}
+    .btn-unlock{background:var(--warning);color:#111}
+    .btn-promote{background:var(--success);color:#fff}
+    .btn-del{background:var(--danger);color:#fff}
+    .btn-add{background:var(--primary);color:#fff;border:none;padding:10px 16px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;}
+    .status{padding:6px 8px;border-radius:6px;font-weight:700;font-size:13px}
+    .locked{background:#ffecec;color:#b33}
+    .active{background:#e8f8f0;color:#14723b}
+    .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:12px;flex-wrap:wrap}
+    .search{padding:8px 12px;border-radius:8px;border:1px solid #e0e6ef;width:260px}
+    /* pagination */
+    .pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:18px;font-size:14px;}
+    .page-btn{padding:6px 12px;border-radius:6px;border:1px solid #ccc;background:#fff;cursor:pointer;transition:background .15s}
+    .page-btn:hover{background:#e9eef8;}
+    .page-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+    @media (max-width:720px){
+      .toolbar{flex-direction:column;align-items:flex-start}
+      table thead{display:none}
+      tbody td{display:block;padding:10px 6px}
+      tbody tr{margin-bottom:12px;border-radius:8px;background:#fff;box-shadow:0 6px 12px rgba(18,24,40,.03)}
+      .meta{margin-bottom:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;">
+      <a href="admin.html" style="text-decoration:none;color:#2c7be5;font-weight:700">← Trở về Admin</a>
+      <h1>Quản lý nhân viên</h1>
+    </div>
+
+    <div class="card">
+      <div class="toolbar">
+        <div class="left" style="display:flex;gap:10px;align-items:center;">
+          <form action="employment.html" method="get" style="display: flex;">
+            <input href id="search" name="query" placeholder="Tìm theo tên hoặc email"
+                   style="padding: 12px 20px; font-size: 15px; width: 300px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
+            <button href ="employment.html"
+                    style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">
+              Tìm
+            </button>
+          </form>
+          <button class="btn-add" data-uionly>+ Thêm nhân viên</button>
+        </div>
+        <div class="right small muted">4 nhân viên</div>
+      </div>
+
+      <table role="table" aria-label="Employee management table">
+        <thead>
+          <tr>
+            <th>Nhân viên</th>
+            <th>Email</th>
+            <th>Chức vụ</th>
+            <th>Trạng thái</th>
+            <th style="width:260px;text-align:right">Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="meta">
+                <div class="avatar">QT</div>
+                <div style="min-width:160px">
+                  <div style="font-weight:600">Quang Trung</div>
+                  <div class="small muted">ID: NV001</div>
+                </div>
+              </div>
+            </td>
+            <td><div class="small">trung.q@example.com</div></td>
+            <td>Quản lý</td>
+            <td><div class="status active">Đang làm</div></td>
+            <td style="text-align:right">
+              <button class="btn btn-view" data-uionly>Xem</button>
+              <button class="btn btn-lock" data-uionly>Khóa</button>
+              <button class="btn btn-promote" data-uionly>Thăng chức</button>
+              <button class="btn btn-del" data-uionly>Xóa</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="meta">
+                <div class="avatar">TL</div>
+                <div style="min-width:160px">
+                  <div style="font-weight:600">Trần Lan</div>
+                  <div class="small muted">ID: NV002</div>
+                </div>
+              </div>
+            </td>
+            <td><div class="small">lan.tran@example.com</div></td>
+            <td>Nhân viên bán hàng</td>
+            <td><div class="status active">Đang làm</div></td>
+            <td style="text-align:right">
+              <button class="btn btn-view" data-uionly>Xem</button>
+              <button class="btn btn-lock" data-uionly>Khóa</button>
+              <button class="btn btn-promote" data-uionly>Thăng chức</button>
+              <button class="btn btn-del" data-uionly>Xóa</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="meta">
+                <div class="avatar">HN</div>
+                <div style="min-width:160px">
+                  <div style="font-weight:600">Hoàng Nam</div>
+                  <div class="small muted">ID: NV003</div>
+                </div>
+              </div>
+            </td>
+            <td><div class="small">nam.hoang@example.com</div></td>
+            <td>Nhân viên kho</td>
+            <td><div class="status locked">Đã khóa</div></td>
+            <td style="text-align:right">
+              <button class="btn btn-view" data-uionly>Xem</button>
+              <button class="btn btn-unlock" data-uionly>Mở khóa</button>
+              <button class="btn btn-del" data-uionly>Xóa</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="meta">
+                <div class="avatar">BH</div>
+                <div style="min-width:160px">
+                  <div style="font-weight:600">Bùi Hạnh</div>
+                  <div class="small muted">ID: NV004</div>
+                </div>
+              </div>
+            </td>
+            <td><div class="small">hanh.bui@example.com</div></td>
+            <td>Nhân viên hỗ trợ</td>
+            <td><div class="status active">Đang làm</div></td>
+            <td style="text-align:right">
+              <button class="btn btn-view" data-uionly>Xem</button>
+              <button class="btn btn-lock" data-uionly>Khóa</button>
+              <button class="btn btn-promote" data-uionly>Thăng chức</button>
+              <button class="btn btn-del" data-uionly>Xóa</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="page-btn" data-uionly>&laquo;</button>
+        <button class="page-btn active" data-uionly>1</button>
+        <button class="page-btn" data-uionly>2</button>
+        <button class="page-btn" data-uionly>3</button>
+        <button class="page-btn" data-uionly>&raquo;</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('[data-uionly]').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        e.preventDefault();
+        btn.classList.add('clicked');
+        setTimeout(()=>btn.classList.remove('clicked'),140);
+      });
+    });
+  </script>
+</body>
+</html>

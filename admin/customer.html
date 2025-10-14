@@ -56,7 +56,14 @@
       <div class="toolbar">
         <div class="left">
           <!-- Search visually enabled but no behavior behind it -->
-          <input class="search" id="search" placeholder="Tìm theo tên hoặc email"><button href="customer.html" type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">Tìm</button>
+          <form action="customer.html" method="get" style="display: flex;">
+  <input class="search" id="search" name="query" placeholder="Tìm theo tên hoặc email"
+         style="padding: 12px 20px; font-size: 15px; width: 300px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
+  <button type="submit"
+          style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">
+    Tìm
+  </button>
+</form>
         </div>
         <div class="right small muted">5 khách hàng (demo UI)</div>
       </div>
@@ -168,7 +175,15 @@
           </tr>
 
         </tbody>
+        
       </table>
+      <div class="pagination"> <!-- Phân trang -->
+  <button class="page-btn" data-uionly>&laquo;</button>
+  <button class="page-btn active" data-uionly>1</button>
+  <button class="page-btn" data-uionly>2</button>
+  <button class="page-btn" data-uionly>3</button>
+  <button class="page-btn" data-uionly>&raquo;</button>
+</div>
     </div>
   </div>
 
@@ -182,7 +197,7 @@
         </div>
       </div>
       <div id="ordersContainer">
-        <div class="empty">Modal tĩnh (không có chức năng)</div>
+        <div class="empty">Modal tĩnh </div>
       </div>
     </div>
   </div>

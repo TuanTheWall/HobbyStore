@@ -45,6 +45,11 @@
 	padding: 8px 15px;
 	display: inline-block;
 }
+.navbar img {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  background: none !important;
+}
 .pagination a.active{
 	background-color: green;
 	font-weight: bold;
@@ -196,6 +201,7 @@ margin-top:-110px;
  		<div class="nav-links">
 			<ul style="list-style:none;display:flex;gap:25px;">
 				<li style="font-size:20px;padding-top:30px;color:black;"><a href="customer.html">Quản lý người dùng</a></li>
+        <li style="font-size:20px;padding-top:30px;color:black;"><a href="employment.html">Quản lý nhân viên</a></li>
 				<li style="font-size:20px;padding-top:30px;color:black;"><a href="add.html">Thêm sản phẩm</a></li>
 				<li style="font-size:20px;padding-top:30px;color:black;"><a href="phieuthem.html">Quản lý sản phẩm</a></li>
 				<li style="font-size:20px;padding-top:30px;color:black;"><a href="tracuu.html">Quản lý số lượng tồn</a></li>
@@ -382,6 +388,23 @@ margin-top:-110px;
         </div>
       </div>
     </section>
+    
+<script>
+  // Lấy tất cả nút "Xóa"
+  const deleteButtons = document.querySelectorAll('button[style*="background:red"]');
+
+  deleteButtons.forEach(btn => {
+    btn.addEventListener('click', function (event) {
+      event.preventDefault();
+      const confirmDelete = confirm("Bạn có chắc muốn xóa sản phẩm này không?");
+      if (confirmDelete) {
+        alert("Sản phẩm đã được xác nhận xóa.");
+      } else {
+        alert("Hủy thao tác xóa.");
+      }
+    });
+  });
+</script>
     
 <div class="pagination" style="margin-top:-100px">
   <a href="admin.html">&laquo;</a>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi">  
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Admin — Chỉnh sửa sản phẩm</title>
+  <title>Chỉnh sửa sản phẩm</title>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    :root{ --bg:#f6f8fb; --card:#fff; --muted:#667; --accent:#2c7be5; --danger:#e94b3c; --ok:#28a745 }
+    :root{ --bg:#e0d7d7; --card:#fff; --muted:#667; --accent:#2c7be5; --danger:#e94b3c; --ok:#28a745 }
     body{font-family:"Josefin Sans",Arial,sans-serif;background:var(--bg);margin:0;padding:28px;color:#222}
     .wrap{max-width:1100px;margin:0 auto}
     .top{display:flex;align-items:center;gap:12px;margin-bottom:18px}
@@ -39,7 +39,7 @@
 <body>
   <div class="wrap">
     <div class="top">
-      <a href="admin.html" class="back-home">← Trở về Admin</a>
+      <a href="admin.html" class="back-home" style="background-color: #08fee9; ">← Trở về Admin</a>
       <h2 style="margin:0">Chỉnh sửa sản phẩm — HG GTO 1/144 RX-78-02</h2>
     </div>
 
@@ -125,57 +125,72 @@
     </div>
   </div>
 
-  <!-- <div id="toast" class="toast" role="status" aria-live="polite">UI only — không có hành động thực</div> -->
+  <div id="toast" class="toast" role="status" aria-live="polite">UI only — không có hành động thực</div>
 
   <script>
-    // UI-only interactions: show quick toast and visual feedback
-    // function showToast(text = 'UI only — không có hành động thực') {
-    //   const t = document.getElementById('toast');
-    //   t.textContent = text;
-    //   t.classList.add('show');
-    //   clearTimeout(t._h);
-    //   t._h = setTimeout(()=> t.classList.remove('show'), 1600);
-    // }
+  (function(){
+    function showToast(msg){
+      const t = document.getElementById('toast');
+      if(!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(t._h);
+      t._h = setTimeout(()=> t.classList.remove('show'), 1400);
+    }
 
-    // File preview (client-side only)
-    document.getElementById('fileInput').addEventListener('change', (e)=>{
-      const f = e.target.files && e.target.files[0];
-      if(!f) return;
-      const url = URL.createObjectURL(f);
-      document.getElementById('mainImage').src = url;
-      showToast('Ảnh được hiển thị tạm ');
-      // release object URL later to avoid leaks
-      setTimeout(()=> URL.revokeObjectURL(url), 5000);
-    });
+    const fileInput = document.getElementById('fileInput');
+    if(fileInput){
+      fileInput.addEventListener('change', (e)=>{
+        const f = e.target.files && e.target.files[0];
+        if(!f) return;
+        const url = URL.createObjectURL(f);
+        const main = document.getElementById('mainImage');
+        if(main) main.src = url;
+        showToast('Ảnh được hiển thị tạm');
+        setTimeout(()=> URL.revokeObjectURL(url), 5000);
+      });
+    }
 
-    // Buttons: provide feedback but no real action
-    document.getElementById('saveBtn').addEventListener('click', ()=>{
-      // small visual blink
-      const b = document.getElementById('saveBtn');
-      b.disabled = true;
-      b.style.transform = 'translateY(1px)';
-      showToast('Lưu thay đổi ');
-      setTimeout(()=>{ b.disabled = false; b.style.transform = ''; }, 700);
-    });
+    const saveBtn = document.getElementById('saveBtn');
+    if(saveBtn){
+      saveBtn.addEventListener('click', ()=>{
+        saveBtn.disabled = true;
+        saveBtn.style.transform = 'translateY(1px)';
+        showToast('Lưu thay đổi (UI only)');
+        setTimeout(()=>{ saveBtn.disabled = false; saveBtn.style.transform = ''; }, 700);
+      });
+    }
 
-    document.getElementById('deleteBtn').addEventListener('click', ()=> {
-      const b = document.getElementById('deleteBtn');
-      b.disabled = true;
-      showToast('Xóa sản phẩm ');
-      setTimeout(()=>{ b.disabled = false; }, 700);
-    });
+    const previewBtn = document.getElementById('previewBtn');
+    if(previewBtn){
+      previewBtn.addEventListener('click', ()=>{
+        showToast('Mở xem trang sản phẩm (UI only)');
+      });
+    }
 
-    document.getElementById('previewBtn').addEventListener('click', ()=>{
-      showToast('Mở xem trang sản phẩm');
-      // optionally open actual public product page in new tab (uncomment if you want)
-      // window.open('../product-1.html', '_blank');
-    });
+    const priceEl = document.getElementById('price');
+    if(priceEl){
+      priceEl.addEventListener('input', (e)=>{
+        const v = Number(e.target.value) || 0;
+        showToast('Giá hiện tại: ' + v.toLocaleString('vi-VN') + ' VNĐ');
+      });
+    }
 
-    // Make inputs "live" visually by updating the price displayed in toast
-    document.getElementById('price').addEventListener('input', (e)=>{
-      const v = Number(e.target.value)||0;
-      showToast('Giá hiện tại: ' + v.toLocaleString('vi-VN') + ' VNĐ ');
-    });
-  </script>
+    const deleteBtn = document.getElementById('deleteBtn');
+    if(deleteBtn){
+      deleteBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        const confirmDelete = confirm("Bạn có chắc muốn xóa sản phẩm này không?");
+        if (confirmDelete) {
+          alert("Sản phẩm đã được xác nhận xóa.");
+        } else {
+          alert("Đã hủy thao tác xóa.");
+        }
+      });
+    }
+  })();
+</script>
+
+
 </body>
 </html>

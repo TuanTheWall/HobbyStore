@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin</title>
+  <title>Thêm sản phẩm</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
@@ -166,10 +166,56 @@ textarea::placeholder {
   color: gray;
   font-style: italic;
 }
+
+/* page background from assets */
+  body{
+    min-height:100vh;
+    margin:0;
+    /* corrected path (admin/add.html -> ../assets/img/...) */
+    background-image: url('../admin/assets/img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position:relative;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    color:#222;
+  }
+
+  /* subtle dark overlay so content stays readable */
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.28);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* make main content area readable on top of background */
+  .wrap{
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.95);
+    padding: 28px;
+    border-radius: 12px;
+    max-width: 1100px;
+    margin: 36px auto;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+    backdrop-filter: blur(4px);
+  }
+
+  /* if you want a darker overlay instead, uncomment:
+  body::before{
+    content:"";
+    position:fixed; inset:0; background:rgba(0,0,0,0.25); pointer-events:none;
+  }
+  */
 </style>
 </head>
 <body>
-<nav class="navbar">
+  
+<!-- <nav class="navbar">
     <div class="nav-links">
       <ul>
       <a href="admin.html" class="rounded-pill">
@@ -184,10 +230,15 @@ textarea::placeholder {
 	</div>
 	</form>
 	<form action="search.html" style="margin-left:10px;">
-	<!-- <button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button> -->
+	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
 	</form>
   </nav>
-    <img src="assets/img/wallhaven-wyjj7x_m.png" width="1521" height="220" >
+    <img src="assets/img/wallhaven-wyjj7x_m.png" width="1521" height="220" > -->
+    <div class="wrap">
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;">
+      <a href="admin.html" style="text-decoration:none;color:#2c7be5;font-weight:600">← Trở về Admin</a>
+      <h1>Thêm sản phẩm</h1>
+    </div>
     
     <div class="add-img">
     <input type="file" id="fileInput" style="display:none;">
@@ -223,7 +274,7 @@ textarea::placeholder {
    	
    	<lable for="info">Mô tả sản phẩm:></lable><br>
    	<textarea id="info" name="info" 
-          style="color:gray; width:500px; height:300px; font-size:16px;" placeholder="Mô tả sản phẩm"></textarea><br>
+          style="color:gray; width:300px; height:150px; font-size:16px;" placeholder="Mô tả sản phẩm"></textarea><br>
           <input type="submit" value="Submit" style="background:black;color:white;">
   	</form>
   	</div>
