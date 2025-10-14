@@ -135,24 +135,29 @@
   }
 
   </style>
+  <script>
+    function showAlert() {
+  alert("Lưu thay đổi");
+          }
+  </script>
 </head>
 <nav class="navbar">
     <div class="nav-links">
       <ul>
-      <a href="indexlogin.html" class="rounded-pill">
+      <a onclick="showAlert()" class="rounded-pill">
   <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:70px;"></a>
-        <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
-        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li></ul>
+        <li style="font-size:20px;padding-top:25px;"><a onclick="showAlert()" >Trang chủ</a></li>
+        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a onclick="showAlert()">Hồ sơ</a></li></ul>
     </div>
-        <form action="1index.html" method="get">
+        
       <div class="search">
 	<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
-	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">Tìm</button>
+	<button onclick="showAlert()" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;" >Tìm</button>
 	</div>
-	</form>
-	<form action="searchlogin.html" style="margin-left:5px;">
-	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
-	</form>
+	
+	
+	<button onclick="showAlert()" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
+	
   </nav>
 <body>
 
@@ -183,18 +188,15 @@
       <span class="value">089235579</span>
       <button class="edit-btn">Sửa</button>
     </div>
-    <button>
-		<i class="fa fa-plus-circle"></i> Lưu
-	</button>
+    
+		<a href="profile.html" style="border-style: solid;padding: 10px;font-family: Arial, Helvetica, sans-serif;font-size: larger;background-color:rgb(225, 196, 99);color: #111827;margin-left: 380px;">Lưu thay đổi</a>
   </div>
 
-  <div class="sidebar">
-    <br>  </br>
-    <br>  </br>
-    <a href="profile.html">Thông tin cá nhân</a>
-    <a href="history.html">Lịch sử mua hàng</a>
+  <div class="sidebar" style="padding-top: 90px;"> 
+    <a onclick="showAlert()">Thông tin cá nhân</a>
+    <a onclick="showAlert()">Lịch sử mua hàng</a>
     <a href="edit.html">Chỉnh sửa</a>
-    <a href="index.html">Đăng xuất</a>
+    <a onclick="showAlert()">Đăng xuất</a>
   </div>
 </body>
 </html>
