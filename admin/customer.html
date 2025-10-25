@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Quản lý khách hàng — Admin (UI only)</title>
+  <title>Quản lý khách hàng — Admin</title>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -75,7 +75,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Static rows (buttons are clickable but do nothing) -->
           <tr data-id="c01">
             <td>
               <div class="meta">
@@ -89,9 +88,9 @@
             <td><div class="small">an.nguyen@example.com</div></td>
             <td><div class="status active">Hoạt động</div></td>
             <td style="text-align:right">
-              <button class="btn btn-view" data-uionly title="UI only">Lịch sử</button>
-              <button class="btn btn-lock" data-uionly title="UI only">Khóa</button>
-              <button class="btn btn-del" data-uionly title="UI only">Xóa</button>
+              <button class="btn btn-view" data-uionly title="">Lịch sử</button>
+              <button class="btn btn-lock" data-uionly title="">Khóa</button>
+              <button class="btn btn-del" data-uionly title="">Xóa</button>
             </td>
           </tr>
 
@@ -108,9 +107,9 @@
             <td><div class="small">binh.tran@example.com</div></td>
             <td><div class="status active">Hoạt động</div></td>
             <td style="text-align:right">
-              <button class="btn btn-view" data-uionly title="UI only">Lịch sử</button>
-              <button class="btn btn-lock" data-uionly title="UI only">Khóa</button>
-              <button class="btn btn-del" data-uionly title="UI only">Xóa</button>
+              <button class="btn btn-view" data-uionly title="">Lịch sử</button>
+              <button class="btn btn-lock" data-uionly title="">Khóa</button>
+              <button class="btn btn-del" data-uionly title="">Xóa</button>
             </td>
           </tr>
 
@@ -127,9 +126,9 @@
             <td><div class="small">hoang.le@example.com</div></td>
             <td><div class="status locked">Đã khóa</div></td>
             <td style="text-align:right">
-              <button class="btn btn-view" data-uionly title="UI only">Lịch sử</button>
-              <button class="btn btn-unlock" data-uionly title="UI only">Mở khóa</button>
-              <button class="btn btn-del" data-uionly title="UI only">Xóa</button>
+              <button class="btn btn-view" data-uionly title="">Lịch sử</button>
+              <button class="btn btn-unlock" data-uionly title="">Mở khóa</button>
+              <button class="btn btn-del" data-uionly title="">Xóa</button>
             </td>
           </tr>
 
@@ -146,9 +145,9 @@
             <td><div class="small">minh.pham@example.com</div></td>
             <td><div class="status active">Hoạt động</div></td>
             <td style="text-align:right">
-              <button class="btn btn-view" data-uionly title="UI only">Lịch sử</button>
-              <button class="btn btn-lock" data-uionly title="UI only">Khóa</button>
-              <button class="btn btn-del" data-uionly title="UI only">Xóa</button>
+              <button class="btn btn-view" data-uionly title="">Lịch sử</button>
+              <button class="btn btn-lock" data-uionly title="">Khóa</button>
+              <button class="btn btn-del" data-uionly title="">Xóa</button>
             </td>
           </tr>
 
@@ -165,16 +164,16 @@
             <td><div class="small">ha.do@example.com</div></td>
             <td><div class="status active">Hoạt động</div></td>
             <td style="text-align:right">
-              <button class="btn btn-view" data-uionly title="UI only">Lịch sử</button>
-              <button class="btn btn-lock" data-uionly title="UI only">Khóa</button>
-              <button class="btn btn-del" data-uionly title="UI only">Xóa</button>
+              <button class="btn btn-view" data-uionly title="">Lịch sử</button>
+              <button class="btn btn-lock" data-uionly title="">Khóa</button>
+              <button class="btn btn-del" data-uionly title="">Xóa</button>
             </td>
           </tr>
 
         </tbody>
         
       </table>
-      <div class="pagination"> <!-- Phân trang -->
+      <div class="pagination">
   <button class="page-btn" data-uionly>&laquo;</button>
   <button class="page-btn active" data-uionly>1</button>
   <button class="page-btn" data-uionly>2</button>
@@ -184,11 +183,10 @@
     </div>
   </div>
 
-  <!-- Static modal markup (inactive) -->
   <div class="modal-back" aria-hidden="true" style="display:none;">
     <div class="modal" role="dialog" aria-labelledby="modalTitle">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <h3 id="modalTitle">Lịch sử đơn hàng (UI only)</h3>
+        <h3 id="modalTitle">Lịch sử đơn hàng ()</h3>
         <div style="display:flex;gap:8px;align-items:center">
           <button class="btn" style="background:#f1f3f5" disabled>Đóng</button>
         </div>
@@ -199,25 +197,17 @@
     </div>
   </div>
 
-  <!-- Minimal JS: buttons produce visual feedback only and do nothing else -->
   <script>
     document.querySelectorAll('[data-uionly]').forEach(btn=>{
       btn.addEventListener('click', (e)=>{
-        // prevent any navigation/default
         e.preventDefault();
-        // tiny visual feedback
         btn.classList.add('clicked');
         setTimeout(()=> btn.classList.remove('clicked'), 140);
-        // optional: brief aria-live message (hidden) could be added later; currently silent
       });
     });
-
-    // disable search behavior (pure UI): prevent typing from changing real state
     const search = document.getElementById('search');
     if(search){
       search.addEventListener('input', e => {
-        // keep text editable but don't perform any search actions
-        // we intentionally do nothing here (UI only)
       });
     }
   </script>
