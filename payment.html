@@ -200,31 +200,53 @@
     </form>
   </nav>
 
-  <!-- Nút trở về -->
+
   <a href="indexlogin.html" class="back-home">← Trở về Trang chủ</a>
 
-  <!-- Form thanh toán -->
   <div class="checkout-container">
-    <h1>Thông tin thanh toán</h1>
-    <form>
-      <label>Họ và tên</label>
-      <input type="text" placeholder="Nhập họ tên của bạn" required>
+  <h1>Thông tin thanh toán</h1>
+  <form id="checkoutForm">
+    <label>Họ và tên</label>
+    <input type="text" placeholder="Nhập họ tên của bạn">
 
-      <label>Địa chỉ giao hàng</label>
-      <input type="text" placeholder="Nhập địa chỉ" required>
+    <label>Địa chỉ giao hàng</label>
+    <input type="text" placeholder="Nhập địa chỉ">
 
-      <label>Số điện thoại</label>
-      <input type="tel" placeholder="VD: 0901234567" required>
+    <label>Số điện thoại</label>
+    <input type="tel" placeholder="VD: 0901234567">
 
-      <label>Phương thức thanh toán</label>
-      <select required>
-        <option>Thanh toán khi nhận hàng (COD)</option>
-        <option>Chuyển khoản ngân hàng</option>
-      </select>
+    <label>Phương thức thanh toán</label>
+    <select>
+      <option>Thanh toán khi nhận hàng (COD)</option>
+      <option>Chuyển khoản ngân hàng</option>
+    </select>
 
-      <button type="submit">Xác nhận đặt hàng</button>
-    </form>
+    <button type="submit">Xác nhận đặt hàng</button>
+  </form>
+
+  <!-- Thông báo thanh toán -->
+  <div id="successMessage" style="display:none; text-align:center; margin-top:20px;">
+    <h2 style="color:#28a745;">Đã thanh toán, cảm ơn bạn đã mua hàng ❤️</h2>
+    <div style="margin-top:20px;">
+      <a href="indexlogin.html" 
+         style="display:inline-block; background:#007bff; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; margin-right:10px;">
+         Tiếp tục mua sắm
+      </a>
+      <a href="cart.html" 
+         style="display:inline-block; background:#ffc107; color:#000; padding:10px 20px; border-radius:6px; text-decoration:none;">
+         Xem giỏ hàng
+      </a>
+    </div>
   </div>
+</div>
+
+<script>
+  document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // Ngăn gửi form thật
+    this.style.display = "none"; // Ẩn form
+    document.getElementById("successMessage").style.display = "block"; // Hiện thông báo
+  });
+</script>
 
 </body>
 </html>
