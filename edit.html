@@ -184,8 +184,10 @@
       <button class="edit-btn">Sửa</button>
     </div>
     <button>
-		<i class="fa fa-plus-circle"></i> Lưu
-	</button>
+		<button id="saveBtn" style="margin-top:20px; padding:10px 20px; background:#000000; color:white; border:none; border-radius:6px; cursor:pointer;">
+  <i class="fa fa-plus-circle"></i> Lưu
+</button>
+
   </div>
 
   <div class="sidebar">
@@ -196,5 +198,13 @@
     <a href="edit.html">Chỉnh sửa</a>
     <a href="index.html">Đăng xuất</a>
   </div>
+  <script>
+  document.getElementById("saveBtn").addEventListener("click", function (e) {
+    e.preventDefault();
+    
+    alert(" Thông tin đã được lưu thành công!");
+  });
+</script>
+
 </body>
 </html>
