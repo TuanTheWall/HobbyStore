@@ -19,6 +19,16 @@
   justify-content: center;  /* căn giữa ngang */
   gap: 40px;                /* khoảng cách giữa ảnh */
   flex-wrap: wrap;
+  font-size:25px;
+}
+.search-advanced input[type="text"] {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  width: 220px;  /* 👈 chỉnh kích thước tại đây */
+  margin-top:-40px;
+  margin-bottom:-30px;
 }
 .category-grid img {
   width: 250px;
@@ -101,10 +111,11 @@ margin-top:auto;
 
 .search-advanced {
   display: flex;
-  justify-content: center;   /* căn giữa ngang */
-  align-items: center;       /* căn giữa dọc */
-  gap: 20px;                 /* khoảng cách giữa các mục */
-  flex-wrap: wrap;           /* xuống dòng gọn khi màn nhỏ */
+  flex-direction: column;   /* ✅ Cho các phần tử xếp theo cột */
+  align-items: flex-start;  /* Canh trái (hoặc center nếu muốn giữa) */
+  gap: 15px;                /* Khoảng cách giữa các dòng */
+  margin: 20px auto;        /* Căn giữa form */
+  width: fit-content;       /* Co theo nội dung */
 }
 
 .search-advanced label {
@@ -120,8 +131,28 @@ margin-top:auto;
   min-width: 200px;          /* tất cả select có cùng độ rộng */
 }
 
-.btn-tim {
-  padding: 10px 20px;
+.search-bar {
+  display: flex;
+  align-items: center;     /* căn giữa theo chiều dọc */
+  justify-content: center; /* căn giữa theo chiều ngang */
+  gap: 10px;               /* khoảng cách giữa các phần tử */
+  margin-top: -10px;
+}
+
+.search-input {
+  width: 400px;
+  height: 45px;            /* cùng chiều cao với nút */
+  padding: 0 15px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.btn-tim,
+.btn-advanced {
+  height: 45px;            /* đảm bảo chiều cao bằng input */
+  padding: 0 20px;
   font-size: 15px;
   font-weight: bold;
   background-color: blue;
@@ -129,7 +160,39 @@ margin-top:auto;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
+
+.btn-tim:hover,
+.btn-advanced:hover {
+  background-color: darkblue;
+}
+
+.product-card .price {
+  text-align: center;
+  width: 100%;
+  color:red;
+  font-size:20px;
+}
+.search-box{
+margin-top:-100px;
+padding-bottom:100px;
+}
+.gia-range {
+  display: flex;
+  align-items: center;   /* căn giữa dọc */
+  gap: 10px;             /* khoảng cách giữa các phần tử */
+  margin-top: -30px;       /* cách nhãn 1 chút */
+}
+
+.gia-range input {
+  width: 100px;          /* độ rộng mỗi ô nhập */
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
 </style>
 </head>
 <body>
@@ -137,12 +200,24 @@ margin-top:auto;
     <div class="nav-links">
       <ul>
       <a href="indexlogin.html" class="rounded-pill">
-  <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:70px;"></a>
+  <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
         <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
-        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li>
-      </ul>
-    
+        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li></ul>
     </div>
+        <div class="search-bar">
+  <form action="ketqualogin.html" method="get" class="search-form">
+    <input type="text" placeholder="Search.." class="search-input">
+    <button type="submit" class="btn-tim">Tìm</button>
+  </form>
+
+  <form action="searchlogin.html" method="get">
+    <button type="submit" class="btn-advanced" style="height:45px;">Tìm kiếm nâng cao</button>
+  </form>
+</div>
+<div style="font-size:20px;padding-top:25px;">
+  <a href="cart.html" style="display:inline-block; margin-top:-100px; padding:10px 20px; background:green; color:white; border-radius:5px; text-decoration:none;"> Giỏ hàng </a>
+</div>
+  
   </nav>
     <img src="assets/img/wallhaven-wyjj7x_m.png" width="100%" height="220" >
   <div class="container">
@@ -171,25 +246,20 @@ margin-top:auto;
       </div>
     </section>
   </div>	
-	<div class="timnangcao">
-	        <form action="indexlogin.html" method="get">
-      <div class="search">
-	<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
-	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;";">Tìm</button>
-	</div>
-	</form>
-  <form action="indexlogin.html" class="search-advanced">
-    <label for="gia">Giá:</label>
-    <select id="gia" name="gia">
-      <option value="ckt">[Chọn giá]</option>
-      <option value="500">500.000VNĐ &lt;=</option>
-      <option value="100">500.000VNĐ =&gt; &lt;=1.000.000VNĐ</option>
-      <option value="100">1.000.000VNĐ =&gt;</option>
-    </select>
-
-    <label for="chat">Chọn dòng:</label>
+	<div class="search-box">
+  <form action="ketqualogin.html" class="search-advanced">
+  <label style="font-size:25px;" for="fname">Tên sản phẩm:</label><br>
+  	<input style="color:gray;" type="text" id="fname" name="fname" placeholder="Name" style="font-size:20px;"><br>
+	<label  for="fname">Khoản giá:</label><br>
+	<div class="gia-range">
+  <input type="text" id="gia-tu" name="gia-tu" placeholder="Từ">
+  <span>–</span>
+  <input type="text" id="gia-den" name="gia-den" placeholder="Đến">
+</div>
+	
+    <label style="font-size:25px;" for="chat">Chọn dòng:</label>
     <select id="chat" name="chat">
-      <option value="cl">[Chọn dòng]</option>
+      <option style="color:gray;" value="cl">Chọn dòng</option>
       <option value="hg">High Grade</option>
       <option value="rg">Real Grade</option>
       <option value="mg">Master Grade</option>
@@ -197,14 +267,23 @@ margin-top:auto;
       <option value="ag">Anime Figure</option>
     </select>
 
-    <label for="hang">Chọn hãng:</label>
+    <label style="font-size:25px;" for="hang">Chọn hãng:</label>
     <select id="hang" name="hang">
-      <option value="hang">[Chọn hãng]</option>
+      <option style="color:gray;" value="hang">Chọn hãng</option>
       <option value="bandai">Bandai</option>
       <option value="sega">Sega</option>
     </select>
+    
+    <label style="font-size:25px;" for="hang">Xắp sếp</label>
+    <select id="hang" name="hang">
+      <option value="md">Mặc định</option>
+      <option value="td">Giá tăng dần</option>
+      <option value="gd">Giá giảm dần</option>
+            <option value="z-a">Tên Z-A</option>
+            <option value="a-z">Tên A-Z</option>
+    </select>
 
-    <button type="submit" class="btn-tim">Tìm</button>
+    <button type="submit" class="btn-tim" style="height:35px; margin-top:-5px;">Tìm</button>
   </form>
 </div>
 

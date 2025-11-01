@@ -6,6 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trang chủ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang chủ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
     rel="stylesheet">
@@ -19,6 +27,7 @@
   justify-content: center;  /* căn giữa ngang */
   gap: 40px;                /* khoảng cách giữa ảnh */
   flex-wrap: wrap;
+  font-size:25px;
 }
 .category-grid img {
   width: 250px;
@@ -124,30 +133,130 @@ margin-top:auto;
   font-size: 14px;
   margin-bottom: 10px;
 }
+.search-bar {
+  display: flex;
+  align-items: center;     /* căn giữa theo chiều dọc */
+  justify-content: center; /* căn giữa theo chiều ngang */
+  gap: 10px;               /* khoảng cách giữa các phần tử */
+  margin-top: -10px;
+}
+
+.search-input {
+  width: 400px;
+  height: 45px;            /* cùng chiều cao với nút */
+  padding: 0 15px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.btn-tim,
+.btn-advanced {
+  height: 45px;            /* đảm bảo chiều cao bằng input */
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-tim:hover,
+.btn-advanced:hover {
+  background-color: darkblue;
+}
+
+.product-card .price {
+  text-align: center;
+  width: 100%;
+  color:red;
+  font-size:20px;
+}
+.banner-slideshow {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.banner-slideshow img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 0;
+  transition: opacity 0.8s ease;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  background-color: rgba(0,0,0,0.3);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px 15px;
+  border-radius: 50%;
+  z-index: 10;
+  transition: background-color 0.3s;
+}
+
+.arrow:hover {
+  background-color: rgba(0,0,0,0.6);
+}
+
+.arrow.left { left: 20px; }
+.arrow.right { right: 20px; }
+
+.titlesp{
+margin-top: -80px;
+margin-left:-1000px;
+color:#060270;
+}
+.newsp{
+margin-top:-100px;
+margin-bottom:40px;
+color:#FED636;
+margin-left:-960px;
+}
+
 </style>
 </head>
 <nav class="navbar">
     <div class="nav-links">
       <ul>
       <a href="index.html" class="rounded-pill">
-  <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:70px;"></a>
-        <li style="font-size:20px;padding-top:25px;"><a href="#" >Trang chủ</a></li>
+  <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
+        <li style="font-size:20px;padding-top:25px;"><a href="index.html" >Trang chủ</a></li>
         <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="login.html">Đăng nhập</a></li>
       </ul>
     </div>
-        <form action="index.html" method="get">
-      <div class="search">
-	<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
-	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;";">Tìm</button>
-	</div>
-	</form>
-	<form action="search.html" style="margin-left:10px;">
-	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
-	</form>
+<div class="search-bar">
+  <form action="ketqua.html" method="get" class="search-form">
+    <input type="text" placeholder="Search.." class="search-input">
+    <button type="submit" class="btn-tim">Tìm</button>
+  </form>
+
+  <form action="search.html" method="get">
+    <button type="submit" class="btn-advanced" style="height:45px;">Tìm kiếm nâng cao</button>
+  </form>
+</div>
+  
   </nav>
-    <img src="assets/img/wallhaven-wyjj7x_m.png" width="100%" height="220" >
+  
+<div class="banner-slideshow">
+  <button class="arrow left" onclick="changeBanner(-1)">&#10094;</button>
+  <img id="bannerImage" src="assets/img/1080x540_Mobile_GQuuuuuuX_Banner.webp" alt="banner" width="100%" height="300px">
+  <button class="arrow right" onclick="changeBanner(1)">&#10095;</button>
+</div>
+
   <div class="container">
-    <section class="product-section"">
+    <section class="product-section">
       <div class="category-grid">
           <a href="hg.html">
           <img class="card-img" src="assets/img/HGlogo.jpg" alt="product-image" width="610" height="100">
@@ -172,7 +281,10 @@ margin-top:auto;
       </div>
     </section>
   </div>
-      <h2 style="margin-top: -80px; text-align: center;">Sản Phẩm</h2>
+  
+  
+  <h2 class="titlesp">SẢN PHẨM</h2>
+ 	<div class="product-display">
 <section class="product-section">
       <div class="product-grid">
         <div class="product-card">
@@ -183,14 +295,7 @@ margin-top:auto;
             <p class="price"><span>1.300.000VNĐ</span></p>
           </div>
           <div class="btn-col">
-            <!-- <a href="products/product-1.html" class="icon-link">
-              Mua
-              <svg fill="none" class="rubicons arrow-right-up" xmlns="http://www.w3.org/2000/svg" width="auto"
-                height="auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path d="M17.9645 12.9645l.071-7h-7.071" stroke-linecap="round"></path>
-                <path d="M5.9645 17.9645l12-12" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </a> -->
+
           </div>
         </div>
         <div class="product-card">
@@ -201,14 +306,7 @@ margin-top:auto;
             <p class="price"><span>1.300.000VNĐ</span></p>
           </div>
           <div class="btn-col">
-            <!-- <a href="products/product-1.html" class="icon-link">
-              Mua
-              <svg fill="none" class="rubicons arrow-right-up" xmlns="http://www.w3.org/2000/svg" width="auto"
-                height="auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path d="M17.9645 12.9645l.071-7h-7.071" stroke-linecap="round"></path>
-                <path d="M5.9645 17.9645l12-12" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </a> -->
+
           </div>
         </div>
         <div class="product-card">
@@ -216,33 +314,54 @@ margin-top:auto;
           </a> 
           <h1 class="product-name">RG 1/144 GOD GUNDAM</h1>
           <div class="flex-row">
-            <p class="price"><span>15.000VNĐ</span></p>
+            <p class="price"><span>915.000VNĐ</span></p>
           </div>
           <div class="btn-col">
-            <!-- <a href="#" class="icon-link">
-              Mua
-              <svg fill="none" class="rubicons arrow-right-up" xmlns="http://www.w3.org/2000/svg" width="auto"
-                height="auto" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path d="M17.9645 12.9645l.071-7h-7.071" stroke-linecap="round"></path>
-                <path d="M5.9645 17.9645l12-12" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </a> -->
+
           </div>
         </div>
 
       </div>
     </section>
+    </div> 
     
 <div class="pagination" style="margin-top:-100px">
-  <a href="rg.html">&laquo;</a>
-  <a href="rg.html" class="active">1</a>
-  <a href="rg.html">2</a>
-  <a href="rg.html">3</a>
-  <a href="rg.html">4</a>
-  <a href="rg.html">5</a>
-  <a href="rg.html">6</a>
-  <a href="rg.html">&raquo;</a>
+  <a href="index.html">&laquo;</a>
+  <a href="index.html" class="active">1</a>
+  <a href="index.html">2</a>
+  <a href="index.html">3</a>
+  <a href="index.html">4</a>
+  <a href="index.html">5</a>
+  <a href="index.html">6</a>
+  <a href="index.html">&raquo;</a>
 </div>
-</body>
-</html>
 
+<script>
+  const bannerImages = [
+    "assets/img/1080x540_Mobile_GQuuuuuuX_Banner.webp",
+    "assets/img/Miku_Collection_Banner.webp",
+    "assets/img/wallhaven-wyjj7x_m.png"
+  ];
+
+  let bannerIndex = 0;
+
+  function changeBanner(step) {
+    const img = document.getElementById("bannerImage");
+    bannerIndex += step;
+
+    // Quay vòng lại nếu đến cuối hoặc đầu
+    if (bannerIndex >= bannerImages.length) bannerIndex = 0;
+    if (bannerIndex < 0) bannerIndex = bannerImages.length - 1;
+
+    // Hiệu ứng mờ dần khi đổi ảnh
+    img.style.opacity = 0;
+    setTimeout(() => {
+      img.src = bannerImages[bannerIndex];
+      img.style.opacity = 1;
+    }, 300);
+  }
+</script>
+
+</body>
+
+</html>

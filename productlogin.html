@@ -94,31 +94,6 @@
       margin-bottom: 20px;
     }
 
-    select {
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-      margin-bottom: 15px;
-    }
-
-    button {
-      background: linear-gradient(90deg, #36d1dc, #5b86e5);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      width: 220px;
-      font-size: 16px;
-      transition: transform 0.2s, background 0.3s;
-    }
-    button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(90deg, #5b86e5, #36d1dc);
-    }
-
     .back-home {
       display: inline-block;
       margin: 20px 40px;
@@ -148,7 +123,7 @@
       right: 20px;
       bottom: 20px;
       background: #111;
-      color: #fff;
+      color: white;
       padding: 10px 14px;
       border-radius: 8px;
       opacity: 0;
@@ -170,37 +145,191 @@
         align-items: center;
       }
     }
+.search{
+	text-align:center;
+	margin: 20px;
+}
+.search-advanced {
+padding-right:220px;
+  margin: 20px 0;  
+}
+.search-advanced button {
+  background-color: blue;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.product-card {
+  height: 295px;
+  width: 220px;         /* chỉnh chiều rộng card */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  background: #DDDDDD;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;              /* ép ảnh cùng chiều cao */
+  object-fit: cover;          /* cắt ảnh cho vừa khung */
+  border-radius: 8px;
+}
+.product-name {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0;
+  min-height: 40px;             /* giữ chiều cao tên đều nhau */
+}
+.cch{
+ color:black;
+}
+.cch:hover{
+color:red;
+}
+.navbar{
+background-color:cyan;
+height:80px;
+}
+.navbar img {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  background: none !important;
+}
+.btn-col{
+margin-top:auto;
+}
+.price {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.search-bar {
+  display: flex;
+  align-items: center;     /* căn giữa theo chiều dọc */
+  justify-content: center; /* căn giữa theo chiều ngang */
+  gap: 10px;               /* khoảng cách giữa các phần tử */
+  margin-top: -10px;
+}
+
+.search-input {
+  width: 400px;
+  height: 45px;            /* cùng chiều cao với nút */
+  padding: 0 15px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.btn-tim,
+.btn-advanced {
+  height: 45px;            /* đảm bảo chiều cao bằng input */
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-tim:hover,
+.btn-advanced:hover {
+  background-color: darkblue;
+}
+.search-advanced {
+  display: flex;
+  flex-direction: column;   /* ✅ Cho các phần tử xếp theo cột */
+  align-items: flex-start;  /* Canh trái (hoặc center nếu muốn giữa) */
+  gap: 15px;                /* Khoảng cách giữa các dòng */
+  margin: 20px auto;        /* Căn giữa form */
+  width: fit-content;       /* Co theo nội dung */
+}
+
+.search-advanced label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.search-advanced select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  min-width: 200px;          /* tất cả select có cùng độ rộng */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;     /* căn giữa theo chiều dọc */
+  justify-content: center; /* căn giữa theo chiều ngang */
+  gap: 10px;               /* khoảng cách giữa các phần tử */
+  margin-top: -10px;
+}
+
+.search-input {
+  width: 400px;
+  height: 45px;            /* cùng chiều cao với nút */
+  padding: 0 15px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.btn-tim,
+.btn-advanced {
+  height: 45px;            /* đảm bảo chiều cao bằng input */
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-tim:hover,
+.btn-advanced:hover {
+  background-color: darkblue;
+}
+
+    
   </style>
 </head>
 
 <body>
-  <nav class="navbar">
+<nav class="navbar">
     <div class="nav-links">
       <ul>
-      <a href="index.html" class="rounded-pill">
-  <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:70px;"></a>
+      <a href="indexlogin.html" class="rounded-pill">
+  <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px;"></a>
         <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
-        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li>
-      </ul>
+        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li></ul>
     </div>
-
-  <!-- FIX: form properly opened and closed -->
-  <form action="indexlogin.html" method="get" style="display:flex;gap:0;align-items:center;">
-    <input type="text" name="search" placeholder="Search.." 
-           style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
-    <button type="submit"
-            style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">
-      Tìm
-    </button>
+        <div class="search-bar">
+  <form action="ketqua.html" method="get" class="search-form">
+    <input type="text" placeholder="Search.." class="search-input">
+    <button type="submit" class="btn-tim">Tìm</button>
   </form>
 
-  <div style="display:flex;align-items:center;gap:8px;">
-    <a href="cart.html" style="display:inline-block; margin-top:10px; padding:10px 20px; background:green; color:white; border-radius:5px; text-decoration:none;"> Giỏ hàng </a>
-    <form action="searchlogin.html" style="margin-left:5px;">
-      <button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
-    </form>
-  </div>
-</nav>
+  <form action="searchlogin.html" method="get">
+    <button type="submit" class="btn-advanced" style="height:45px;">Tìm kiếm nâng cao</button>
+  </form>
+</div>
+<div style="font-size:20px;padding-top:25px;">
+  <a href="cart.html" style="display:inline-block; margin-top:-100px; padding:10px 20px; background:green; color:white; border-radius:5px; text-decoration:none;"> Giỏ hàng </a>
+</div>
+  
+  </nav>
   
   <a href="indexlogin.html" class="back-home">← Trở về</a>
 
@@ -218,7 +347,7 @@
        <div class="badge">High Grade (HG)</div>
        <div class="small-muted">Tỉ lệ: 1/144 • Thể loại: Gundam / Model kit • Nhà sản xuất: Bandai</div>
      </div>
-
+	<div class="search-advanced">
       <label for="addon">Chọn phụ kiện thêm:</label>
       <select id="addon" name="addon">
         <option value="none">Không thêm phụ kiện</option>
@@ -226,8 +355,8 @@
         <option value="kim">Thêm kìm </option>
         <option value="combo">Thêm kìm + decal </option>
       </select>
-      <label for="quantity">Số lượng:</label>
-      <input type="number" id="quantity" name="quantity" value="1" min="1" max="1">
+     </div> 
+      
       <div id="total-price">Tổng: 560.000 VNĐ</div>
 
       <button type="button" id="addCartBtn">Thêm vào giỏ hàng</button>

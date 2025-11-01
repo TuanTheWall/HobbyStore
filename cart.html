@@ -1,96 +1,173 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Giỏ hàng</title>
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: "Josefin Sans", sans-serif;
-      background-image: url(assets/img/cartbackground.png);
-      background-repeat: no-repeat;
-      background-size: cover;
-      margin: 0;
-      padding: 0;
-    }
+  <title>Trang chủ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><!DOCTYPE html>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/product-page.css">
+  <link rel="stylesheet" href="assets/css/view-cart.css">
+<style>
+.category-grid {
+  display: flex;
+  justify-content: center;  /* căn giữa ngang */
+  gap: 40px;                /* khoảng cách giữa ảnh */
+  flex-wrap: wrap;
+  font-size:25px;
+}
+.category-grid img {
+  width: 250px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.category-grid img:hover {
+  transform: scale(1.05);
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-items: center;
+  max-width: 1200px;   /* Giới hạn chiều rộng */
+  margin: 0 auto;      /* Căn giữa lưới */
+}
+.pagination{
+	text-align:center;
+}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+.pagination a.active{
+	background-color: green;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+	background-color: gray;
+	border-radius: 5px;
+}
+.card{
+   padding: 10px; 
+}
+.product-section{
+    display:flex;
+    justify-content: center; 
+	margin-top: -10px; 
+}
+.search{
+	text-align:center;
+	margin: 20px;
+}
+.search-advanced {
+  text-align: center; /* canh giữa nội dung bên trong form */
+  margin: 20px 0;     /* khoảng cách trên/dưới */
+}
+.search-advanced button {
+  background-color: blue;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.product-card {
+  height: 295px;
+  width: 220px;         /* chỉnh chiều rộng card */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  background: #DDDDDD;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
 
-    /* Navbar */
-    .navbar {
-      background-color: cyan;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+.product-card img {
+  width: 100%;
+  height: 200px;              /* ép ảnh cùng chiều cao */
+  object-fit: cover;          /* cắt ảnh cho vừa khung */
+  border-radius: 8px;
+}
+.product-name {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0;
+  min-height: 40px;             /* giữ chiều cao tên đều nhau */
+}
+.cch{
+ color:black;
+}
+.cch:hover{
+color:red;
+}
+.navbar{
+background-color:cyan;
+height:80px;
+}
+.navbar img {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  background: none !important;
+}
+.btn-col{
+margin-top:auto;
+}
+.price {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.search-bar {
+  display: flex;
+  align-items: center;     /* căn giữa theo chiều dọc */
+  justify-content: center; /* căn giữa theo chiều ngang */
+  gap: 10px;               /* khoảng cách giữa các phần tử */
+  margin-top: -10px;
+}
 
-    .navbar .nav-links ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      margin: 0;
-      padding: 0;
-      align-items: center;
-    }
+.search-input {
+  width: 400px;
+  height: 45px;            /* cùng chiều cao với nút */
+  padding: 0 15px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
 
-    .navbar .nav-links ul li a {
-      text-decoration: none;
-      font-weight: bold;
-      color: black;
-      font-size: 18px;
-    }
+.btn-tim,
+.btn-advanced {
+  height: 45px;            /* đảm bảo chiều cao bằng input */
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
 
-    .navbar .nav-links ul li a:hover {
-      color: red;
-    }
+.btn-tim:hover,
+.btn-advanced:hover {
+  background-color: darkblue;
+}
 
-    .navbar img {
-      width: 70px;
-      margin-right: 20px;
-    }
-
-    .search {
-      display: flex;
-      align-items: center;
-    }
-
-    .search input {
-      padding: 12px 20px;
-      font-size: 15px;
-      width: 300px;
-      border: 1px solid #ccc;
-      border-radius: 4px 0 0 4px;
-    }
-
-    .search button {
-      font-size: 15px;
-      padding: 12px 20px;
-      background-color: blue;
-      color: white;
-      border: none;
-      border-radius: 0 4px 4px 0;
-      cursor: pointer;
-    }
-
-    .advanced-search {
-      margin-left: 10px;
-    }
-
-    .advanced-search button {
-      font-size: 15px;
-      padding: 12px 20px;
-      background-color: blue;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 150px;
-      height: 47px;
-    }
-
-    /* Giỏ hàng */
+.product-card .price {
+  text-align: center;
+  width: 100%;
+  color:red;
+  font-size:20px;
+}
     .container {
       max-width: 1000px;
       margin: 40px auto;
@@ -100,13 +177,14 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .cart-item {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      border-bottom: 1px solid #ddd;
-      padding: 20px 0;
-    }
+.cart-item {
+  display: grid;
+  grid-template-columns: 40px 120px 1fr 180px; /* checkbox | ảnh | thông tin | cột số lượng & xóa */
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+}
 
     .cart-item img {
       width: 120px;
@@ -115,48 +193,6 @@
       object-fit: cover;
     }
 
-    .item-info {
-      flex: 1;
-    }
-
-    .item-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .price {
-      color: #0072ff;
-      font-weight: bold;
-    }
-
-    .controls {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    .controls label {
-      font-size: 14px;
-    }
-
-    .controls input {
-      width: 60px;
-      padding: 6px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    .btn-delete {
-      background: #ff4d4d;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
 
     .summary {
       text-align: right;
@@ -165,16 +201,7 @@
       font-weight: bold;
       color: #0066cc;
     }
-
-    .actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-
-    .btn-continue, .btn-pay {
+     .btn-continue, .btn-pay {
       text-decoration: none;
       padding: 10px 20px;
       border-radius: 8px;
@@ -197,69 +224,43 @@
     .btn-pay:hover {
       background: #218838;
     }
-
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        height: auto;
-        padding: 20px;
-      }
-
-      .search {
-        margin-top: 10px;
-      }
-
-      .cart-item {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .controls {
-        align-items: center;
-      }
-
-      .summary {
-        text-align: center;
-      }
-
-      .actions {
-        justify-content: center;
-      }
+        .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
     }
-  </style>
-</head>
-<body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
+</style>
+</head>
+<nav class="navbar">
     <div class="nav-links">
       <ul>
-        <li>
-          <a href="indexlogin.html">
-            <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo">
-          </a>
-        </li>
-        <li><a href="indexlogin.html">Trang chủ</a></li>
-        <li style="background-color: rgb(225, 196, 99); border-radius: 5px; padding: 10px;">
-          <a href="profile.html">Hồ sơ</a>
-        </li>
-      </ul>
+      <a href="indexlogin.html" class="rounded-pill">
+  <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
+        <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
+        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li></ul>
     </div>
+        <div class="search-bar">
+  <form action="ketqualogin.html.html" method="get" class="search-form">
+    <input type="text" placeholder="Search.." class="search-input">
+    <button type="submit" class="btn-tim">Tìm</button>
+  </form>
 
-    <form action="indexlogin.html" method="get" class="search">
-      <input type="text" name="search" placeholder="Search..">
-      <button type="submit">Tìm</button>
-    </form>
-
-    <form action="searchlogin.html" class="advanced-search">
-      <button type="submit">Tìm kiếm nâng cao</button>
-    </form>
+  <form action="searchlogin.html" method="get">
+    <button type="submit" class="btn-advanced" style="height:45px;">Tìm kiếm nâng cao</button>
+  </form>
+</div>
+<div style="font-size:20px;padding-top:25px;">
+  <a href="cart.html" style="display:inline-block; margin-top:-100px; padding:10px 20px; background:green; color:white; border-radius:5px; text-decoration:none;"> Giỏ hàng </a>
+</div>
+  
   </nav>
 
-  <!-- Giỏ hàng -->
-  <div class="container">
+<div class="container">
     <div class="cart-item">
+    <input type="checkbox" name="vehicle1" value="Bike">
       <img src="assets/img/rx782origin.jpg" alt="HG GTO">
       <div class="item-info">
         <p class="item-title">HG GTO 1/144 RX-78-02 Gundam</p>
@@ -267,13 +268,42 @@
       </div>
       <div class="controls">
         <label>Số lượng</label>
-        <input type="number" value="1" min="1" max="1">
+        <p style="padding-left:20px;">1</p>
         <button class="btn-delete" type="button">Xóa</button>
       </div>
     </div>
 
+    <div class="cart-item">
+    <input type="checkbox" name="vehicle1" value="Bike">
+      <img src="assets/img/2607613-2_2_219e9d4dd40a4b98a0d7ab276eebfca5_grande.jpg" alt="HG GTO">
+      <div class="item-info">
+        <p class="item-title">Umamusume: Pretty Derby - Tamamo Cross</p>
+        <p class="price">360.000 VNĐ</p>
+      </div>
+      <div class="controls">
+        <label>Số lượng</label>
+        <p style="padding-left:20px;">1</p>
+        <button class="btn-delete" type="button">Xóa</button>
+      </div>
+    </div>
+ 
+    <div class="cart-item">
+    <input type="checkbox" name="vehicle1" value="Bike">
+      <img src="assets/img/oj4qyp0dik0xnfd5_988680d6151e4ee2bf7c10240cd5ce71_master.jpg" alt="HG GTO">
+      <div class="item-info">
+        <p class="item-title">HG GQ 1/144 RED GUNDAM</p>
+        <p class="price">660.000VNĐ</p>
+      </div>
+      <div class="controls">
+        <label>Số lượng</label>
+        <p style="padding-left:20px;">2</p>
+        <button class="btn-delete" type="button">Xóa</button>
+      </div>
+    </div>
+
+
     <div class="summary">
-      Tổng cộng: 560.000 VNĐ
+      Tổng cộng: 1.580.000 VNĐ
     </div>
 
     <div class="actions">
@@ -281,6 +311,6 @@
       <a href="payment.html" class="btn-pay">Thanh toán</a>
     </div>
   </div>
-
 </body>
 </html>
+
