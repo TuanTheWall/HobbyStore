@@ -100,6 +100,17 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
+    /* Product preview */
+    .cart-preview{background:#fbfdff;border:1px solid #eef6ff;padding:12px;border-radius:8px;margin-bottom:18px}
+    .cart-item{display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dashed #eef6ff}
+    .cart-item:last-child{border-bottom:none}
+    .cart-item img{width:64px;height:64px;object-fit:cover;border-radius:6px}
+    .item-meta{flex:1}
+    .item-meta .name{font-weight:700}
+    .item-meta .qty{color:#666;font-size:13px}
+    .item-price{text-align:right;min-width:110px}
+    .cart-total{display:flex;justify-content:space-between;font-weight:700;padding-top:10px;margin-top:6px;border-top:1px solid #f1f7ff}
+
     h1 {
       text-align: center;
       color: #0072ff;
@@ -205,6 +216,14 @@
 
   <div class="checkout-container">
   <h1>Thông tin thanh toán</h1>
+  <!-- Product preview -->
+  <div id="cartPreview" class="cart-preview" aria-live="polite">
+    <div id="cartItems"></div>
+    <div id="cartTotal" class="cart-total" style="display:none">
+      <div>Tổng cộng</div>
+      <div id="cartTotalValue">0₫</div>
+    </div>
+  </div>
   <form id="checkoutForm">
     <label>Họ và tên</label>
     <input type="text" placeholder="Nhập họ tên của bạn">
@@ -241,10 +260,54 @@
 </div>
 
 <script>
+  // Simple cart preview logic
+  function formatVND(amount){
+    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫';
+  }
+
+  function loadCart(){
+    // Try reading cart from localStorage (expected format: [{id,name,price,qty,img}])
+    try{
+      const raw = localStorage.getItem('cart');
+      if (raw) return JSON.parse(raw);
+    }catch(e){console.warn('Invalid cart in storage', e)}
+    // fallback sample (valid JS object)
+    return [{id:'RX782', name:'HG GTO 1/144 RX-78-02 Gundam', price:560000, qty:1, img:'assets/img/rx782origin.jpg'}];
+  }
+
+  function renderCart(){
+    const items = loadCart();
+    const container = document.getElementById('cartItems');
+    container.innerHTML = '';
+    let total = 0;
+    items.forEach(it => {
+      const row = document.createElement('div');
+      row.className = 'cart-item';
+      row.innerHTML = `
+        <img src="${it.img || 'assets/img/placeholder.png'}" alt="${it.name}">
+        <div class="item-meta">
+          <div class="name">${it.name}</div>
+          <div class="qty">Số lượng: ${it.qty}</div>
+        </div>
+        <div class="item-price">${formatVND(it.price * it.qty)}</div>
+      `;
+      container.appendChild(row);
+      total += (it.price * it.qty);
+    });
+    const totalWrap = document.getElementById('cartTotal');
+    document.getElementById('cartTotalValue').textContent = formatVND(total);
+    totalWrap.style.display = items.length ? 'flex' : 'none';
+  }
+
+  // Render on load
+  renderCart();
+
   document.getElementById("checkoutForm").addEventListener("submit", function(e) {
     e.preventDefault(); // Ngăn gửi form thật
     this.style.display = "none"; // Ẩn form
     document.getElementById("successMessage").style.display = "block"; // Hiện thông báo
+    // Optionally clear cart (localStorage)
+    try{ localStorage.removeItem('cart'); }catch(e){}
   });
 </script>
 
