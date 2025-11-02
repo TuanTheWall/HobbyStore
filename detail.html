@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chi tiết đơn hàng</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -66,44 +64,67 @@
       margin-bottom: 20px;
     }
 
-    .order-info {
+    .info-section {
       display: flex;
       justify-content: space-between;
-      font-size: 16px;
-      margin-bottom: 30px;
-    }
-
-    .address, .status {
-      width: 48%;
-    }
-
-    .address h3 {
-      margin-top: 0;
-      font-size: 18px;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 5px;
-    }
-
-    .status h3 {
-      margin-top: 0;
-      font-size: 18px;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 5px;
-    }
-
-    .timeline {
-      padding-left: 20px;
+      margin-bottom: 20px;
       font-size: 15px;
-      color: #333;
     }
 
-    .timeline p {
-      margin: 6px 0;
+    .info-box {
+      width: 48%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 15px;
+      background-color: #f9f9f9;
     }
 
-    .done {
-      color: green;
-      font-weight: 600;
+    .info-box h3 {
+      margin-top: 0;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+      font-size: 17px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 15px;
+    }
+
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    table th {
+      background-color: #eee;
+    }
+
+    .summary {
+      margin-top: 20px;
+      float: right;
+      text-align: right;
+      font-size: 16px;
+    }
+
+    .summary p {
+      margin: 5px 0;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .back-btn:hover {
+      background-color: #2980b9;
     }
 
     .sidebar {
@@ -125,20 +146,6 @@
     .sidebar a:hover {
       background-color: #34495e;
     }
-
-    .back-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #3498db;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-
-    .back-btn:hover {
-      background-color: #2980b9;
-    }
   </style>
 </head>
 
@@ -146,53 +153,89 @@
   <nav class="navbar">
     <div class="nav-links">
       <ul>
-      <a href="indexlogin.html" class="rounded-pill">
-  <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:70px;"></a>
-        <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
-        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li></ul>
+        <a href="indexlogin.html" class="rounded-pill"><img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png"
+            alt="Logo"></a>
+        <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html">Trang chủ</a></li>
+        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a
+            href="profile.html">Hồ sơ</a></li>
+      </ul>
     </div>
-        <form action="indexlogin.html" method="get">
+    <form action="indexlogin.html" method="get">
       <div class="search">
-	<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
-	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">Tìm</button>
-	</div>
-	</form>
-	<form action="searchlogin.html" style="margin-left:5px;">
-	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
-	</form>
+        <input type="text" placeholder="Search.."
+          style="padding: 12px 20px; font-size: 15px; width: 320px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
+        <button type="submit"
+          style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">Tìm</button>
+      </div>
+    </form>
+
+    <form action="searchlogin.html" style="margin-left:12px;">
+      <button type="submit"
+        style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao
+      </button>
+    </form>
   </nav>
 
   <div class="border">
     <div class="header">Chi tiết đơn hàng #DH001</div>
 
-    <div class="order-info">
-      <div class="address">
-        <h3>Địa chỉ nhận hàng</h3>
-        <p><strong>Nguyễn Văn A</strong></p>
-        <p>Ấp Lmao, Xã Có Thật, Huyện Có Người, Trái Đất</p>
-        <p>SĐT: 6218.321.285</p>
+    <div class="info-section">
+      <div class="info-box">
+        <h3>Thông tin khách hàng</h3>
+        <p><strong>Họ tên:</strong> Nguyễn Văn A</p>
+        <p><strong>Email:</strong> nguyenvana@gmail.com</p>
+        <p><strong>SĐT:</strong> 0987654321</p>
+        <p><strong>Địa chỉ:</strong> Ấp Lmao, Xã Có Thật, Huyện Có Người, Trái Đất</p>
       </div>
 
-      <div class="status">
-        <h3>Trạng thái giao hàng</h3>
-        <div class="timeline">
-          <p><span class="done">+14:53 16-08-2025 — Đã giao</span></p>
-          <p>+Giao hàng thành công</p>
-          <br>
-          <p>+08:08 16-08-2025 — Đang vận chuyển</p>
-          <p>+Đơn hàng sẽ sớm được giao, vui lòng chú ý điện thoại</p>
-          <p>+13:01 15-08-2025 — Đơn hàng đã đến trạm giao hàng tại Trái Đất</p>
-          <p>+20:49 11-08-2025 — Đơn hàng đã đến bưu cục</p>
-          <p>+17:55 11-08-2025 — Đơn hàng đã đến bưu cục MX592, Cảng Liên Hà</p>
-        </div>
+      <div class="info-box">
+        <h3>Thông tin đơn hàng</h3>
+        <p><strong>Mã đơn hàng:</strong> DH001</p>
+        <p><strong>Ngày đặt:</strong> 05/08/2025 - 08:30</p>
+        <p><strong>Trạng thái:</strong> Đang xử lý</p>
+        <p><strong>Phương thức thanh toán:</strong> COD</p>
       </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Sản phẩm</th>
+          <th>Hình ảnh</th>
+          <th>Đơn giá</th>
+          <th>Số lượng</th>
+          <th>Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hiểu về trái tim</td>
+          <td><img src="assets/img/book1.png" alt="book1" width="50"></td>
+          <td>70.000đ</td>
+          <td>2</td>
+          <td>140.000đ</td>
+        </tr>
+        <tr>
+          <td>Sự im lặng của bầy cừu</td>
+          <td><img src="assets/img/book2.png" alt="book2" width="50"></td>
+          <td>150.000đ</td>
+          <td>1</td>
+          <td>150.000đ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="summary">
+      <p><strong>Tiền hàng:</strong> 290.000đ</p>
+      <p><strong>Phí vận chuyển:</strong> Freeship</p>
+      <p><strong>Tổng cộng:</strong> 290.000đ</p>
     </div>
 
     <a href="history.html" class="back-btn">← Quay lại lịch sử mua hàng</a>
   </div>
 
   <div class="sidebar">
-    <br></br>
+    <br><br>
     <br></br>
     <a href="profile.html">Thông tin cá nhân</a>
     <a href="history.html">Lịch sử mua hàng</a>
