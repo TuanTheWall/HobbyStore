@@ -29,7 +29,7 @@
 }
 
 .navbar{
-background-color:rgb(187, 183, 183);
+background-color:cyan;
 height:80px;
 }
 .navbar img {
@@ -37,6 +37,50 @@ height:80px;
   mix-blend-mode: normal !important;
   background: none !important;
 }
+.btn-col{
+margin-top:auto;
+}
+.price {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.search-bar {
+  display: flex;
+  align-items: center;     /* căn giữa theo chiều dọc */
+  justify-content: center; /* căn giữa theo chiều ngang */
+  gap: 10px;               /* khoảng cách giữa các phần tử */
+  margin-top: -10px;
+}
+
+.search-input {
+  width: 400px;
+  height: 45px;            /* cùng chiều cao với nút */
+  padding: 0 15px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.btn-tim,
+.btn-advanced {
+  height: 45px;            /* đảm bảo chiều cao bằng input */
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-tim:hover,
+.btn-advanced:hover {
+  background-color: darkblue;
+}
+
 
 .border{
     width: 1000px;
@@ -143,19 +187,24 @@ body{
     <div class="nav-links">
       <ul>
       <a href="indexlogin.html" class="rounded-pill">
-  <img src="assets/img/ChatGPT Image Sep 24, 2025, 01_47_48 PM.png" alt="Logo" style="width:70px;"></a>
+  <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
         <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
         <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li></ul>
     </div>
-        <form action="1index.html" method="get">
-      <div class="search">
-	<input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
-	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">Tìm</button>
-	</div>
-	</form>
-	<form action="searchlogin.html" style="margin-left:5px;">
-	<button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao </button>
-	</form>
+        <div class="search-bar">
+  <form action="ketqualogin.html" method="get" class="search-form">
+    <input type="text" placeholder="Search.." class="search-input">
+    <button type="submit" class="btn-tim">Tìm</button>
+  </form>
+
+  <form action="searchlogin.html" method="get">
+    <button type="submit" class="btn-advanced" style="height:45px;">Tìm kiếm nâng cao</button>
+  </form>
+</div>
+<div style="font-size:20px;padding-top:25px;">
+  <a href="cart.html" style="display:inline-block; margin-top:-100px; padding:10px 20px; background:green; color:white; border-radius:5px; text-decoration:none;"> Giỏ hàng </a>
+</div>
+  
   </nav>
 <body>
 
@@ -180,8 +229,39 @@ body{
     <div class="info">
       <span class="label">Số điện thoại</span>
       <input type="text" placeholder="089235579" class="value" style="border-style: none;font-size: large;font-family: Arial, Helvetica, sans-serif;">
-    </div><br><br>
-		<a href="profile.html" style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin-left:390px;background-color: rgb(225, 196, 99);color:#111827">Lưu thay đổi</a>
+    </div><br>
+    
+		<div style="text-align: right; margin-top: 20px;margin-right: 50px;">
+      <a href="profile.html" 
+     style="display: inline-block;
+            font-size: larger;
+            border: solid 1px #999;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #d1d5db;
+            color: #111827;
+            text-decoration: none;
+            transition: all 0.3s ease;">
+    Hủy
+  </a>
+  <a href="profile.html" 
+     style="display: inline-block;
+            font-size: larger;
+            border: solid 1px #c4a94f;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: rgb(225, 196, 99);
+            color: #111827;
+            text-decoration: none;
+            transition: all 0.3s ease;">
+    Lưu thay đổi
+  </a>
+
+  
+</div>
+   
   </div>
 
   <div class="sidebar">
