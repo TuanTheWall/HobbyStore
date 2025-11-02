@@ -22,7 +22,7 @@
       font-family: "Josefin Sans", sans-serif;
     }
 
-    /* ===== NAVBAR (đồng bộ với profile.html) ===== */
+    /* ===== NAVBAR (đồng bộ từ profile.html) ===== */
     .navbar {
       background-color: cyan;
       height: 80px;
@@ -67,41 +67,37 @@
     .search-bar {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
     }
 
-    .search-form {
-      display: flex;
-    }
-
     .search-input {
-      padding: 12px 20px;
+      width: 400px;
+      height: 45px;
+      padding: 0 15px;
       font-size: 15px;
-      width: 320px;
       border: 1px solid #ccc;
-      border-radius: 4px 0 0 4px;
+      border-radius: 6px;
+      box-sizing: border-box;
     }
 
-    .btn-tim {
-      font-size: 15px;
-      padding: 12px 20px;
-      background-color: blue;
-      color: white;
-      border: none;
-      border-radius: 0 4px 4px 0;
-      cursor: pointer;
-    }
-
+    .btn-tim,
     .btn-advanced {
+      height: 45px;
+      padding: 0 20px;
       font-size: 15px;
-      padding: 12px 20px;
+      font-weight: bold;
       background-color: blue;
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
-      width: 150px;
-      height: 47px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-tim:hover,
+    .btn-advanced:hover {
+      background-color: darkblue;
     }
 
     .cart-btn {
@@ -122,7 +118,7 @@
       color: white !important;
     }
 
-    /* ===== SIDEBAR & MAIN CONTENT giữ nguyên ===== */
+    /* ===== SIDEBAR ===== */
     .sidebar {
       position: fixed;
       top: 80px;
@@ -148,6 +144,7 @@
       background-color: #34495e;
     }
 
+    /* ===== MAIN CONTENT ===== */
     .main-content {
       margin-top: 120px;
       margin-left: 200px;
@@ -257,38 +254,33 @@
 </head>
 
 <body>  
- <nav class="navbar">
-  <div class="nav-links">
-    <ul>
-      <a href="indexlogin.html" class="rounded-pill">
-        <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo">
-      </a>
-      <li style="font-size:20px;padding-top:25px;">
-        <a href="indexlogin.html">Trang chủ</a>
-      </li>
-      <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);">
-        <a href="profile.html">Hồ sơ</a>
-      </li>
-    </ul>
-  </div>
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <ul>
+        <a href="indexlogin.html" class="rounded-pill">
+          <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo">
+        </a>
+        <li style="font-size:20px; display:flex; align-items:center;">
+  <a href="indexlogin.html">Trang chủ</a>
+</li>
 
-  <form action="indexlogin.html" method="get">
-    <div class="search">
-      <input type="text" placeholder="Search.."
-        style="padding: 12px 20px; font-size: 15px; width: 250px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
-      <button type="submit"
-        style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">
-        Tìm
-      </button>
+        <li style="font-size: large; border-style:solid; border-radius: 5px; padding:10px; text-align: center; margin:auto; background-color: rgb(225, 196, 99);">
+          <a href="profile.html">Hồ sơ</a>
+        </li>
+      </ul>
     </div>
-  </form>
 
-  <form action="searchlogin.html" style="margin-left:12px;">
-    <button type="submit"
-      style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">
-      Tìm kiếm nâng cao
-    </button>
-  </form>
+    <div class="search-bar">
+      <form action="ketqualogin.html" method="get" class="search-form">
+        <input type="text" placeholder="Search.." class="search-input">
+        <button type="submit" class="btn-tim">Tìm</button>
+      </form>
+
+      <form action="searchlogin.html" method="get">
+        <button type="submit" class="btn-advanced">Tìm kiếm nâng cao</button>
+      </form>
+    </div>
 
     <a href="cart.html" class="cart-btn">Giỏ hàng</a>
   </nav>
