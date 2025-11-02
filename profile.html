@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chỉnh sửa thông tin</title>
+  <title>Trang chủ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.reflowhq.com/v2/toolkit.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/settings.css">
-    <style>
-    .search{
+  <link rel="stylesheet" href="assets/css/product-page.css">
+  <link rel="stylesheet" href="assets/css/view-cart.css">
+<style>
+
+.search{
 	text-align:center;
 	margin: 20px;
 }
@@ -180,9 +186,8 @@ body{
     padding: 20px;
     flex-grow: 1;
   }
+</style>
 
-  </style>
-</head>
 <nav class="navbar">
     <div class="nav-links">
       <ul>
@@ -206,72 +211,42 @@ body{
 </div>
   
   </nav>
-<body>
+</head>
 
-  <div class="border">
-    <div class="header" style="text-align: center;">Chỉnh sửa thông tin cá nhân</div><br>
-    <div class="info">
-      <span class="label">Tên người dùng</span>
-      <input type="text" placeholder="khachhang21312309" class="value" style="border-style: none;font-size: large;font-family: Arial, Helvetica, sans-serif;">
-    </div><br>
-    <div class="info">
-      <span class="label">Mật khẩu</span>
-      <input type="password" placeholder="************" class="value" style="border-style: none;font-size: large;font-family: Arial, Helvetica, sans-serif;">
-    </div><br>
-    <div class="info">
-      <span class="label">Địa chỉ</span>
-      <input type="text" placeholder="123 Đường Vĩnh Viễn" class="value" style="border-style: none;font-size: large;font-family: Arial, Helvetica, sans-serif;">
-    </div><br>
-    <div class="info">
-      <span class="label">Gmail</span>
-      <input type="text" placeholder="21312309@gmail.com" class="value" style="border-style: none;font-size: large;font-family: Arial, Helvetica, sans-serif;">
-    </div><br>
-    <div class="info">
-      <span class="label">Số điện thoại</span>
-      <input type="text" placeholder="089235579" class="value" style="border-style: none;font-size: large;font-family: Arial, Helvetica, sans-serif;">
-    </div><br>
-    
-		<div style="text-align: right; margin-top: 20px;margin-right: 50px;">
-      <a href="profile.html" 
-     style="display: inline-block;
-            font-size: larger;
-            border: solid 1px #999;
-            border-radius: 5px;
-            padding: 10px 20px;
-            margin: 5px;
-            background-color: #d1d5db;
-            color: #111827;
-            text-decoration: none;
-            transition: all 0.3s ease;">
-    Hủy
-  </a>
-  <a href="profile.html" 
-     style="display: inline-block;
-            font-size: larger;
-            border: solid 1px #c4a94f;
-            border-radius: 5px;
-            padding: 10px 20px;
-            margin: 5px;
-            background-color: rgb(225, 196, 99);
-            color: #111827;
-            text-decoration: none;
-            transition: all 0.3s ease;">
-    Lưu thay đổi
-  </a>
-
-  
-</div>
-   
-  </div>
-
-  <div class="sidebar">
-    <br>  </br>
-    <br>  </br>
-    <a href="profile.html">Thông tin cá nhân</a>
-    <a href="history.html">Lịch sử mua hàng</a>
-    <a href="edit.html">Chỉnh sửa</a>
-    <a href="index.html">Đăng xuất</a>
-  </div>
-
-</body>
+    <body>
+        <div class="border">
+                <div>
+                    <h class="header">Thông tin cá nhân</h>
+                </div>
+                <div class="subhead">
+                    <p>ID:21312309</p>
+                </div><br>
+                <div class="info">
+                    <span class="label">Tên người dùng</span>
+                    <span class="value">khachhang21312309</span>
+                </div><br>
+                <div class="info">
+                    <span class="label">Mật khẩu</span>
+                    <span class="value">************</span>
+                </div><br>
+                <div class="info">
+                    <span class="label">Địa chỉ</span>
+                    <span class="value">123 Đường vĩnh viễn</span>
+                </div><br>
+                <div class="info">
+                    <span class="label">Gmail</span>
+                    <span class="value">21312309@gmail.com</span>
+                </div><br>
+                <div class="info">
+                    <span class="label">Số điện thoại</span>
+                    <span class="value">089235579</span>
+                </div><br>
+              </div>
+        <div class="sidebar" style="padding-top: 90px;">
+            <a href="profile.html">Thông tin cá nhân</a>
+            <a href="history.html">Lịch sử mua hàng</a>
+            <a href="edit.html">Chỉnh sửa</a>
+            <a href="index.html">Đăng xuất</a>
+        </div>
+    </body>
 </html>
