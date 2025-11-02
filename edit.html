@@ -158,34 +158,63 @@
       .sidebar { display: none; }
       .content { margin: 100px 20px; }
     }
+        .cart-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: green;
+      color: white !important;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .cart-btn:hover {
+      background: darkgreen;
+      color: white !important;
+    }
   </style>
 </head>
 
 <body>
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar">
-    <div class="nav-links">
-      <ul>
-        <a href="indexlogin.html" class="rounded-pill">
-          <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo">
-        </a>
-        <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html">Trang chủ</a></li>
-        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li>
-      </ul>
+  <div class="nav-links">
+    <ul>
+      <a href="indexlogin.html" class="rounded-pill">
+        <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo">
+      </a>
+      <li style="font-size:20px;padding-top:25px;">
+        <a href="indexlogin.html">Trang chủ</a>
+      </li>
+      <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);">
+        <a href="profile.html">Hồ sơ</a>
+      </li>
+    </ul>
+  </div>
+
+  <form action="indexlogin.html" method="get">
+    <div class="search">
+      <input type="text" placeholder="Search.."
+        style="padding: 12px 20px; font-size: 15px; width: 250px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
+      <button type="submit"
+        style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">
+        Tìm
+      </button>
     </div>
+  </form>
 
-    <form action="indexlogin.html" method="get">
-      <div class="search">
-        <input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 250px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
-        <button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">Tìm</button>
-      </div>
-    </form>
+  <form action="searchlogin.html" style="margin-left:12px;">
+    <button type="submit"
+      style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">
+      Tìm kiếm nâng cao
+    </button>
+  </form>
 
-    <form action="searchlogin.html" style="margin-left:12px;">
-      <button type="submit" style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:4px; cursor:pointer; width:150px; height:47px;">Tìm kiếm nâng cao</button>
-    </form>
+    <a href="cart.html" class="cart-btn">Giỏ hàng</a>
   </nav>
-
   <!-- ===== SIDEBAR ===== -->
   <div class="sidebar">
     <br></br><br></br>
