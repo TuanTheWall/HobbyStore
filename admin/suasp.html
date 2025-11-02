@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang chủ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/product-page.css">
+  <link rel="stylesheet" href="assets/css/view-cart.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+.pagination{
+	text-align:center;
+}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+.pagination a.active{
+	background-color: green;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+	background-color: gray;
+	border-radius: 5px;
+}
+.search{
+	text-align:center;
+	margin: 20px;
+}
+.search-advanced {
+  text-align: center; /* canh giữa nội dung bên trong form */
+  margin: 20px 0;     /* khoảng cách trên/dưới */
+}
+.search-advanced button {
+  background-color: blue;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cch{
+ color:black;
+}
+.cch:hover{
+color:red;
+}
+.navbar{
+background-color:cyan;
+height:80px;
+}
+.navbar img {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  background: none !important;
+}
+.btn-col{
+margin-top:auto;
+}
+.price {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+
+.overview-menu {
+  padding: 30px;
+  background-color: white;
+}
+
+.overview-menu h2 {
+  font-size: 22px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.menu-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* canh giữa toàn bộ các ô */
+  gap: 20px;
+}
+
+.menu-card {
+  background: linear-gradient(to bottom,cyan,blue);
+  color: #fff;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.menu-card i {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.menu-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.menu-card a{
+color:white;
+text-decoration:none;
+}
+  .wrap{
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.95);
+    padding: 28px;
+    border-radius: 12px;
+    max-width: 1100px;
+    margin: 36px auto;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+    backdrop-filter: blur(4px);
+  }
+  .add-img{
+padding-bottom:50px;
+}
+.left-po{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+.add-info{
+margin-top:-500px;
+font-size:25px;
+padding-bottom:10px;
+margin-left:300px;
+}
+
+.add-info input,
+.add-info select {
+  display: block;
+  margin-bottom: 1px;
+  font-size: 20px;
+  width:600px !important;
+  height: 30px;
+    border: 1px solid #aaa;
+  border-radius: 6px;
+}
+textarea::placeholder {
+  color: gray;
+  font-style: italic;
+}
+.add-info select,
+.add-info textarea {
+  width: 600px;
+  font-size: 20px;
+    border: 1px solid #aaa;
+  border-radius: 6px;
+}
+.bt-them {
+  background: #04a4b3;
+  color: white;
+  font-size: 18px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.bt-them i {
+  margin-right: 8px;
+  font-size: 20px;
+  background: white;
+  color: black;
+  border-radius: 4px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+}
+.themsp {
+  display: inline-block;
+  margin-right: 100px;
+}
+.bt-them.gray {
+  background: gray;
+}
+
+.bt-them.gray:hover {
+  background: #5a5a5a;
+}
+.khung{
+	text-align:center;
+	margin-bottom:200px;
+}
+
+
+</style>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+<nav class="navbar">
+    <div class="nav-links">
+      <ul>
+      <a href="indexlogin.html" class="rounded-pill">
+  <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
+        <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
+        </ul>
+    </div>
+  </nav>
+<section class="overview-menu">
+  <h2>Mục quản lý</h2>
+  <div class="menu-grid">
+  <a href="indexlogin.html">
+    <div class="menu-card">
+      <a href="#">
+      <h3>Quản lý khách hàng</h3>
+    </div>
+    </a>
+    <div class="menu-card">
+      <h3>Quản lý đơn hàng</h3>
+    </div>
+    <a href="quanlysp.html">
+    <div class="menu-card" style="background: linear-gradient(to bottom,#19113b,blue);">
+      <h3>Quản lý sản phẩm</h3>
+    </div>
+    </a>
+    <a href="lndm.html">
+    <div class="menu-card" >
+      <h3>Quản lý giá bán</h3>
+    </div>
+    </a>
+    <a href="quanlydm.html">
+    <div class="menu-card" >
+      <h3>Quản lý danh mục</h3>
+    </div>
+    </a>
+    <a href="tracuusoluong.html">
+    <div class="menu-card">      
+      <h3>Quản lý tồn kho</h3>
+    </div>
+    </a>
+    <a href="quanlynhaphang.html">
+    <div class="menu-card"> 
+      <h3>Quản lý nhập hàng</h3>
+    </div>
+    </a>
+  </div>
+</section>
+
+
+<div class="wrap">
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;">
+      <h1>Sửa sản phẩm</h1>
+    </div>
+    
+    <div class="add-img">
+    <input type="file" id="fileInput" style="display:none;">
+    <button style="display:flex;width:320px;justify-content:center;font-size:20px;background:#56e37c;color:black;" onclick="document.getElementById('fileInput').click()">Thay đổi hình ảnh sản phẩm</button>
+    <button style="background:cyan;" onclick="document.getElementById('fileInput').click()"><img src="assets/img/rx782origin.jpg" style="width:280px;height:370px;"></button>
+    </div>
+    
+    
+  <div class="add-info" >
+   <div class="left-po">
+  	<form>
+  	<label for="fname">Tên sản phẩm</label><br>
+  	<input style="color:black;" type="text" id="fname" name="fname" value="HG GTO 1/144 RX-78-02 Gundam" style="font-size:20px;"><br>
+<label for="chat">Chọn dòng</label>
+<select id="chat" name="chat" style="font-size:20px; width:600px;">
+  <option style="color:black;" value="cl">High Grade</option>
+  <option value="hg">High Grade</option>
+  <option value="rg">Real Grade</option>
+  <option value="mg">Master Grade</option>
+  <option value="pg">Perfect Grade</option>
+  <option value="ag">Anime Figure</option>
+</select><br>
+
+<label for="hang">Chọn hãng</label>
+<select id="hang" name="hang" style="font-size:20px; width:600px;">
+  <option style="color:gray;" value="hang">Bandai</option>
+  <option value="bandai">Bandai</option>
+  <option value="sega">Sega</option>
+</select><br>
+<label for="fname">Giá sản phẩm</label><br>
+  	<input style="color:black;" type="text" id="fname" name="fname" value="560.000VNĐ" style="font-size:20px;"><br>
+
+<label for="info">Giới thiệu mô hình</label><br>
+
+<textarea id="info" name="info" rows="10" cols="50" 
+style="font-size:16px; color:black; padding-top:10px;">•Xuất hiện trong MOBILE SUIT GUNDAM THE ORIGIN
+•Bộ kit này mang đến một khuôn mẫu và định nghĩa hoàn toàn mới cho Gundam The Origin's RX•-78-02, được trang bị nhiều loại vũ khí và gimmicks.
+•Màu sắc và khả năng tháo lắp các bộ phận của bộ kit này cũng được cải tiến tốt hơn so với các dòng HG còn lại trong dòng GTO.
+•Được cung cấp nhiều bộ phận chuyển đổi để tạo ra các biến thể của RX-78-02 Gundam và để đại diện cho tất cả các thiết kế có sẵn cho chính Gundam đó.</textarea><br> 
+
+
+<label for="info">Thông tin mô hình</label><br>
+<textarea id="info" name="info" rows="10" cols="50" 
+style="font-size:16px; color:black; padding-top:10px;">•Cấp độ: HG
+•Yêu cầu tự lắp
+•Chiều cao mô hình: 
+•Tỉ lệ: 1/144</textarea>  	 
+</form>
+</div>	
+  	</div>
+
+  
+  <div class="khung">
+    <form action="quanlysp.html" method="get" class="themsp">
+      <button type="submit" class="bt-them" style="background:gray;color:white;">Quay về</button>
+    </form>
+
+    <form action="quanlysp.html" method="get" class="themsp">
+      <button type="submit" class="bt-them" style="background:cyan;color:white;">Lưu thay đổi</button>
+    </form>
+  </div>
+
+</div>
+</body>
+
+
+</html>
+
