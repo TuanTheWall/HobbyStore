@@ -3,218 +3,561 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Quản lí đơn đặt hàng — Admin</title>
+  <title>Quản lý đơn hàng — Admin</title>
+
+  <!-- Font giống customers.html -->
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <!-- (Bạn vẫn dùng assets/css/style.css nếu có) -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- ----- CSS (verbose để giữ cấu trúc giống file gốc) ----- -->
   <style>
-    :root{
-      --bg:#2b2b2d; --card:#fffafa; --muted:#667; --accent:#2c7be5; --danger:#e94b3c; --ok:#28a745;
+    /* body basic */
+    body {
+      font-family: "Josefin Sans", Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      color: #222;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    body{font-family:"Josefin Sans",Arial,sans-serif;background:var(--bg);margin:0;padding:26px;color:#3c9ef3}
-    .wrap{max-width:1200px;margin:0 auto}
-    .top{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-    a.back{color:var(--accent);text-decoration:none;font-weight:700}
-    h1{margin:0;font-size:20px}
-    .card{background:var(--card);border-radius:10px;padding:16px;box-shadow:0 8px 24px rgba(14,20,40,.06)}
-    .toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap}
-    .filters{display:flex;gap:8px;align-items:center}
-    .search{padding:8px 12px;border-radius:8px;border:1px solid #e6eef8;min-width:220px}
-    select, .search{font-size:14px}
-    table{width:100%;border-collapse:collapse;font-size:14px}
-    thead th{text-align:left;padding:12px 8px;border-bottom:1px solid #eef2f8;color:var(--muted);font-weight:600}
-    tbody td{padding:12px 8px;border-bottom:1px solid #f4f7fb;vertical-align:middle}
-    .id{font-weight:700;color:#1f3d7a}
-    .muted{color:var(--muted);font-size:13px}
-    .status{padding:6px 8px;border-radius:8px;font-weight:700;font-size:13px;display:inline-block}
-    .pending{background:#fff7e6;color:#b36b00}
-    .shipped{background:#e8f8f0;color:#14723b}
-    .cancel{background:#fff0f0;color:#b33}
-    .row-actions{display:flex;gap:8px;justify-content:flex-end}
-    .btn{padding:8px 10px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:13px}
-    .btn-view{background:#6c757d;color:#fff}
-    .btn-ship{background:linear-gradient(90deg,#36d1dc,#5b86e5);color:#fff}
-    .btn-cancel{background:var(--danger);color:#fff}
-    .small{font-size:13px;color:var(--muted)}
-    /* modal */
-    .modal-back{position:fixed;inset:0;background:rgba(12,18,30,.45);display:none;align-items:center;justify-content:center;z-index:60}
-    .modal{background:#fff;border-radius:10px;max-width:760px;width:94%;padding:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);max-height:80vh;overflow:auto}
-    .order-box{border:1px solid #f0f2f6;padding:12px;border-radius:8px;margin-bottom:10px;background:#fbfdff}
-    .order-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px dashed #eef2f6}
-    .order-row:first-of-type{border-top:none}
-    .toast{position:fixed;right:20px;bottom:20px;background:#111;color:#fff;padding:10px 14px;border-radius:8px;opacity:0;transform:translateY(6px);transition:all .2s;z-index:90}
-    .toast.show{opacity:1;transform:none}
 
-    /* preview tooltip (hover on "Xem") */
-    .preview{position:relative;display:inline-block}
-    .preview .tooltip{position:absolute;right:0;top:calc(100% + 8px);background:#ffffff;color:#111;border-radius:8px;padding:10px;box-shadow:0 10px 30px rgba(0,0,0,.12);min-width:220px;display:none;z-index:80}
-    .preview:hover .tooltip{display:block}
-    .tooltip .item{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #eee}
-    .tooltip .item:last-child{border-bottom:none}
-    .tooltip .muted{font-size:12px;color:#667;margin-top:6px}
+    /* NAVBAR */
+    .navbar {
+      background-color: cyan;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      box-sizing: border-box;
+    }
 
-    @media (max-width:860px){ table thead{display:none} tbody td{display:block;padding:10px 6px} tbody tr{margin-bottom:12px;border-radius:8px;background:#fff;box-shadow:0 6px 12px rgba(18,24,40,.03)} .row-actions{justify-content:flex-start} .preview .tooltip{position:static;margin-top:8px;} }
+    .navbar .nav-left {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .navbar .nav-left a.logo-link {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration: none;
+    }
+
+    .navbar img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: none !important;
+      mix-blend-mode: normal !important;
+      background: none !important;
+    }
+
+    .navbar .nav-left a.home {
+      text-decoration: none;
+      color: black;
+      font-weight: 700;
+      font-size: 20px;
+      margin-left: 6px;
+    }
+
+    .navbar .nav-left a.home:hover {
+      color: red;
+    }
+
+    .navbar .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .navbar .nav-right a {
+      text-decoration: none;
+      color: black;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .navbar .nav-right a:hover {
+      color: red;
+    }
+
+    /* OVERVIEW / MENU CARDS (giống customers.html) */
+    .overview-menu {
+      padding: 30px;
+      background-color: white;
+    }
+
+    .overview-menu h2 {
+      font-size: 22px;
+      color: black;
+      margin: 0 0 20px 0;
+      padding: 0;
+    }
+
+    .menu-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .menu-card {
+      background: linear-gradient(to bottom, cyan, blue);
+      color: #fff;
+      text-align: center;
+      padding: 30px 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      min-width: 180px;
+    }
+
+    .menu-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+
+    .menu-card a { color:white; text-decoration:none; display:block; }
+
+    /* TABLE area (keeps original look) */
+    .shipping-table {
+      margin: 30px;
+      background-color: white;
+      padding: 18px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(30,40,60,0.06);
+    }
+
+    .shipping-table h2 { margin:0 0 14px 0; font-size:20px; color:#222; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 12px 10px;
+      border-bottom: 1px solid #eef2f8;
+      color: #666;
+      font-weight: 700;
+      background: #f7f9fb;
+    }
+
+    tbody td {
+      padding: 12px 10px;
+      border-bottom: 1px solid #f1f3f6;
+      vertical-align: middle;
+    }
+
+    tbody tr:hover { background: #fafcff; }
+
+    .col-center { text-align:center; }
+
+    /* Buttons */
+    .btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      margin-right: 8px;
+    }
+
+    .btn:active { transform: translateY(1px); }
+
+    .btn-deliver { background: #28a745; color: #fff; }  /* Xác nhận đã giao */
+    .btn-cancel { background: #e94b3c; color: #fff; }
+    .btn-detail { background: #f59e0b; color: #111; }
+
+    .status-badge { padding:6px 8px; border-radius:8px; font-weight:700; font-size:13px; display:inline-block; }
+
+    .status-pending { background:#fff7e6; color:#b36b00; }
+    .status-shipped { background:#e8f8f0; color:#14723b; }
+    .status-cancel { background:#fff0f0; color:#b33; }
+
+    /* PAGINATION */
+    .pagination {
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      margin-top:18px;
+    }
+
+    .pagination a {
+      padding:8px 12px;
+      background:#007bff;
+      color:#fff;
+      border-radius:6px;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    .pagination a:hover { background: #0056b3; }
+
+    /* POPUP (centered, large) */
+    .modal-back {
+      position: fixed;
+      inset: 0;
+      background: rgba(12,18,30,0.45);
+      display: none; /* show/hide by JS */
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 12px;
+      width: 760px;
+      max-width: calc(100% - 48px);
+      padding: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      max-height: 80vh;
+      overflow: auto;
+    }
+
+    .modal h3 { margin: 0 0 8px 0; font-size:18px; color:#0b5ed7; }
+    .modal .meta { color:#666; font-size:14px; margin-bottom:8px; }
+
+    .modal table { width:100%; border-collapse: collapse; margin-top:12px; font-size:14px; }
+    .modal table th, .modal table td { padding:8px 10px; border-bottom:1px dashed #eef2f6; text-align:left; }
+    .modal .close-btn { background:#f1f3f5; border:none; padding:8px 12px; border-radius:8px; cursor: pointer; float:right; }
+
+    /* small screens */
+    @media (max-width:860px) {
+      thead { display:none; }
+      tbody td { display:block; padding:10px 6px; }
+      tbody tr { margin-bottom:12px; border-radius:8px; background:#fff; box-shadow:0 6px 12px rgba(18,24,40,.03); }
+      .modal { width: 94%; margin: 8vh auto; }
+    }
+
+    /* Extra repeated rules (kept verbose like original files) */
+    .muted { color:#667; font-size:13px; }
+    .small { font-size:13px; }
+    .avatar { width:40px; height:40px; border-radius:6px; background:#e9eef8; display:inline-flex; align-items:center; justify-content:center; font-weight:700; color:#2c5aa0; }
+
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <a class="back" href="admin.html">← Trở về Admin</a>
-      <h1>Quản lí đơn đặt hàng</h1>
+
+  <!-- NAVBAR -->
+  <div class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-left">
+      <a class="logo-link" href="admin.html" aria-label="Trang chủ admin">
+        <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo">
+      </a>
+      <a class="home" href="admin.html">Trang chủ</a>
     </div>
 
-    <div class="card">
-      <div class="toolbar">
-        <div class="filters">
-          <!-- Search & filter are visual only (no JS) -->
-          <form action="shiping.html" method="get" style="display: flex;">
-  <input class="search" id="search" name="query" placeholder="Tìm theo tên hoặc email"
-         style="padding: 12px 20px; font-size: 15px; width: 300px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
-  <button type="submit"
-          style="font-size:15px; padding:12px 20px; background-color:blue; color:white; border:none; border-radius:0 4px 4px 0; cursor:pointer;">
-    Tìm
-  </button>
-</form>
-          <select id="statusFilter" aria-label="Lọc trạng thái">
-            <option value="">Tất cả trạng thái</option>
-            <option value="pending">Chờ xử lý</option>
-            <option value="shipped">Đã gửi</option>
-            <option value="cancel">Đã huỷ</option>
-          </select>
-        </div>
-        <div class="small">5 đơn</div>
-      </div>
-
-      <table id="ordersTable" role="table" aria-label="Orders table">
-        <thead>
-          <tr>
-            <th>Mã đơn</th>
-            <th>Khách</th>
-            <th>Ngày</th>
-            <th>Số tiền</th>
-            <th>Trạng thái</th>
-            <th style="text-align:right">Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Static demo rows (UI-only, hover shows items) -->
-          <tr>
-            <td class="id">ORD-101</td>
-            <td><div style="font-weight:600">Nguyễn Văn An</div><div class="muted">an.nguyen@example.com</div></td>
-            <td class="muted">2025-09-25</td>
-            <td>560.000 VNĐ</td>
-            <td><span class="status pending">Chờ xử lý</span></td>
-            <td style="text-align:right" class="row-actions">
-              <div class="preview" aria-hidden="false">
-                <button class="btn btn-view" type="button" title="Xem">Xem</button>
-                <div class="tooltip" role="tooltip">
-                  <div class="item"><div>HG GTO Rx-78 <div class="muted small">x1</div></div><div>560.000 VNĐ</div></div>
-                </div>
-              </div>
-              <button class="btn btn-ship" type="button" title="UI only">Gửi</button>
-              <button class="btn btn-cancel" type="button" title="UI only">Huỷ</button>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="id">ORD-102</td>
-            <td><div style="font-weight:600">Trần Thị Bình</div><div class="muted">binh.tran@example.com</div></td>
-            <td class="muted">2025-09-24</td>
-            <td>3.900.000 VNĐ</td>
-            <td><span class="status shipped">Đã gửi</span></td>
-            <td style="text-align:right" class="row-actions">
-              <div class="preview" aria-hidden="false">
-                <button class="btn btn-view" type="button" title="Xem">Xem</button>
-                <div class="tooltip" role="tooltip">
-                  <div class="item"><div>Strike Freedom <div class="muted small">x1</div></div><div>2.200.000 VNĐ</div></div>
-                  <div class="item"><div>Paint Set Pro <div class="muted small">x1</div></div><div>1.700.000 VNĐ</div></div>
-                </div>
-              </div>
-              <button class="btn btn-ship" type="button" title="UI only">Đã gửi</button>
-              <button class="btn btn-cancel" type="button" title="UI only">Huỷ</button>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="id">ORD-103</td>
-            <td><div style="font-weight:600">Lê Hoàng</div><div class="muted">hoang.le@example.com</div></td>
-            <td class="muted">2025-09-20</td>
-            <td>2.600.000 VNĐ</td>
-            <td><span class="status pending">Chờ xử lý</span></td>
-            <td style="text-align:right" class="row-actions">
-              <div class="preview" aria-hidden="false">
-                <button class="btn btn-view" type="button" title="Xem">Xem</button>
-                <div class="tooltip" role="tooltip">
-                  <div class="item"><div>RG Unicorn <div class="muted small">x1</div></div><div>1.200.000 VNĐ</div></div>
-                  <div class="item"><div>Tools Set <div class="muted small">x1</div></div><div>1.400.000 VNÐ</div></div>
-                </div>
-              </div>
-              <button class="btn btn-ship" type="button" title="UI only">Gửi</button>
-              <button class="btn btn-cancel" type="button" title="UI only">Huỷ</button>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="id">ORD-104</td>
-            <td><div style="font-weight:600">Phạm Minh</div><div class="muted">minh.pham@example.com</div></td>
-            <td class="muted">2025-09-18</td>
-            <td>1.520.000 VNĐ</td>
-            <td><span class="status cancel">Đã huỷ</span></td>
-            <td style="text-align:right" class="row-actions">
-              <div class="preview" aria-hidden="false">
-                <button class="btn btn-view" type="button" title="Xem">Xem</button>
-                <div class="tooltip" role="tooltip">
-                  <div class="item"><div>HG RX-0 <div class="muted small">x1</div></div><div>1.520.000 VNĐ</div></div>
-                </div>
-              </div>
-              <button class="btn btn-ship" type="button" title="UI only">Gửi</button>
-              <button class="btn btn-cancel" type="button" title="UI only">Huỷ</button>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="id">ORD-105</td>
-            <td><div style="font-weight:600">Đỗ Hà</div><div class="muted">ha.do@example.com</div></td>
-            <td class="muted">2025-09-16</td>
-            <td>1.610.000 VNĐ</td>
-            <td><span class="status shipped">Đã gửi</span></td>
-            <td style="text-align:right" class="row-actions">
-              <div class="preview" aria-hidden="false">
-                <button class="btn btn-view" type="button" title="Xem">Xem</button>
-                <div class="tooltip" role="tooltip">
-                  <div class="item"><div>SD Exia <div class="muted small">x2</div></div><div>1.610.000 VNĐ</div></div>
-                </div>
-              </div>
-              <button class="btn btn-ship" type="button" title="UI only">Đã gửi</button>
-              <button class="btn btn-cancel" type="button" title="UI only">Huỷ</button>
-            </td>
-          </tr>
-
-        </tbody>
-      </table>
+    <div class="nav-right">
+      <a href="#" aria-label="Xin chào admin">Xin chào, Admin</a>
     </div>
   </div>
 
-  <!-- Static modal markup (inactive, no JS) -->
-  <div class="modal-back" id="modalBack" aria-hidden="true" style="display:none;">
+  <!-- MENU -->
+  <section class="overview-menu" aria-label="Menu quản lý">
+    <h2>Mục quản lý</h2>
+    <div class="menu-grid" role="list">
+      <a href="customer.html" class="menu-card" role="listitem"><h3>Quản lý khách hàng</h3></a>
+      <a href="shiping.html" class="menu-card" role="listitem"><h3>Quản lý đơn hàng</h3></a>
+      <a href="quanlysp.html" class="menu-card" role="listitem"><h3>Quản lý sản phẩm</h3></a>
+      <a href="lndm.html" class="menu-card" role="listitem"><h3>Quản lý giá bán</h3></a>
+      <a href="quanlydm.html" class="menu-card" role="listitem"><h3>Quản lý danh mục</h3></a>
+      <a href="tracuusoluong.html" class="menu-card" role="listitem"><h3>Quản lý tồn kho</h3></a>
+      <a href="quanlynhaphang.html" class="menu-card" role="listitem"><h3>Quản lý nhập hàng</h3></a>
+    </div>
+  </section>
+
+  <!-- TABLE -->
+  <div class="shipping-table" role="main" aria-labelledby="ordersTitle">
+    <h2 id="ordersTitle">Danh sách đơn hàng</h2>
+
+    <table role="table" aria-label="Orders table">
+      <thead>
+        <tr>
+          <th>Mã đơn</th>
+          <th>Khách</th>
+          <th>Sản phẩm</th>
+          <th>Tổng tiền</th>
+          <th>Ngày đặt</th>
+          <th>Trạng thái</th>
+          <th style="text-align:right">Hành động</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- 5 đơn hàng: DH001..DH005 -->
+        <tr>
+          <td class="id">DH001</td>
+          <td><div style="font-weight:600">Nguyễn Văn A</div><div class="muted">an.nguyen@example.com</div></td>
+          <td>HG RX-78-02 Gundam<br>HG Zaku II<br>SD Exia</td>
+          <td>1.450.000đ</td>
+          <td class="muted">20/10/2025</td>
+          <td><span class="status-badge status-pending">Chờ xử lý</span></td>
+          <td style="text-align:right">
+            <button class="btn btn-deliver" onclick="confirmDelivered('DH001')">Xác nhận đã giao</button>
+            <button class="btn btn-cancel" onclick="confirmCancel('DH001')">Huỷ</button>
+            <button class="btn btn-detail" onclick="openModal('DH001')">Xem chi tiết</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="id">DH002</td>
+          <td><div style="font-weight:600">Trần Thị B</div><div class="muted">binh.tran@example.com</div></td>
+          <td>RED GUNDAM<br>Char Zaku Custom</td>
+          <td>1.860.000đ</td>
+          <td class="muted">22/07/2025</td>
+          <td><span class="status-badge status-shipped">Đã xác nhận</span></td>
+          <td style="text-align:right">
+            <button class="btn btn-deliver" onclick="confirmDelivered('DH002')">Xác nhận đã giao</button>
+            <button class="btn btn-cancel" onclick="confirmCancel('DH002')">Huỷ</button>
+            <button class="btn btn-detail" onclick="openModal('DH002')">Xem chi tiết</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="id">DH003</td>
+          <td><div style="font-weight:600">Lê Minh C</div><div class="muted">minhc@example.com</div></td>
+          <td>Gundam GQuuuuuuX</td>
+          <td>950.000đ</td>
+          <td class="muted">05/08/2025</td>
+          <td><span class="status-badge status-shipped">Đang giao</span></td>
+          <td style="text-align:right">
+            <button class="btn btn-deliver" onclick="confirmDelivered('DH003')">Xác nhận đã giao</button>
+            <button class="btn btn-cancel" onclick="confirmCancel('DH003')">Huỷ</button>
+            <button class="btn btn-detail" onclick="openModal('DH003')">Xem chi tiết</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="id">DH004</td>
+          <td><div style="font-weight:600">Hoàng Đức D</div><div class="muted">hduc@example.com</div></td>
+          <td>Freedom Gundam</td>
+          <td>3.100.000đ</td>
+          <td class="muted">12/09/2025</td>
+          <td><span class="status-badge status-cancel">Đã huỷ</span></td>
+          <td style="text-align:right">
+            <button class="btn btn-deliver" onclick="confirmDelivered('DH004')">Xác nhận đã giao</button>
+            <button class="btn btn-cancel" onclick="confirmCancel('DH004')">Huỷ</button>
+            <button class="btn btn-detail" onclick="openModal('DH004')">Xem chi tiết</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="id">DH005</td>
+          <td><div style="font-weight:600">Vũ Minh E</div><div class="muted">vminh@example.com</div></td>
+          <td>God Gundam<br>Char Zaku II</td>
+          <td>1.750.000đ</td>
+          <td class="muted">01/11/2025</td>
+          <td><span class="status-badge status-pending">Chờ xử lý</span></td>
+          <td style="text-align:right">
+            <button class="btn btn-deliver" onclick="confirmDelivered('DH005')">Xác nhận đã giao</button>
+            <button class="btn btn-cancel" onclick="confirmCancel('DH005')">Huỷ</button>
+            <button class="btn btn-detail" onclick="openModal('DH005')">Xem chi tiết</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <div class="pagination" aria-hidden="false">
+      <a href="shiping.html">&laquo;</a>
+      <a href="shiping.html">1</a>
+      <a href="shiping.html">2</a>
+      <a href="shiping.html">3</a>
+      <a href="shiping.html">&raquo;</a>
+    </div>
+  </div>
+
+  <!-- MODAL / POPUP: Chi tiết đơn hàng (centered) -->
+  <div class="modal-back" id="modalBack" aria-hidden="true">
     <div class="modal" role="dialog" aria-labelledby="modalTitle">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
         <h3 id="modalTitle">Chi tiết đơn hàng</h3>
-        <button class="btn" style="background:#f1f3f5" disabled>Đóng</button>
+        <button class="close-btn" onclick="closeModal()">Đóng</button>
       </div>
-      <div id="orderDetail">
-        <div class="order-box">
-          <strong>ORD-101</strong>
-          <div class="muted">Nguyễn Văn An • an.nguyen@example.com</div>
-          <div class="muted" style="margin-top:8px">Địa chỉ: Hà Nội, Hoàn Kiếm</div>
-        </div>
-        <div class="order-box">
-          <strong>Sản phẩm</strong>
-          <div class="order-row"><div>HG GTO Rx-78 <div class="muted small">x1</div></div><div style="min-width:120px;text-align:right">560.000 VNĐ</div></div>
-        </div>
-        <div class="order-box" style="display:flex;justify-content:space-between"><div class="muted">Tổng</div><div style="font-weight:700">560.000 VNĐ</div></div>
+
+      <div id="modalBody">
+        <!-- Nội dung sẽ được JS chèn vào đây -->
       </div>
     </div>
   </div>
 
-  <!-- JavaScript removed — page is UI-only -->
+  <!-- ----- JavaScript ----- -->
+  <script>
+    // Data (mimic backend)
+    const ORDERS = {
+      "DH001": {
+        id: "DH001",
+        customer: "Nguyễn Văn A",
+        email: "an.nguyen@example.com",
+        address: "Hà Nội, Hoàn Kiếm",
+        date: "2025-10-20",
+        status: "Chờ xử lý",
+        total: "1.450.000đ",
+        products: [
+          { name: "HG RX-78-02 Gundam", qty: 1, price: "850.000đ" },
+          { name: "HG Zaku II", qty: 1, price: "400.000đ" },
+          { name: "SD Exia", qty: 1, price: "200.000đ" }
+        ]
+      },
+      "DH002": {
+        id: "DH002",
+        customer: "Trần Thị B",
+        email: "binh.tran@example.com",
+        address: "TP. Hồ Chí Minh, Quận 1",
+        date: "2025-07-22",
+        status: "Đã xác nhận",
+        total: "1.860.000đ",
+        products: [
+          { name: "RED GUNDAM", qty: 1, price: "660.000đ" },
+          { name: "Char Zaku Custom", qty: 1, price: "1.200.000đ" }
+        ]
+      },
+      "DH003": {
+        id: "DH003",
+        customer: "Lê Minh C",
+        email: "minhc@example.com",
+        address: "Đà Nẵng",
+        date: "2025-08-05",
+        status: "Đang giao",
+        total: "950.000đ",
+        products: [
+          { name: "Gundam GQuuuuuuX", qty: 1, price: "950.000đ" }
+        ]
+      },
+      "DH004": {
+        id: "DH004",
+        customer: "Hoàng Đức D",
+        email: "hduc@example.com",
+        address: "Cần Thơ",
+        date: "2025-09-12",
+        status: "Đã huỷ",
+        total: "3.100.000đ",
+        products: [
+          { name: "Freedom Gundam", qty: 1, price: "3.100.000đ" }
+        ]
+      },
+      "DH005": {
+        id: "DH005",
+        customer: "Vũ Minh E",
+        email: "vminh@example.com",
+        address: "Bắc Giang",
+        date: "2025-11-01",
+        status: "Chờ xử lý",
+        total: "1.750.000đ",
+        products: [
+          { name: "God Gundam", qty: 1, price: "1.200.000đ" },
+          { name: "Char Zaku II", qty: 1, price: "550.000đ" }
+        ]
+      }
+    };
+
+    // Mở modal hiển thị chi tiết (danh sách sản phẩm)
+    function openModal(orderId) {
+      const data = ORDERS[orderId];
+      if (!data) {
+        alert("Không tìm thấy đơn hàng: " + orderId);
+        return;
+      }
+
+      // Build products table html
+      let productsHtml = '<table style="width:100%; border-collapse:collapse;">';
+      productsHtml += '<thead><tr><th style="text-align:left;padding:8px;border-bottom:1px solid #eee;">Sản phẩm</th><th style="padding:8px;border-bottom:1px solid #eee;">Số lượng</th><th style="padding:8px;border-bottom:1px solid #eee;">Giá</th></tr></thead>';
+      productsHtml += '<tbody>';
+      data.products.forEach(p => {
+        productsHtml += `<tr><td style="padding:8px;border-bottom:1px solid #f1f3f6;">${p.name}</td><td style="padding:8px;border-bottom:1px solid #f1f3f6;width:90px">${p.qty}</td><td style="padding:8px;border-bottom:1px solid #f1f3f6;width:140px">${p.price}</td></tr>`;
+      });
+      productsHtml += '</tbody></table>';
+
+      const html = `
+        <div style="margin-bottom:8px;"><strong>Mã đơn:</strong> ${data.id}</div>
+        <div style="margin-bottom:8px;"><strong>Khách hàng:</strong> ${data.customer} <div class="muted">${data.email}</div></div>
+        <div style="margin-bottom:8px;"><strong>Địa chỉ:</strong> ${data.address}</div>
+        <div style="margin-bottom:8px;"><strong>Ngày đặt:</strong> ${data.date}</div>
+        <div style="margin-bottom:8px;"><strong>Trạng thái:</strong> ${data.status}</div>
+
+        <h4 style="margin-top:12px;margin-bottom:8px;color:#333">Danh sách sản phẩm</h4>
+        ${productsHtml}
+
+        <p style="text-align:right;margin-top:12px;font-weight:700;">Tổng: ${data.total}</p>
+      `;
+
+      document.getElementById("modalBody").innerHTML = html;
+      document.getElementById("modalBack").style.display = "flex";
+      document.getElementById("modalBack").setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal() {
+      document.getElementById("modalBack").style.display = "none";
+      document.getElementById("modalBack").setAttribute("aria-hidden", "true");
+    }
+
+    // Confirm "Đã giao"
+    function confirmDelivered(orderId) {
+      if (!ORDERS[orderId]) return alert("Không tìm thấy đơn hàng " + orderId);
+      if (confirm("Xác nhận đã giao đơn hàng " + orderId + " ?")) {
+        // cập nhật trạng thái trong data (kịch bản demo)
+        ORDERS[orderId].status = "Đã giao";
+        alert("Đã cập nhật trạng thái: Đã giao cho " + orderId);
+        // reload trang nhỏ (UI-only): cập nhật text hiển thị của badge (nếu muốn)
+        updateStatusBadge(orderId, "Đã giao");
+      }
+    }
+
+    // Confirm huỷ đơn
+    function confirmCancel(orderId) {
+      if (!ORDERS[orderId]) return alert("Không tìm thấy đơn hàng " + orderId);
+      if (confirm("Bạn có chắc muốn huỷ đơn hàng " + orderId + " ?")) {
+        ORDERS[orderId].status = "Đã huỷ";
+        alert("Đơn hàng " + orderId + " đã bị huỷ.");
+        updateStatusBadge(orderId, "Đã huỷ");
+      }
+    }
+
+    // Cập nhật badge text (UI-only, tìm ô có dữ liệu id)
+    function updateStatusBadge(orderId, newStatus) {
+      // tìm tất cả id cells, thay text dựa trên orderId match
+      const rows = document.querySelectorAll("tbody tr");
+      rows.forEach(row => {
+        const idCell = row.querySelector(".id");
+        if (idCell && idCell.textContent.trim() === orderId) {
+          const statusCell = row.cells[5]; // thứ tự cột trạng thái
+          if (statusCell) {
+            // set badge class & text
+            let badgeClass = "status-badge ";
+            if (newStatus.includes("huỷ") || newStatus.includes("Huỷ") || newStatus.includes("hủy") ) badgeClass += "status-cancel";
+            else if (newStatus.includes("giao") || newStatus.includes("Giao") ) badgeClass += "status-shipped";
+            else badgeClass += "status-pending";
+            statusCell.innerHTML = `<span class="${badgeClass}">${newStatus}</span>`;
+          }
+        }
+      });
+    }
+
+    // Đóng modal khi click ra ngoài
+    window.addEventListener('click', function(e) {
+      const modalBack = document.getElementById("modalBack");
+      if (e.target === modalBack) closeModal();
+    });
+  </script>
+
 </body>
 </html>
