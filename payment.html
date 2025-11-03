@@ -13,7 +13,7 @@
       padding: 0;
     }
 
-    /* Navbar */
+    /* --- NAVBAR giống cart.html --- */
     .navbar {
       background-color: cyan;
       height: 80px;
@@ -24,97 +24,149 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    .navbar .nav-links ul {
+    .navbar img {
+      width: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .nav-links ul {
       list-style: none;
       display: flex;
       gap: 20px;
+      align-items: center;
       margin: 0;
       padding: 0;
-      align-items: center;
     }
 
-    .navbar .nav-links ul li a {
+    .nav-links ul li a {
       text-decoration: none;
-      font-weight: bold;
       color: black;
+      font-weight: bold;
       font-size: 18px;
     }
 
-    .navbar .nav-links ul li a:hover {
+    .nav-links ul li a:hover {
       color: red;
     }
 
-    .navbar img {
-      width: 70px;
-      margin-right: 20px;
-    }
-
-    .search {
+    .search-bar {
       display: flex;
       align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
-    .search input {
-      padding: 12px 20px;
-      font-size: 15px;
+    .search-input {
       width: 300px;
+      height: 40px;
+      padding: 0 10px;
+      font-size: 15px;
       border: 1px solid #ccc;
-      border-radius: 4px 0 0 4px;
+      border-radius: 6px;
     }
 
-    .search button {
-      font-size: 15px;
-      padding: 12px 20px;
+    .btn-tim, .btn-advanced {
+      height: 40px;
+      padding: 0 15px;
       background-color: blue;
       color: white;
+      font-weight: bold;
       border: none;
-      border-radius: 0 4px 4px 0;
+      border-radius: 6px;
       cursor: pointer;
     }
-    .search button {
-  margin-left: 50px; 
-}
-    .advanced-search {
-      margin-left: 10px;
+
+    .btn-tim:hover, .btn-advanced:hover {
+      background-color: darkblue;
     }
 
-    .advanced-search button {
-      font-size: 15px;
-      padding: 12px 20px;
-      background-color: blue;
+    .cart-btn {
+      background-color: green;
       color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 150px;
-      height: 47px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
     }
 
-    /* Thanh toán */
-    .checkout-container {
-      max-width: 600px;
-      margin: 60px auto;
+    /* --- Layout thanh toán --- */
+    .payment-layout {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      margin: 50px auto;
+      max-width: 1200px;
+      flex-wrap: wrap;
+    }
+
+    .cart-section, .checkout-container {
+      flex: 1;
+      min-width: 350px;
       background: #fff;
-      padding: 30px;
+      padding: 25px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    /* Product preview */
-    .cart-preview{background:#fbfdff;border:1px solid #eef6ff;padding:12px;border-radius:8px;margin-bottom:18px}
-    .cart-item{display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dashed #eef6ff}
-    .cart-item:last-child{border-bottom:none}
-    .cart-item img{width:64px;height:64px;object-fit:cover;border-radius:6px}
-    .item-meta{flex:1}
-    .item-meta .name{font-weight:700}
-    .item-meta .qty{color:#666;font-size:13px}
-    .item-price{text-align:right;min-width:110px}
-    .cart-total{display:flex;justify-content:space-between;font-weight:700;padding-top:10px;margin-top:6px;border-top:1px solid #f1f7ff}
-
-    h1 {
+    .cart-section h1, .checkout-container h1 {
       text-align: center;
       color: #0072ff;
       margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px 0;
+      border-bottom: 1px dashed #ccc;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .item-info {
+      flex: 1;
+    }
+
+    .item-title {
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .price {
+      color: #333;
+      font-size: 15px;
+      margin-top: 4px;
+    }
+
+    .controls {
+      text-align: center;
+    }
+
+    .controls label {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .controls p {
+      font-weight: bold;
+      margin: 5px 0 0;
+    }
+
+    .summary {
+      margin-top: 15px;
+      text-align: right;
+      font-weight: bold;
+      font-size: 18px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
     }
 
     label {
@@ -127,7 +179,7 @@
       width: 100%;
       padding: 10px;
       border-radius: 8px;
-      border: 1px solid #f0eaea;
+      border: 1px solid #ccc;
       margin-top: 5px;
     }
 
@@ -148,39 +200,39 @@
       transform: scale(1.05);
     }
 
-    .back-home {
+    /* --- Thông báo cảm ơn --- */
+    .thankyou-message {
+      display: none;
+      text-align: center;
+      background: white;
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: 80px auto;
+      max-width: 600px;
+    }
+
+    .thankyou-message h2 {
+      color: #0072ff;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .thankyou-message a {
       display: inline-block;
-      margin: 30px 40px 0;
-      background: #00c6ff;
-      color: #fff;
-      padding: 8px 16px;
-      border-radius: 25px;
-      text-decoration: none;
+      background: green;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
       font-weight: bold;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-      transition: all 0.3s;
+      text-decoration: none;
+      transition: background 0.2s;
     }
 
-    .back-home:hover {
-      background: #0072ff;
-      transform: translateY(-2px);
+    .thankyou-message a:hover {
+      background: darkgreen;
     }
 
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        height: auto;
-        padding: 20px;
-      }
-
-      .search {
-        margin-top: 10px;
-      }
-
-      .checkout-container {
-        margin: 40px 20px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -191,8 +243,7 @@
       <ul>
         <li>
           <a href="indexlogin.html">
-            <a href="indexlogin.html" class="rounded-pill">
-  <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
+            <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo">
           </a>
         </li>
         <li><a href="indexlogin.html">Trang chủ</a></li>
@@ -202,115 +253,104 @@
       </ul>
     </div>
 
-    <form action="indexlogin.html" method="get" class="search">
-      <input type="text" name="search" placeholder="Search..">
-      <button type="submit">Tìm</button>
-    </form>
+    <div class="search-bar">
+      <form action="ketqualogin.html" method="get" class="search-form">
+        <input type="text" name="search" placeholder="Search.." class="search-input">
+        <button type="submit" class="btn-tim">Tìm</button>
+      </form>
+      <form action="searchlogin.html" method="get">
+        <button type="submit" class="btn-advanced">Tìm kiếm nâng cao</button>
+      </form>
+    </div>
 
-    <form action="searchlogin.html" class="advanced-search">
-      <button type="submit">Tìm kiếm nâng cao</button>
-    </form>
+    <a href="cart.html" class="cart-btn">Giỏ hàng</a>
   </nav>
 
-
-  <a href="indexlogin.html" class="back-home">← Trở về Trang chủ</a>
-
-  <div class="checkout-container">
-  <h1>Thông tin thanh toán</h1>
-  <!-- Product preview -->
-  <div id="cartPreview" class="cart-preview" aria-live="polite">
-    <div id="cartItems"></div>
-    <div id="cartTotal" class="cart-total" style="display:none">
-      <div>Tổng cộng</div>
-      <div id="cartTotalValue">0₫</div>
-    </div>
-  </div>
-  <form id="checkoutForm">
-    <label>Họ và tên</label>
-    <input type="text" placeholder="Nhập họ tên của bạn">
-
-    <label>Địa chỉ giao hàng</label>
-    <input type="text" placeholder="Nhập địa chỉ">
-
-    <label>Số điện thoại</label>
-    <input type="tel" placeholder="VD: 0901234567">
-
-    <label>Phương thức thanh toán</label>
-    <select>
-      <option>Thanh toán khi nhận hàng (COD)</option>
-      <option>Chuyển khoản ngân hàng</option>
-    </select>
-
-    <button type="submit">Xác nhận đặt hàng</button>
-  </form>
-
-  <!-- Thông báo thanh toán -->
-  <div id="successMessage" style="display:none; text-align:center; margin-top:20px;">
-    <h2 style="color:#28a745;">Đã thanh toán, cảm ơn bạn đã mua hàng ❤️</h2>
-    <div style="margin-top:20px;">
-      <a href="indexlogin.html" 
-         style="display:inline-block; background:#007bff; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; margin-right:10px;">
-         Tiếp tục mua sắm
-      </a>
-      <a href="cart.html" 
-         style="display:inline-block; background:#ffc107; color:#000; padding:10px 20px; border-radius:6px; text-decoration:none;">
-         Xem giỏ hàng
-      </a>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Simple cart preview logic
-  function formatVND(amount){
-    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫';
-  }
-
-  function loadCart(){
-    // Try reading cart from localStorage (expected format: [{id,name,price,qty,img}])
-    try{
-      const raw = localStorage.getItem('cart');
-      if (raw) return JSON.parse(raw);
-    }catch(e){console.warn('Invalid cart in storage', e)}
-    // fallback sample (valid JS object)
-    return [{id:'RX782', name:'HG GTO 1/144 RX-78-02 Gundam', price:560000, qty:1, img:'assets/img/rx782origin.jpg'}];
-  }
-
-  function renderCart(){
-    const items = loadCart();
-    const container = document.getElementById('cartItems');
-    container.innerHTML = '';
-    let total = 0;
-    items.forEach(it => {
-      const row = document.createElement('div');
-      row.className = 'cart-item';
-      row.innerHTML = `
-        <img src="${it.img || 'assets/img/placeholder.png'}" alt="${it.name}">
-        <div class="item-meta">
-          <div class="name">${it.name}</div>
-          <div class="qty">Số lượng: ${it.qty}</div>
+  <!-- Layout 2 cột -->
+  <div class="payment-layout" id="paymentSection">
+    <!-- Bên trái: sản phẩm -->
+    <div class="cart-section">
+      <h1>Giỏ hàng của bạn</h1>
+      <div class="cart-item">
+        <img src="assets/img/rx782origin.jpg" alt="HG GTO">
+        <div class="item-info">
+          <p class="item-title">HG GTO 1/144 RX-78-02 Gundam</p>
+          <p class="price">560.000 VNĐ</p>
         </div>
-        <div class="item-price">${formatVND(it.price * it.qty)}</div>
-      `;
-      container.appendChild(row);
-      total += (it.price * it.qty);
+        <div class="controls">
+          <label>Số lượng</label>
+          <p>1</p>
+        </div>
+      </div>
+
+      <div class="cart-item">
+        <img src="assets/img/2607613-2_2_219e9d4dd40a4b98a0d7ab276eebfca5_grande.jpg" alt="Umamusume">
+        <div class="item-info">
+          <p class="item-title">Umamusume: Pretty Derby - Tamamo Cross</p>
+          <p class="price">360.000 VNĐ</p>
+        </div>
+        <div class="controls">
+          <label>Số lượng</label>
+          <p>1</p>
+        </div>
+      </div>
+
+      <div class="cart-item">
+        <img src="assets/img/oj4qyp0dik0xnfd5_988680d6151e4ee2bf7c10240cd5ce71_master.jpg" alt="HG GQ Red">
+        <div class="item-info">
+          <p class="item-title">HG GQ 1/144 RED GUNDAM</p>
+          <p class="price">660.000 VNĐ</p>
+        </div>
+        <div class="controls">
+          <label>Số lượng</label>
+          <p>2</p>
+        </div>
+      </div>
+
+      <div class="summary">
+        Tổng cộng: 1.580.000 VNĐ
+      </div>
+    </div>
+
+    <!-- Bên phải: form thanh toán -->
+    <div class="checkout-container">
+      <h1>Thông tin thanh toán</h1>
+      <form id="checkoutForm">
+        <label>Họ và tên</label>
+        <input type="text" placeholder="Nhập họ tên của bạn" null>
+        <label>Địa chỉ giao hàng</label>
+        <input type="text" placeholder="Nhập địa chỉ" null>
+        <label>Số điện thoại</label>
+        <input type="tel" placeholder="VD: 0901234567" null>
+        <label>Phương thức thanh toán</label>
+        <select>
+          <option>Thanh toán khi nhận hàng (COD)</option>
+          <option>Chuyển khoản ngân hàng</option>
+        </select>
+        <button type="submit">Xác nhận đặt hàng</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Thông báo cảm ơn -->
+  <div class="thankyou-message" id="thankyouMessage">
+    <h2>🎉 Cảm ơn bạn đã mua hàng! 🎉</h2>
+    <p>Đơn hàng của bạn đã được ghi nhận. Chúng tôi sẽ liên hệ sớm nhất để giao hàng.</p>
+    <a href="indexlogin.html">Trở về trang chủ</a>
+  </div>
+
+  <script>
+    const form = document.getElementById("checkoutForm");
+    const paymentSection = document.getElementById("paymentSection");
+    const thankyouMessage = document.getElementById("thankyouMessage");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      paymentSection.style.display = "none";
+      thankyouMessage.style.display = "block";
+      window.scrollTo(0, 0);
     });
-    const totalWrap = document.getElementById('cartTotal');
-    document.getElementById('cartTotalValue').textContent = formatVND(total);
-    totalWrap.style.display = items.length ? 'flex' : 'none';
-  }
-
-  // Render on load
-  renderCart();
-
-  document.getElementById("checkoutForm").addEventListener("submit", function(e) {
-    e.preventDefault(); // Ngăn gửi form thật
-    this.style.display = "none"; // Ẩn form
-    document.getElementById("successMessage").style.display = "block"; // Hiện thông báo
-    // Optionally clear cart (localStorage)
-    try{ localStorage.removeItem('cart'); }catch(e){}
-  });
-</script>
+  </script>
 
 </body>
 </html>
