@@ -14,81 +14,165 @@
     }
 
     /* --- NAVBAR giống cart.html --- */
-    .navbar {
-      background-color: cyan;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+    body {
+    font-family: "Josefin Sans", sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+  }
 
-    .navbar img {
-      width: 70px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+  /* ===== NAVBAR ===== */
+  .navbar {
+    background-color: cyan;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+  }
 
-    .nav-links ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      margin: 0;
-      padding: 0;
-    }
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
 
-    .nav-links ul li a {
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-      font-size: 18px;
-    }
+  .navbar ul li {
+    margin: 0 15px;
+  }
 
-    .nav-links ul li a:hover {
-      color: red;
-    }
+  .navbar a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+  }
 
-    .search-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
+  .navbar a:hover {
+    text-decoration: underline;
+  }
 
-    .search-input {
-      width: 300px;
-      height: 40px;
-      padding: 0 10px;
-      font-size: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
+  .navbar img {
+    width: 70px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
 
-    .btn-tim, .btn-advanced {
-      height: 40px;
-      padding: 0 15px;
-      background-color: blue;
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+/*Thanh tiem kiem*/
+ .search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* khoảng cách giữa ô và nút */
+}
+
+.search-bar input[type="text"] {
+  width: 400px; /* cố định rộng của ô tìm kiếm */
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.search-bar button {
+  width: 80px; /* cố định nút tìm ngắn lại */
+  padding: 8px 0;
+  background: linear-gradient(to right, #42c9e3, #5f73e3);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  opacity: 0.9;
+}
+.search-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important; /* cách nút ra 1 chút */
+}
+
+.search-form {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.search-input {
+  width: 420px !important; /* Ô tìm to hơn */
+  height: 42px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  padding: 0 12px !important;
+  font-size: 15px !important;
+  box-sizing: border-box !important;
+}
+
+.btn-tim {
+  width: 90px !important; /* Nút tìm ngắn lại */
+  height: 42px !important;
+  background-color: blue !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+}
+
+.btn-advanced {
+  width: 160px !important; /* Nút tìm kiếm nâng cao cách ra xíu */
+  height: 42px !important;
+  background-color: rgb(32, 43, 255) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+}
+
+
+    .btn-tim {
+    height: 40px;
+    border: none;
+    background: linear-gradient(90deg, #20b2aa, #4682b4);
+    color: white;
+    border-radius: 8px;
+    padding: 0 20px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .btn-advanced {
+    height: 40px;
+    border: none;
+    background: linear-gradient(90deg, #20b2aa, #4682b4);
+    color: white;
+    border-radius: 8px;
+    padding: 0 15px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
 
     .btn-tim:hover, .btn-advanced:hover {
       background-color: darkblue;
     }
 
-    .cart-btn {
-      background-color: green;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+   .cart-btn {
+    display: inline-block;
+    background: green;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+  }
 
     /* --- Layout thanh toán --- */
     .payment-layout {
@@ -238,32 +322,28 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar">
+<nav class="navbar">
     <div class="nav-links">
       <ul>
-        <li>
-          <a href="indexlogin.html">
-            <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo">
-          </a>
-        </li>
-        <li><a href="indexlogin.html">Trang chủ</a></li>
-        <li style="background-color: rgb(225, 196, 99); border-radius: 5px; padding: 10px;">
-          <a href="profile.html">Hồ sơ</a>
-        </li>
-      </ul>
+      <a href="indexlogin.html" class="rounded-pill">
+  <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
+        <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
+        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li></ul>
     </div>
+        <div class="search-bar">
+  <form action="ketqualogin.html.html" method="get" class="search-form">
+    <input type="text" placeholder="Search.." class="search-input">
+    <button type="submit" class="btn-tim " style="background:rgb(11, 66, 232); color:white;">Tìm</button>
+  </form>
 
-    <div class="search-bar">
-      <form action="ketqualogin.html" method="get" class="search-form">
-        <input type="text" name="search" placeholder="Search.." class="search-input">
-        <button type="submit" class="btn-tim">Tìm</button>
-      </form>
-      <form action="searchlogin.html" method="get">
-        <button type="submit" class="btn-advanced">Tìm kiếm nâng cao</button>
-      </form>
-    </div>
-
-    <a href="cart.html" class="cart-btn">Giỏ hàng</a>
+  <form action="searchlogin.html" method="get">
+    <button type="submit" class="btn-advanced" style="height:45px;background:rgb(32, 43, 255); color:white;" >Tìm kiếm nâng cao</button>
+  </form>
+</div>
+<div style="font-size:20px;padding-top:25px;">
+  <a href="cart.html" style="display:inline-block; margin-top:-100px; padding:10px 20px; background:green; color:white; border-radius:5px; text-decoration:none;"> Giỏ hàng </a>
+</div>
+  
   </nav>
 
   <!-- Layout 2 cột -->
