@@ -216,7 +216,85 @@ margin-bottom:40px;
 color:#CCA406;
 margin-left:-960px;
 }
+/* ===== Popup tìm kiếm nâng cao ===== */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
 
+    .popup-content {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 450px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .popup-content h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .popup-content label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .popup-content input,
+    .popup-content select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+      margin-top: 5px;
+    }
+
+    .popup-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .popup-buttons button {
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .popup-buttons .search-btn {
+      background-color: blue;
+      color: white;
+    }
+
+    .popup-buttons .close-btn {
+      background-color: gray;
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 </style>
 </head>
 <nav class="navbar">
@@ -227,16 +305,50 @@ margin-left:-960px;
         <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
         <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li></ul>
     </div>
-        <div class="search-bar">
-  <form action="ketqualogin.html" method="get" class="search-form">
-    <input type="text" placeholder="Search.." class="search-input">
-    <button type="submit" class="btn-tim">Tìm</button>
-  </form>
+       <div class="timnangcao">
+    <div class="search">
+      <form action="ketqualogin.html" method="get">
+        <input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
+        <button type="submit" class="btn-tim">Tìm</button>
+        <button type="button" class="btn-advanced" id="advancedSearchBtn">Tìm kiếm nâng cao</button>
+      </form>
+    </div>
+  </div>
+  <!-- POPUP -->
+  <div class="popup-overlay" id="advancedSearchPopup">
+    <div class="popup-content">
+      <h2>Tìm kiếm nâng cao</h2>
+      <form action="ketqualogin.html" method="get">
+        <label>Giá từ:</label>
+        <input type="number" name="price_min" placeholder="VD: 500000">
 
-  <form action="searchlogin.html" method="get">
-    <button type="submit" class="btn-advanced" style="height:45px;">Tìm kiếm nâng cao</button>
-  </form>
-</div>
+        <label>Giá đến:</label>
+        <input type="number" name="price_max" placeholder="VD: 1000000">
+
+        <label>Chọn dòng:</label>
+        <select name="series">
+          <option value="">-- Chọn dòng --</option>
+          <option value="hg">High Grade</option>
+          <option value="rg">Real Grade</option>
+          <option value="mg">Master Grade</option>
+          <option value="pg">Perfect Grade</option>
+          <option value="anime">Anime Figure</option>
+        </select>
+
+        <label>Chọn hãng:</label>
+        <select name="brand">
+          <option value="">-- Chọn hãng --</option>
+          <option value="bandai">Bandai</option>
+          <option value="sega">Sega</option>
+        </select>
+
+        <div class="popup-buttons">
+          <button type="submit" class="search-btn">Tìm</button>
+          <button type="button" class="close-btn" id="closePopup">Đóng</button>
+        </div>
+      </form>
+    </div>
+  </div>
 <div style="font-size:20px;padding-top:25px;">
   <a href="cart.html" style="display:inline-block; margin-top:-100px; padding:10px 20px; background:green; color:white; border-radius:5px; text-decoration:none;"> Giỏ hàng </a>
 </div>
@@ -346,6 +458,22 @@ margin-left:-960px;
       img.style.opacity = 1;
     }, 300);
   }
+  const advancedBtn = document.getElementById('advancedSearchBtn');
+    const popup = document.getElementById('advancedSearchPopup');
+    const closePopup = document.getElementById('closePopup');
+
+    advancedBtn.addEventListener('click', () => {
+      popup.style.display = 'flex';
+    });
+
+    closePopup.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
+    // Đóng popup khi click ra ngoài
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) popup.style.display = 'none';
+    });
 </script>
 
 </body>
