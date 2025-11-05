@@ -168,8 +168,8 @@ text-decoration:none;
     }
 
     th {
-      background-color: #007bff;
-      color: white;
+      background-color: #96dee0;
+      color: rgb(0, 0, 0);
     }
 
     tr:hover {
@@ -194,7 +194,7 @@ text-decoration:none;
     }
 
     .btn-lock {
-      background-color: gray;
+      background-color: rgb(43, 244, 255);
     }
 
     .btn-unlock {
@@ -277,7 +277,7 @@ text-decoration:none;
           <td>01/01/2024</td>
           <td>Hoạt động</td>
           <td>
-            <button class="btn btn-lock" onclick="toggleLock(this)">Khóa</button>
+           <a href="edit.html"> <button class="btn btn-lock" onclick="toggleLock(this)">Sửa</button> </a>
             <button class="btn btn-delete" onclick="confirmDelete(this)">Xóa</button>
           </td>
         </tr>
@@ -289,7 +289,7 @@ text-decoration:none;
           <td>05/02/2024</td>
           <td>Bị khóa</td>
           <td>
-            <button class="btn btn-unlock" onclick="toggleLock(this)">Mở khóa</button>
+            <a href="edit.html"> <button class="btn btn-lock" onclick="toggleLock(this)">Sửa</button> </a>
             <button class="btn btn-delete" onclick="confirmDelete(this)">Xóa</button>
           </td>
         </tr>
@@ -301,7 +301,7 @@ text-decoration:none;
           <td>10/03/2024</td>
           <td>Hoạt động</td>
           <td>
-            <button class="btn btn-lock" onclick="toggleLock(this)">Khóa</button>
+            <a href="edit.html"> <button class="btn btn-lock" onclick="toggleLock(this)">Sửa</button> </a>
             <button class="btn btn-delete" onclick="confirmDelete(this)">Xóa</button>
           </td>
         </tr>
@@ -313,7 +313,7 @@ text-decoration:none;
           <td>22/04/2024</td>
           <td>Hoạt động</td>
           <td>
-            <button class="btn btn-lock" onclick="toggleLock(this)">Khóa</button>
+            <a href="edit.html"> <button class="btn btn-lock" onclick="toggleLock(this)">Sửa</button> </a>
             <button class="btn btn-delete" onclick="confirmDelete(this)">Xóa</button>
           </td>
         </tr>
@@ -325,7 +325,7 @@ text-decoration:none;
           <td>02/05/2024</td>
           <td>Bị khóa</td>
           <td>
-            <button class="btn btn-unlock" onclick="toggleLock(this)">Mở khóa</button>
+            <a href="edit.html"> <button class="btn btn-lock" onclick="toggleLock(this)">Sửa</button> </a>
             <button class="btn btn-delete" onclick="confirmDelete(this)">Xóa</button>
           </td>
         </tr>
@@ -351,23 +351,38 @@ text-decoration:none;
     }
 
     // Khóa / Mở khóa khách hàng
-    function toggleLock(button) {
-      const row = button.closest("tr");
-      const statusCell = row.cells[5];
-      if (statusCell.textContent === "Hoạt động") {
-        statusCell.textContent = "Bị khóa";
-        button.textContent = "Mở khóa";
-        button.classList.remove("btn-lock");
-        button.classList.add("btn-unlock");
-        alert("Khách hàng đã bị khóa!");
-      } else {
-        statusCell.textContent = "Hoạt động";
-        button.textContent = "Khóa";
-        button.classList.remove("btn-unlock");
-        button.classList.add("btn-lock");
-        alert("Khách hàng đã được mở khóa!");
-      }
-    }
+    // function toggleLock(button) {
+    //   const row = button.closest("tr");
+    //   const statusCell = row.cells[5];
+    //   if (statusCell.textContent === "Hoạt động") {
+    //     statusCell.textContent = "Bị khóa";
+    //     button.textContent = "Mở khóa";
+    //     button.classList.remove("btn-lock");
+    //     button.classList.add("btn-unlock");
+    //     alert("Khách hàng đã bị khóa!");
+    //   } else {
+    //     statusCell.textContent = "Hoạt động";
+    //     button.textContent = "Khóa";
+    //     button.classList.remove("btn-unlock");
+    //     button.classList.add("btn-lock");
+    //     alert("Khách hàng đã được mở khóa!");
+    //   }
+    // }               // Cái JS này hoạt động được nhưng ko thỏa yêu cầu
+  //   function confirmDelete(button) {
+  //   if (confirm("Bạn có chắc muốn xóa khách hàng này không?")) {
+  //     alert("Khách hàng đã được xóa!");
+  //   }
+  // }
+  // function toggleLock(button) {
+  //   const row = button.closest("tr");
+  //   const status = row.cells[5].textContent;
+
+  //   if (status === "Hoạt động") {
+  //     alert("Khách hàng đã bị khóa!");
+  //   } else if (status === "Bị khóa") {
+  //     alert("Khách hàng đã được mở khóa!");
+  //   }
+  // }            //// Đúng nhưng được thay bằng nút "Sửa"
   </script>
 </body>
 

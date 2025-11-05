@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trang chủ</title>
+  <title>Quản lý giá bán</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
@@ -57,15 +57,81 @@
 .cch:hover{
 color:red;
 }
-.navbar{
-background-color:cyan;
-height:80px;
+nav.navbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background-color: cyan !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+  gap: 12px;
+  z-index: 50;
 }
-.navbar img {
+
+/* LOGO: ép kích thước, loại mọi filter và giữ tỉ lệ */
+.navbar .navbar-logo {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: inline-block !important;
+
+  /* vô hiệu hóa mọi filter / blend mode từ file khác */
   filter: none !important;
+  -webkit-filter: none !important;
   mix-blend-mode: normal !important;
-  background: none !important;
+  background: transparent !important;
+  opacity: 1 !important;
 }
+
+/* bố cục trái */
+.nav-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px;
+}
+
+/* chữ Trang chủ */
+.nav-left .nav-home {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* phải */
+.nav-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px;
+}
+
+/* "Xin chào" */
+.nav-right .hello {
+  font-weight: 600;
+  color: black;
+}
+
+/* Nút đăng xuất */
+.logout-btn {
+  background-color: rgb(221, 99, 225) !important;
+  border: 2px solid black !important;
+  border-radius: 5px !important;
+  padding: 8px 12px !important;
+  color: black !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
+
+/* hover */
+.nav-left a:hover, .nav-right a:hover, .nav-right .hello:hover {
+  color: red !important;
+}
+
 .btn-col{
 margin-top:auto;
 }
@@ -220,15 +286,20 @@ background:#96dee0;
 </style>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
+<!--Navbar-->
 <nav class="navbar">
-    <div class="nav-links">
-      <ul>
-      <a href="indexlogin.html" class="rounded-pill">
-  <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
-        <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
-        </ul>
-    </div>
-  </nav>
+  <div class="nav-left">
+    <a href="admin.html" class="logo-link">
+      <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" class="navbar-logo">
+    </a>
+    <a href="admin.html" class="nav-home">Trang chủ</a>
+  </div>
+
+  <div class="nav-right">
+    <span class="hello">Xin chào, Admin</span>
+    <a href="adminlogin.html" class="logout-btn">Đăng xuất</a>
+  </div>
+</nav>
 
 <body>
 <section class="overview-menu">

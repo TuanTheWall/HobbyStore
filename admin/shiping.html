@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Quản lý đơn hàng — Admin</title>
+  <title>Quản lý đơn hàng </title>
 
   <!-- Font giống customers.html -->
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500;700&display=swap" rel="stylesheet">
@@ -25,67 +25,80 @@
     }
 
     /* NAVBAR */
-    .navbar {
-      background-color: cyan;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 28px;
-      box-sizing: border-box;
-    }
+   nav.navbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background-color: cyan !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+  gap: 12px;
+  z-index: 50;
+}
 
-    .navbar .nav-left {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
+/* LOGO: ép kích thước, loại mọi filter và giữ tỉ lệ */
+.navbar .navbar-logo {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: inline-block !important;
 
-    .navbar .nav-left a.logo-link {
-      display:flex;
-      align-items:center;
-      gap:12px;
-      text-decoration: none;
-    }
+  /* vô hiệu hóa mọi filter / blend mode từ file khác */
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+  background: transparent !important;
+  opacity: 1 !important;
+}
 
-    .navbar img {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      object-fit: cover;
-      filter: none !important;
-      mix-blend-mode: normal !important;
-      background: none !important;
-    }
+/* bố cục trái */
+.nav-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px;
+}
 
-    .navbar .nav-left a.home {
-      text-decoration: none;
-      color: black;
-      font-weight: 700;
-      font-size: 20px;
-      margin-left: 6px;
-    }
+/* chữ Trang chủ */
+.nav-left .nav-home {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+}
 
-    .navbar .nav-left a.home:hover {
-      color: red;
-    }
+/* phải */
+.nav-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px;
+}
 
-    .navbar .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+/* "Xin chào" */
+.nav-right .hello {
+  font-weight: 600;
+  color: black;
+}
 
-    .navbar .nav-right a {
-      text-decoration: none;
-      color: black;
-      font-weight: 600;
-      font-size: 16px;
-    }
+/* Nút đăng xuất */
+.logout-btn {
+  background-color: rgb(221, 99, 225) !important;
+  border: 2px solid black !important;
+  border-radius: 5px !important;
+  padding: 8px 12px !important;
+  color: black !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
 
-    .navbar .nav-right a:hover {
-      color: red;
-    }
+/* hover */
+.nav-left a:hover, .nav-right a:hover, .nav-right .hello:hover {
+  color: red !important;
+}
 
     /* OVERVIEW / MENU CARDS (giống customers.html) */
     .overview-menu {
@@ -154,9 +167,9 @@
       text-align: left;
       padding: 12px 10px;
       border-bottom: 1px solid #eef2f8;
-      color: #666;
+      color: #000000;
       font-weight: 700;
-      background: #f7f9fb;
+      background: #96dee0;
     }
 
     tbody td {
@@ -225,11 +238,11 @@
     .modal {
       background: #fff;
       border-radius: 12px;
-      width: 760px;
+      width: 1500px;
       max-width: calc(100% - 48px);
-      padding: 18px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-      max-height: 80vh;
+      padding: 25px;
+      box-shadow: 0 20px 60px rgba(75, 73, 73, 0.25);
+      max-height: 800vh;
       overflow: auto;
     }
 
@@ -252,24 +265,27 @@
     .muted { color:#667; font-size:13px; }
     .small { font-size:13px; }
     .avatar { width:40px; height:40px; border-radius:6px; background:#e9eef8; display:inline-flex; align-items:center; justify-content:center; font-weight:700; color:#2c5aa0; }
+    .btn-pending { background: #ffcc00; color: #111; }   /* Chờ xử lý */
+.btn-delivering { background: #17a2b8; color: #fff; } /* Đang giao */
 
   </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <div class="navbar" role="navigation" aria-label="Main navigation">
-    <div class="nav-left">
-      <a class="logo-link" href="admin.html" aria-label="Trang chủ admin">
-        <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo">
-      </a>
-      <a class="home" href="admin.html">Trang chủ</a>
-    </div>
-
-    <div class="nav-right">
-      <a href="#" aria-label="Xin chào admin">Xin chào, Admin</a>
-    </div>
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="admin.html" class="logo-link">
+      <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" class="navbar-logo">
+    </a>
+    <a href="admin.html" class="nav-home">Trang chủ</a>
   </div>
+
+  <div class="nav-right">
+    <span class="hello">Xin chào, Admin</span>
+    <a href="adminlogin.html" class="logout-btn">Đăng xuất</a>
+  </div>
+</nav>
 
   <!-- MENU -->
   <section class="overview-menu" aria-label="Menu quản lý">
@@ -312,10 +328,12 @@
           <td class="muted">20/10/2025</td>
           <td><span class="status-badge status-pending">Chờ xử lý</span></td>
           <td style="text-align:right">
-            <button class="btn btn-deliver" onclick="confirmDelivered('DH001')">Xác nhận đã giao</button>
-            <button class="btn btn-cancel" onclick="confirmCancel('DH001')">Huỷ</button>
-            <button class="btn btn-detail" onclick="openModal('DH001')">Xem chi tiết</button>
-          </td>
+  <button class="btn btn-pending" onclick="pendingOrder(this)">Chờ xử lý</button>
+  <button class="btn btn-delivering" onclick="deliveringOrder(this)">Đang giao</button>
+  <button class="btn btn-deliver" onclick="confirmDelivered(this)">Đã giao</button>
+  <button class="btn btn-cancel" onclick="confirmCancel(this)">Huỷ</button>
+  <button class="btn btn-detail" onclick="openModal('DH001')">Xem chi tiết</button>
+</td>
         </tr>
 
         <tr>
@@ -326,10 +344,12 @@
           <td class="muted">22/07/2025</td>
           <td><span class="status-badge status-shipped">Đã xác nhận</span></td>
           <td style="text-align:right">
-            <button class="btn btn-deliver" onclick="confirmDelivered('DH002')">Xác nhận đã giao</button>
-            <button class="btn btn-cancel" onclick="confirmCancel('DH002')">Huỷ</button>
-            <button class="btn btn-detail" onclick="openModal('DH002')">Xem chi tiết</button>
-          </td>
+  <button class="btn btn-pending" onclick="pendingOrder(this)">Chờ xử lý</button>
+  <button class="btn btn-delivering" onclick="deliveringOrder(this)">Đang giao</button>
+  <button class="btn btn-deliver" onclick="confirmDelivered(this)">Đã giao</button>
+  <button class="btn btn-cancel" onclick="confirmCancel(this)">Huỷ</button>
+  <button class="btn btn-detail" onclick="openModal('DH001')">Xem chi tiết</button>
+</td>
         </tr>
 
         <tr>
@@ -340,10 +360,12 @@
           <td class="muted">05/08/2025</td>
           <td><span class="status-badge status-shipped">Đang giao</span></td>
           <td style="text-align:right">
-            <button class="btn btn-deliver" onclick="confirmDelivered('DH003')">Xác nhận đã giao</button>
-            <button class="btn btn-cancel" onclick="confirmCancel('DH003')">Huỷ</button>
-            <button class="btn btn-detail" onclick="openModal('DH003')">Xem chi tiết</button>
-          </td>
+  <button class="btn btn-pending" onclick="pendingOrder(this)">Chờ xử lý</button>
+  <button class="btn btn-delivering" onclick="deliveringOrder(this)">Đang giao</button>
+  <button class="btn btn-deliver" onclick="confirmDelivered(this)">Đã giao</button>
+  <button class="btn btn-cancel" onclick="confirmCancel(this)">Huỷ</button>
+  <button class="btn btn-detail" onclick="openModal('DH001')">Xem chi tiết</button>
+</td>
         </tr>
 
         <tr>
@@ -354,10 +376,12 @@
           <td class="muted">12/09/2025</td>
           <td><span class="status-badge status-cancel">Đã huỷ</span></td>
           <td style="text-align:right">
-            <button class="btn btn-deliver" onclick="confirmDelivered('DH004')">Xác nhận đã giao</button>
-            <button class="btn btn-cancel" onclick="confirmCancel('DH004')">Huỷ</button>
-            <button class="btn btn-detail" onclick="openModal('DH004')">Xem chi tiết</button>
-          </td>
+  <button class="btn btn-pending" onclick="pendingOrder(this)">Chờ xử lý</button>
+  <button class="btn btn-delivering" onclick="deliveringOrder(this)">Đang giao</button>
+  <button class="btn btn-deliver" onclick="confirmDelivered(this)">Đã giao</button>
+  <button class="btn btn-cancel" onclick="confirmCancel(this)">Huỷ</button>
+  <button class="btn btn-detail" onclick="openModal('DH001')">Xem chi tiết</button>
+</td>
         </tr>
 
         <tr>
@@ -368,10 +392,12 @@
           <td class="muted">01/11/2025</td>
           <td><span class="status-badge status-pending">Chờ xử lý</span></td>
           <td style="text-align:right">
-            <button class="btn btn-deliver" onclick="confirmDelivered('DH005')">Xác nhận đã giao</button>
-            <button class="btn btn-cancel" onclick="confirmCancel('DH005')">Huỷ</button>
-            <button class="btn btn-detail" onclick="openModal('DH005')">Xem chi tiết</button>
-          </td>
+  <button class="btn btn-pending" onclick="pendingOrder(this)">Chờ xử lý</button>
+  <button class="btn btn-delivering" onclick="deliveringOrder(this)">Đang giao</button>
+  <button class="btn btn-deliver" onclick="confirmDelivered(this)">Đã giao</button>
+  <button class="btn btn-cancel" onclick="confirmCancel(this)">Huỷ</button>
+  <button class="btn btn-detail" onclick="openModal('DH001')">Xem chi tiết</button>
+</td>
         </tr>
 
       </tbody>
@@ -510,27 +536,35 @@
       document.getElementById("modalBack").setAttribute("aria-hidden", "true");
     }
 
-    // Confirm "Đã giao"
-    function confirmDelivered(orderId) {
-      if (!ORDERS[orderId]) return alert("Không tìm thấy đơn hàng " + orderId);
-      if (confirm("Xác nhận đã giao đơn hàng " + orderId + " ?")) {
-        // cập nhật trạng thái trong data (kịch bản demo)
-        ORDERS[orderId].status = "Đã giao";
-        alert("Đã cập nhật trạng thái: Đã giao cho " + orderId);
-        // reload trang nhỏ (UI-only): cập nhật text hiển thị của badge (nếu muốn)
-        updateStatusBadge(orderId, "Đã giao");
-      }
-    }
+      // Khi ấn "Chờ xử lý"
+  function pendingOrder(button) {
+    const row = button.closest("tr");
+    const orderID = row.cells[0].textContent;
+    alert(`Đơn hàng ${orderID} đang ở trạng thái: Chờ xử lý.`);
+  }
 
-    // Confirm huỷ đơn
-    function confirmCancel(orderId) {
-      if (!ORDERS[orderId]) return alert("Không tìm thấy đơn hàng " + orderId);
-      if (confirm("Bạn có chắc muốn huỷ đơn hàng " + orderId + " ?")) {
-        ORDERS[orderId].status = "Đã huỷ";
-        alert("Đơn hàng " + orderId + " đã bị huỷ.");
-        updateStatusBadge(orderId, "Đã huỷ");
-      }
+  // Khi ấn "Đang giao"
+  function deliveringOrder(button) {
+    const row = button.closest("tr");
+    const orderID = row.cells[0].textContent;
+    alert(`Đơn hàng ${orderID} hiện đang được giao.`);
+  }
+
+  // Khi ấn "Đã giao"
+  function confirmDelivered(button) {
+    const row = button.closest("tr");
+    const orderID = row.cells[0].textContent;
+    alert(`Đơn hàng ${orderID} đã được xác nhận giao thành công!`);
+  }
+
+  // Khi ấn "Hủy đơn"
+  function confirmCancel(button) {
+    const row = button.closest("tr");
+    const orderID = row.cells[0].textContent;
+    if (confirm(`Bạn có chắc muốn hủy đơn hàng ${orderID} không?`)) {
+      alert(`Đơn hàng ${orderID} đã bị hủy!`);
     }
+  }
 
     // Cập nhật badge text (UI-only, tìm ô có dữ liệu id)
     function updateStatusBadge(orderId, newStatus) {
