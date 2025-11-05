@@ -401,7 +401,8 @@
       </div>
 
       <div style="text-align: center; margin-top: 20px;">
-        <a href="profile.html" 
+        <div style="text-align: center; margin-top: 20px;">
+  <a href="profile.html" 
      style="display: inline-block;
             font-size: larger;
             border: solid 1px #999;
@@ -414,7 +415,8 @@
             transition: all 0.3s ease;">
     Hủy
   </a>
-  <a href="profile.html" 
+
+  <button id="saveBtn"
      style="display: inline-block;
             font-size: larger;
             border: solid 1px #c4a94f;
@@ -423,12 +425,12 @@
             margin: 5px;
             background-color: rgb(225, 196, 99);
             color: #111827;
-            text-decoration: none;
+            cursor: pointer;
             transition: all 0.3s ease;">
     Lưu thay đổi
-  </a>
+  </button>
+</div>
 
-  
 </div>
     </div>
   </div>
@@ -449,6 +451,14 @@
     popup.addEventListener('click', (e) => {
       if (e.target === popup) popup.style.display = 'none';
     });
+    const saveBtn = document.getElementById('saveBtn');
+  saveBtn.addEventListener('click', () => {
+    alert('Lưu thay đổi thành công!');
+    // Chuyển trang sau 1.2 giây
+    setTimeout(() => {
+      window.location.href = 'profile.html';
+    }, 1200);
+  });
   </script>
 </body>
 </html>
