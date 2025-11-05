@@ -22,51 +22,81 @@
     }
 
     /* ===== NAVBAR ===== */
-    .navbar{
-background-color:cyan;
-height:80px;
+  nav.navbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background-color: cyan !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+  gap: 12px;
+  z-index: 50;
 }
-.navbar img {
+
+/* LOGO: ép kích thước, loại mọi filter và giữ tỉ lệ */
+.navbar .navbar-logo {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: inline-block !important;
+
+  /* vô hiệu hóa mọi filter / blend mode từ file khác */
   filter: none !important;
+  -webkit-filter: none !important;
   mix-blend-mode: normal !important;
-  background: none !important;
+  background: transparent !important;
+  opacity: 1 !important;
 }
 
-    .navbar .nav-left {
-      display: flex;
-      align-items: center;
-    }
+/* bố cục trái */
+.nav-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px;
+}
 
-    .navbar img {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      filter: none !important;
-      mix-blend-mode: normal !important;
-    }
+/* chữ Trang chủ */
+.nav-left .nav-home {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+}
 
-    .navbar .nav-left a {
-      text-decoration: none;
-      color: black;
-      font-size: 20px;
-      font-weight: 600;
-      margin-left: 20px;
-    }
+/* phải */
+.nav-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px;
+}
 
-    .navbar .nav-left a:hover {
-      color: red;
-    }
+/* "Xin chào" */
+.nav-right .hello {
+  font-weight: 600;
+  color: black;
+}
 
-    .navbar .nav-right a {
-      text-decoration: none;
-      color: black;
-      font-weight: 600;
-      font-size: 16px;
-    }
+/* Nút đăng xuất */
+.logout-btn {
+  background-color: rgb(221, 99, 225) !important;
+  border: 2px solid black !important;
+  border-radius: 5px !important;
+  padding: 8px 12px !important;
+  color: black !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
 
-    .navbar .nav-right a:hover {
-      color: red;
-    }
+/* hover */
+.nav-left a:hover, .nav-right a:hover, .nav-right .hello:hover {
+  color: red !important;
+}
+
 
     /* ===== MENU QUẢN LÝ ===== */
    .overview-menu {
@@ -194,18 +224,20 @@ text-decoration:none;
 </head>
 
 <body>
-  <!-- ===== THANH ĐẦU ===== -->
-  <nav class="navbar">
-    <div class="nav-left">
-      <a href="admin.html">
-        <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo">
-      </a>
-      <a href="admin.html">Trang chủ</a>
-    </div>
-    <div class="nav-right">
-      <a href="#">Xin chào, Admin</a>
-    </div>
-  </nav>
+  <!--Navbar-->
+ <nav class="navbar">
+  <div class="nav-left">
+    <a href="admin.html" class="logo-link">
+      <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" class="navbar-logo">
+    </a>
+    <a href="admin.html" class="nav-home">Trang chủ</a>
+  </div>
+
+  <div class="nav-right">
+    <span class="hello">Xin chào, Admin</span>
+    <a href="adminlogin.html" class="logout-btn">Đăng xuất</a>
+  </div>
+</nav>
 
   <!-- ===== MENU QUẢN LÝ ===== -->
   <section class="overview-menu">
