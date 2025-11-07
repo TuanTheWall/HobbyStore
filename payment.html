@@ -1,320 +1,235 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thanh toán</title>
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: "Josefin Sans", sans-serif;
-      background: linear-gradient(135deg, #f0faff, #e0f7ff);
-      margin: 0;
-      padding: 0;
-    }
-
-    /* --- NAVBAR giống cart.html --- */
-    body {
-    font-family: "Josefin Sans", sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* ===== NAVBAR ===== */
-  .navbar {
-    background-color: cyan;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-  }
-
-  .navbar ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-  }
-
-  .navbar ul li {
-    margin: 0 15px;
-  }
-
-  .navbar a {
-    text-decoration: none;
-    color: black;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .navbar a:hover {
-    text-decoration: underline;
-  }
-
-  .navbar img {
-    width: 70px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-
-/*Thanh tiem kiem*/
- .search-bar {
+  <title>Trang chủ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><!DOCTYPE html>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/product-page.css">
+  <link rel="stylesheet" href="assets/css/view-cart.css">
+<style>
+.category-grid {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px; /* khoảng cách giữa ô và nút */
+  justify-content: center;  /* căn giữa ngang */
+  gap: 40px;                /* khoảng cách giữa ảnh */
+  flex-wrap: wrap;
+  font-size:25px;
 }
-
-.search-bar input[type="text"] {
-  width: 400px; /* cố định rộng của ô tìm kiếm */
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 15px;
+.category-grid img {
+  width: 250px;
+  border-radius: 10px;
+  transition: transform 0.3s;
 }
-
-.search-bar button {
-  width: 80px; /* cố định nút tìm ngắn lại */
-  padding: 8px 0;
-  background: linear-gradient(to right, #42c9e3, #5f73e3);
+.category-grid img:hover {
+  transform: scale(1.05);
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-items: center;
+  max-width: 1200px;   /* Giới hạn chiều rộng */
+  margin: 0 auto;      /* Căn giữa lưới */
+}
+.pagination{
+	text-align:center;
+}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+.pagination a.active{
+	background-color: green;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+	background-color: gray;
+	border-radius: 5px;
+}
+.card{
+   padding: 10px; 
+}
+.product-section{
+    display:flex;
+    justify-content: center; 
+	margin-top: -10px; 
+}
+.search{
+	text-align:center;
+	margin: 20px;
+}
+.search-advanced {
+  text-align: center; /* canh giữa nội dung bên trong form */
+  margin: 20px 0;     /* khoảng cách trên/dưới */
+}
+.search-advanced button {
+  background-color: blue;
   color: white;
+  padding: 12px 24px;
+  font-size: 16px;
   border: none;
   border-radius: 6px;
-  font-size: 14px;
-  font-weight: bold;
   cursor: pointer;
 }
+.product-card {
+  height: 295px;
+  width: 220px;         /* chỉnh chiều rộng card */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  background: #DDDDDD;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
 
-.search-bar button:hover {
-  opacity: 0.9;
+.product-card img {
+  width: 100%;
+  height: 200px;              /* ép ảnh cùng chiều cao */
+  object-fit: cover;          /* cắt ảnh cho vừa khung */
+  border-radius: 8px;
+}
+.product-name {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0;
+  min-height: 40px;             /* giữ chiều cao tên đều nhau */
+}
+.cch{
+ color:black;
+}
+.cch:hover{
+color:red;
+}
+.navbar{
+background-color:cyan;
+height:80px;
+}
+.navbar img {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  background: none !important;
+}
+.btn-col{
+margin-top:auto;
+}
+.price {
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 .search-bar {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 12px !important; /* cách nút ra 1 chút */
-}
-
-.search-form {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
+  display: flex;
+  align-items: center;     /* căn giữa theo chiều dọc */
+  justify-content: center; /* căn giữa theo chiều ngang */
+  gap: 10px;               /* khoảng cách giữa các phần tử */
+  margin-top: -10px;
 }
 
 .search-input {
-  width: 420px !important; /* Ô tìm to hơn */
-  height: 42px !important;
-  border: 1px solid #ccc !important;
-  border-radius: 6px !important;
-  padding: 0 12px !important;
-  font-size: 15px !important;
-  box-sizing: border-box !important;
+  width: 400px;
+  height: 45px;            /* cùng chiều cao với nút */
+  padding: 0 15px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
-.btn-tim {
-  width: 90px !important; /* Nút tìm ngắn lại */
-  height: 42px !important;
-  background-color: blue !important;
-  color: white !important;
-  border: none !important;
-  border-radius: 6px !important;
-  font-weight: bold !important;
-  cursor: pointer !important;
-}
-
+.btn-tim,
 .btn-advanced {
-  width: 160px !important; /* Nút tìm kiếm nâng cao cách ra xíu */
-  height: 42px !important;
-  background-color: rgb(32, 43, 255) !important;
-  color: white !important;
-  border: none !important;
-  border-radius: 6px !important;
-  font-weight: bold !important;
-  cursor: pointer !important;
+  height: 45px;            /* đảm bảo chiều cao bằng input */
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
+.btn-tim:hover,
+.btn-advanced:hover {
+  background-color: darkblue;
+}
 
-    .btn-tim {
-    height: 40px;
-    border: none;
-    background: linear-gradient(90deg, #20b2aa, #4682b4);
-    color: white;
-    border-radius: 8px;
-    padding: 0 20px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-
-  .btn-advanced {
-    height: 40px;
-    border: none;
-    background: linear-gradient(90deg, #20b2aa, #4682b4);
-    color: white;
-    border-radius: 8px;
-    padding: 0 15px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-
-
-    .btn-tim:hover, .btn-advanced:hover {
-      background-color: darkblue;
-    }
-
-   .cart-btn {
-    display: inline-block;
-    background: green;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-    /* --- Layout thanh toán --- */
-    .payment-layout {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 40px;
-      margin: 50px auto;
-      max-width: 1200px;
-      flex-wrap: wrap;
-    }
-
-    .cart-section, .checkout-container {
-      flex: 1;
-      min-width: 350px;
-      background: #fff;
-      padding: 25px;
+.product-card .price {
+  text-align: center;
+  width: 100%;
+  color:red;
+  font-size:20px;
+}
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .cart-section h1, .checkout-container h1 {
-      text-align: center;
-      color: #0072ff;
-      margin-bottom: 20px;
-    }
-
-    .cart-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 10px 0;
-      border-bottom: 1px dashed #ccc;
-    }
+.cart-item {
+  display: grid;
+  grid-template-columns: 40px 120px 1fr 180px; /* checkbox | ảnh | thông tin | cột số lượng & xóa */
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+}
 
     .cart-item img {
-      width: 80px;
-      height: 80px;
+      width: 120px;
+      height: auto;
       border-radius: 8px;
       object-fit: cover;
     }
 
-    .item-info {
-      flex: 1;
-    }
-
-    .item-title {
-      font-weight: bold;
-      margin: 0;
-    }
-
-    .price {
-      color: #333;
-      font-size: 15px;
-      margin-top: 4px;
-    }
-
-    .controls {
-      text-align: center;
-    }
-
-    .controls label {
-      font-size: 13px;
-      color: #555;
-    }
-
-    .controls p {
-      font-weight: bold;
-      margin: 5px 0 0;
-    }
 
     .summary {
-      margin-top: 15px;
       text-align: right;
-      font-weight: bold;
+      margin-top: 30px;
       font-size: 18px;
-      border-top: 1px solid #ccc;
-      padding-top: 10px;
-    }
-
-    label {
-      display: block;
-      margin-top: 10px;
       font-weight: bold;
+      color: #0066cc;
     }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-top: 5px;
-    }
-
-    button[type="submit"] {
-      margin-top: 20px;
-      padding: 12px;
-      background: linear-gradient(90deg, #36d1dc, #5b86e5);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      width: 100%;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    button[type="submit"]:hover {
-      transform: scale(1.05);
-    }
-
-    /* --- Thông báo cảm ơn --- */
-    .thankyou-message {
-      display: none;
-      text-align: center;
-      background: white;
-      padding: 50px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      margin: 80px auto;
-      max-width: 600px;
-    }
-
-    .thankyou-message h2 {
-      color: #0072ff;
-      font-size: 26px;
-      margin-bottom: 20px;
-    }
-
-    .thankyou-message a {
-      display: inline-block;
-      background: green;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 8px;
-      font-weight: bold;
+     .btn-continue, .btn-pay {
       text-decoration: none;
-      transition: background 0.2s;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      color: white;
     }
 
-    .thankyou-message a:hover {
-      background: darkgreen;
+    .btn-continue {
+      background: #00c6ff;
+    }
+
+    .btn-pay {
+      background: #28a745;
+    }
+
+    .btn-continue:hover {
+      background: #0072ff;
+    }
+
+    .btn-pay:hover {
+      background: #218838;
+    }
+        .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
     }
 /* ===== Popup tìm kiếm nâng cao ===== */
     .popup-overlay {
@@ -395,30 +310,157 @@
         transform: scale(1);
       }
     }
-  </style>
+    /* ===== BỐ CỤC THANH TOÁN ===== */
+  .payment-layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin: 50px auto;
+    max-width: 1200px;
+    flex-wrap: wrap;
+  }
+
+  .cart-section,
+  .checkout-container {
+    flex: 1;
+    min-width: 350px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .cart-section h1,
+  .checkout-container h1 {
+    text-align: center;
+    color: #0072ff;
+    margin-bottom: 20px;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ccc;
+  }
+
+  .cart-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .item-info {
+    flex: 1;
+  }
+
+  .item-title {
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .price {
+    color: #333;
+    font-size: 15px;
+    margin-top: 4px;
+  }
+
+  .controls {
+    text-align: center;
+  }
+
+  .controls label {
+    font-size: 13px;
+    color: #555;
+  }
+
+  .controls p {
+    font-weight: bold;
+    margin: 5px 0 0;
+  }
+
+  .summary {
+    margin-top: 15px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 18px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+  }
+
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+  }
+  .thankyou-message {
+  display: none; /* Ẩn ban đầu */
+  text-align: center;
+  background: white;
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 700px;
+  margin: 80px auto;
+}
+
+.thankyou-message h2 {
+  color: green;
+  margin-bottom: 15px;
+}
+
+.thankyou-message a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #0072ff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.thankyou-message a:hover {
+  background: #0056cc;
+}
+
+
+</style>
+
 </head>
 <body>
 
-  <!-- Navbar -->
-<nav class="navbar">
+  <nav class="navbar">
     <div class="nav-links">
       <ul>
       <a href="indexlogin.html" class="rounded-pill">
   <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
-        <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
+                <li class="home-link" style="font-size:20px; padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
         <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li></ul>
     </div>
   <div class="timnangcao">
-    <div class="search">
-      <form action="ketqualogin.html" method="get">
-        <input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
-        <button type="submit" class="btn-tim">Tìm</button>
+        <div class="search" style="display:flex; align-items:center;">
+      <form action="ketqualogin.html" method="get" style="display:flex; align-items:center;">
+        <input type="text" placeholder="Search.." 
+style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px; position: relative; top: 5px; left:-10px">
+
+                <button type="submit" class="btn-tim" style="border-radius:4 4px 4px 0;">Tìm</button>
         <button type="button" class="btn-advanced" id="advancedSearchBtn">Tìm kiếm nâng cao</button>
       </form>
     </div>
   </div>
-  <!-- POPUP -->
-  <div class="popup-overlay" id="advancedSearchPopup">
+    <div class="popup-overlay" id="advancedSearchPopup">
     <div class="popup-content">
       <h2>Tìm kiếm nâng cao</h2>
       <form action="ketqualogin.html" method="get">
@@ -458,17 +500,15 @@
   
   </nav>
 
-  <!-- Layout 2 cột -->
-  <div class="payment-layout" id="paymentSection">
-    <!-- Bên trái: sản phẩm -->
-    <div class="cart-section">
+    <div class="payment-layout" id="paymentSection">
+        <div class="cart-section">
       <h1>Giỏ hàng của bạn</h1>
       <div class="cart-item">
         <img src="assets/img/rx782origin.jpg" alt="HG GTO">
         <div class="item-info">
           <p class="item-title">HG GTO 1/144 RX-78-02 Gundam</p>
           <p class="price">560.000 VNĐ</p>
-        </div>
+            </div>
         <div class="controls">
           <label>Số lượng</label>
           <p>1</p>
@@ -504,8 +544,7 @@
       </div>
     </div>
 
-    <!-- Bên phải: form thanh toán -->
-    <div class="checkout-container">
+        <div class="checkout-container">
       <h1>Thông tin thanh toán</h1>
       <form id="checkoutForm">
         <label>Họ và tên</label>
@@ -524,8 +563,7 @@
     </div>
   </div>
 
-  <!-- Thông báo cảm ơn -->
-  <div class="thankyou-message" id="thankyouMessage">
+    <div class="thankyou-message" id="thankyouMessage">
     <h2>🎉 Cảm ơn bạn đã mua hàng! 🎉</h2>
     <p>Đơn hàng của bạn đã được ghi nhận. Chúng tôi sẽ liên hệ sớm nhất để giao hàng.</p>
     <a href="indexlogin.html">Trở về trang chủ</a>
@@ -559,6 +597,5 @@
       if (e.target === popup) popup.style.display = 'none';
     });
   </script>
-
 </body>
 </html>
