@@ -378,9 +378,9 @@ textarea::placeholder {
   <label><input type="checkbox" name="phukien" value="combo"> Thêm kìm + decal</label>
 </div>
 
-<label for="fname">Giá sản phẩm</label><br>
-  	<input style="color:gray;" type="text" id="fname" name="fname" placeholder="Name" style="font-size:20px;"><br>
-
+<label for="price">Giá sản phẩm</label><br>
+<input id="price" name="price" type="text" placeholder="Nhập giá..." 
+style="color:black; font-size:20px; width:600px; height:30px; border:1px solid #aaa; border-radius:6px;">
 <label for="info">Giới thiệu sản phẩm</label><br>
 <textarea id="info" name="info"
   style="color:gray; width:600px; height:150px; font-size:16px;"
@@ -403,7 +403,48 @@ textarea::placeholder {
 	</form>
 	</div>
 	</div>
-  
+  </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const priceInput = document.getElementById("price");
+      let timeout;
+
+      function formatCurrency(value) {
+        return new Intl.NumberFormat("vi-VN").format(Number(value));
+      }
+
+      function stripVNĐ(str) {
+        return str.replace(/\s?VNĐ$/, "").trim();
+      }
+
+      priceInput.addEventListener("input", function (e) {
+        clearTimeout(timeout);
+        let raw = e.target.value.replace(/\D/g, "");
+        if (raw === "") {
+          e.target.value = "";
+          return;
+        }
+        e.target.value = formatCurrency(raw);
+
+        timeout = setTimeout(() => {
+          if (!e.target.value.endsWith("VNĐ")) {
+            e.target.value += " VNĐ";
+          }
+        }, 1000);
+      });
+
+      priceInput.addEventListener("focus", function (e) {
+        e.target.value = stripVNĐ(e.target.value).replace(/\D/g, "");
+      });
+
+      priceInput.addEventListener("blur", function (e) {
+        let raw = e.target.value.replace(/\D/g, "");
+        if (raw !== "") {
+          e.target.value = formatCurrency(raw) + " VNĐ";
+        }
+      });
+    });
+  </script>
 </body>
 
 
