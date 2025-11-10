@@ -418,7 +418,8 @@ textarea::placeholder {
       <option value="ag">Umamusume: Pretty Derby - Tamamo Crosstd</option>
     </select><br>
     
-  	<input style="color:gray;" type="text" id="fname" name="fname" placeholder="VNĐ" style="font-size:20px;">
+  	<input id="price" name="price" type="text" placeholder="Nhập giá..." 
+style="color:black; font-size:20px; width:600px; height:30px; border:1px solid #aaa; border-radius:6px;">
 	<input type="number" id="profit" name="profit" min="0" max="100" value="1">
   	
   	<div class="summary-box" >
@@ -451,7 +452,64 @@ textarea::placeholder {
 	</form>
 	</div>
 	</div>
-  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const priceInput = document.getElementById("price");
+      let timeout;
+
+      function formatCurrency(value) {
+        return new Intl.NumberFormat("vi-VN").format(Number(value));
+      }
+
+      function stripVNĐ(str) {
+        return str.replace(/\s?VNĐ$/, "").trim();
+      }
+
+      priceInput.addEventListener("input", function (e) {
+        clearTimeout(timeout);
+        let raw = e.target.value.replace(/\D/g, "");
+        if (raw === "") {
+          e.target.value = "";
+          return;
+        }
+        e.target.value = formatCurrency(raw);
+
+        timeout = setTimeout(() => {
+          if (!e.target.value.endsWith("VNĐ")) {
+            e.target.value += " VNĐ";
+          }
+        }, 1000);
+      });
+
+      priceInput.addEventListener("focus", function (e) {
+        e.target.value = stripVNĐ(e.target.value).replace(/\D/g, "");
+      });
+
+      priceInput.addEventListener("blur", function (e) {
+        let raw = e.target.value.replace(/\D/g, "");
+        if (raw !== "") {
+          e.target.value = formatCurrency(raw) + " VNĐ";
+        }
+      });
+    }); /*Này là tự form số và thêm vnđ*/
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const maPhieuInput = document.getElementById("fname");
+    maPhieuInput.addEventListener("input", function(e) {
+      let value = e.target.value;
+      if (value.startsWith("PN")) {
+        value = value.slice(2);
+      }
+      let numbersOnly = value.replace(/\D/g, '');
+      if (numbersOnly.length > 0) {
+        e.target.value = "PN" + numbersOnly;
+      } else {
+        e.target.value = "";
+      }
+    });/*Này tự thêm PN khi nhập số */
+  });
+  </script>
 </body>
 
 
