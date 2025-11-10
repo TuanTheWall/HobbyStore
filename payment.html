@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trang chủ</title>
+  <title>Thanh toán</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
@@ -246,11 +246,12 @@ margin-top:auto;
     }
 
     .popup-content {
-      background-color: white;
+      background-color: rgb(255, 255, 255);
       padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      width: 450px;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgb(0, 0, 0);
+      width: 60%;  /*Kích thước popup*/
+      height: 60%;
       animation: fadeIn 0.3s ease;
     }
 
@@ -562,7 +563,30 @@ style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc;
       </form>
     </div>
   </div>
-
+  <!-- ===== Popup xác nhận đơn hàng ===== -->
+<div class="popup-overlay" id="orderConfirmPopup">
+  <div class="popup-content">
+    <h2>Xác nhận đơn hàng</h2>
+    <div id="orderSummary">
+      <p><strong>Họ tên:</strong> Nguyễn Văn A</p>
+      <p><strong>Địa chỉ:</strong> 123 Đường ABC, Quận 1, TP.HCM</p>
+      <p><strong>Số điện thoại:</strong> 0901234567</p>
+      <p><strong>Phương thức thanh toán:</strong> Thanh toán khi nhận hàng (COD)</p>
+      <hr>
+      <h3>Sản phẩm:</h3>
+      <br>
+      <p>• HG GTO 1/144 RX-78-02 Gundam (1x) - 560.000 VNĐ</p>
+      <p>• Umamusume: Pretty Derby - Tamamo Cross (1x) - 360.000 VNĐ</p>
+      <p>• HG GQ 1/144 RED GUNDAM (2x) - 660.000 VNĐ</p>
+      <hr><br>
+      <p><strong>Tổng cộng: 1.580.000 VNĐ</strong></p>
+    </div>
+    <div class="popup-buttons">
+      <button id="confirmOrderBtn" class="search-btn">Xác nhận</button>
+      <button id="cancelOrderBtn" class="close-btn">Hủy</button>
+    </div>
+  </div>
+</div>
     <div class="thankyou-message" id="thankyouMessage">
     <h2>🎉 Cảm ơn bạn đã mua hàng! 🎉</h2>
     <p>Đơn hàng của bạn đã được ghi nhận. Chúng tôi sẽ liên hệ sớm nhất để giao hàng.</p>
@@ -570,32 +594,54 @@ style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc;
   </div>
 
   <script>
-    const form = document.getElementById("checkoutForm");
-    const paymentSection = document.getElementById("paymentSection");
-    const thankyouMessage = document.getElementById("thankyouMessage");
+  const form = document.getElementById("checkoutForm");
+  const paymentSection = document.getElementById("paymentSection");
+  const thankyouMessage = document.getElementById("thankyouMessage");
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      paymentSection.style.display = "none";
-      thankyouMessage.style.display = "block";
-      window.scrollTo(0, 0);
-    });
-    const advancedBtn = document.getElementById('advancedSearchBtn');
-    const popup = document.getElementById('advancedSearchPopup');
-    const closePopup = document.getElementById('closePopup');
+  const orderConfirmPopup = document.getElementById("orderConfirmPopup");
+  const confirmOrderBtn = document.getElementById("confirmOrderBtn");
+  const cancelOrderBtn = document.getElementById("cancelOrderBtn");
 
-    advancedBtn.addEventListener('click', () => {
-      popup.style.display = 'flex';
-    });
+  // Khi nhấn "Xác nhận đặt hàng"
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    orderConfirmPopup.style.display = "flex";
+  });
 
-    closePopup.addEventListener('click', () => {
-      popup.style.display = 'none';
-    });
+  // Khi nhấn "Xác nhận" trong popup
+  confirmOrderBtn.addEventListener("click", () => {
+    orderConfirmPopup.style.display = "none";
+    paymentSection.style.display = "none";
+    thankyouMessage.style.display = "block";
+    window.scrollTo(0, 0);
+  });
 
-    // Đóng popup khi click ra ngoài
-    popup.addEventListener('click', (e) => {
-      if (e.target === popup) popup.style.display = 'none';
-    });
-  </script>
+  // Khi nhấn "Hủy"
+  cancelOrderBtn.addEventListener("click", () => {
+    orderConfirmPopup.style.display = "none";
+  });
+
+  // Đóng popup khi click ra ngoài
+  orderConfirmPopup.addEventListener("click", (e) => {
+    if (e.target === orderConfirmPopup) orderConfirmPopup.style.display = "none";
+  });
+
+  // Popup tìm kiếm nâng cao (giữ nguyên)
+  const advancedBtn = document.getElementById('advancedSearchBtn');
+  const popup = document.getElementById('advancedSearchPopup');
+  const closePopup = document.getElementById('closePopup');
+
+  advancedBtn.addEventListener('click', () => {
+    popup.style.display = 'flex';
+  });
+
+  closePopup.addEventListener('click', () => {
+    popup.style.display = 'none';
+  });
+
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) popup.style.display = 'none';
+  });
+</script>
 </body>
 </html>
