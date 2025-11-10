@@ -511,16 +511,16 @@ margin-top:auto;
       const basePrice = 560000;
       const addon = document.getElementById('addon');
       const totalPrice = document.getElementById('total-price');
-      if(addon && totalPrice){
-        addon.addEventListener('change', function(){
-          let add = 0;
-          if(this.value === 'decal') add = 20000;
-          else if(this.value === 'kim') add = 50000;
-          else if(this.value === 'combo') add = 65000;
-          const total = basePrice + add;
-          totalPrice.textContent = 'Tổng: ' + total.toLocaleString('vi-VN') + ' VNĐ';
-        });
-      }
+      // if(addon && totalPrice){                                       //Thay đổi giá theo phụ kiện
+      //   addon.addEventListener('change', function(){
+      //     let add = 0;
+      //     if(this.value === 'decal') add = 20000;
+      //     else if(this.value === 'kim') add = 50000;
+      //     else if(this.value === 'combo') add = 65000;
+      //     const total = basePrice + add;
+      //     totalPrice.textContent = 'Tổng: ' + total.toLocaleString('vi-VN') + ' VNĐ';
+      //   });
+      // }
     })();
     const advancedBtn = document.getElementById('advancedSearchBtn');
     const popup = document.getElementById('advancedSearchPopup');
