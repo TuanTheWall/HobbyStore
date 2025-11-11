@@ -267,7 +267,61 @@
     .avatar { width:40px; height:40px; border-radius:6px; background:#e9eef8; display:inline-flex; align-items:center; justify-content:center; font-weight:700; color:#2c5aa0; }
     .btn-pending { background: #ffcc00; color: #111; }   /* Chờ xử lý */
 .btn-delivering { background: #17a2b8; color: #fff; } /* Đang giao */
+.search-advanced {
+  display: flex;
+  align-items: center;       /* căn giữa theo chiều dọc */
+  justify-content: center;   /* căn giữa theo chiều ngang */
+  gap: 20px;                 /* khoảng cách giữa các phần tử */
+  margin: 30px auto;
+  flex-wrap: wrap;           /* tự xuống dòng nếu màn hình nhỏ */
+}
 
+.search-advanced label {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.search-advanced input,
+.search-advanced select {
+  width: 220px;              /* đồng đều chiều rộng */
+  height: 38px;              /* đồng đều chiều cao */
+  padding: 6px 10px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+
+.search-advanced button {
+  background-color: blue;
+  color: white;
+  padding: 8px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  height: 40px;
+  transition: 0.25s;
+}
+
+.search-advanced button:hover {
+  background-color: darkblue;
+}
+
+.input-box input{
+  height:30px;
+  border-radius: 8px;
+  width:100px;
+  
+  
+}
+.underline-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: underline; /* gạch chân chữ */
+  text-underline-offset: 4px; /* khoảng cách giữa chữ và gạch */
+}
   </style>
 </head>
 <body>
@@ -304,7 +358,14 @@
   <!-- TABLE -->
   <div class="shipping-table" role="main" aria-labelledby="ordersTitle">
     <h2 id="ordersTitle">Danh sách đơn hàng</h2>
-
+    <form action="quanlynhaphang.html" class="search-advanced">
+    <label style="font-size:25px;" for="fname">Từ</label><br>
+    <input type="date">
+    <label style="font-size:25px;" for="fname">Đến</label><br>
+    <input type="date">
+<button type="submit" class="btn-tim" style="height:38px; margin-top:-4px;">Tìm</button>
+<button type="submit" class="btn-tim" style="height:38px; margin-top:-4px;background:gray;">Đặt lại</button>
+</form>
     <table role="table" aria-label="Orders table">
       <thead>
         <tr>
