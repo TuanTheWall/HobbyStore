@@ -202,24 +202,24 @@ text-decoration:none;
     }
 
     /* ===== PHÂN TRANG ===== */
-    .pagination {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-      gap: 10px;
-    }
-
-    .pagination a {
-      padding: 8px 12px;
-      background: #007bff;
-      color: white;
-      border-radius: 5px;
-      text-decoration: none;
-    }
-
-    .pagination a:hover {
-      background: darkblue;
-    }
+.pagination{
+	text-align:center;
+}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+.pagination a.active{
+	background-color: green;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+	background-color: gray;
+	border-radius: 5px;
+}
     .search-advanced {
   display: flex;
   align-items: center;       /* căn giữa theo chiều dọc */
@@ -298,7 +298,11 @@ text-decoration:none;
   <section class="overview-menu">
     <h2>Mục quản lý</h2>
     <div class="menu-grid">
-      <a href="customer.html"><div class="menu-card"><h3>Quản lý khách hàng</h3></div></a>
+      <a href="customer.html">
+    <div class="menu-card" style="background: linear-gradient(to bottom,#19113b,blue);">
+      <h3>Quản lý sản phẩm</h3>
+    </div>
+    </a>
       <a href="shiping.html"><div class="menu-card"><h3>Quản lý đơn hàng</h3></div></a>
       <a href="quanlysp.html"><div class="menu-card"><h3>Quản lý sản phẩm</h3></div></a>
       <a href="lndm.html"><div class="menu-card"><h3>Quản lý giá bán</h3></div></a>
@@ -309,7 +313,7 @@ text-decoration:none;
   </section>
 
   <!-- ===== BẢNG KHÁCH HÀNG ===== -->
-   <form action="quanlynhaphang.html" class="search-advanced">
+   <form action="customer.html" class="search-advanced">
     <label style="font-size:25px;" for="fname">Từ</label><br>
     <input type="date">
     <label style="font-size:25px;" for="fname">Đến</label><br>

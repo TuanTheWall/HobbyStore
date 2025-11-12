@@ -205,25 +205,25 @@
     .status-shipped { background:#e8f8f0; color:#14723b; }
     .status-cancel { background:#fff0f0; color:#b33; }
 
-    /* PAGINATION */
-    .pagination {
-      display:flex;
-      justify-content:center;
-      gap:8px;
-      margin-top:18px;
-    }
-
-    .pagination a {
-      padding:8px 12px;
-      background:#007bff;
-      color:#fff;
-      border-radius:6px;
-      text-decoration:none;
-      font-weight:700;
-    }
-
-    .pagination a:hover { background: #0056b3; }
-
+    /* Phân trang */
+.pagination{
+	text-align:center;
+}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+.pagination a.active{
+	background-color: green;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+	background-color: gray;
+	border-radius: 5px;
+}
     /* POPUP (centered, large) */
     .modal-back {
       position: fixed;
@@ -322,6 +322,39 @@
   text-decoration: underline; /* gạch chân chữ */
   text-underline-offset: 4px; /* khoảng cách giữa chữ và gạch */
 }
+  .shipping-table {
+  background-color: #fff;       /* nền trắng */
+  border-radius: 12px;          /* bo góc */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1); /* đổ bóng */
+  padding: 20px;
+  margin: 30px;
+}
+
+.shipping-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: left;
+  border-radius: 12px;           /* bo góc table */
+  overflow: hidden;              /* để bo góc shadow đúng */
+}
+
+.shipping-table table thead th {
+  background: #96dee0;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eef2f8;
+}
+
+.shipping-table table tbody td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #f1f3f6;
+  vertical-align: middle;
+}
+
+.shipping-table table tbody tr:hover {
+  background: #fafcff;
+}
+
   </style>
 </head>
 <body>
@@ -346,7 +379,11 @@
     <h2>Mục quản lý</h2>
     <div class="menu-grid" role="list">
       <a href="customer.html" class="menu-card" role="listitem"><h3>Quản lý khách hàng</h3></a>
-      <a href="shiping.html" class="menu-card" role="listitem"><h3>Quản lý đơn hàng</h3></a>
+      <a href="shiping.html">
+    <div class="menu-card" style="background: linear-gradient(to bottom,#19113b,blue);">
+      <h3>Quản lý sản phẩm</h3>
+    </div>
+    </a>
       <a href="quanlysp.html" class="menu-card" role="listitem"><h3>Quản lý sản phẩm</h3></a>
       <a href="lndm.html" class="menu-card" role="listitem"><h3>Quản lý giá bán</h3></a>
       <a href="quanlydm.html" class="menu-card" role="listitem"><h3>Quản lý danh mục</h3></a>
@@ -354,11 +391,7 @@
       <a href="quanlynhaphang.html" class="menu-card" role="listitem"><h3>Quản lý nhập hàng</h3></a>
     </div>
   </section>
-
-  <!-- TABLE -->
-  <div class="shipping-table" role="main" aria-labelledby="ordersTitle">
-    <h2 id="ordersTitle">Danh sách đơn hàng</h2>
-    <form action="quanlynhaphang.html" class="search-advanced">
+<form action="shiping.html" class="search-advanced">
     <label style="font-size:25px;" for="fname">Từ</label><br>
     <input type="date">
     <label style="font-size:25px;" for="fname">Đến</label><br>
@@ -366,22 +399,26 @@
 <button type="submit" class="btn-tim" style="height:38px; margin-top:-4px;">Tìm</button>
 <button type="submit" class="btn-tim" style="height:38px; margin-top:-4px;background:gray;">Đặt lại</button>
 </form>
-    <table role="table" aria-label="Orders table">
-      <thead>
-        <tr>
-          <th>Mã đơn</th>
-          <th>Khách</th>
-          <th>Sản phẩm</th>
-          <th>Tổng tiền</th>
-          <th>Ngày đặt</th>
-          <th>Trạng thái</th>
-          <th style="text-align:right">Hành động</th>
-        </tr>
-      </thead>
+  <!-- TABLE -->
+  
+   <div class="shipping-table">
+  <h2 id="ordersTitle" style="font-size: 31px;">Danh sách đơn hàng</h2>
+  <table role="table" aria-label="Orders table">
+    <thead>
+      <tr>
+        <th>Mã đơn</th>
+        <th>Khách</th>
+        <th>Sản phẩm</th>
+        <th>Tổng tiền</th>
+        <th>Ngày đặt</th>
+        <th>Trạng thái</th>
+        <th style="text-align:right">Hành động</th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <!-- 5 đơn hàng: DH001..DH005 -->
-        <tr>
+    <tbody>
+      <!-- 5 đơn hàng: DH001..DH005 -->
+      <tr>
           <td class="id">DH001</td>
           <td><div style="font-weight:600">Nguyễn Văn A</div><div class="muted">an.nguyen@example.com</div></td>
           <td>HG RX-78-02 Gundam<br>HG Zaku II<br>SD Exia</td>
@@ -461,17 +498,18 @@
 </td>
         </tr>
 
-      </tbody>
-    </table>
-
+      <!-- Các đơn hàng khác giống trên -->
+    </tbody>
+  </table>
+</div>
     <div class="pagination" aria-hidden="false">
-      <a href="shiping.html">&laquo;</a>
-      <a href="shiping.html">1</a>
-      <a href="shiping.html">2</a>
-      <a href="shiping.html">3</a>
-      <a href="shiping.html">&raquo;</a>
-    </div>
-  </div>
+  <a href="shiping.html">&laquo;</a>
+  <a href="shiping.html" class="active">1</a> <!-- ✅ thêm class active -->
+  <a href="shiping.html">2</a>
+  <a href="shiping.html">3</a>
+  <a href="shiping.html">&raquo;</a>
+</div>
+
 
   <!-- MODAL / POPUP: Chi tiết đơn hàng (centered) -->
   <div class="modal-back" id="modalBack" aria-hidden="true">
