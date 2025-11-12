@@ -15,7 +15,7 @@
     /* product meta */
     .meta-info { display:flex; gap:10px; align-items:center; margin-bottom:8px; color:#555; font-size:14px; }
     .badge { background:#eef6ff; color:#0b66d1; padding:6px 10px; border-radius:999px; font-weight:700; font-size:13px; }
-    .small-muted { color:#777; font-size:13px; }
+    .small-muted { color:#000000; font-size:20px; }
 
     /* Navbar */
     .navbar {
@@ -62,11 +62,11 @@
     }
 
     .product-image {
-      flex: 1;
-      min-width: 300px;
+      flex: 10%;
+      min-width: 200px;
     }
     .product-image img {
-      width: 100%;
+      width: 80%;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(218, 8, 8, 0.934);
     }
@@ -76,7 +76,7 @@
       min-width: 300px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
     }
     .product-details h2 {
       font-size: 26px;
@@ -380,6 +380,23 @@ margin-top:auto;
         transform: scale(1);
       }
     }
+    #addCartBtn {
+  background-color: #007bff;/*Màu sắc*/
+  color: white;
+  border: none;
+  padding: 20px 110px;     /*  chỉnh độ lớn của nút */
+  font-size: 15px;        /*  cỡ chữ */
+  border-radius: 10px;     /*  bo góc */
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#addCartBtn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
   </style>
 </head>
 
@@ -439,43 +456,79 @@ margin-top:auto;
   </div>
 </nav>
   <a href="index.html" class="back-home">← Trở về</a>
+ <div class="container">
+  <div class="product-image">
+    <img src="assets/img/rx782origin.jpg" alt="HG GTO 1/144 RX-78-02 Gundam">
+  </div>
 
-  <div class="container">
-    <div class="product-image">
-      <img src="assets/img/rx782origin.jpg" alt="HG GTO 1/144 RX-78-02 Gundam">
+  <div class="product-details">
+    <h2>HG GTO 1/144 RX-78-02 Gundam</h2>
+    
+
+    <div class="meta-info" aria-hidden="true">
+      <div class="badge">High Grade (HG)</div>
     </div>
-
-   <div class="product-details">
-      <h2>HG GTO 1/144 RX-78-02 Gundam</h2>
-      <div class="price" id="base-price">560.000 VNĐ</div>
-
-     <!-- Thông tin nhỏ: danh mục / tỉ lệ / nhà sản xuất -->
-     <div class="meta-info" aria-hidden="true">
-       <div class="badge">High Grade (HG)</div>
-       <div class="small-muted">Tỉ lệ: 1/144 • Thể loại: Gundam / Model kit • Nhà sản xuất: Bandai</div>
-     </div>
-	<div class="search-advanced">
-      <label for="addon">Chọn phụ kiện thêm:</label>
+    <div class="small-muted" style="text-indent: 10px;"> Nhà sản xuất: Bandai</div>
+    <div class="search-advanced">
+      <label for="addon" style="text-indent: 10px;">Chọn phụ kiện thêm:</label>
       <select id="addon" name="addon">
         <option value="none">Không thêm phụ kiện</option>
-        <option value="decal">Thêm decal </option>
-        <option value="kim">Thêm kìm </option>
-        <option value="combo">Thêm kìm + decal </option>
+        <option value="decal">Thêm decal</option>
+        <option value="kim">Thêm kìm</option>
+        <option value="combo">Thêm kìm + decal</option>
       </select>
-     </div> 
-      
-      <div id="total-price">Tổng: 560.000 VNĐ</div>
-     
-      <a href="login.html">
-  <button type="button" id="addCartBtn">Thêm vào giỏ hàng</button>
-</a>
+    </div>
+    <br><br><br>
+    <div style="font-size: 20px ;text-indent: 10px; color: #007bff;" ;="total-price">Tổng: 560.000 VNĐ</div>
+    
+    <a href="login.html">
+      <button type="button" id="addCartBtn">Thêm vào giỏ hàng</button>
+    </a>
+    <br><br>
+    
+  </div>
+  
+
+  <!--Giới thiệu mô hình được đưa ra dưới đây -->
+  <div class="product-description">
+    <h1>Giới thiệu mô hình:</h1>
+    <ul>
+<br>
+<b style="display: block; text-align: left; text-indent: 30px;">Xuất hiện trong: MOBILE SUIT GUNDAM THE ORIGIN</b>
+
+      <p style="text-indent: 30px;" style="font-size:medium;">
+         Bộ kit này mang đến một khuôn mẫu và định nghĩa hoàn toàn mới cho Gundam The Origin's RX-78-02,
+        được trang bị nhiều loại vũ khí và gimmicks. Màu sắc và khả năng tháo lắp các bộ phận của bộ kit này
+        cũng được cải tiến tốt hơn so với các dòng HG còn lại trong dòng GTO.
+        Được cung cấp nhiều bộ phận chuyển đổi để tạo ra các biến thể của RX-78-02 Gundam và để đại diện cho tất cả
+        các thiết kế có sẵn cho chính Gundam đó.
+      </p>
+      <br>
+      <h1>Thông tin mô hình</h1a>
+         <p id="info" name="info" rows="10" cols="50" 
+          style="text-indent: 30px;font-size:16px; color:black; padding-top:10px; ">
+          Cấp độ: HG</p>  
+          <p id="info" name="info" rows="10" cols="50" 
+          style="text-indent: 30px;font-size:16px; color:black; padding-top:10px; ">
+         
+          Yêu cầu tự lắp
+      </p> 
+          <p id="info" name="info" rows="10" cols="50" 
+          style="text-indent: 30px;font-size:16px; color:black; padding-top:10px; ">
+          
+          Chiều cao mô hình :
+         </p> 
+          <p id="info" name="info" rows="10" cols="50" 
+          style="text-indent: 30px;font-size:16px; color:black; padding-top:10px; ">
+          
+          Tỉ lệ: 1/144</p> 	
+    </ul>
+  </div>
+</div>
+
       <br><br>
   <div class="product-description-tab">
     <div class="content-entry add-height-img max-height-ct lazyload-addclass">
-      <div>
-        <h1>Giới thiệu mô hình:</h1><ul><li>Xuất hiện trong&nbsp;MOBILE SUIT GUNDAM THE ORIGIN</li><li>Bộ kit này mang đến một khuôn mẫu và định nghĩa hoàn toàn mới cho Gundam The Origin's RX-78-02, được trang bị nhiều loại vũ khí và gimmicks.</li><li>Màu sắc và khả năng&nbsp;tháo lắp&nbsp;các bộ phận của bộ kit này cũng được cải&nbsp;tiến&nbsp;tốt hơn so với các dòng HG còn lại trong&nbsp;dòng GTO.</li><li>Được cung cấp nhiều bộ phận chuyển đổi để tạo ra các biến thể của RX-78-02 Gundam và để đại diện cho tất cả các thiết kế có sẵn cho chính Gundam đó.</li></ul><h1>Thông tin&nbsp;mô hình:</h1><ul><li>Cấp độ: HG</li><li>Yêu cầu tự lắp</li><li>Chiều cao mô hình:&nbsp;</li><li>Tỉ lệ: 1/144</li></ul>
-      </div>
-    </div>
     <div class="view-all-btn">
     </div>
 
