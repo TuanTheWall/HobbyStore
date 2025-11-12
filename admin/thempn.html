@@ -15,31 +15,32 @@
   <link rel="stylesheet" href="assets/css/view-cart.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
+/* ===== chung (giữ các style bạn cần) ===== */
 .pagination{
-	text-align:center;
+  text-align:center;
 }
 .pagination a{
-	color: black;
-	text-decoration: none;
-	padding: 8px 15px;
-	display: inline-block;
+  color: black;
+  text-decoration: none;
+  padding: 8px 15px;
+  display: inline-block;
 }
 .pagination a.active{
-	background-color: green;
-	font-weight: bold;
-	border-radius: 5px;
+  background-color: green;
+  font-weight: bold;
+  border-radius: 5px;
 }
 .pagination a:hover:not(.active){
-	background-color: gray;
-	border-radius: 5px;
+  background-color: gray;
+  border-radius: 5px;
 }
 .search{
-	text-align:center;
-	margin: 20px;
+  text-align:center;
+  margin: 20px;
 }
 .search-advanced {
-  text-align: center; /* canh giữa nội dung bên trong form */
-  margin: 20px 0;     /* khoảng cách trên/dưới */
+  text-align: center;
+  margin: 20px 0;
 }
 .search-advanced button {
   background-color: blue;
@@ -51,12 +52,10 @@
   cursor: pointer;
 }
 
-.cch{
- color:black;
-}
-.cch:hover{
-color:red;
-}
+.cch{ color:black; }
+.cch:hover{ color:red; }
+
+/* NAVBAR */
 nav.navbar {
   display: flex !important;
   justify-content: space-between !important;
@@ -69,8 +68,6 @@ nav.navbar {
   gap: 12px;
   z-index: 50;
 }
-
-/* LOGO: ép kích thước, loại mọi filter và giữ tỉ lệ */
 .navbar .navbar-logo {
   width: 64px !important;
   height: 64px !important;
@@ -79,44 +76,16 @@ nav.navbar {
   border-radius: 50% !important;
   object-fit: cover !important;
   display: inline-block !important;
-
-  /* vô hiệu hóa mọi filter / blend mode từ file khác */
   filter: none !important;
   -webkit-filter: none !important;
   mix-blend-mode: normal !important;
   background: transparent !important;
   opacity: 1 !important;
 }
-
-/* bố cục trái */
-.nav-left {
-  display: flex !important;
-  align-items: center !important;
-  gap: 18px;
-}
-
-/* chữ Trang chủ */
-.nav-left .nav-home {
-  text-decoration: none;
-  color: black;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-/* phải */
-.nav-right {
-  display: flex !important;
-  align-items: center !important;
-  gap: 14px;
-}
-
-/* "Xin chào" */
-.nav-right .hello {
-  font-weight: 600;
-  color: black;
-}
-
-/* Nút đăng xuất */
+.nav-left { display: flex !important; align-items: center !important; gap: 18px; }
+.nav-left .nav-home { text-decoration: none; color: black; font-size: 20px; font-weight: 600; }
+.nav-right { display: flex !important; align-items: center !important; gap: 14px; }
+.nav-right .hello { font-weight: 600; color: black; }
 .logout-btn {
   background-color: rgb(221, 99, 225) !important;
   border: 2px solid black !important;
@@ -126,39 +95,15 @@ nav.navbar {
   text-decoration: none !important;
   font-weight: 700 !important;
 }
+.nav-left a:hover, .nav-right a:hover, .nav-right .hello:hover { color: red !important; }
 
-/* hover */
-.nav-left a:hover, .nav-right a:hover, .nav-right .hello:hover {
-  color: red !important;
-}
+.btn-col{ margin-top:auto; }
+.price { font-size: 14px; margin-bottom: 10px; }
 
-.btn-col{
-margin-top:auto;
-}
-.price {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-
-.overview-menu {
-  padding: 30px;
-  background-color: white;
-}
-
-.overview-menu h2 {
-  font-size: 22px;
-  color: black;
-  margin-bottom: 20px;
-}
-
-.menu-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* canh giữa toàn bộ các ô */
-  gap: 20px;
-}
-
+/* OVERVIEW / MENU */
+.overview-menu { padding: 30px; background-color: white; }
+.overview-menu h2 { font-size: 22px; color: black; margin-bottom: 20px; }
+.menu-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 .menu-card {
   background: linear-gradient(to bottom,cyan,blue);
   color: #fff;
@@ -169,52 +114,32 @@ margin-top:auto;
   transition: all 0.25s ease;
   cursor: pointer;
 }
+.menu-card h3 { font-size: 16px; font-weight: 600; }
+.menu-card:hover { transform: translateY(-5px); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
+.menu-card a{ color:white; text-decoration:none; }
 
-.menu-card i {
-  font-size: 36px;
-  margin-bottom: 15px;
+/* WRAP / FORM */
+.wrap{
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.95);
+  padding: 28px;
+  border-radius: 12px;
+  max-width: 1100px;
+  margin: 36px auto;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+  backdrop-filter: blur(4px);
 }
-
-.menu-card h3 {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.menu-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-}
-
-.menu-card a{
-color:white;
-text-decoration:none;
-}
-  .wrap{
-    position: relative;
-    z-index: 1;
-    background: rgba(255,255,255,0.95);
-    padding: 28px;
-    border-radius: 12px;
-    max-width: 1100px;
-    margin: 36px auto;
-    box-shadow: 0 14px 30px rgba(0,0,0,0.12);
-    backdrop-filter: blur(4px);
-  }
-  .add-img{
-padding-bottom:50px;
-}
-.left-po{
-display:flex;
-flex-direction:column;
-align-items:center;
-}
+.add-img{ padding-bottom:50px; }
+.left-po{ display:flex; flex-direction:column; align-items:center; }
 .add-info{
-margin-top:50px;
-font-size:25px;
-padding-bottom:10px;
-width:90%;
+  margin-top:50px;
+  font-size:25px;
+  padding-bottom:10px;
+  width:90%;
 }
 
+/* chung cho input trong add-info (không ghi đè lên phần nhập hàng riêng) */
 .add-info input,
 .add-info select {
   display: block;
@@ -222,18 +147,14 @@ width:90%;
   font-size: 20px;
   width:600px !important;
   height: 40px;
-    border: 1px solid #aaa;
+  border: 1px solid #aaa;
   border-radius: 6px;
-}
-textarea::placeholder {
-  color: gray;
-  font-style: italic;
 }
 .add-info select,
 .add-info textarea {
   width: 600px;
   font-size: 20px;
-    border: 1px solid #aaa;
+  border: 1px solid #aaa;
   border-radius: 6px;
 }
 .bt-them {
@@ -246,90 +167,157 @@ textarea::placeholder {
   cursor: pointer;
   transition: 0.3s;
 }
+.bt-them i { margin-right: 8px; font-size: 20px; background: white; color: black; border-radius: 4px; width: 25px; height: 25px; text-align: center; line-height: 25px; }
+.themsp { display: inline-block; margin-right: 100px; }
+.bt-them.gray { background: gray; }
+.bt-them.gray:hover { background: #5a5a5a; }
 
-.bt-them i {
-  margin-right: 8px;
-  font-size: 20px;
-  background: white;
-  color: black;
-  border-radius: 4px;
-  width: 25px;
-  height: 25px;
-  text-align: center;
-  line-height: 25px;
-}
-.themsp {
-  display: inline-block;
-  margin-right: 100px;
-}
-.bt-them.gray {
-  background: gray;
-}
-
-.bt-them.gray:hover {
-  background: #5a5a5a;
-}
 .khung {
   display: flex;
-  justify-content: center; /* căn giữa hai nút */
-  gap: 20px; /* khoảng cách giữa hai nút */
+  justify-content: center;
+  gap: 20px;
   margin-top: 50px;
-  
-  
 }
 
 .add-info label {
   display: block;
-  margin-top: 15px;     /* khoảng cách trên */
-  margin-bottom: 8px;   /* khoảng cách dưới */
+  margin-top: 15px;
+  margin-bottom: 8px;
   font-weight: 600;
 }
+.add-info input { margin-bottom: 20px; }
 
-.add-info input {
-  margin-bottom: 20px;  /* khoảng cách giữa các ô nhập */
-}
+/* NHẬP HÀNG BOX - khung chứa các product-item */
 .nhap-hang-box {
-  background-color: #f2f2f2;  /* nền xám nhạt */
-  padding: 20px;              /* khoảng cách bên trong */
-  border-radius: 10px;        /* bo góc */
-  max-width: 650px;           /* giới hạn độ rộng */
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 100%;
   margin-top: 10px;
   margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
+/* mặc định bên trong: nếu chỉ 1 item, hiển thị lớn; nhưng product-item sẽ thay đổi */
 .nhap-hang-box select,
 .nhap-hang-box input {
-  display: block;
-  width: 100%;
   font-size: 18px;
-  margin-bottom: 15px;
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-.nhap-hang-box select {
-  margin-bottom: -10px; /* tăng khoảng cách riêng cho ô chọn sản phẩm */
-}
-.summary-box {
-  background-color: #f8f9fa;   /* nền xám nhạt */
-  border-radius: 10px;         /* bo góc */
-  padding: 20px 30px;
-  max-width: 600px;            /* chiều rộng tối đa */
-  margin-top: 20px;
-}
 
+/* SUMMARY BOX (giữ nguyên) */
+.summary-box {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px 30px;
+  max-width: 600px;
+  margin-top: 20px;
+  margin-left:150px;
+}
 .summary-row {
   display: flex;
-  justify-content: space-between; /* căn 2 đầu */
+  justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid #ddd;  /* dòng kẻ ngăn cách */
+  border-bottom: 1px solid #ddd;
   font-size: 18px;
   color: #22314e;
 }
 
+/* ======= STYLE CHO MỤC NHẬP SẢN PHẨM (thay đổi duy nhất) ======= */
+/* Product item: hiển thị hàng ngang, gap tốt, responsive */
+.product-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  flex-wrap: wrap; /* sẽ xuống dòng trên màn hình nhỏ */
+}
+
+/* Select sản phẩm: ngắn vừa phải, giữ placeholder đẹp */
+.product-item select.sanpham-select {
+  width: 320px;         /* bạn có thể điều chỉnh: 240-360px */
+  min-width: 180px;
+  max-width: 45%;
+  font-size: 16px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* Giá: ngắn lại */
+.product-item .gia {
+  width: 200px;         /* điều chỉnh nếu cần */
+  min-width: 120px;
+  font-size: 16px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Số lượng: nhỏ gọn, căn trái */
+.product-item .soluong {
+  width: 80px;
+  min-width: 60px;
+  text-align: left;
+  font-size: 16px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Nút xóa: cố định kích thước, luôn ở cuối hàng */
+.product-item .xoa {
+  background: #ff2b2b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-left: auto; /* đẩy về cuối hàng nếu còn chỗ */
+  flex-shrink: 0;
+}
+.product-item .xoa:hover { background: #cc2222; }
+
+/* Dòng chứa các ô cuối cùng (nếu bạn dùng .row-bottom) */
+.row-bottom {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/* Responsive nhỏ hơn */
+@media (max-width: 700px) {
+  .product-item {
+    gap: 12px;
+    padding: 10px;
+  }
+  .product-item select.sanpham-select { width: 100%; max-width: 100%; }
+  .product-item .gia { width: 48%; }
+  .product-item .soluong { width: 40%; }
+  .product-item .xoa { margin-left: 0; }
+}
 </style>
+
+
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <!--Navbar-->
@@ -408,21 +396,30 @@ textarea::placeholder {
   	<input style="color:gray;" type="text" id="fname" name="fname" placeholder="Mã" style="font-size:20px;">
   	<label style="font-size:25px;" for="fname">Danh sách sản phẩm nhập</label>
   	<button type="submit" class="bt-them" style="background:Green;color:white;margin-top:-10px;">Thêm sản phẩm</button>
-  	<div class="nhap-hang-box">
-	     <select id="chat" name="chat">
-      <option style="color:gray;" value="cl">Chọn sản phẩm</option>
+<div class="nhap-hang-box">
+  <div class="product-item">
+    <select name="sanpham" class="sanpham-select">
+      <option value="">Chọn sản phẩm</option>
       <option value="hg">HG GTO 1/144 Rx-78-02 Gundam</option>
       <option value="rg">HG GQ 1/144 RED GUNDAM</option>
       <option value="mg">HG GQ 1/144 Gundam GQuuuuuuX</option>
       <option value="pg">Banpresto - GUNDAM 45TH x HATSUNE MIKU - Zaku-Gurumi Hatsune Miku Ver</option>
       <option value="ag">Umamusume: Pretty Derby - Tamamo Crosstd</option>
-    </select><br>
-    
-  	<input id="price" name="price" type="text" placeholder="Nhập giá..." 
-style="color:black; font-size:20px; width:600px; height:30px; border:1px solid #aaa; border-radius:6px;">
-	<input type="number" id="profit" name="profit" min="0" max="100" value="1">
-  	
-  	<div class="summary-box" >
+    </select>
+
+    <input type="text" class="gia" placeholder="Nhập giá..." >
+    <input type="number" class="soluong" min="1" value="1">
+    <button type="button" class="xoa" >Xóa</button>
+  </div>
+</div>
+      </form>
+            
+  	</div>
+  </div>
+  
+  
+  
+    	<div class="summary-box" >
   <div class="summary-row">
     <span class="label">Tổng số sản phẩm:</span>
     <span class="value">1</span>
@@ -436,12 +433,9 @@ style="color:black; font-size:20px; width:600px; height:30px; border:1px solid #
     <span class="value highlight">0 VNĐ</span>
   </div>
 </div>
-  	
-  </div>
-      </form>
-            
-  	</div>
-  </div>
+  
+  
+  
   <div class="khung">
 
   	<form action="quanlynhaphang.html" method="get" class="themsp">
@@ -452,64 +446,128 @@ style="color:black; font-size:20px; width:600px; height:30px; border:1px solid #
 	</form>
 	</div>
 	</div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const priceInput = document.getElementById("price");
-      let timeout;
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const addBtn = document.querySelector(".bt-them[style*='background:Green']");
+  const boxContainer = document.querySelector(".nhap-hang-box");
+  
+  // Template ô nhập sản phẩm
+function createProductBox() {
+  const box = document.createElement("div");
+  box.className = "product-item";
+  box.innerHTML = `
+    <select name="sanpham" class="sanpham-select">
+      <option value="">Chọn sản phẩm</option>
+      <option value="hg">HG GTO 1/144 Rx-78-02 Gundam</option>
+      <option value="rg">HG GQ 1/144 RED GUNDAM</option>
+      <option value="mg">HG GQ 1/144 Gundam GQuuuuuuX</option>
+      <option value="pg">Banpresto - GUNDAM 45TH x HATSUNE MIKU - Zaku-Gurumi Hatsune Miku Ver</option>
+      <option value="ag">Umamusume: Pretty Derby - Tamamo Crosstd</option>
+    </select>
 
-      function formatCurrency(value) {
-        return new Intl.NumberFormat("vi-VN").format(Number(value));
-      }
+    <input type="text" class="gia" placeholder="Nhập giá..." />
+    <input type="number" class="soluong" min="1" value="1" />
+    <button type="button" class="xoa">Xóa</button>
+  `;
 
-      function stripVNĐ(str) {
-        return str.replace(/\s?VNĐ$/, "").trim();
-      }
-
-      priceInput.addEventListener("input", function (e) {
-        clearTimeout(timeout);
-        let raw = e.target.value.replace(/\D/g, "");
-        if (raw === "") {
-          e.target.value = "";
-          return;
-        }
-        e.target.value = formatCurrency(raw);
-
-        timeout = setTimeout(() => {
-          if (!e.target.value.endsWith("VNĐ")) {
-            e.target.value += " VNĐ";
-          }
-        }, 1000);
-      });
-
-      priceInput.addEventListener("focus", function (e) {
-        e.target.value = stripVNĐ(e.target.value).replace(/\D/g, "");
-      });
-
-      priceInput.addEventListener("blur", function (e) {
-        let raw = e.target.value.replace(/\D/g, "");
-        if (raw !== "") {
-          e.target.value = formatCurrency(raw) + " VNĐ";
-        }
-      });
-    }); /*Này là tự form số và thêm vnđ*/
-
-
-    document.addEventListener("DOMContentLoaded", function() {
-    const maPhieuInput = document.getElementById("fname");
-    maPhieuInput.addEventListener("input", function(e) {
-      let value = e.target.value;
-      if (value.startsWith("PN")) {
-        value = value.slice(2);
-      }
-      let numbersOnly = value.replace(/\D/g, '');
-      if (numbersOnly.length > 0) {
-        e.target.value = "PN" + numbersOnly;
-      } else {
-        e.target.value = "";
-      }
-    });/*Này tự thêm PN khi nhập số */
+  // Nút xoá
+  box.querySelector(".xoa").addEventListener("click", function() {
+    box.remove();
+    capNhatTong();
   });
-  </script>
+
+  // Khi thay đổi giá hoặc số lượng thì cập nhật tổng
+  box.querySelector(".gia").addEventListener("input", capNhatTong);
+  box.querySelector(".soluong").addEventListener("input", capNhatTong);
+
+  return box;
+}
+
+  // Hàm cập nhật tổng
+  function capNhatTong() {
+    const items = document.querySelectorAll(".product-item");
+    let tongSP = items.length;
+    let tongSL = 0;
+    let tongGia = 0;
+
+    items.forEach(item => {
+      const gia = parseFloat(item.querySelector(".gia").value.replace(/[^\d]/g, "")) || 0;
+      const sl = parseInt(item.querySelector(".soluong").value) || 0;
+      tongSL += sl;
+      tongGia += gia * sl;
+    });
+
+    document.querySelector(".summary-row:nth-child(1) .value").textContent = tongSP;
+    document.querySelector(".summary-row:nth-child(2) .value").textContent = tongSL;
+    document.querySelector(".summary-row:nth-child(3) .value").textContent = tongGia.toLocaleString("vi-VN") + " VNĐ";
+  }
+
+  // Sự kiện thêm sản phẩm
+  addBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    const newBox = createProductBox();
+    boxContainer.appendChild(newBox);
+    capNhatTong();
+  });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const container = document.querySelector(".nhap-hang-box");
+  const totalSanPham = document.querySelectorAll(".summary-row .value")[0];
+  const totalSoLuong = document.querySelectorAll(".summary-row .value")[1];
+  const totalGiaTri = document.querySelectorAll(".summary-row .value")[2];
+
+  // Hàm tính tổng
+  function tinhTong() {
+    const items = container.querySelectorAll(".product-item");
+    let tongSP = items.length;
+    let tongSL = 0;
+    let tongGia = 0;
+
+    items.forEach(item => {
+      const gia = parseFloat(item.querySelector(".gia").value) || 0;
+      const sl = parseInt(item.querySelector(".soluong").value) || 0;
+      tongSL += sl;
+      tongGia += gia * sl;
+    });
+
+    totalSanPham.textContent = tongSP;
+    totalSoLuong.textContent = tongSL;
+    totalGiaTri.textContent = tongGia.toLocaleString("vi-VN") + " VNĐ";
+  }
+
+  // Giới hạn chỉ nhập số vào ô giá
+  container.addEventListener("input", function (e) {
+    if (e.target.classList.contains("gia")) {
+      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // chỉ cho nhập số
+    }
+    tinhTong();
+  });
+
+  // Lắng nghe thay đổi số lượng
+  container.addEventListener("input", function (e) {
+    if (e.target.classList.contains("soluong")) {
+      tinhTong();
+    }
+  });
+
+  // Xóa sản phẩm
+  container.addEventListener("click", function (e) {
+    if (e.target.classList.contains("xoa")) {
+      e.target.closest(".product-item").remove();
+      tinhTong();
+    }
+  });
+
+  // Tính ban đầu
+  tinhTong();
+});
+</script>
+
+
+
 </body>
 
 

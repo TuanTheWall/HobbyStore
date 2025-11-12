@@ -293,34 +293,41 @@ text-decoration:none;
     <a href="adminlogin.html" class="logout-btn">Đăng xuất</a>
   </div>
 </nav>
-
-  <!-- ===== MENU QUẢN LÝ ===== -->
-  <section class="overview-menu">
+  <section class="overview-menu" aria-label="Menu quản lý">
     <h2>Mục quản lý</h2>
-    <div class="menu-grid">
-      <a href="customer.html">
-    <div class="menu-card" style="background: linear-gradient(to bottom,#19113b,blue);">
+    <div class="menu-grid" role="list">
+      <a href="customer.html" class="menu-card" role="listitem" style="background: linear-gradient(to bottom,#19113b,blue);"><h3>Quản lý khách hàng</h3></a>
+      <a href="shiping.html">
+    <div class="menu-card">
       <h3>Quản lý sản phẩm</h3>
     </div>
     </a>
-      <a href="shiping.html"><div class="menu-card"><h3>Quản lý đơn hàng</h3></div></a>
-      <a href="quanlysp.html"><div class="menu-card"><h3>Quản lý sản phẩm</h3></div></a>
-      <a href="lndm.html"><div class="menu-card"><h3>Quản lý giá bán</h3></div></a>
-      <a href="quanlydm.html"><div class="menu-card"><h3>Quản lý danh mục</h3></div></a>
-      <a href="tracuusoluong.html"><div class="menu-card"><h3>Quản lý tồn kho</h3></div></a>
-      <a href="quanlynhaphang.html"><div class="menu-card"><h3>Quản lý nhập hàng</h3></div></a>
+      <a href="quanlysp.html" class="menu-card" role="listitem"><h3>Quản lý sản phẩm</h3></a>
+      <a href="lndm.html" class="menu-card" role="listitem"><h3>Quản lý giá bán</h3></a>
+      <a href="quanlydm.html" class="menu-card" role="listitem"><h3>Quản lý danh mục</h3></a>
+      <a href="tracuusoluong.html" class="menu-card" role="listitem"><h3>Quản lý tồn kho</h3></a>
+      <a href="quanlynhaphang.html" class="menu-card" role="listitem"><h3>Quản lý nhập hàng</h3></a>
     </div>
   </section>
+<form action="shiping.html" class="search-advanced">
+    <label style="font-size:25px;" for="fname">Tìm theo họ tên</label><br>
+    <input style="color:gray;" type="text" id="fname" name="fname" placeholder="Name" style="font-size:20px; width:220px; height:38px;"><br>
 
-  <!-- ===== BẢNG KHÁCH HÀNG ===== -->
-   <form action="customer.html" class="search-advanced">
-    <label style="font-size:25px;" for="fname">Từ</label><br>
-    <input type="date">
-    <label style="font-size:25px;" for="fname">Đến</label><br>
-    <input type="date">
+    <label style="font-size:25px;" for="fname">Trạng thái</label><br>
+    <select name="sanpham" class="sanpham-select">
+      <option value="">Tất cả trạng thái</option>
+      <option value="hd">Hoạt động</option>
+      <option value="bk">Bị khóa</option>
+    </select>
+    
 <button type="submit" class="btn-tim" style="height:38px; margin-top:-4px;">Tìm</button>
 <button type="submit" class="btn-tim" style="height:38px; margin-top:-4px;background:gray;">Đặt lại</button>
+	
 </form>
+
+
+
+
   <div class="customer-table">
     <h2>Danh sách khách hàng</h2>
     <table>
