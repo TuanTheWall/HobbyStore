@@ -35,23 +35,102 @@
 }
 
 .navbar {
-      background-color: cyan;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
+  background-color: cyan;
+  height: 50px;
+  display: flex;
+  justify-content: space-between; /* chia trái - phải */
+  align-items: center;            /* căn giữa dọc */
+  padding: 0 40px;
+  border-bottom: 2px solid #00bcd4;
+}
+
+/* nhóm bên trái */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* khoảng cách giữa logo và chữ Trang chủ */
+}
+
+/* logo */
+.logo img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* nhóm bên phải */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* liên kết chung */
+.navbar a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  transition: color 0.2s;
+}
+
+.navbar a:hover {
+  color: red;
+}
+ .popup-content {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 450px;
+      animation: fadeIn 0.3s ease;
     }
+
+    .popup-content h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .popup-content label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .popup-content input,
+    .popup-content select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+      margin-top: 5px;
+    }
+    
+
 .navbar img {
   filter: none !important;
   mix-blend-mode: normal !important;
   background: none !important;
 }
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    
+    
 .btn-col{
 margin-top:auto;
 }
@@ -104,13 +183,12 @@ margin-top:auto;
     border-radius: 20px;
     padding-top: 40px;
     padding-left: 40px;
-
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: rgb(255, 255, 255);
-    margin:0cm 1cm;
+    width: 1000px;
+   margin: 50px auto;
+   margin-left:300px;
+   background-color: rgb(255, 255, 255);
+   margin-top:200px;
 }
 
 body{
@@ -168,14 +246,18 @@ body{
   flex: 1;         
 }
 .sidebar {
-    width: 170px;
-    height: 100vh;
-    background-color: #2c3e50;
-    color: white;
-    padding-top: 20px;
-    position: fixed;
-  }
-
+  width: 170px;
+  height: 100vh;              /* Chiều cao bằng phần nội dung */
+  background-color: #2c3e50;
+  color: white;
+  position: fixed;         /* Không cố định khi cuộn */
+  top: 151px;                 /* Căn theo phần navbar */
+  left: 0;
+  z-index: 10;
+  padding-top: 120px;
+  overflow-y: auto;           /* Cho phép cuộn riêng nếu sidebar dài */
+  margin-bottom:-100px;
+}
   .sidebar h2 {
     text-align: center;
     margin-bottom: 20px;
@@ -226,32 +308,84 @@ body{
     color: rgb(246, 246, 246);
     border-color: black;
   }
+body{
+    background-image:url(assets/img/loginbackground.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.tren{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+}
 </style>
-
-<nav class="navbar">
-    <div class="nav-links">
-      <ul>
-      <a href="indexlogin.html" class="rounded-pill">
-  <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
-        <li style="font-size:20px;padding-top:25px;"><a href="indexlogin.html" >Trang chủ</a></li>
-        <li style="font-size: large;border-style:solid;border-radius: 5px;padding:10px;text-align: center;margin:auto;background-color: rgb(225, 196, 99);"><a href="profile.html">Hồ sơ</a></li></ul>
-    </div>
-        <div class="search-bar">
-  <form action="ketqualogin.html" method="get" class="search-form">
-    <input type="text" placeholder="Search.." class="search-input">
-    <button type="submit" class="btn-tim">Tìm</button>
-  </form>
-
-  <form action="searchlogin.html" method="get">
-    <button type="submit" class="btn-advanced" style="height:45px;">Tìm kiếm nâng cao</button>
-  </form>
-</div>
-<div style="font-size:20px;padding-top:25px;">
-  <a href="cart.html" style="display:inline-block; margin-top:-100px; padding:10px 20px; background:green; color:white; border-radius:5px; text-decoration:none;"> Giỏ hàng </a>
-</div>
-  
-  </nav>
 </head>
+
+<nav class="tren">
+
+   <nav class="navbar">
+  <div class="nav-left">
+    <a href="index.html" class="logo">
+      <img src="assets/img/logo.png" alt="Logo">
+    </a>
+    <a href="indexlogin.html" class="nav-item">Trang chủ</a>
+  </div>
+
+  <ul class="nav-right">
+    <li><a href="profile.html">Hồ sơ</a></li>
+    <li><a href="cart.html">Giỏ hàng</a></li>
+  </ul>
+</nav>
+         <div class="timnangcao" style="background-color:white;padding-top:1px;padding-bottom:5px;">
+    <div class="search" style="margin-top:10px;">
+      <form action="ketqualogin.html" method="get">
+        <input type="text" placeholder="Search.." style="padding: 12px 20px; font-size: 15px; width: 400px; border:1px solid #ccc; border-radius:4px 0 0 4px;">
+        <button type="submit" class="btn-tim">Tìm</button>
+        <button type="button" class="btn-advanced" id="advancedSearchBtn">Tìm kiếm nâng cao</button>
+      </form>
+    </div>
+  </div>
+  <!-- POPUP -->
+  <div class="popup-overlay" id="advancedSearchPopup">
+    <div class="popup-content">
+      <h2>Tìm kiếm nâng cao</h2>
+      <form action="ketqualogin.html" method="get">
+        <label>Giá từ:</label>
+        <input type="number" name="price_min" placeholder="VD: 500000">
+
+        <label>Giá đến:</label>
+        <input type="number" name="price_max" placeholder="VD: 1000000">
+
+        <label>Chọn dòng:</label>
+        <select name="series">
+          <option value="">-- Chọn dòng --</option>
+          <option value="hg">High Grade</option>
+          <option value="rg">Real Grade</option>
+          <option value="mg">Master Grade</option>
+          <option value="pg">Perfect Grade</option>
+          <option value="anime">Anime Figure</option>
+        </select>
+
+        <label>Chọn hãng:</label>
+        <select name="brand">
+          <option value="">-- Chọn hãng --</option>
+          <option value="bandai">Bandai</option>
+          <option value="sega">Sega</option>
+        </select>
+
+        <div class="popup-buttons">
+          <button type="submit" class="search-btn">Tìm</button>
+          <button type="button" class="close-btn" id="closePopup">Đóng</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</nav>
+
+
 
     <body>
         <div class="border">
@@ -286,7 +420,7 @@ body{
                   <a href="profile.html" class="savebutton">💾 Lưu</a>
                 </div>
               </div>
-        <div class="sidebar" style="padding-top: 190px;">
+        <div class="sidebar">
             <a href="profile.html">Thông tin cá nhân</a>
             <a href="history.html">Lịch sử mua hàng</a>
             <a href="edit.html">Chỉnh sửa</a>
