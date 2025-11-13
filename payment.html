@@ -480,6 +480,29 @@ margin-top:auto;
 .thankyou-message a:hover {
   background: #0056cc;
 }
+.row-selects {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;          /* khoảng cách giữa 2 ô */
+  margin-top: 10px;
+}
+
+.select-box {
+  flex: 1;             /* chia đều chiều rộng */
+}
+
+.select-box label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.select-box select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+}
 
 
 </style>
@@ -522,22 +545,29 @@ margin-top:auto;
         <label>Giá đến:</label>
         <input type="number" name="price_max" placeholder="VD: 1000000">
 
-        <label>Chọn dòng:</label>
-        <select name="series">
-          <option value="">-- Chọn dòng --</option>
-          <option value="hg">High Grade</option>
-          <option value="rg">Real Grade</option>
-          <option value="mg">Master Grade</option>
-          <option value="pg">Perfect Grade</option>
-          <option value="anime">Anime Figure</option>
-        </select>
+      <div class="row-selects">
+  <div class="select-box">
+    <label>Chọn dòng:</label>
+    <select name="series">
+      <option value="">-- Chọn dòng --</option>
+      <option value="hg">High Grade</option>
+      <option value="rg">Real Grade</option>
+      <option value="mg">Master Grade</option>
+      <option value="pg">Perfect Grade</option>
+      <option value="anime">Anime Figure</option>
+    </select>
+  </div>
 
-        <label>Chọn hãng:</label>
-        <select name="brand">
-          <option value="">-- Chọn hãng --</option>
-          <option value="bandai">Bandai</option>
-          <option value="sega">Sega</option>
-        </select>
+  <div class="select-box">
+    <label>Chọn hãng:</label>
+    <select name="brand">
+      <option value="">-- Chọn hãng --</option>
+      <option value="bandai">Bandai</option>
+      <option value="sega">Sega</option>
+    </select>
+  </div>
+</div>
+
 
         <div class="popup-buttons">
           <button type="submit" class="search-btn">Tìm</button>
