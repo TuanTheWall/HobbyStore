@@ -81,7 +81,20 @@
 .navbar a:hover {
   color: red;
 }
- .popup-content {
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
       background-color: white;
       padding: 30px 40px;
       border-radius: 10px;
@@ -109,7 +122,31 @@
       border: 1px solid #aaa;
       margin-top: 5px;
     }
-    
+
+    .popup-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .popup-buttons button {
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .popup-buttons .search-btn {
+      background-color: blue;
+      color: white;
+    }
+
+    .popup-buttons .close-btn {
+      background-color: gray;
+      color: white;
+    }
 
 .navbar img {
   filter: none !important;
@@ -406,7 +443,7 @@ width:100%;
 
    <nav class="navbar">
   <div class="nav-left">
-    <a href="index.html" class="logo">
+    <a href="indexlogin.html" class="logo">
       <img src="assets/img/logo.png" alt="Logo">
     </a>
     <a href="indexlogin.html" class="nav-item">Trang chủ</a>
@@ -531,5 +568,61 @@ width:100%;
 
     <a href="history.html" class="back-btn">← Quay lại lịch sử mua hàng</a>
   </div>
+    <script>
+    (function(){
+      const toast = document.getElementById('toast');
+      const btn = document.getElementById('addCartBtn');
+
+      function show(text){
+        toast.textContent = text;
+        toast.classList.add('show');
+        clearTimeout(toast._h);
+        toast._h = setTimeout(()=> {
+          toast.classList.remove('show');
+        }, 1400);
+      }
+
+      if(btn){
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          btn.disabled = true;
+          btn.style.transform = 'translateY(1px)';
+          show('Đã thêm vô giỏ hàng');
+          setTimeout(()=>{ btn.disabled = false; btn.style.transform = ''; }, 700);
+        });
+      }
+
+      const basePrice = 560000;
+      const addon = document.getElementById('addon');
+      const totalPrice = document.getElementById('total-price');
+      // if(addon && totalPrice){                     //Thay đổi giá theo phụ kiện
+      //   addon.addEventListener('change', function(){
+      //     let add = 0;
+      //     if(this.value === 'decal') add = 20000;
+      //     else if(this.value === 'kim') add = 50000;
+      //     else if(this.value === 'combo') add = 65000;
+      //     const total = basePrice + add;
+      //     totalPrice.textContent = 'Tổng: ' + total.toLocaleString('vi-VN') + ' VNĐ';
+      //   });
+      // }
+    })();
+    const advancedBtn = document.getElementById('advancedSearchBtn');
+    const popup = document.getElementById('advancedSearchPopup');
+    const closePopup = document.getElementById('closePopup');
+
+    advancedBtn.addEventListener('click', () => {
+      popup.style.display = 'flex';
+    });
+
+    closePopup.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
+    // Đóng popup khi click ra ngoài
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) popup.style.display = 'none';
+    });
+  </script>
 </body>
+
 </html>

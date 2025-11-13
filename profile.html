@@ -81,7 +81,20 @@
 .navbar a:hover {
   color: red;
 }
- .popup-content {
+  .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
       background-color: white;
       padding: 30px 40px;
       border-radius: 10px;
@@ -109,7 +122,31 @@
       border: 1px solid #aaa;
       margin-top: 5px;
     }
-    
+
+    .popup-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .popup-buttons button {
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .popup-buttons .search-btn {
+      background-color: blue;
+      color: white;
+    }
+
+    .popup-buttons .close-btn {
+      background-color: gray;
+      color: white;
+    }
 
 .navbar img {
   filter: none !important;
@@ -254,7 +291,7 @@ body{
   top: 151px;                 /* Căn theo phần navbar */
   left: 0;
   z-index: 10;
-  padding-top: 120px;
+  padding-top: 160px;
   overflow-y: auto;           /* Cho phép cuộn riêng nếu sidebar dài */
   margin-bottom:-100px;
 }
@@ -327,7 +364,7 @@ width:100%;
 
    <nav class="navbar">
   <div class="nav-left">
-    <a href="index.html" class="logo">
+    <a href="indexlogin.html" class="logo">
       <img src="assets/img/logo.png" alt="Logo">
     </a>
     <a href="indexlogin.html" class="nav-item">Trang chủ</a>
@@ -390,8 +427,6 @@ width:100%;
     <body>
     
    
-    
-    
     
         <div class="border">
                 <div>

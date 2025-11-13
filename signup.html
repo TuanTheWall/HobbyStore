@@ -109,14 +109,59 @@
 .cch:hover{
 color:red;
 }
-.navbar{
-background-color:cyan;
-height:80px;
+.navbar {
+  background-color: cyan;
+  height: 50px;
+  display: flex;
+  justify-content: space-between; /* chia trái - phải */
+  align-items: center;            /* căn giữa dọc */
+  padding: 0 40px;
+  border-bottom: 2px solid #00bcd4;
 }
-.navbar img {
+
+/* nhóm bên trái */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* khoảng cách giữa logo và chữ Trang chủ */
+}
+
+/* logo */
+.logo img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
   filter: none !important;
-  mix-blend-mode: normal !important;
-  background: none !important;
+}
+
+/* nhóm bên phải */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* liên kết chung */
+.navbar a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  transition: color 0.2s;
+}
+
+.navbar a:hover {
+  color: red;
+}
+.tren{
+ position: relative;
+top:0;
+left:0;
+width:100%;
 }
 .btn-col{
 margin-top:auto;
@@ -128,18 +173,18 @@ margin-top:auto;
 
 </style>
 </head>
-<nav class="navbar">
-    <div class="nav-links">
-      <ul>
-      <a href="index.html" class="rounded-pill">
-  <img src="assets/img/edcccf43-c892-4b8e-83e3-46c9dee78692.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
-        <li style="font-size:20px;padding-top:25px;"><a href="index.html" >Trang chủ</a></li>
-        
-      </ul>
-    </div>
+<nav class="tren">
+
+   <nav class="navbar">
+  <div class="nav-left">
+    <a href="index.html" class="logo">
+      <img src="assets/img/logo.png" alt="Logo">
+    </a>
+    <a href="index.html" class="nav-item">Trang chủ</a>
+  </div>
+</nav>
        
-  
-  </nav>
+  </nav>  
     <body>
         <Style>
          body{
