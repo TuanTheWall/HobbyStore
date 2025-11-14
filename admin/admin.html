@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang chủ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/product-page.css">
+  <link rel="stylesheet" href="assets/css/view-cart.css">
+<style>
+
+.search{
+	text-align:center;
+	margin: 20px;
+}
+.search-advanced {
+  text-align: center; /* canh giữa nội dung bên trong form */
+  margin: 20px 0;     /* khoảng cách trên/dưới */
+}
+.search-advanced button {
+  background-color: blue;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cch{
+ color:black;
+}
+.cch:hover{
+color:red;
+}
+nav.navbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background-color: cyan !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+  gap: 12px;
+  z-index: 50;
+}
+
+/* LOGO: ép kích thước, loại mọi filter và giữ tỉ lệ */
+.navbar .navbar-logo {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: inline-block !important;
+
+  /* vô hiệu hóa mọi filter / blend mode từ file khác */
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+/* bố cục trái */
+.nav-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px;
+}
+
+/* chữ Trang chủ */
+.nav-left .nav-home {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* phải */
+.nav-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px;
+}
+
+/* "Xin chào" */
+.nav-right .hello {
+  font-weight: 600;
+  color: black;
+}
+
+/* Nút đăng xuất */
+.logout-btn {
+  background-color: rgb(221, 99, 225) !important;
+  border: 2px solid black !important;
+  border-radius: 5px !important;
+  padding: 8px 12px !important;
+  color: black !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
+
+/* hover */
+.nav-left a:hover, .nav-right a:hover, .nav-right .hello:hover {
+  color: red !important;
+}
+
+.btn-col{
+margin-top:auto;
+}
+.price {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.search-bar {
+  display: flex;
+  align-items: center;     /* căn giữa theo chiều dọc */
+  justify-content: center; /* căn giữa theo chiều ngang */
+  gap: 10px;               /* khoảng cách giữa các phần tử */
+  margin-top: -10px;
+}
+
+.search-input {
+  width: 400px;
+  height: 45px;            /* cùng chiều cao với nút */
+  padding: 0 15px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.btn-tim,
+.btn-advanced {
+  height: 45px;            /* đảm bảo chiều cao bằng input */
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-tim:hover,
+.btn-advanced:hover {
+  background-color: darkblue;
+}
+.overview-menu {
+  padding: 30px;
+  background-color: white;
+}
+
+.overview-menu h2 {
+  font-size: 22px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.menu-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* canh giữa toàn bộ các ô */
+  gap: 20px;
+}
+
+.menu-card {
+  background: linear-gradient(to bottom,cyan,blue);
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.menu-card i {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.menu-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.menu-card a{
+color:white;
+text-decoration:none;
+}
+
+.dashboard {
+  padding: 40px;
+  background-color: white;
+}
+
+.dashboard h2 {
+  font-size: 22px;
+  color: black;
+  margin-bottom: 25px;
+}
+
+/* Lưới chứa các ô */
+.stat-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+/* Ô thống kê */
+.stat-card {
+  background: linear-gradient(to bottom right, cyan, royalblue);
+  color: white;
+  border-radius: 18px;
+  width: 230px;
+  height: 150px;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Icon trong vòng tròn */
+.icon-circle {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px auto;
+  transition: all 0.3s ease;
+  background-image: url(assets/img/5e759ee9e50d4348a0a0ad907206f0f9_c2aa7bce7a164478be622bafcdac5f6b_grande.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.stat-card:hover .icon-circle {
+  background-color: rgba(255, 251, 0, 0.35);
+  transform: scale(1.1);
+}
+
+/* Icon */
+.icon-circle i {
+  font-size: 28px;
+  color: #fff;
+}
+
+/* Tiêu đề */
+.stat-card h3 {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin: 8px 0 5px 0;
+  opacity: 0.9;
+  font-family: sans-serif;
+}
+
+/* Số liệu */
+.stat-card p {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+  color: #f6ff00;
+}
+
+/* Đường gạch nhẹ */
+.stat-card::after {
+  content: "";
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 2px;
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stat-card {
+    width: 90%;
+}
+}
+</style>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<!--Navbar-->
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="admin.html" class="logo-link">
+      <img src="assets/img/logo.png" alt="Logo" class="navbar-logo">
+    </a>
+    <a href="admin.html" class="nav-home">Trang chủ</a>
+  </div>
+
+  <div class="nav-right">
+    <span class="hello">Xin chào, Admin</span>
+    <a href="adminlogin.html" class="logout-btn">Đăng xuất</a>
+  </div>
+</nav>
+
+<body>
+<section class="overview-menu">
+  <h2>Mục quản lý</h2>
+  <div class="menu-grid">
+  <a href="customer.html">
+    <div class="menu-card">
+      <h3>Quản lý khách hàng</h3>
+    </div>
+    </a>
+    <a href="shiping.html">
+    <div class="menu-card">
+      <h3>Quản lý đơn hàng</h3>
+    </div>
+    </a>
+    <a href="quanlysp.html">
+    <div class="menu-card" >
+      <h3>Quản lý sản phẩm</h3>
+    </div>
+    </a>
+    <a href="lndm.html">
+    <div class="menu-card" >
+      <h3>Quản lý giá bán</h3>
+    </div>
+    </a>
+    <a href="quanlydm.html">
+    <div class="menu-card" >
+      <h3>Quản lý danh mục</h3>
+    </div>
+    </a>
+    <a href="tracuusoluong.html">
+    <div class="menu-card">
+      <h3>Quản lý tồn kho</h3>
+    </div>
+    </a>
+    <a href="quanlynhaphang.html">
+    <div class="menu-card">
+      <h3>Quản lý nhập hàng</h3>
+    </div>
+    </a>
+  </div>
+</section>
+
+<section class="dashboard">
+  <h2>Tổng quan hệ thống</h2>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="icon-circle">
+        <i class="fas fa-users"></i>
+      </div>
+      <h3>Tổng khách hàng</h3>
+      <p>69</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="icon-circle">
+        <i class="fas fa-box-open"></i>
+      </div>
+      <h3>Tổng sản phẩm</h3>
+      <p>67</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="icon-circle">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <h3>Tổng doanh thu</h3>
+      <p>36,000,000đ</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="icon-circle">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <h3>Tổng đơn hàng</h3>
+      <p >911</p>
+    </div>
+  </div>
+</section>
+</body>
+
+</html>
+
+

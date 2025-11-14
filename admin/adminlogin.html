@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang chủ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.reflowhq.com/v2/toolkit.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/product-page.css">
+  <link rel="stylesheet" href="assets/css/view-cart.css">
+<style>
+.category-grid {
+  display: flex;
+  justify-content: center;  /* căn giữa ngang */
+  gap: 40px;                /* khoảng cách giữa ảnh */
+  flex-wrap: wrap;
+}
+.category-grid img {
+  width: 250px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.category-grid img:hover {
+  transform: scale(1.05);
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-items: center;
+  max-width: 1200px;   /* Giới hạn chiều rộng */
+  margin: 0 auto;      /* Căn giữa lưới */
+}
+.pagination{
+	text-align:center;
+}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+.pagination a.active{
+	background-color: green;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+	background-color: gray;
+	border-radius: 5px;
+}
+.card{
+   padding: 10px; 
+}
+.product-section{
+    display:flex;
+    justify-content: center; 
+	margin-top: -10px; 
+}
+.search{
+	text-align:center;
+	margin: 20px;
+}
+.search-advanced {
+  text-align: center; /* canh giữa nội dung bên trong form */
+  margin: 20px 0;     /* khoảng cách trên/dưới */
+}
+.search-advanced button {
+  background-color: blue;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.product-card {
+  height: 380px;
+  width: 220px;         /* chỉnh chiều rộng card */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  background: #DDDDDD;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;              /* ép ảnh cùng chiều cao */
+  object-fit: cover;          /* cắt ảnh cho vừa khung */
+  border-radius: 8px;
+}
+.product-name {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0;
+  min-height: 40px;             /* giữ chiều cao tên đều nhau */
+}
+.cch{
+ color:black;
+}
+.cch:hover{
+color:red;
+}
+.navbar{
+background-color:cyan;
+height:80px;
+}
+.navbar img {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  background: none !important;
+}
+.btn-col{
+margin-top:auto;
+}
+.price {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+</style>
+</head>
+<nav class="navbar">
+    <div class="nav-links">
+      <ul>
+      <a href="#" class="rounded-pill">
+  <img src="assets/img/logo.png" alt="Logo" style="width:70px; border-radius:50%;overflow: hidden;"></a>
+        <li style="font-size:20px;padding-top:25px;"><a href="#" >Trang chủ</a></li>
+        
+      </ul>
+    </div>
+  </nav>
+    <body>
+        <Style>
+        body{
+            background-image:url(assets/img/adminbackground.png);
+            background-size:cover;
+            background-repeat: no-repeat;
+        }
+    </Style>
+
+<div style="border: #ffffff;width:400px;height:300px;margin: auto;background-color: #d81159;margin-top: 4cm;border-radius: 20px;">
+<h2  style="color: rgb(255, 255, 255);text-align:center;font-family:Arial, Helvetica, sans-serif;font-size: 200%;"><br>ĐĂNG NHẬP QUẢN LÝ</h2>
+
+<form action="admin.html">
+    <div>
+
+        <div style="text-align:center; font-family: sans-serif;color:#ffffff;font-size:150%">
+  <label for="user" >TÊN QUẢN LÝ</label><br>
+            </div>
+        <div style="text-align: center;">
+  <input type="text" id="user" name="user" placeholder="Tài khoản quản lý/tên quản lý" style="margin: auto;width:300px;height:25px;background-color: #8e9096;font-family: Arial, Helvetica, sans-serif;font-size:large;color:#ffffff"><br><br>
+            </div>
+        
+        <div style="text-align:center; font-family: sans-serif;color:#ffffff;font-size:150%">
+    <label for="pass">MẬT KHẨU</label><br>
+            </div>
+        <div style="text-align: center;">
+    <input type="password" placeholder="Mã quản lý" style="margin: auto;width:300px;height:25px;background-color: #8e9096;font-family: Arial, Helvetica, sans-serif;font-size:large;color:#ffffff" id="pass" name="pass" ><br><br>
+            </div><br>
+    </div>
+        <div style="text-align: center;">
+  <input type="submit" style="width:310px;height:30px;font-family: Arial, Helvetica, sans-serif;font-size: larger;" value="Đăng nhập">
+        </div><br>
+</form> 
+
+    </div>
+</div>
+
+    </body>
+
+</body>
+</html>

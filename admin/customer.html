@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý khách hàng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/product-page.css">
+  <style>
+    body {
+      font-family: "Josefin Sans", sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ===== NAVBAR ===== */
+  nav.navbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background-color: cyan !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+  gap: 12px;
+  z-index: 50;
+}
+
+/* LOGO: ép kích thước, loại mọi filter và giữ tỉ lệ */
+.navbar .navbar-logo {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: inline-block !important;
+
+  /* vô hiệu hóa mọi filter / blend mode từ file khác */
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+/* bố cục trái */
+.nav-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px;
+}
+
+/* chữ Trang chủ */
+.nav-left .nav-home {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* phải */
+.nav-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px;
+}
+
+/* "Xin chào" */
+.nav-right .hello {
+  font-weight: 600;
+  color: black;
+}
+
+/* Nút đăng xuất */
+.logout-btn {
+  background-color: rgb(221, 99, 225) !important;
+  border: 2px solid black !important;
+  border-radius: 5px !important;
+  padding: 8px 12px !important;
+  color: black !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
+
+/* hover */
+.nav-left a:hover, .nav-right a:hover, .nav-right .hello:hover {
+  color: red !important;
+}
+
+
+    /* ===== MENU QUẢN LÝ ===== */
+   .overview-menu {
+  padding: 30px;
+  background-color: white;
+}
+
+.overview-menu h2 {
+  font-size: 22px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.menu-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* canh giữa toàn bộ các ô */
+  gap: 20px;
+}
+
+.menu-card {
+  background: linear-gradient(to bottom,cyan,blue);
+  color: #fff;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.menu-card i {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.menu-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.menu-card a{
+color:white;
+text-decoration:none;
+}
+/*table*/
+    .customer-table {
+      margin: 30px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #96dee0;
+      color: rgb(0, 0, 0);
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      font-size: 14px;
+    }
+
+    .btn-edit {
+      background-color: orange;
+    }
+
+    .btn-delete {
+      background-color: red;
+    }
+
+    .btn-lock {
+      background-color: rgb(43, 244, 255);
+    }
+
+    .btn-unlock {
+      background-color: green;
+    }
+
+    /* ===== PHÂN TRANG ===== */
+.pagination{
+	text-align:center;
+}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+.pagination a.active{
+	background-color: green;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+	background-color: gray;
+	border-radius: 5px;
+}
+    .search-advanced {
+  display: flex;
+  align-items: center;       /* căn giữa theo chiều dọc */
+  justify-content: center;   /* căn giữa theo chiều ngang */
+  gap: 20px;                 /* khoảng cách giữa các phần tử */
+  margin: 30px auto;
+  flex-wrap: wrap;           /* tự xuống dòng nếu màn hình nhỏ */
+}
+
+.search-advanced label {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.search-advanced input,
+.search-advanced select {
+  width: 220px;              /* đồng đều chiều rộng */
+  height: 38px;              /* đồng đều chiều cao */
+  padding: 6px 10px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+
+.search-advanced button {
+  background-color: blue;
+  color: white;
+  padding: 8px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  height: 40px;
+  transition: 0.25s;
+}
+
+.search-advanced button:hover {
+  background-color: darkblue;
+}
+
+.input-box input{
+  height:30px;
+  border-radius: 8px;
+  width:100px;
+  
+  
+}
+.underline-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: underline; /* gạch chân chữ */
+  text-underline-offset: 4px; /* khoảng cách giữa chữ và gạch */
+}
+  </style>
+</head>
+
+<body>
+  <!--Navbar-->
+ <nav class="navbar">
+  <div class="nav-left">
+    <a href="admin.html" class="logo-link">
+      <img src="assets/img/logo.png" alt="Logo" class="navbar-logo">
+    </a>
+    <a href="admin.html" class="nav-home">Trang chủ</a>
+  </div>
+
+  <div class="nav-right">
+    <span class="hello">Xin chào, Admin</span>
+    <a href="adminlogin.html" class="logout-btn">Đăng xuất</a>
+  </div>
+</nav>
+  <section class="overview-menu" aria-label="Menu quản lý">
+    <h2>Mục quản lý</h2>
+    <div class="menu-grid" role="list">
+      <a href="customer.html" class="menu-card" role="listitem" style="background: linear-gradient(to bottom,#19113b,blue);"><h3>Quản lý khách hàng</h3></a>
+      <a href="shiping.html">
+    <div class="menu-card">
+      <h3>Quản lý đơn hàng</h3>
+    </div>
+    </a>
+      <a href="quanlysp.html" class="menu-card" role="listitem"><h3>Quản lý sản phẩm</h3></a>
+      <a href="lndm.html" class="menu-card" role="listitem"><h3>Quản lý giá bán</h3></a>
+      <a href="quanlydm.html" class="menu-card" role="listitem"><h3>Quản lý danh mục</h3></a>
+      <a href="tracuusoluong.html" class="menu-card" role="listitem"><h3>Quản lý tồn kho</h3></a>
+      <a href="quanlynhaphang.html" class="menu-card" role="listitem"><h3>Quản lý nhập hàng</h3></a>
+    </div>
+  </section>
+  
+  
+<form action="customer.html" class="search-advanced">
+    <label style="font-size:25px;" for="fname">Tìm theo họ tên</label><br>
+    <input style="color:gray;" type="text" id="fname" name="fname" placeholder="Name" style="font-size:20px; width:220px; height:38px;"><br>
+
+    <label style="font-size:25px;" for="fname">Trạng thái</label><br>
+    <select name="sanpham" class="sanpham-select">
+      <option value="">Tất cả trạng thái</option>
+      <option value="hd">Hoạt động</option>
+      <option value="bk">Bị khóa</option>
+    </select>
+    
+<button type="submit" class="btn-tim" style="height:38px; margin-top:-4px;">Tìm</button>
+<button type="submit" class="btn-tim" style="height:38px; margin-top:-4px;background:gray;">Đặt lại</button>
+	
+</form>
+
+
+
+
+  <div class="customer-table">
+    <h2>Danh sách khách hàng</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Tên khách hàng</th>
+          <th>Số điện thoại</th>
+          <th>Email</th>
+          <th>Địa chỉ</th>
+          <th>Ngày đăng ký</th>
+          <th>Trạng thái</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody id="customerTable">
+        <tr>
+          <td>Nguyễn Văn A</td>
+          <td>0912345678</td>
+          <td>vana@example.com</td>
+          <td>Hà Nội</td>
+          <td>01/01/2024</td>
+          <td>Hoạt động</td>
+          <td>
+           <a href="edit.html"> <button class="btn btn-lock" onclick="toggleLock(this)">Sửa</button> </a>
+            <button class="btn btn-delete" onclick="confirmDelete(this)">Xóa</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Trần Thị B</td>
+          <td>0987654321</td>
+          <td>thib@example.com</td>
+          <td>TP. Hồ Chí Minh</td>
+          <td>05/02/2024</td>
+          <td>Bị khóa</td>
+          <td>
+            <a href="edit.html"> <button class="btn btn-lock" onclick="toggleLock(this)">Sửa</button> </a>
+            <button class="btn btn-delete" onclick="confirmDelete(this)">Xóa</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Lê Minh C</td>
+          <td>0978123456</td>
+          <td>minhc@example.com</td>
+          <td>Đà Nẵng</td>
+          <td>10/03/2024</td>
+          <td>Hoạt động</td>
+          <td>
+            <a href="edit.html"> <button class="btn btn-lock" onclick="toggleLock(this)">Sửa</button> </a>
+            <button class="btn btn-delete" onclick="confirmDelete(this)">Xóa</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Phạm Thị D</td>
+          <td>0965123789</td>
+          <td>thid@example.com</td>
+          <td>Cần Thơ</td>
+          <td>22/04/2024</td>
+          <td>Hoạt động</td>
+          <td>
+            <a href="edit.html"> <button class="btn btn-lock" onclick="toggleLock(this)">Sửa</button> </a>
+            <button class="btn btn-delete" onclick="confirmDelete(this)">Xóa</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Đỗ Văn E</td>
+          <td>0933456789</td>
+          <td>vane@example.com</td>
+          <td>Hải Phòng</td>
+          <td>02/05/2024</td>
+          <td>Bị khóa</td>
+          <td>
+            <a href="edit.html"> <button class="btn btn-lock" onclick="toggleLock(this)">Sửa</button> </a>
+            <button class="btn btn-delete" onclick="confirmDelete(this)">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <a href="customer.html">&laquo;</a>
+      <a href="customer.html" class="active">1</a>
+      <a href="customer.html">2</a>
+      <a href="customer.html">3</a>
+      <a href="customer.html">&raquo;</a>
+    </div>
+  </div>
+
+  <script>
+    // Xác nhận xóa
+    function confirmDelete(button) {
+      if (confirm("Bạn có chắc muốn xóa khách hàng này không?")) {
+        //button.closest("tr").remove();
+        alert("Khách hàng đã được xóa!");
+      }
+    }
+
+    // Khóa / Mở khóa khách hàng
+    // function toggleLock(button) {
+    //   const row = button.closest("tr");
+    //   const statusCell = row.cells[5];
+    //   if (statusCell.textContent === "Hoạt động") {
+    //     statusCell.textContent = "Bị khóa";
+    //     button.textContent = "Mở khóa";
+    //     button.classList.remove("btn-lock");
+    //     button.classList.add("btn-unlock");
+    //     alert("Khách hàng đã bị khóa!");
+    //   } else {
+    //     statusCell.textContent = "Hoạt động";
+    //     button.textContent = "Khóa";
+    //     button.classList.remove("btn-unlock");
+    //     button.classList.add("btn-lock");
+    //     alert("Khách hàng đã được mở khóa!");
+    //   }
+    // }               // Cái JS này hoạt động được nhưng ko thỏa yêu cầu
+  //   function confirmDelete(button) {
+  //   if (confirm("Bạn có chắc muốn xóa khách hàng này không?")) {
+  //     alert("Khách hàng đã được xóa!");
+  //   }
+  // }
+  // function toggleLock(button) {
+  //   const row = button.closest("tr");
+  //   const status = row.cells[5].textContent;
+
+  //   if (status === "Hoạt động") {
+  //     alert("Khách hàng đã bị khóa!");
+  //   } else if (status === "Bị khóa") {
+  //     alert("Khách hàng đã được mở khóa!");
+  //   }
+  // }            //// Đúng nhưng được thay bằng nút "Sửa"
+  </script>
+</body>
+
+</html>
