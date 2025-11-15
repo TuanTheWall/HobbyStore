@@ -565,6 +565,28 @@ document.addEventListener("DOMContentLoaded", function () {
   // Tính ban đầu
   tinhTong();
 });
+	document.addEventListener("input", function (e) {
+  if (e.target.classList.contains("gia")) {
+
+    // Lấy chỉ số (bỏ ký tự khác số)
+    let raw = e.target.value.replace(/[^\d]/g, "");
+
+    // Format số
+    let formatted = raw.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    // Hiển thị kèm đơn vị
+    if (formatted.length > 0) {
+      e.target.value = formatted + "VNĐ";
+    } else {
+      e.target.value = "";
+    }
+
+    // Gửi event để cập nhật tổng
+    const updateEvent = new Event("change");
+    e.target.dispatchEvent(updateEvent);
+  }
+});
+
 </script>
 
 
@@ -574,5 +596,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </html>
+
 
 
