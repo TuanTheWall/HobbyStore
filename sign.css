@@ -1,0 +1,265 @@
+.category-grid {
+  display: flex;
+  justify-content: center;  /* căn giữa ngang */
+  gap: 40px;                /* khoảng cách giữa ảnh */
+  flex-wrap: wrap;
+}
+.category-grid img {
+  width: 250px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.category-grid img:hover {
+  transform: scale(1.05);
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-items: center;
+  max-width: 1200px;   /* Giới hạn chiều rộng */
+  margin: 0 auto;      /* Căn giữa lưới */
+}
+.pagination{
+	text-align:center;
+}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+.pagination a.active{
+	background-color: green;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+	background-color: gray;
+	border-radius: 5px;
+}
+.card{
+   padding: 10px; 
+}
+.product-section{
+    display:flex;
+    justify-content: center; 
+	margin-top: -10px; 
+}
+.search{
+	text-align:center;
+	margin: 20px;
+}
+.search-advanced {
+  text-align: center; /* canh giữa nội dung bên trong form */
+  margin: 20px 0;     /* khoảng cách trên/dưới */
+}
+.search-advanced button {
+  background-color: blue;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.product-card {
+  height: 380px;
+  width: 220px;         /* chỉnh chiều rộng card */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  background: #DDDDDD;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;              /* ép ảnh cùng chiều cao */
+  object-fit: cover;          /* cắt ảnh cho vừa khung */
+  border-radius: 8px;
+}
+.product-name {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0;
+  min-height: 40px;             /* giữ chiều cao tên đều nhau */
+}
+.cch{
+ color:black;
+}
+.cch:hover{
+color:red;
+}
+.navbar {
+  background-color: cyan;
+  height: 50px;
+  display: flex;
+  justify-content: space-between; /* chia trái - phải */
+  align-items: center;            /* căn giữa dọc */
+  padding: 0 40px;
+  border-bottom: 2px solid #00bcd4;
+}
+
+/* nhóm bên trái */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* khoảng cách giữa logo và chữ Trang chủ */
+}
+
+/* logo */
+.logo img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: none !important;
+}
+
+/* nhóm bên phải */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* liên kết chung */
+.navbar a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  transition: color 0.2s;
+}
+
+.navbar a:hover {
+  color: red;
+}
+.tren{
+ position: relative;
+top:0;
+left:0;
+width:100%;
+}
+.btn-col{
+margin-top:auto;
+}
+.price {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+ body{
+            background-image:url(assets/img/loginbackground.png);
+            background-size:cover;
+            background-repeat: no-repeat;
+            background-color: #5f5956;
+            font-family: Arial, Helvetica, sans-serif;
+}
+
+/* The main login box */
+.login-box {
+    width: 400px;
+    height: 550px;
+    background-color: #1a72ec;
+    border-radius: 20px;
+    position: relative;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    margin: 2cm auto;
+}
+
+/* Gradient border effect */
+
+/* Title */
+h2 {
+    font-size: 1.8em;
+    margin-top: 30px;
+    color:white;
+}
+
+/* Input styles */
+input[type="text"],
+input[type="password"] {
+    width: 80%;
+    height: 35px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 8px;
+    background-color: #8e9096;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 1em;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+    color: #d9d9d9;
+}
+
+input:focus {
+    outline: none;
+    background-color: #9a9ca2;
+}
+
+/* Submit button */
+input[type="submit"] {
+    width: 85%;
+    height: 40px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #d4d4d4;
+    transform: scale(1.03);
+}
+
+/* Signup link */
+a {
+    color: #ffffff;
+    font-size: 1.1em;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #bfbfbf;
+    margin: 20px 0;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"] {
+    width: 80%;
+    height: 35px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 8px;
+    background-color: #8e9096;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 1em;
+}
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder {
+    color: #d9d9d9;
+}
