@@ -2,7 +2,8 @@
 --------------------------------------------------------------------------------------------------------------------------
 | 3122410076 | Nguyễn Hồ Vũ Ngọc Tuấn  |    Anh    |   8 |     Mô hình       |https://github.com/TuanTheWall/HobbyStore
 | 3124411229 | Trần Ngọc               |    Phong  |   8 |     Mô hình       |https://github.com/TuanTheWall/HobbyStore
-| 3124411328 | Phạm Quang              |    Trung  |   8 |     Mô hình     |https://github.com/TuanTheWall/HobbyStore 
+| 3124411328 | Phạm Quang              |    Trung  |   8 |     Mô hình       |https://github.com/TuanTheWall/HobbyStore 
+
 
 
 
