@@ -14,8 +14,8 @@ if(isset($_POST['user']) && isset($_POST['pass'])){
     $username = trim($_POST['user']);
     $password = trim($_POST['pass']);
 
-    $sql = "SELECT customer_id FROM customers 
-            WHERE (email=? OR phone=?) AND password=?";
+    $sql = "SELECT customer_id, status FROM customers 
+        WHERE (email=? OR phone=?) AND password=?";
 
     $stmt = $conn->prepare($sql);
 
@@ -30,16 +30,20 @@ if(isset($_POST['user']) && isset($_POST['pass'])){
 
     if($result->num_rows == 1){
 
-        $row = $result->fetch_assoc();
+    $row = $result->fetch_assoc();
 
+    if($row['status'] == "Bị khóa"){
+        $error = "Tài khoản của bạn đã bị khóa";
+    }
+    else{
         $_SESSION['user_id'] = $row['customer_id'];
-
         header("Location: index.php");
         exit();
     }
-    else{
-        $error = "Sai tài khoản hoặc mật khẩu";
-    }
+}
+else{
+    $error = "Sai tài khoản hoặc mật khẩu";
+}
 }
 ?>
 <!DOCTYPE html>
