@@ -73,11 +73,6 @@ mysqli_query($conn,$sql_item);
 
 /* ===== TRỪ KHO ===== */
 
-mysqli_query($conn,"
-UPDATE product_list
-SET Quantity = Quantity - $quantity
-WHERE ProductID = '$product_id'
-");
 
 }
 
