@@ -3,6 +3,19 @@
 $conn = new mysqli("localhost","root","","hobbystore");
 $conn->set_charset("utf8");
 
+/* lấy toàn bộ sản phẩm từ DB cho dropdown */
+$products_result = $conn->query("SELECT ProductID, ProductName FROM product_list ORDER BY Grade, ProductName");
+$products = [];
+while($p = $products_result->fetch_assoc()){
+    $products[] = $p;
+}
+
+/* tạo option HTML để dùng trong PHP và JS */
+$options_html = '<option value="">Chọn sản phẩm</option>';
+foreach($products as $p){
+    $options_html .= '<option value="' . htmlspecialchars($p['ProductID']) . '">' . htmlspecialchars($p['ProductID'] . ' - ' . $p['ProductName']) . '</option>';
+}
+
 if(isset($_POST['receipt_code'])){
 
   $receipt_code = $conn->real_escape_string($_POST['receipt_code']);
@@ -451,12 +464,7 @@ nav.navbar {
         <div class="nhap-hang-box">
           <div class="product-item">
             <select name="product_id[]" class="sanpham-select">
-              <option value="">Chọn sản phẩm</option>
-              <option value="HG-001">HG GTO 1/144 Rx-78-02 Gundam</option>
-              <option value="HG-007">HG GQ 1/144 RED GUNDAM</option>
-              <option value="MG-001">HG GQ 1/144 Gundam GQuuuuuuX</option>
-              <option value="PG-001">Banpresto - GUNDAM 45TH x HATSUNE MIKU - Zaku-Gurumi Hatsune Miku Ver</option>
-              <option value="AG-001">Umamusume: Pretty Derby - Tamamo Crosstd</option>
+              <?php echo $options_html; ?>
             </select>
             <input type="text" name="price[]" class="gia" placeholder="Nhập giá...">
             <input type="number" name="quantity[]" class="soluong" min="1" value="1">
@@ -495,19 +503,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const addBtn        = document.getElementById("addProductBtn");
   const boxContainer  = document.querySelector(".nhap-hang-box");
 
-  // FIX #2: corrected class name typo "sanpham"-select -> "sanpham-select"
+  const optionsHtml = <?php echo json_encode($options_html); ?>;
+
   function createProductBox() {
     const box = document.createElement("div");
     box.className = "product-item";
     box.innerHTML = `
-      <select name="product_id[]" class="sanpham-select">
-        <option value="">Chọn sản phẩm</option>
-        <option value="HG001">HG GTO 1/144 Rx-78-02 Gundam</option>
-        <option value="HG007">HG GQ 1/144 RED GUNDAM</option>
-        <option value="MG001">HG GQ 1/144 Gundam GQuuuuuuX</option>
-        <option value="PG001">Banpresto - GUNDAM 45TH x HATSUNE MIKU - Zaku-Gurumi Hatsune Miku Ver</option>
-        <option value="AG001">Umamusume: Pretty Derby - Tamamo Crosstd</option>
-      </select>
+      <select name="product_id[]" class="sanpham-select">${optionsHtml}</select>
       <input type="text" name="price[]" class="gia" placeholder="Nhập giá..." />
       <input type="number" name="quantity[]" class="soluong" min="1" value="1" />
       <button type="button" class="xoa">Xóa</button>

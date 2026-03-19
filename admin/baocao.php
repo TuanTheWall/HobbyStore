@@ -61,6 +61,10 @@ $result = mysqli_query($conn,$sql);
 <meta charset="UTF-8">
 <title>Báo cáo nhập-xuất-tồn</title>
 <link rel="stylesheet" href="assets/css/storagestyle.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Josefin Sans", sans-serif; }
+  body { background-color: #f5f5f5; }
+</style>
 </head>
 
 <body>

@@ -1,6 +1,16 @@
 <?php
+session_start();
 $conn = new mysqli("localhost","root","","hobbystore");
 $conn->set_charset("utf8");
+
+/* xóa phiếu nhập */
+if(isset($_GET['xoa'])){
+    $code = $conn->real_escape_string($_GET['xoa']);
+    $conn->query("DELETE FROM purchase_receipt_items WHERE receipt_code='$code'");
+    $conn->query("DELETE FROM purchase_receipts WHERE receipt_code='$code'");
+    header("Location: quanlynhaphang.php");
+    exit;
+}
 
 $from = isset($_GET['from']) ? $_GET['from'] : "";
 $to = isset($_GET['to']) ? $_GET['to'] : "";
@@ -32,6 +42,11 @@ $result = $conn->query($sql);
   <link rel="stylesheet" href="assets/css/view-cart.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Josefin Sans",sans-serif; }
+body { background-color:#f5f5f5; }
+.bt-them { background:#04a4b3; color:white; font-size:15px; padding:6px 14px; border:none; border-radius:8px; cursor:pointer; transition:0.3s; }
+.bt-them:hover { opacity:0.85; }
+.themsp { margin:20px 0 0 5%; display:inline-block; }
 .pagination{
 	text-align:center;
 }
@@ -379,17 +394,25 @@ background:#96dee0;
         <th>Ngày nhập</th>
         <th>Số lượng</th>
         <th>Tổng tiền</th>
-        <th>Trạng thái</th>
+        <th>Thao tác</th>
     </tr>
     <?php
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
+            $code = htmlspecialchars($row["receipt_code"]);
             echo "<tr>";
-            echo "<td>" . $row["receipt_code"] . "</td>";
+            echo "<td>" . $code . "</td>";
             echo "<td>" . $row["import_date"] . "</td>";
             echo "<td>" . $row["total_quantity"] . "</td>";
             echo "<td>" . number_format($row["total_value"], 0, ',', '.') . " VND</td>";
-            
+            echo "<td>
+                <a href='xempn.php?code=" . urlencode($row["receipt_code"]) . "'>
+                    <button class='bt-them' style='background:#04a4b3;'>Xem</button>
+                </a>
+                <a href='quanlynhaphang.php?xoa=" . urlencode($row["receipt_code"]) . "' onclick=\"return confirm('Bạn có chắc muốn xóa phiếu nhập này?')\">
+                    <button class='bt-them' style='background:red;'>Xóa</button>
+                </a>
+            </td>";
             echo "</tr>";
         }
     } else {
