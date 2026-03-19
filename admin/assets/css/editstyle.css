@@ -1,0 +1,565 @@
+body {
+      font-family: "Josefin Sans", sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ===== NAVBAR ===== */
+  nav.navbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background-color: cyan !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+  gap: 12px;
+  z-index: 50;
+}
+
+/* LOGO: ép kích thước, loại mọi filter và giữ tỉ lệ */
+.navbar .navbar-logo {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: inline-block !important;
+
+  /* vô hiệu hóa mọi filter / blend mode từ file khác */
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+/* bố cục trái */
+.nav-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px;
+}
+
+/* chữ Trang chủ */
+.nav-left .nav-home {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* phải */
+.nav-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px;
+}
+
+/* "Xin chào" */
+.nav-right .hello {
+  font-weight: 600;
+  color: black;
+}
+
+/* Nút đăng xuất */
+.logout-btn {
+  background-color: rgb(221, 99, 225) !important;
+  border: 2px solid black !important;
+  border-radius: 5px !important;
+  padding: 8px 12px !important;
+  color: black !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
+
+/* hover */
+.nav-left a:hover, .nav-right a:hover, .nav-right .hello:hover {
+  color: red !important;
+}
+
+
+    /* ===== MENU QUẢN LÝ ===== */
+   .overview-menu {
+  padding: 30px;
+  background-color: white;
+}
+
+.overview-menu h2 {
+  font-size: 22px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.menu-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* canh giữa toàn bộ các ô */
+  gap: 20px;
+}
+
+.menu-card {
+  background: linear-gradient(to bottom,cyan,blue);
+  color: #fff;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.menu-card i {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.menu-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.menu-card a{
+color:white;
+text-decoration:none;
+}
+/*table*/
+    .customer-table {
+      margin: 30px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #96dee0;
+      color: rgb(0, 0, 0);
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      font-size: 14px;
+    }
+
+    .btn-edit {
+      background-color: orange;
+    }
+
+    .btn-delete {
+      background-color: red;
+    }
+
+    .btn-lock {
+      background-color: rgb(43, 244, 255);
+    }
+
+    .btn-unlock {
+      background-color: green;
+    }
+
+    /* ===== PHÂN TRANG ===== */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 10px;
+    }
+
+    .pagination a {
+      padding: 8px 12px;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .pagination a:hover {
+      background: darkblue;
+    }
+  body {
+    font-family: "Josefin Sans", sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+  }
+
+  main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+  margin-left: 0;
+}
+
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    color: #333;
+  }
+
+.form-control,
+textarea,
+select {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+
+  .input-with-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .input-with-icon input {
+    width: 100%;
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+  }
+
+  .btn {
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+
+  .btn-gradient {
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    color: white;
+    text-align: center;
+  }
+
+  .btn-gradient:hover {
+    opacity: 0.9;
+  }
+
+  .material-icons {
+    vertical-align: middle;
+  }
+
+ body {
+    font-family: "Josefin Sans", sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    color: #333;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+
+  .input-with-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .input-with-icon input {
+    width: 100%;
+  }
+
+.input-with-icon input {
+  width: 100% !important;
+}
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+  }
+
+  .btn {
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+
+  .btn-gradient {
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    color: white;
+  }
+
+  .btn-gradient:hover {
+    opacity: 0.9;
+  }
+
+  .material-icons {
+    vertical-align: middle;
+  }
+  /* ===== FORM CẬP NHẬT KHÁCH HÀNG ===== */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+  margin-left: 250px;
+  min-height: 100vh;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 650px;
+  max-width: 90%;
+  margin: auto;
+}
+
+.card-header h4 {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #222;
+  margin-bottom: 0.3rem;
+}
+
+.card-header p {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+  border-color: #00b4ff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 180, 255, 0.2);
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  font-size: 22px;
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-size: 24px;
+  vertical-align: middle;
+  color: #555;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: white;
+  font-weight: 600;
+}
+
+.btn-gradient:hover {
+  opacity: 0.9;
+}
+
+/* Căn nút dưới form */
+.form-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid #dee2e6;
+}
+.card-body form {
+  width: 100%;
+}
+
+.card-body .form-group {
+  width: 100%;
+}
+
+.card-body .form-control,
+.card-body textarea,
+.card-body select {
+  width: 100%;
+  box-sizing: border-box;
+}
+.card {
+  padding: 2rem; /* có thể giảm hoặc tăng để vừa mắt */
+}
+
+.card-body {
+  padding: 0;
+}
+
+.card-body form {
+  width: 100%;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-control,
+textarea,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+}
+
+.form-group{
+  margin-bottom:16px;
+}
+
+.form-label{
+  font-weight:600;
+  margin-bottom:6px;
+  display:block;
+}
+
+.card-body {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+.form-container{
+    max-width: 600px;
+    margin: auto;
+}
+
+input, textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.form-actions{
+  text-align:center;
+  margin-top:20px;
+}

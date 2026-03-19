@@ -1,0 +1,260 @@
+.pagination{
+	text-align:center;
+}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	padding: 8px 15px;
+	display: inline-block;
+}
+.pagination a.active{
+	background-color: green;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+	background-color: gray;
+	border-radius: 5px;
+}
+.search{
+	text-align:center;
+	margin: 20px;
+}
+.search-advanced {
+  text-align: center; /* canh giữa nội dung bên trong form */
+  margin: 20px 0;     /* khoảng cách trên/dưới */
+}
+.search-advanced button {
+  background-color: blue;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cch{
+ color:black;
+}
+.cch:hover{
+color:red;
+}
+nav.navbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background-color: cyan !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+  gap: 12px;
+  z-index: 50;
+}
+
+/* LOGO: ép kích thước, loại mọi filter và giữ tỉ lệ */
+.navbar .navbar-logo {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: inline-block !important;
+
+  /* vô hiệu hóa mọi filter / blend mode từ file khác */
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+/* bố cục trái */
+.nav-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px;
+}
+
+/* chữ Trang chủ */
+.nav-left .nav-home {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* phải */
+.nav-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px;
+}
+
+/* "Xin chào" */
+.nav-right .hello {
+  font-weight: 600;
+  color: black;
+}
+
+/* Nút đăng xuất */
+.logout-btn {
+  background-color: rgb(221, 99, 225) !important;
+  border: 2px solid black !important;
+  border-radius: 5px !important;
+  padding: 8px 12px !important;
+  color: black !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
+
+/* hover */
+.nav-left a:hover, .nav-right a:hover, .nav-right .hello:hover {
+  color: red !important;
+}
+
+.btn-col{
+margin-top:auto;
+}
+.price {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+
+.overview-menu {
+  padding: 30px;
+  background-color: white;
+}
+
+.overview-menu h2 {
+  font-size: 22px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.menu-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* canh giữa toàn bộ các ô */
+  gap: 20px;
+}
+
+.menu-card {
+  background: linear-gradient(to bottom,cyan,blue);
+  color: #fff;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.menu-card i {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.menu-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.menu-card a{
+color:white;
+text-decoration:none;
+}
+  .wrap{
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.95);
+    padding: 28px;
+    border-radius: 12px;
+    max-width: 1100px;
+    margin: 36px auto;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+    backdrop-filter: blur(4px);
+  }
+  .add-img{
+padding-bottom:50px;
+}
+.left-po{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+.add-info{
+margin-top:50px;
+font-size:25px;
+padding-bottom:10px;
+width:90%;
+}
+
+.add-info input,
+.add-info select {
+  display: block;
+  margin-bottom: 1px;
+  font-size: 20px;
+  width:600px !important;
+  height: 40px;
+    border: 1px solid #aaa;
+  border-radius: 6px;
+}
+textarea::placeholder {
+  color: gray;
+  font-style: italic;
+}
+.add-info select,
+.add-info textarea {
+  width: 600px;
+  font-size: 20px;
+    border: 1px solid #aaa;
+  border-radius: 6px;
+}
+.bt-them {
+  background: #04a4b3;
+  color: white;
+  font-size: 18px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.bt-them i {
+  margin-right: 8px;
+  font-size: 20px;
+  background: white;
+  color: black;
+  border-radius: 4px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+}
+.themsp {
+  display: inline-block;
+  margin-right: 100px;
+}
+.bt-them.gray {
+  background: gray;
+}
+
+.bt-them.gray:hover {
+  background: #5a5a5a;
+}
+.khung {
+  display: flex;
+  justify-content: center; /* căn giữa hai nút */
+  gap: 20px; /* khoảng cách giữa hai nút */
+  margin-top: 50px;
+}

@@ -1,0 +1,25 @@
+.pagination{
+text-align:center;
+margin-top:25px;
+}
+
+.pagination a{
+display:inline-block;
+padding:8px 14px;
+margin:4px;
+background:white;
+color:black;
+text-decoration:none;
+border-radius:6px;
+font-weight:500;
+}
+
+.pagination a:hover{
+background:#ddd;
+}
+
+.pagination a.active{
+background:green;
+color:white;
+font-weight:bold;
+}
