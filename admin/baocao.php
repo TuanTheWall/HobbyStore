@@ -43,10 +43,6 @@ $result = mysqli_query($conn,$sql);
 <meta charset="UTF-8">
 <title>Báo cáo nhập-xuất-tồn</title>
 <link rel="stylesheet" href="assets/css/storagestyle.css">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Josefin Sans", sans-serif; }
-  body { background-color: #f5f5f5; }
-</style>
 </head>
 
 <body>
@@ -136,35 +132,53 @@ style="font-size:20px;width:220px;height:38px;"
 
 <?php
 
-$stt = $start+1;
+$stt = $start + 1;
 
-while($row = mysqli_fetch_assoc($result)){
+while ($row = mysqli_fetch_assoc($result)) {
 
-$product_id = $row['ProductID'];
+    $product_id = $row['ProductID'];
 
-$import = 0;
-$export = 0;
+    // 🔥 Lấy history mới nhất
+    $q = mysqli_query($conn, "
+        SELECT import_num, export_num, quantity
+        FROM history
+        WHERE ProductID = '$product_id'
+        ORDER BY update_date DESC
+        LIMIT 1
+    ");
 
-$q1 = mysqli_query($conn,"
-SELECT import_num 
-FROM history 
-WHERE ProductID='$product_id'
+    $data = mysqli_fetch_assoc($q);
 
-");
+    // 🔥 Lấy quantity từ product_list
+    $q_product = mysqli_query($conn, "
+        SELECT Quantity 
+        FROM product_list
+        WHERE ProductID = '$product_id'
+    ");
 
-$q2 = mysqli_query($conn,"
-SELECT export_num 
-FROM history 
-WHERE ProductID='$product_id'
+    $product = mysqli_fetch_assoc($q_product);
+    $product_quantity = $product ? $product['Quantity'] : 0;
 
-");
-$import = mysqli_fetch_row($q1)[0] ?? 0;
-$export = mysqli_fetch_row($q2)[0] ?? 0;
+    // 🔥 Logic tồn đầu
+    if ($data) {
+        $tondau = $data['quantity'];
+        $import = $data['import_num'];
+        $export = $data['export_num'];
 
+        // ✅ Nếu history = 0 nhưng product_list có hàng
+        if ($tondau == 0 && $product_quantity != 0) {
+            $tondau = $product_quantity;
+        }
 
-$toncuoi = $row['Quantity'];
+    } else {
+        // ✅ Không có history → lấy từ product_list
+        $tondau = $product_quantity;
+        $import = 0;
+        $export = 0;
+    }
 
-$tondau = $toncuoi - $import + $export;
+    // 🔥 Tính tồn cuối
+    $toncuoi = $tondau + $import - $export;
 
 ?>
 
