@@ -181,30 +181,73 @@ th{ border:3px solid #dddddd; text-align: center; padding: 8px; background:#96de
 </style>
 <script>
 window.addEventListener('DOMContentLoaded', function(){
+
+    function formatVND(num){
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
+    }
+    function parseRaw(str){
+        return parseFloat(str.replace(/[^\d]/g, '')) || 0;
+    }
+
     document.querySelectorAll('tr.data-row').forEach(function(row){
-        const inpPrice  = row.querySelector('.inp-price');
-        const inpProfit = row.querySelector('.inp-profit');
-        const inpGiaBan = row.querySelector('.inp-giaban');
+        const inpPrice    = row.querySelector('.inp-price');
+        const inpPriceRaw = row.querySelector('.inp-price-raw');
+        const inpProfit   = row.querySelector('.inp-profit');
+        const inpGiaBan   = row.querySelector('.inp-giaban');
+        const inpGiaBanRaw= row.querySelector('.inp-giaban-raw');
+
+        // Format khi gõ giá vốn
+        inpPrice.addEventListener('input', function(){
+            let raw = this.value.replace(/[^\d]/g, '');
+            inpPriceRaw.value = raw;
+            this.setAttribute('data-raw', raw);
+            if(raw) this.value = formatVND(raw);
+            updateGiaBan();
+        });
+        inpPrice.addEventListener('focus', function(){
+            this.value = this.getAttribute('data-raw') || '';
+        });
+        inpPrice.addEventListener('blur', function(){
+            let raw = this.getAttribute('data-raw') || inpPriceRaw.value;
+            if(raw) this.value = formatVND(raw);
+        });
+
+        // Format khi gõ giá bán
+        inpGiaBan.addEventListener('input', function(){
+            let raw = this.value.replace(/[^\d]/g, '');
+            inpGiaBanRaw.value = raw;
+            this.setAttribute('data-raw', raw);
+            if(raw) this.value = formatVND(raw);
+            updateProfit();
+        });
+        inpGiaBan.addEventListener('focus', function(){
+            this.value = this.getAttribute('data-raw') || '';
+        });
+        inpGiaBan.addEventListener('blur', function(){
+            let raw = this.getAttribute('data-raw') || inpGiaBanRaw.value;
+            if(raw) this.value = formatVND(raw);
+        });
 
         // Giá vốn hoặc Tỷ lệ thay đổi → cập nhật Giá bán
         function updateGiaBan() {
-            const price  = parseFloat(inpPrice.value)  || 0;
-            const profit = parseFloat(inpProfit.value) || 0;
-            inpGiaBan.value = Math.round(price * (1 + profit / 100));
+            const price  = parseFloat(inpPriceRaw.value) || 0;
+            const profit = parseFloat(inpProfit.value)   || 0;
+            const gb     = Math.round(price * (1 + profit / 100));
+            inpGiaBanRaw.value = gb;
+            inpGiaBan.setAttribute('data-raw', gb);
+            inpGiaBan.value = formatVND(gb);
         }
 
-        // Giá bán thay đổi → cập nhật Tỷ lệ lợi nhuận (giá vốn giữ nguyên)
+        // Giá bán thay đổi → cập nhật Tỷ lệ lợi nhuận
         function updateProfit() {
-            const price  = parseFloat(inpPrice.value)  || 0;
-            const giaban = parseFloat(inpGiaBan.value) || 0;
+            const price  = parseFloat(inpPriceRaw.value)  || 0;
+            const giaban = parseFloat(inpGiaBanRaw.value) || 0;
             if(price > 0){
                 inpProfit.value = (((giaban / price) - 1) * 100).toFixed(2);
             }
         }
 
-        inpPrice.addEventListener('input',  updateGiaBan);
         inpProfit.addEventListener('input', updateGiaBan);
-        inpGiaBan.addEventListener('input', updateProfit);
     });
 });
 </script>
@@ -294,7 +337,10 @@ window.addEventListener('DOMContentLoaded', function(){
         <td><?php echo htmlspecialchars($row['Grade']); ?></td>
         <td>
           <div class="input-price">
-            <input class="inp-price" type="number" name="price" min="0" value="<?php echo $cost; ?>">
+            <input class="inp-price" type="text" placeholder="Nhập giá..."
+              value="<?php echo number_format($cost, 0, ',', '.'); ?> VNĐ"
+              data-raw="<?php echo $cost; ?>">
+            <input type="hidden" name="price" class="inp-price-raw" value="<?php echo $cost; ?>">
           </div>
         </td>
         <td>
@@ -305,7 +351,10 @@ window.addEventListener('DOMContentLoaded', function(){
         </td>
         <td>
           <div class="input-price">
-            <input class="inp-giaban" type="number" name="giaban" min="0" value="<?php echo $giaban; ?>">
+            <input class="inp-giaban" type="text" placeholder="Nhập giá..."
+              value="<?php echo number_format($giaban, 0, ',', '.'); ?> VNĐ"
+              data-raw="<?php echo $giaban; ?>">
+            <input type="hidden" name="giaban" class="inp-giaban-raw" value="<?php echo $giaban; ?>">
           </div>
         </td>
         <td class="thaotac">

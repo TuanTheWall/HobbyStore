@@ -162,7 +162,10 @@ if(!$row){ header("Location: quanlysp.php"); exit; }
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Giá bán (VNĐ) <span style="color:#dc3545;">*</span></label>
-              <input type="number" class="form-control" name="Price" value="<?php echo $row['Price']; ?>" min="0" required>
+              <input type="text" class="form-control" id="priceDisplay" 
+                placeholder="Nhập giá..."
+                value="<?php echo number_format($row['Price'], 0, ',', '.'); ?> VNĐ">
+              <input type="hidden" name="Price" id="priceRaw" value="<?php echo $row['Price']; ?>">
             </div>
             <div class="form-group">
               <label class="form-label">Số lượng <span style="color:#dc3545;">*</span></label>
@@ -211,6 +214,31 @@ function previewImg(input){
     reader.readAsDataURL(input.files[0]);
   }
 }
+
+const priceDisplay = document.getElementById('priceDisplay');
+const priceRaw     = document.getElementById('priceRaw');
+
+priceDisplay.addEventListener('input', function(){
+  let raw = this.value.replace(/[^\d]/g, '');
+  priceRaw.value = raw;
+  if(raw.length > 0){
+    this.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
+  } else {
+    this.value = '';
+  }
+});
+
+priceDisplay.addEventListener('focus', function(){
+  let raw = priceRaw.value;
+  this.value = raw ? raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
+});
+
+priceDisplay.addEventListener('blur', function(){
+  let raw = priceRaw.value;
+  if(raw){
+    this.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
+  }
+});
 </script>
 </body>
 </html>
