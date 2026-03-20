@@ -100,10 +100,10 @@ $result->data_seek(0);
       <h2>Tìm kiếm nâng cao</h2>
       <form action="index.php" method="get">
         <label>Giá từ:</label>
-        <input type="number" name="price_min" placeholder="VD: 500000">
+        <input type="text" name="price_min" class="price-input" placeholder="VD: 500.000">
 
         <label>Giá đến:</label>
-        <input type="number" name="price_max" placeholder="VD: 1000000">
+        <input type="text" name="price_max" class="price-input" placeholder="VD: 1000000">
 
         <label>Chọn dòng:</label>
         <select name="grade">
@@ -269,6 +269,29 @@ while($row = $result->fetch_assoc()){
     popup.addEventListener('click', (e) => {
       if (e.target === popup) popup.style.display = 'none';
     });
+    function formatNumber(value) {
+  return value.replace(/\D/g, "") // chỉ giữ số
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+function unformatNumber(value) {
+  return value.replace(/\./g, "");
+}
+
+document.querySelectorAll('.price-input').forEach(input => {
+
+  // Khi nhập
+  input.addEventListener('input', (e) => {
+    let raw = unformatNumber(e.target.value);
+    e.target.value = formatNumber(raw);
+  });
+
+  // Khi submit form → bỏ dấu chấm để gửi đúng số
+  input.form.addEventListener('submit', () => {
+    input.value = unformatNumber(input.value);
+  });
+
+});
   </script>
 </body>
 
