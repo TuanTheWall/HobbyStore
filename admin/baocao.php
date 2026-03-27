@@ -220,6 +220,21 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     $toncuoi = $tondau + $import - $export;
     $pid_safe = htmlspecialchars($product_id);
+
+    // Tính xuất trong kỳ trực tiếp từ order_item (có lọc ngày nếu có)
+    $where_xuat = "oi.ProductID = '$product_id' AND o.status = 'Đã giao'";
+    if ($from != "") $where_xuat .= " AND o.order_date >= '$from'";
+    if ($to   != "") $where_xuat .= " AND o.order_date <= '$to'";
+
+    $q_xuat = mysqli_query($conn, "
+        SELECT COUNT(*) as cnt, COALESCE(SUM(oi.quantity), 0) as tong_xuat
+        FROM order_item oi
+        JOIN orders o ON oi.id_order = o.id_order
+        WHERE $where_xuat
+    ");
+    $xuat_data = mysqli_fetch_assoc($q_xuat);
+    $has_xuat  = $xuat_data['cnt'] > 0;
+    $export    = (int)$xuat_data['tong_xuat']; // ghi đè export từ history
 ?>
 <tr>
   <td><?php echo $stt++ ?></td>
@@ -234,7 +249,7 @@ while ($row = mysqli_fetch_assoc($result)) {
   </td>
   <td>
     <?php echo $export ?>
-    <?php if($export > 0): ?>
+    <?php if($has_xuat): ?>
       <br><button class="btn-detail xuat" onclick="xemChiTiet('xuat','<?php echo $pid_safe ?>','<?php echo htmlspecialchars($row['ProductName']) ?>')">Xem đơn hàng</button>
     <?php endif; ?>
   </td>
