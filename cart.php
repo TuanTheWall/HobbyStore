@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once "config.php";
@@ -16,9 +15,14 @@ $sql = "SELECT
         product_list.ProductID,
         product_list.ProductName,
         product_list.Product_image,
-        product_list.Price,
         product_list.Profit,
-        product_list.Quantity AS stock
+        product_list.Quantity AS stock,
+        (SELECT pri.price 
+         FROM purchase_receipt_items pri
+         JOIN purchase_receipts pr ON pri.receipt_code = pr.receipt_code
+         WHERE pri.product_id = product_list.ProductID
+         ORDER BY pr.import_date DESC
+         LIMIT 1) AS cost_price
         FROM cart
         JOIN cart_item ON cart.cart_id = cart_item.cart_id
         JOIN product_list ON cart_item.product_id = product_list.ProductID
@@ -81,9 +85,9 @@ $cart_items[] = $row;
       <h2>Tìm kiếm nâng cao</h2>
       <form action="index.php" method="get">
         <label>Giá từ:</label>
-        <input type="text" name="price_min" class="price-input" placeholder="VD: 500.000">
+        <input type="number" name="price_min" placeholder="VD: 500000">
         <label>Giá đến:</label>
-        <input type="text" name="price_max" class="price-input" placeholder="VD: 1.000.000">
+        <input type="number" name="price_max" placeholder="VD: 1000000">
         <label>Chọn dòng:</label>
         <select name="grade">
             <option value="">-- Chọn dòng --</option>
@@ -116,11 +120,10 @@ $cart_items[] = $row;
       <div class="item-info">
       <p class="item-title"><?= $item['ProductName'] ?></p>
       <?php 
-$price  = (float)$item['Price'];
-$profit = (float)$item['Profit'];
-$sell_price = $price * (1 + $profit);
+$cost_price = (float)($item['cost_price'] ?? 0);
+$profit     = (float)$item['Profit'];
+$sell_price = $cost_price * (1 + $profit);
 ?>
-
 <p class="price"><?= number_format($sell_price) ?> VNĐ</p>
     </div>
     <div class="controls">
@@ -266,29 +269,7 @@ e.preventDefault();
 
 });
 });
-function formatNumber(value) {
-  return value.replace(/\D/g, "") // chỉ giữ số
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
 
-function unformatNumber(value) {
-  return value.replace(/\./g, "");
-}
-
-document.querySelectorAll('.price-input').forEach(input => {
-
-  // Khi nhập
-  input.addEventListener('input', (e) => {
-    let raw = unformatNumber(e.target.value);
-    e.target.value = formatNumber(raw);
-  });
-
-  // Khi submit form → bỏ dấu chấm để gửi đúng số
-  input.form.addEventListener('submit', () => {
-    input.value = unformatNumber(input.value);
-  });
-
-});
 </script>
 
 
