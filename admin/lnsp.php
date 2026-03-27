@@ -32,6 +32,10 @@ $grade_map = [
 if($grade !== 'cl' && isset($grade_map[$grade])){
     $grade_val = $grade_map[$grade];
     $where .= " AND Grade='$grade_val'";
+} elseif($grade !== 'cl'){
+    // Nếu không tìm thấy trong map, dùng trực tiếp (cho danh mục mới)
+    $grade_val = $conn->real_escape_string($grade);
+    $where .= " AND Grade='$grade_val'";
 }
 
 /* phân trang */
@@ -52,6 +56,13 @@ $query_params = [];
 if(!empty($fname)) $query_params[] = "fname=" . urlencode($fname);
 if($grade !== 'cl') $query_params[] = "chat=" . urlencode($grade);
 $query_string = count($query_params) ? '&' . implode('&', $query_params) : '';
+
+/* lấy danh sách danh mục từ database */
+$grades_result = $conn->query("SELECT DISTINCT Grade FROM product_list ORDER BY Grade");
+$all_grades = [];
+while($g = $grades_result->fetch_assoc()){
+    $all_grades[] = $g['Grade'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -381,11 +392,17 @@ background:#96dee0;
     <label style="font-size:25px;">Danh mục:</label>
     <select id="chat" name="chat">
       <option value="cl" <?php echo $grade=='cl'?'selected':''; ?>>Tất cả</option>
-      <option value="hg" <?php echo $grade=='hg'?'selected':''; ?>>High Grade</option>
-      <option value="rg" <?php echo $grade=='rg'?'selected':''; ?>>Real Grade</option>
-      <option value="mg" <?php echo $grade=='mg'?'selected':''; ?>>Master Grade</option>
-      <option value="pg" <?php echo $grade=='pg'?'selected':''; ?>>Perfect Grade</option>
-      <option value="ag" <?php echo $grade=='ag'?'selected':''; ?>>Anime Figure</option>
+      <?php 
+      foreach($all_grades as $g):
+          $grade_key = strtolower($g);
+          if($g === 'Figure') $grade_key = 'ag';
+          elseif($g === 'HG') $grade_key = 'hg';
+          elseif($g === 'RG') $grade_key = 'rg';
+          elseif($g === 'MG') $grade_key = 'mg';
+          elseif($g === 'PG') $grade_key = 'pg';
+      ?>
+      <option value="<?php echo $grade_key; ?>" <?php echo $grade==$grade_key?'selected':''; ?>><?php echo htmlspecialchars($g); ?></option>
+      <?php endforeach; ?>
     </select>
     <button type="submit" class="btn-tim" style="height:38px; margin-top:-4px;">Tìm</button>
     <a href="lnsp.php"><button type="button" style="height:38px; margin-top:-4px; background:gray; color:white; border:none; border-radius:6px; padding:8px 20px; font-size:16px; cursor:pointer;">Đặt lại</button></a>
