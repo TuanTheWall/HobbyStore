@@ -13,8 +13,45 @@ if(isset($_POST['grade'])){
     $conn->query($sql_update);
 }
 
-/* lấy danh mục */
-$sql = "SELECT Grade, Profit FROM product_list GROUP BY Grade";
+/* lấy giá trị tìm kiếm */
+$fname = isset($_GET['fname']) ? $_GET['fname'] : '';
+$chat = isset($_GET['chat']) ? $_GET['chat'] : '';
+
+/* Pagination */
+$limit = 5;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if($page < 1) $page = 1;
+$start = ($page - 1) * $limit;
+
+/* lấy danh mục với filter */
+$sql = "SELECT Grade, Profit FROM product_list WHERE 1";
+
+if($fname != ""){
+    $sql .= " AND Grade LIKE '%$fname%'";
+}
+
+if($chat != "" && $chat != "cl"){
+    // Tìm kiếm theo khoảng tỷ lệ
+    if($chat == "hg"){
+        $sql .= " AND Profit >= 0 AND Profit < 0.1";
+    } elseif($chat == "rg"){
+        $sql .= " AND Profit >= 0.1 AND Profit < 0.3";
+    } elseif($chat == "mg"){
+        $sql .= " AND Profit >= 0.3 AND Profit < 0.5";
+    } elseif($chat == "pg"){
+        $sql .= " AND Profit >= 0.5";
+    }
+}
+
+$sql .= " GROUP BY Grade";
+
+// Đếm tổng record
+$total_result = $conn->query($sql);
+$total_rows = $total_result->num_rows;
+$total_page = ceil($total_rows / $limit);
+
+// Lấy dữ liệu theo trang
+$sql .= " LIMIT $start, $limit";
 $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
@@ -374,19 +411,19 @@ background:#96dee0;
 	
 </div>
 	<div class="search-box">
-  <form action="lndm.php" class="search-advanced">
+  <form action="lndm.php" method="GET" class="search-advanced">
   <label style="font-size:25px;" for="fname">Tìm theo tên:</label><br>
-  	<input style="color:gray;" type="text" id="fname" name="fname" placeholder="Name" style="font-size:20px; width:220px; height:38px;"><br>
-  	<label style="font-size:25px;" for="fname">Khoảng tỷ lệ:</label><br>
+  	<input style="color:gray;" type="text" id="fname" name="fname" placeholder="Name" value="<?php echo htmlspecialchars($fname); ?>" style="font-size:20px; width:220px; height:38px;"><br>
+  	<label style="font-size:25px;" for="chat">Khoảng tỷ lệ:</label><br>
   	  <select id="chat" name="chat">
-      <option style="color:gray;" value="cl">Tất cả</option>
-      <option value="hg">0-10%</option>
-      <option value="rg">10%-30%</option>
-      <option value="mg">30%-50%</option>
-      <option value="pg">trên 50%</option>
+      <option value="cl" <?php if($chat=="cl" || $chat=="") echo "selected"; ?>>Tất cả</option>
+      <option value="hg" <?php if($chat=="hg") echo "selected"; ?>>0-10%</option>
+      <option value="rg" <?php if($chat=="rg") echo "selected"; ?>>10%-30%</option>
+      <option value="mg" <?php if($chat=="mg") echo "selected"; ?>>30%-50%</option>
+      <option value="pg" <?php if($chat=="pg") echo "selected"; ?>>trên 50%</option>
     </select>
 <button type="submit" class="btn-tim" style="height:38px; margin-top:-4px;">Tìm</button>
-<button type="submit" class="btn-tim" style="height:38px; margin-top:-4px;background:gray;">Đặt lại</button>
+<a href="lndm.php"><button type="button" class="btn-tim" style="height:38px; margin-top:-4px;background:gray;">Đặt lại</button></a>
 </form>
 	<table>
 		<tr>
@@ -395,7 +432,11 @@ background:#96dee0;
 			<th>Tỷ lệ lợi nhuận</th>
 			<th>Thao tác</th>
 		</tr>
-		<?php $i = 1; while($row = $result->fetch_assoc()): ?>
+		<?php 
+		if($result->num_rows > 0){
+			$i = $start + 1; 
+			while($row = $result->fetch_assoc()): 
+		?>
 		<tr>
 			<form method="post" action="lndm.php">
 			<td><?php echo $i++; ?></td>
@@ -414,17 +455,25 @@ background:#96dee0;
 			</td>
 			</form>
 		</tr>
-		<?php endwhile; ?>
+		<?php 
+			endwhile; 
+		} else {
+			echo "<tr><td colspan='4' style='text-align:center; padding: 20px;'>Không tìm thấy dữ liệu</td></tr>";
+		}
+		?>
 	</table>
 <div class="pagination" style="margin-top:100px;margin-bottom:50px;">
-  <a href="lndm.php">&laquo;</a>
-  <a href="lndm.php" class="active">1</a>
-  <a href="lndm.php">2</a>
-  <a href="lndm.php">3</a>
-  <a href="lndm.php">4</a>
-  <a href="lndm.php">5</a>
-  <a href="lndm.php">6</a>
-  <a href="lndm.php">&raquo;</a>
+  <?php if($page > 1){ ?>
+  <a href="lndm.php?page=1&fname=<?php echo urlencode($fname); ?>&chat=<?php echo urlencode($chat); ?>">&laquo;</a>
+  <?php } ?>
+  
+  <?php for($i = 1; $i <= $total_page; $i++){ ?>
+  <a href="lndm.php?page=<?php echo $i; ?>&fname=<?php echo urlencode($fname); ?>&chat=<?php echo urlencode($chat); ?>" class="<?php if($i == $page) echo 'active'; ?>"><?php echo $i; ?></a>
+  <?php } ?>
+  
+  <?php if($page < $total_page){ ?>
+  <a href="lndm.php?page=<?php echo $total_page; ?>&fname=<?php echo urlencode($fname); ?>&chat=<?php echo urlencode($chat); ?>">&raquo;</a>
+  <?php } ?>
 </div>
 </body>
 </html>
