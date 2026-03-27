@@ -222,6 +222,7 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
             '<?php echo htmlspecialchars($row['id_order']); ?>',
             '<?php echo htmlspecialchars($row['receiver_name'] ?? $row['username']); ?>',
             '<?php echo htmlspecialchars($row['email']); ?>',
+            '<?php echo htmlspecialchars($row['receiver_phone'] ?? ''); ?>',   
             '<?php echo htmlspecialchars($row['receiver_address'] ?? ''); ?>',
             '<?php echo htmlspecialchars($row['order_date']); ?>',
             '<?php echo htmlspecialchars($row['status']); ?>',
@@ -257,7 +258,7 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
 </div>
 
 <script>
-function openModal(id, name, email, address, date, status, total, payment, note, items) {
+function openModal(id, name, email, phone, address, date, status, total, payment, note, items)  {
   let productsHtml = '<table><thead><tr><th>Sản phẩm</th><th>Số lượng</th><th>Đơn giá</th></tr></thead><tbody>';
   items.forEach(p => {
     const price = p.Price ? Number(p.Price).toLocaleString('vi-VN') + 'đ' : '—';
@@ -268,6 +269,7 @@ function openModal(id, name, email, address, date, status, total, payment, note,
   document.getElementById('modalBody').innerHTML = `
     <div style="margin-bottom:8px"><strong>Mã đơn:</strong> ${id}</div>
     <div style="margin-bottom:8px"><strong>Khách hàng:</strong> ${name} <span class="muted">${email}</span></div>
+    <div style="margin-bottom:8px"><strong>Số điện thoại:</strong> ${phone || '—'}</div>
     <div style="margin-bottom:8px"><strong>Địa chỉ:</strong> ${address || '—'}</div>
     <div style="margin-bottom:8px"><strong>Ngày đặt:</strong> ${date}</div>
     <div style="margin-bottom:8px"><strong>Trạng thái:</strong> ${status}</div>
