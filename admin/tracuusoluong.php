@@ -10,6 +10,8 @@ $conn = mysqli_connect("localhost","root","","hobbystore");
 
 $fname = "";
 $category = "";
+$from = "";
+$to = "";
 
 if(isset($_GET['fname'])){
     $fname = $_GET['fname'];
@@ -17,6 +19,14 @@ if(isset($_GET['fname'])){
 
 if(isset($_GET['chat'])){
     $category = $_GET['chat'];
+}
+
+if(isset($_GET['from'])){
+    $from = $_GET['from'];
+}
+
+if(isset($_GET['to'])){
+    $to = $_GET['to'];
 }
 
 # Pagination
@@ -30,14 +40,22 @@ if(isset($_GET['page'])){
 
 $start = ($page - 1) * $limit;
 
-$sql = "SELECT * FROM product_list WHERE 1";
+$sql = "SELECT DISTINCT p.* FROM product_list p LEFT JOIN history h ON p.ProductID = h.ProductID WHERE 1";
 
 if($fname != ""){
-    $sql .= " AND ProductName LIKE '%$fname%'";
+    $sql .= " AND p.ProductName LIKE '%$fname%'";
 }
 
 if($category != "" && $category != "cl"){
-    $sql .= " AND Grade='$category'";
+    $sql .= " AND p.Grade='$category'";
+}
+
+if($from != ""){
+    $sql .= " AND h.update_date >= '$from'";
+}
+
+if($to != ""){
+    $sql .= " AND h.update_date <= '$to'";
 }
 
 # Đếm tổng sản phẩm
@@ -113,9 +131,13 @@ style="font-size:20px; width:220px; height:38px;"
 <option value="pg" <?php if($category=="pg") echo "selected"; ?>>Perfect Grade</option>
 <option value="ag" <?php if($category=="ag") echo "selected"; ?>>Anime Figure</option>
 
-</select>
+</select><br>
 
-<br><br>
+<label style="font-size:25px;">Từ</label><br>
+<input type="date" name="from" value="<?php echo $from ?>" style="font-size:20px;width:220px;height:38px;"><br>
+
+<label style="font-size:25px;">Đến</label><br>
+<input type="date" name="to" value="<?php echo $to ?>" style="font-size:20px;width:220px;height:38px;"><br><br>
 
 <button type="submit" class="btn-tim" style="height:38px;">Tìm</button>
 
@@ -188,7 +210,7 @@ $color = "#36f77a";
 
 <?php if($page > 1){ ?>
 
-<a href="?page=<?php echo $page-1 ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>">&laquo;</a>
+<a href="?page=<?php echo $page-1 ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>&from=<?php echo $from ?>&to=<?php echo $to ?>">&laquo;</a>
 
 <?php } ?>
 
@@ -197,7 +219,7 @@ for($i=1; $i <= $total_page; $i++){
 ?>
 
 <a
-href="?page=<?php echo $i ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>"
+href="?page=<?php echo $i ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>&from=<?php echo $from ?>&to=<?php echo $to ?>"
 class="<?php if($i == $page) echo 'active'; ?>"
 >
 <?php echo $i ?>
@@ -207,7 +229,7 @@ class="<?php if($i == $page) echo 'active'; ?>"
 
 <?php if($page < $total_page){ ?>
 
-<a href="?page=<?php echo $page+1 ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>">&raquo;</a>
+<a href="?page=<?php echo $page+1 ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>&from=<?php echo $from ?>&to=<?php echo $to ?>">&raquo;</a>
 
 <?php } ?>
 
