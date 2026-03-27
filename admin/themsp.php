@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $grade       = isset($grade_map[$_POST['chat']]) ? $grade_map[$_POST['chat']] : '';
     $hang_map    = ['bandai'=>'Bandai','sega'=>'SEGA','banpresto'=>'Banpresto'];
     $producer    = isset($hang_map[$_POST['hang']]) ? $hang_map[$_POST['hang']] : '';
-    $price       = (int)preg_replace('/\D/','',$_POST['price']);
+    $price       = 0;
     $origin      = trim($_POST['origin']);
     $description = trim($_POST['description']);
     $info        = trim($_POST['info']);
@@ -229,9 +229,6 @@ textarea::placeholder { color:gray; font-style:italic; }
           <option value="banpresto">Banpresto</option>
         </select><br>
 
-        <label for="price">Giá sản phẩm</label>
-        <input id="price" name="price" type="text" placeholder="Nhập giá..."
-          style="color:black;font-size:20px;width:600px;height:30px;border:1px solid #aaa;border-radius:6px;"><br>
 
         <h2 style="font-size:20px;color:#333;">Giới thiệu mô hình</h2>
 
@@ -273,36 +270,6 @@ function previewImage(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    const priceInput = document.getElementById("price");
-    let timeout;
-
-    function formatCurrency(value) {
-        return new Intl.NumberFormat("vi-VN").format(Number(value));
-    }
-
-    priceInput.addEventListener("input", function (e) {
-        clearTimeout(timeout);
-        let raw = e.target.value.replace(/\D/g, "");
-        if(raw === ""){ e.target.value = ""; return; }
-        e.target.value = formatCurrency(raw);
-        timeout = setTimeout(() => {
-            if(!e.target.value.endsWith("VNĐ")){
-                e.target.value += " VNĐ";
-            }
-        }, 1000);
-    });
-
-    priceInput.addEventListener("focus", function (e) {
-        e.target.value = e.target.value.replace(/\s?VNĐ$/, "").replace(/\D/g, "");
-    });
-
-    priceInput.addEventListener("blur", function (e) {
-        let raw = e.target.value.replace(/\D/g, "");
-        if(raw !== ""){ e.target.value = formatCurrency(raw) + " VNĐ"; }
-    });
-});
 </script>
 </body>
 </html>
