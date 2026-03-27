@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 20, 2026 lúc 08:08 AM
+-- Thời gian đã tạo: Th3 27, 2026 lúc 12:59 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -82,7 +82,8 @@ CREATE TABLE `cart_item` (
 
 INSERT INTO `cart_item` (`cart_item_id`, `cart_id`, `product_id`, `quantity`) VALUES
 (1, 'CART_69abe5cf21d96', 'RG-003', 5),
-(2, 'CART_69abe5cf21d96', 'HG-004', 1);
+(2, 'CART_69abe5cf21d96', 'HG-004', 1),
+(19, 'CART_69abf8dce4bcd', 'zzz', 1);
 
 -- --------------------------------------------------------
 
@@ -114,6 +115,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`name`, `ID`, `description`) VALUES
+('qqq', 0, 'qqq'),
 ('HG', 1, 'Mô hình có chi tiết bề mặt thấp dễ lắp có kích thước dao động từ 12cm-15cm'),
 ('RG', 2, 'Mô hình có chi tiết thấp cao khó lắp có kích thước dao động từ 12cm-15cm'),
 ('MG', 3, 'Mô hình có chi tiết thấp cao khó lắp có kích thước dao động từ 18cm-21cm'),
@@ -178,7 +180,25 @@ INSERT INTO `history` (`ProductID`, `export_num`, `import_num`, `quantity`, `upd
 ('HG-004', 0, 5, 5, '2026-03-19'),
 ('HG-002', 0, 5, 5, '2026-03-19'),
 ('HG-002', 0, 5, 5, '2026-03-19'),
-('FG-005', 1, 0, -1, '2026-03-19');
+('FG-005', 1, 0, -1, '2026-03-19'),
+('FG-002', NULL, 5, 5, '2026-03-20'),
+('FG-002', 0, 5, 5, '2026-03-20'),
+('FG-002', NULL, 1, 1, '2026-03-20'),
+('FG-002', 1, 0, -1, '2026-03-20'),
+('FG-005', NULL, 10, 10, '0000-00-00'),
+('FG-005', 0, 10, 10, '2026-03-27'),
+('RG-003', NULL, 1, 1, '2026-03-27'),
+('FG-005', NULL, 1, 1, '2026-03-27'),
+('RG-003', 1, 0, -1, '2026-03-27'),
+('FG-005', 1, 0, -1, '2026-03-27'),
+('zzz', NULL, 10, 10, '2026-03-01'),
+('zzz', 0, 10, 10, '2026-03-27'),
+('zzz', NULL, 3, 3, '2026-03-27'),
+('zzz', 3, 0, -3, '2026-03-27'),
+('vvvv', NULL, 10, 10, '2026-03-27'),
+('vvvv', 0, 10, 10, '2026-03-27'),
+('rrrrr', NULL, 10, 10, '2026-03-27'),
+('rrrrr', 0, 10, 10, '2026-03-27');
 
 --
 -- Bẫy `history`
@@ -245,7 +265,10 @@ INSERT INTO `orders` (`id_order`, `customer_id`, `order_date`, `status`, `create
 ('DH003', 'CM05', '2026-03-08', 'Đang giao', '2026-03-07 18:34:26', 2600000, 'CM001_Legend', '0933456789', 'Hải Phòng', 'COD', NULL),
 ('DH004', 'CM03', '2026-03-19', 'Đang giao', '2026-03-19 13:07:45', 4160000, 'CM001.Alpha', '0978123456', 'Đà Nẵng', 'COD', NULL),
 ('DH005', 'CM03', '2026-03-19', 'Chờ xử lý', '2026-03-19 13:08:56', 1430000, 'CM001.Alpha', '0978123456', 'Đà Nẵng', 'COD', NULL),
-('DH006', 'CM03', '2026-03-19', 'Đã giao', '2026-03-19 14:16:07', 520000, 'CM001.Alpha', '0978123456', 'Đà Nẵng', 'COD', NULL);
+('DH006', 'CM03', '2026-03-19', 'Đã giao', '2026-03-19 14:16:07', 520000, 'CM001.Alpha', '0978123456', 'Đà Nẵng', 'COD', NULL),
+('DH007', 'CM03', '2026-03-20', 'Đã giao', '2026-03-20 07:17:48', 939250, 'CM001.Alpha', '0978123456', 'Đà Nẵng', 'BANK', NULL),
+('DH008', 'CM03', '2026-03-27', 'Đã giao', '2026-03-27 07:58:59', 1425667, 'CM001.Alpha', '0978123456', 'Đà Nẵng', 'COD', NULL),
+('DH009', 'CM03', '2026-03-27', 'Đã giao', '2026-03-27 08:11:41', 507, 'CM001.Alpha', '0978123456', 'ttt', 'COD', NULL);
 
 --
 -- Bẫy `orders`
@@ -293,7 +316,11 @@ INSERT INTO `order_item` (`orderID`, `id_order`, `ProductID`, `quantity`) VALUES
 (16, 'DH004', 'HG-003', 6),
 (17, 'DH004', 'FG-005', 2),
 (18, 'DH005', 'PG-001', 1),
-(19, 'DH006', 'FG-005', 1);
+(19, 'DH006', 'FG-005', 1),
+(20, 'DH007', 'FG-002', 1),
+(21, 'DH008', 'RG-003', 1),
+(22, 'DH008', 'FG-005', 1),
+(23, 'DH009', 'zzz', 3);
 
 --
 -- Bẫy `order_item`
@@ -343,10 +370,10 @@ CREATE TABLE `product_list` (
 
 INSERT INTO `product_list` (`ProductID`, `ProductName`, `Grade`, `Producer`, `Product_source`, `Product_description`, `Product_detail`, `Product_image`, `Price`, `Profit`, `cost_price`, `Quantity`) VALUES
 ('FG-001', 'Hatsune Miku - Piapro Characters - Banpresto Evolve - Classical Tuning -Swan Lake', 'Figure', 'Bandai', 'Hatsune Miku Evolve Classical Tuning', 'Hatsune Miku – Banpresto Evolve – Classical Tuning: Swan Lake là mẫu figure thuộc dòng Piapro Characters, tái hiện hình ảnh nàng diva ảo trong tạo hình thiên nga trắng đầy thanh lịch và mềm mại, lấy cảm hứng từ vở ballet kinh điển.', 'Dòng: Prize Figure\r\nChất Liệu : PVC, ABS\r\nChiều Cao: 210mm', 'Swan.jpg', 600000, 0.30, 461538.46, 5),
-('FG-002', 'Banpresto - Umamusume: Pretty Derby - Tamamo Cross', 'Figure', 'Banpresto', 'Umamusume: Pretty Derby', 'Một cô gái nhỏ nhắn với chất giọng Kansai đặc trưng. Dù vóc dáng nhỏ bé, cô lại tràn đầy năng lượng và luôn sẵn sàng hành động — dù là trên đường đua hay trong cuộc sống hằng ngày. Cô lớn lên trong hoàn cảnh không mấy thuận lợi, nhưng sức mạnh của cô đến từ tinh thần kiên cường — hiếm khi thấy cô nản lòng trước bất cứ điều gì. Cô và Oguri Cap, người có khiếu hài hước tự nhiên, tạo thành một cặp đôi tấu hài hoàn hảo.', 'Chiều cao: ~17cm\r\nChất liệu: PVC\r\nKhông yêu cầu lắp ráp', 'ph-11134207-7rasd-m3qdzaudvacv5e.jpg', 600000, 0.30, 461538.46, 5),
+('FG-002', 'Banpresto - Umamusume: Pretty Derby - Tamamo Cross', 'Figure', 'Banpresto', 'Umamusume: Pretty Derby', 'Một cô gái nhỏ nhắn với chất giọng Kansai đặc trưng. Dù vóc dáng nhỏ bé, cô lại tràn đầy năng lượng và luôn sẵn sàng hành động — dù là trên đường đua hay trong cuộc sống hằng ngày. Cô lớn lên trong hoàn cảnh không mấy thuận lợi, nhưng sức mạnh của cô đến từ tinh thần kiên cường — hiếm khi thấy cô nản lòng trước bất cứ điều gì. Cô và Oguri Cap, người có khiếu hài hước tự nhiên, tạo thành một cặp đôi tấu hài hoàn hảo.', 'Chiều cao: ~17cm\r\nChất liệu: PVC\r\nKhông yêu cầu lắp ráp', 'ph-11134207-7rasd-m3qdzaudvacv5e.jpg', 722500, 0.30, 555769.23, 14),
 ('FG-003', 'Hatsune Miku Project Diva Mega 39\'s - Luminasta - Project Diva 15th Ver', 'Figure', 'SEGA', 'Hatsune Miku Project Diva Mega 39\'s', 'Hatsune Miku Project Diva 15th Ver. Luminasta - Project Diva Mega 39\'s – figure kỷ niệm 15 năm Project Diva của SEGA, được thiết kế dựa trên Hatsune Miku từ tựa game Hatsune Miku: Project Diva Mega39’s. Đây là sản phẩm trong dòng Luminasta – nổi bật với tạo dáng năng động và chi tiết sắc nét, thích hợp trưng bày mọi bộ sưu tập anime & game', 'Kích thước:  21 cm\r\nChất liệu: PVC - ABS', 'Mikuvr15.png', 600000, 0.30, 461538.46, 5),
 ('FG-004', 'MÔ HÌNH Astolfo - Fate/Grand Order - Figurizm Alpha - Saber (SEGA) ', 'Figure', 'SEGA', 'Fate/Grand Order', 'FIGURIZMα \"Fate/Grand Order\" \"Saber/Astolfo\" – mô hình figure prize chính hãng của SEGA lấy cảm hứng từ nhân vật Astolfo trong game/anime đình đám Fate/Grand Order. Figure thuộc dòng Figurizm Alpha, thiết kế tái hiện Astolfo ở dạng Saber với trang phục tinh tế, pose năng động cùng biểu cảm rạng rỡ tràn đầy năng lượng – lý tưởng để trưng bày trong mọi bộ sưu tập anime & figure chất lượng cao.', 'Chất Liệu : PVC, ABS\r\nChiều Cao: 180mm', 'astolfo.webp', 600000, 0.30, 461538.46, 5),
-('FG-005', 'Banpresto - Zaku-Gurumi Hatsune Miku Ver', 'Figure', 'Bandai', 'Hatsune Miku', 'Figure hợp tác đặc biệt kỷ niệm 45 năm Mobile Suit Gundam – sản phẩm được Banpresto & Bandai phân phối chính thức, tái hiện Hatsune Miku trong bộ trang phục Zaku-Gurumi độc đáo lấy cảm hứng từ dòng mecha Zaku nổi tiếng. Thiết kế figure tập trung vào sự dễ thương và tinh thần “crossover” giữa thế giới Vocaloid và Gundam, tạo điểm nhấn nổi bật trong bất kỳ bộ sưu tập anime nào.', 'Chiều cao mô hình: ~14cm', '5e759ee9e50d4348a0a0ad907206f0f9_c2aa7bce7a164478be622bafcdac5f6b_grande.jpg', 400000, 0.30, 307692.31, 5),
+('FG-005', 'Banpresto - Zaku-Gurumi Hatsune Miku Ver', 'Figure', 'Bandai', 'Hatsune Miku', 'Figure hợp tác đặc biệt kỷ niệm 45 năm Mobile Suit Gundam – sản phẩm được Banpresto & Bandai phân phối chính thức, tái hiện Hatsune Miku trong bộ trang phục Zaku-Gurumi độc đáo lấy cảm hứng từ dòng mecha Zaku nổi tiếng. Thiết kế figure tập trung vào sự dễ thương và tinh thần “crossover” giữa thế giới Vocaloid và Gundam, tạo điểm nhấn nổi bật trong bất kỳ bộ sưu tập anime nào.', 'Chiều cao mô hình: ~14cm', '5e759ee9e50d4348a0a0ad907206f0f9_c2aa7bce7a164478be622bafcdac5f6b_grande.jpg', 696667, 0.30, 535897.44, 24),
 ('HG-001', 'HG GTO 1/144 RX-78-02 Gundam', 'HG', 'Bandai', 'Xuất hiện trong: MOBILE SUIT GUNDAM THE ORIGIN', 'Bộ kit này mang đến một khuôn mẫu và định nghĩa hoàn toàn mới cho Gundam The Origin\'s RX-78-02, được trang bị nhiều loại vũ khí và gimmicks. Màu sắc và khả năng tháo lắp các bộ phận của bộ kit này cũng được cải tiến tốt hơn so với các dòng HG còn lại trong dòng GTO. Được cung cấp nhiều bộ phận chuyển đổi để tạo ra các biến thể của RX-78-02 Gundam và để đại diện cho tất cả các thiết kế có sẵn cho chính Gundam đó.', 'Cấp độ: HG\nYêu cầu tự lắp\nChiều cao mô hình: 13cm\nTỉ lệ: 1/144', 'rx782origin.jpg', 400000, 0.30, 307692.31, 20),
 ('HG-002', 'HG Char\'s Zaku II', 'HG', 'Bandai', 'Xuất hiện trong: MOBILE SUIT GUNDAM THE ORIGIN', 'HG Char\'s Zaku II là mẫu mô hình Gunpla tỉ lệ 1/144 tái hiện cỗ Mobile Suit huyền thoại của “Sao Đỏ” Char Aznable trong series Mobile Suit Gundam. Với tông màu đỏ đặc trưng và thiết kế mạnh mẽ, đây là lựa chọn không thể thiếu cho người hâm mộ Zeon cũng như các nhà sưu tầm Gunpla.', 'Cấp độ: HG\r\nYêu cầu tự lắp\r\nChiều cao mô hình: 13cm', 'charzaku6.jpg', 400000, 0.30, 307692.31, 30),
 ('HG-003', 'HG ZGOK - SEED FREEDOM Ver', 'HG', 'Bandai', 'Mobile Suit Gundam SEED Freedom', 'HG ZGOK – SEED FREEDOM Ver. là mẫu mô hình Gunpla tỉ lệ 1/144 thuộc dòng High Grade, tái hiện lại thiết kế Z’Gok xuất hiện trong thế giới Mobile Suit Gundam SEED FREEDOM với diện mạo hiện đại và sắc nét hơn.', 'Cấp độ: HG\r\nYêu cầu tự lắp\r\nChiều cao mô hình: 13cm', 'HGCE_Z_GOK_en_01m.jpg', 400000, 0.30, 307692.31, 20),
@@ -358,7 +385,10 @@ INSERT INTO `product_list` (`ProductID`, `ProductName`, `Grade`, `Producer`, `Pr
 ('PG-001', ' PG 00 Raiser ', 'PG', 'Bandai', 'A Wakening of the Trailblazer', 'Bandai/MG Perfect Grade 00 Raiser – mô hình lắp ráp Perfect Grade (PG) 1/60 00 Raiser chính hãng từ Bandai – phiên bản đỉnh cao của dòng Gunpla dành cho bộ sưu tập nghiêm túc. Đây là mô hình Perfect Grade cực kỳ chi tiết, tỉ lệ 1/60 với kích thước lớn (khoảng 30 cm sau hoàn thiện), tích hợp hệ thống GN Drive có đèn LED & cơ chế quay, cho hiệu ứng ánh sáng chân thực và tạo dáng ấn tượng trên kệ trưng bày.', 'Cấp độ: PG\r\nYêu cầu tự lắp\r\nChiều cao mô hình:30 cm', 'raiser.jpg', 1100000, 0.30, 846153.85, 4),
 ('RG-001', 'RG RX-93 ν Gundam', 'RG', 'Bandai', 'Mobile Suit Gundam: Char\'s Counterattack', 'RG RX-93 ν Gundam là mẫu Gunpla tỉ lệ 1/144 thuộc dòng Real Grade, tái hiện mobile suit huyền thoại của Amuro Ray trong Mobile Suit Gundam: Char\'s Counterattack. Đây là một trong những kit RG được đánh giá cao nhất nhờ độ chi tiết, khung xương chắc chắn và hệ thống Fin Funnel ấn tượng.', 'Cấp độ: HG\r\nYêu cầu tự lắp\r\nChiều cao mô hình: 13cm', 'nugundam.jpg', 500000, 0.30, 384615.38, 10),
 ('RG-002', 'RG MSN-04 Sazabi', 'RG', 'Bandai', 'Mobile Suit Gundam: Char\'s Counterattack', 'RG MSN-04 Sazabi là mẫu Gunpla tỉ lệ 1/144 thuộc dòng Real Grade, tái hiện mobile suit đỏ huyền thoại của Char Aznable trong Mobile Suit Gundam: Char\'s Counterattack. Đây là một trong những kit RG có kích thước lớn và độ chi tiết ấn tượng bậc nhất phân khúc 1/144.', 'Cấp độ: RG\r\nYêu cầu tự lắp\r\nChiều cao mô hình: 13cm', 'sazabi.jpg', 500000, 0.30, 384615.38, 10),
-('RG-003', 'RG God Gundam', 'RG', 'Bandai', 'Mobile Fighter G Gundam', 'Mô hình lắp ráp Gunpla Real Grade 1/144 God Gundam – Bandai chính hãng – kit thực tế tái hiện chiến binh God Gundam từ series Mobile Fighter G Gundam ở tỷ lệ 1/144 với độ chi tiết và khả năng tạo dáng vượt trội. Được thiết kế với khung nội bộ đa lớp và nhiều điểm khớp linh hoạt, sản phẩm cho phép bạn dễ dàng dựng các tư thế hành động đặc sắc như God Finger hay folded-arms chân thực như trong anime.', 'Cấp độ: RG\r\nYêu cầu tự lắp\r\nChiều cao mô hình: 13cm', 'godgundam.jpg', 400000, 0.30, 307692.31, 10);
+('RG-003', 'RG God Gundam', 'RG', 'Bandai', 'Mobile Fighter G Gundam', 'Mô hình lắp ráp Gunpla Real Grade 1/144 God Gundam – Bandai chính hãng – kit thực tế tái hiện chiến binh God Gundam từ series Mobile Fighter G Gundam ở tỷ lệ 1/144 với độ chi tiết và khả năng tạo dáng vượt trội. Được thiết kế với khung nội bộ đa lớp và nhiều điểm khớp linh hoạt, sản phẩm cho phép bạn dễ dàng dựng các tư thế hành động đặc sắc như God Finger hay folded-arms chân thực như trong anime.', 'Cấp độ: RG\r\nYêu cầu tự lắp\r\nChiều cao mô hình: 13cm', 'godgundam.jpg', 400000, 0.30, 307692.31, 9),
+('rrrrr', 'rrrrr', 'HG', 'SEGA', 'rr', 'rr', 'rr', 'Screenshot 2025-09-24 235909.png', 130, 0.30, 100.00, 20),
+('vvvv', 'vvvv', 'RG', 'SEGA', 'vvv', 'vv', 'vv', 'Screenshot 2025-09-24 175606.png', 130, 0.30, 100.00, 20),
+('zzz', 'zzz', 'qqq', 'SEGA', 'zzz', 'zzz', 'zzz', 'Screenshot 2026-03-26 215017.png', 130, 0.30, 100.00, 17);
 
 -- --------------------------------------------------------
 
@@ -382,7 +412,12 @@ INSERT INTO `purchase_receipts` (`id`, `receipt_code`, `import_date`, `total_qua
 (5, 'PN01', '2026-03-11', 10, 6500000.00),
 (6, 'PN02', '2026-03-15', 5, 3250000.00),
 (7, 'PN03', '2026-03-19', 5, 3250000.00),
-(10, 'PN05', '2026-03-20', 10, 6500000.00);
+(10, 'PN05', '2026-03-20', 10, 6500000.00),
+(11, 'PN04', '2026-03-20', 5, 3250000.00),
+(12, 'PN06', '0000-00-00', 10, 6500000.00),
+(13, 'qqq', '2026-03-01', 10, 1000.00),
+(14, 'vvvv', '2026-03-27', 10, 1000.00),
+(15, 'ttt', '2026-03-27', 10, 1000.00);
 
 -- --------------------------------------------------------
 
@@ -407,7 +442,12 @@ INSERT INTO `purchase_receipt_items` (`id`, `receipt_code`, `product_id`, `quant
 (4, 'PN02', 'MG-001', 5, 650000.00),
 (5, 'PN03', 'HG-007', 5, 650000.00),
 (7, 'PN05', 'HG-004', 5, 650000.00),
-(8, 'PN05', 'HG-002', 5, 650000.00);
+(8, 'PN05', 'HG-002', 5, 650000.00),
+(9, 'PN04', 'FG-002', 5, 650000.00),
+(10, 'PN06', 'FG-005', 10, 650000.00),
+(11, 'qqq', 'zzz', 10, 100.00),
+(12, 'vvvv', 'vvvv', 10, 100.00),
+(13, 'ttt', 'rrrrr', 10, 100.00);
 
 --
 -- Bẫy `purchase_receipt_items`
@@ -558,7 +598,7 @@ ALTER TABLE `purchase_receipt_items`
 -- AUTO_INCREMENT cho bảng `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `cart_temp`
@@ -576,19 +616,19 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT cho bảng `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `purchase_receipts`
 --
 ALTER TABLE `purchase_receipts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `purchase_receipt_items`
 --
 ALTER TABLE `purchase_receipt_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
