@@ -253,7 +253,30 @@ $is_search = $error === '' && (
 
 <div class="product-card">
     <a href="product.php?id=<?= $row['ProductID'] ?>">
-        <img src="assets/img/<?= $row['Product_image'] ?>" alt="">
+        <?php
+$image = $row['Product_image'];
+
+// Nếu là link online (https://...)
+if (filter_var($image, FILTER_VALIDATE_URL)) {
+    $img_src = $image;
+
+// Nếu là đường dẫn ổ cứng (D:\...)
+} elseif (preg_match('/^[A-Z]:\\\\/i', $image)) {
+
+    // ⚠️ CHỈNH LẠI theo máy bạn
+    // Ví dụ: D:\product_img → http://localhost/product_img
+    $img_src = str_replace("D:\\product_img\\", "http://localhost/product_img/", $image);
+    $img_src = str_replace("\\", "/", $img_src);
+
+// Nếu là đường dẫn tương đối (uploads/... hoặc assets/img/...)
+} else {
+    $img_src = $image;
+}
+?>
+
+<img src="<?= htmlspecialchars($img_src) ?>"
+     onerror="this.src='assets/img/default.png'"
+     alt="">
     </a>
 
     <h3><?= $row['ProductName'] ?></h3>
