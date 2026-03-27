@@ -19,7 +19,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $detail      = $conn->real_escape_string($_POST['Product_detail']);
     $qty         = (int)$_POST['Quantity'];
 
-    /* xử lý upload ảnh mới (nếu có) */
     $image = $conn->real_escape_string($_POST['old_image']);
     if(!empty($_FILES['Product_image']['name'])){
         $ext      = pathinfo($_FILES['Product_image']['name'], PATHINFO_EXTENSION);
@@ -47,6 +46,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 /* lấy dữ liệu sản phẩm */
 $row = $conn->query("SELECT * FROM product_list WHERE ProductID='$id'")->fetch_assoc();
 if(!$row){ header("Location: quanlysp.php"); exit; }
+
+/* lấy danh mục từ DB */
+$grades = [];
+$grade_result = $conn->query("SELECT name FROM categories ORDER BY ID ASC");
+while($g = $grade_result->fetch_assoc()){
+    $grades[] = $g['name'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -138,11 +144,10 @@ if(!$row){ header("Location: quanlysp.php"); exit; }
             <div class="form-group">
               <label class="form-label">Dòng (Grade) <span style="color:#dc3545;">*</span></label>
               <select class="form-control" name="Grade" required>
-                <?php
-                $grades = ['HG'=>'High Grade','RG'=>'Real Grade','MG'=>'Master Grade','PG'=>'Perfect Grade','Figure'=>'Anime Figure'];
-                foreach($grades as $val => $label):
-                ?>
-                <option value="<?php echo $val; ?>" <?php echo $row['Grade']===$val?'selected':''; ?>><?php echo $label; ?></option>
+                <?php foreach($grades as $g): ?>
+                <option value="<?php echo htmlspecialchars($g); ?>" <?php echo $row['Grade']===$g ? 'selected' : ''; ?>>
+                  <?php echo htmlspecialchars($g); ?>
+                </option>
                 <?php endforeach; ?>
               </select>
             </div>
