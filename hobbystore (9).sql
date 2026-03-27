@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 27, 2026 lúc 12:59 PM
+-- Thời gian đã tạo: Th3 27, 2026 lúc 04:51 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -45,6 +45,18 @@ INSERT INTO `admin` (`adminname`, `password`, `id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `admin_settings`
+--
+
+CREATE TABLE `admin_settings` (
+  `id` int(11) NOT NULL,
+  `setting_key` varchar(255) DEFAULT NULL,
+  `setting_value` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `cart`
 --
 
@@ -82,8 +94,7 @@ CREATE TABLE `cart_item` (
 
 INSERT INTO `cart_item` (`cart_item_id`, `cart_id`, `product_id`, `quantity`) VALUES
 (1, 'CART_69abe5cf21d96', 'RG-003', 5),
-(2, 'CART_69abe5cf21d96', 'HG-004', 1),
-(19, 'CART_69abf8dce4bcd', 'zzz', 1);
+(2, 'CART_69abe5cf21d96', 'HG-004', 1);
 
 -- --------------------------------------------------------
 
@@ -106,7 +117,7 @@ CREATE TABLE `cart_temp` (
 
 CREATE TABLE `categories` (
   `name` varchar(50) NOT NULL,
-  `ID` int(3) NOT NULL,
+  `ID` int(11) NOT NULL,
   `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -115,12 +126,12 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`name`, `ID`, `description`) VALUES
-('qqq', 0, 'qqq'),
 ('HG', 1, 'Mô hình có chi tiết bề mặt thấp dễ lắp có kích thước dao động từ 12cm-15cm'),
 ('RG', 2, 'Mô hình có chi tiết thấp cao khó lắp có kích thước dao động từ 12cm-15cm'),
 ('MG', 3, 'Mô hình có chi tiết thấp cao khó lắp có kích thước dao động từ 18cm-21cm'),
 ('PG', 4, 'Mô hình có chi tiết thấp cao khó lắp có kích thước dao động từ 30cm-32cm'),
-('Figure', 5, 'Mô hình tỉnh không cần tự lắp được dựa các nhân vật 2d');
+('Figure', 5, 'Mô hình tỉnh không cần tự lắp được dựa các nhân vật 2d'),
+('SD', 6, 'mini hg');
 
 -- --------------------------------------------------------
 
@@ -198,7 +209,11 @@ INSERT INTO `history` (`ProductID`, `export_num`, `import_num`, `quantity`, `upd
 ('vvvv', NULL, 10, 10, '2026-03-27'),
 ('vvvv', 0, 10, 10, '2026-03-27'),
 ('rrrrr', NULL, 10, 10, '2026-03-27'),
-('rrrrr', 0, 10, 10, '2026-03-27');
+('rrrrr', 0, 10, 10, '2026-03-27'),
+('SD-01', NULL, 10, 10, '2026-03-27'),
+('SD-01', 0, 10, 10, '2026-03-27'),
+('SD-01', NULL, 1, 1, '2026-03-27'),
+('SD-01', 1, 0, -1, '2026-03-27');
 
 --
 -- Bẫy `history`
@@ -268,7 +283,8 @@ INSERT INTO `orders` (`id_order`, `customer_id`, `order_date`, `status`, `create
 ('DH006', 'CM03', '2026-03-19', 'Đã giao', '2026-03-19 14:16:07', 520000, 'CM001.Alpha', '0978123456', 'Đà Nẵng', 'COD', NULL),
 ('DH007', 'CM03', '2026-03-20', 'Đã giao', '2026-03-20 07:17:48', 939250, 'CM001.Alpha', '0978123456', 'Đà Nẵng', 'BANK', NULL),
 ('DH008', 'CM03', '2026-03-27', 'Đã giao', '2026-03-27 07:58:59', 1425667, 'CM001.Alpha', '0978123456', 'Đà Nẵng', 'COD', NULL),
-('DH009', 'CM03', '2026-03-27', 'Đã giao', '2026-03-27 08:11:41', 507, 'CM001.Alpha', '0978123456', 'ttt', 'COD', NULL);
+('DH009', 'CM03', '2026-03-27', 'Đã giao', '2026-03-27 08:11:41', 507, 'CM001.Alpha', '0978123456', 'ttt', 'COD', NULL),
+('DH010', 'CM03', '2026-03-27', 'Đã giao', '2026-03-27 15:42:27', 169, 'CM001.Alpha', '0978123436', 'Tiểu Vương Quốc Thanh Hóa', 'BANK', NULL);
 
 --
 -- Bẫy `orders`
@@ -320,7 +336,7 @@ INSERT INTO `order_item` (`orderID`, `id_order`, `ProductID`, `quantity`) VALUES
 (20, 'DH007', 'FG-002', 1),
 (21, 'DH008', 'RG-003', 1),
 (22, 'DH008', 'FG-005', 1),
-(23, 'DH009', 'zzz', 3);
+(24, 'DH010', 'SD-01', 1);
 
 --
 -- Bẫy `order_item`
@@ -387,8 +403,8 @@ INSERT INTO `product_list` (`ProductID`, `ProductName`, `Grade`, `Producer`, `Pr
 ('RG-002', 'RG MSN-04 Sazabi', 'RG', 'Bandai', 'Mobile Suit Gundam: Char\'s Counterattack', 'RG MSN-04 Sazabi là mẫu Gunpla tỉ lệ 1/144 thuộc dòng Real Grade, tái hiện mobile suit đỏ huyền thoại của Char Aznable trong Mobile Suit Gundam: Char\'s Counterattack. Đây là một trong những kit RG có kích thước lớn và độ chi tiết ấn tượng bậc nhất phân khúc 1/144.', 'Cấp độ: RG\r\nYêu cầu tự lắp\r\nChiều cao mô hình: 13cm', 'sazabi.jpg', 500000, 0.30, 384615.38, 10),
 ('RG-003', 'RG God Gundam', 'RG', 'Bandai', 'Mobile Fighter G Gundam', 'Mô hình lắp ráp Gunpla Real Grade 1/144 God Gundam – Bandai chính hãng – kit thực tế tái hiện chiến binh God Gundam từ series Mobile Fighter G Gundam ở tỷ lệ 1/144 với độ chi tiết và khả năng tạo dáng vượt trội. Được thiết kế với khung nội bộ đa lớp và nhiều điểm khớp linh hoạt, sản phẩm cho phép bạn dễ dàng dựng các tư thế hành động đặc sắc như God Finger hay folded-arms chân thực như trong anime.', 'Cấp độ: RG\r\nYêu cầu tự lắp\r\nChiều cao mô hình: 13cm', 'godgundam.jpg', 400000, 0.30, 307692.31, 9),
 ('rrrrr', 'rrrrr', 'HG', 'SEGA', 'rr', 'rr', 'rr', 'Screenshot 2025-09-24 235909.png', 130, 0.30, 100.00, 20),
-('vvvv', 'vvvv', 'RG', 'SEGA', 'vvv', 'vv', 'vv', 'Screenshot 2025-09-24 175606.png', 130, 0.30, 100.00, 20),
-('zzz', 'zzz', 'qqq', 'SEGA', 'zzz', 'zzz', 'zzz', 'Screenshot 2026-03-26 215017.png', 130, 0.30, 100.00, 17);
+('SD-01', 'Super DUmber 67', 'SD', 'Bandai', 'Sea', '676', '6736', 'Screenshot 2026-03-17 003056 - Copy.png', 130, 0.30, 100.00, 19),
+('vvvv', 'vvvv', 'RG', 'SEGA', 'vvv', 'vv', 'vv', 'Screenshot 2025-09-24 175606.png', 130, 0.30, 100.00, 20);
 
 -- --------------------------------------------------------
 
@@ -417,7 +433,8 @@ INSERT INTO `purchase_receipts` (`id`, `receipt_code`, `import_date`, `total_qua
 (12, 'PN06', '0000-00-00', 10, 6500000.00),
 (13, 'qqq', '2026-03-01', 10, 1000.00),
 (14, 'vvvv', '2026-03-27', 10, 1000.00),
-(15, 'ttt', '2026-03-27', 10, 1000.00);
+(15, 'ttt', '2026-03-27', 10, 1000.00),
+(16, 'ggg', '2026-03-27', 10, 1000.00);
 
 -- --------------------------------------------------------
 
@@ -447,7 +464,8 @@ INSERT INTO `purchase_receipt_items` (`id`, `receipt_code`, `product_id`, `quant
 (10, 'PN06', 'FG-005', 10, 650000.00),
 (11, 'qqq', 'zzz', 10, 100.00),
 (12, 'vvvv', 'vvvv', 10, 100.00),
-(13, 'ttt', 'rrrrr', 10, 100.00);
+(13, 'ttt', 'rrrrr', 10, 100.00),
+(14, 'ggg', 'SD-01', 10, 100.00);
 
 --
 -- Bẫy `purchase_receipt_items`
@@ -510,6 +528,13 @@ DELIMITER ;
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `adminname` (`adminname`);
+
+--
+-- Chỉ mục cho bảng `admin_settings`
+--
+ALTER TABLE `admin_settings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `setting_key` (`setting_key`);
 
 --
 -- Chỉ mục cho bảng `cart`
@@ -595,16 +620,28 @@ ALTER TABLE `purchase_receipt_items`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `admin_settings`
+--
+ALTER TABLE `admin_settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `cart_temp`
 --
 ALTER TABLE `cart_temp`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `inventory`
@@ -616,19 +653,19 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT cho bảng `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `purchase_receipts`
 --
 ALTER TABLE `purchase_receipts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `purchase_receipt_items`
 --
 ALTER TABLE `purchase_receipt_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

@@ -551,7 +551,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let raw = e.target.value.replace(/[^\d]/g, "");
       e.target.setAttribute("data-raw", raw); // store clean number
       if (raw.length > 0) {
-        e.target.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VNĐ";
+        e.target.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
       } else {
         e.target.value = "";
       }
@@ -573,7 +573,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let raw = e.target.value.replace(/[^\d]/g, "");
       e.target.setAttribute("data-raw", raw);
       if (raw.length > 0) {
-        e.target.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VNĐ";
+        e.target.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
       } else {
         e.target.value = "";
       }

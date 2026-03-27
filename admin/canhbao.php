@@ -8,6 +8,13 @@ if(!isset($_SESSION['admin'])){
 
 $conn = mysqli_connect("localhost","root","","hobbystore");
 
+// Load danh mục động từ database
+$grade_options = [];
+$grade_query = mysqli_query($conn, "SELECT DISTINCT Grade FROM product_list ORDER BY Grade");
+while($grade_row = mysqli_fetch_assoc($grade_query)){
+    $grade_options[] = $grade_row['Grade'];
+}
+
 // Tạo bảng admin_settings nếu chưa tồn tại
 $check_table = mysqli_query($conn, "SHOW TABLES LIKE 'admin_settings'");
 if(mysqli_num_rows($check_table) == 0){
@@ -240,13 +247,10 @@ style="font-size:20px;width:220px;height:38px;"
 
 <select name="chat">
 
-<option value="cl">Tất cả</option>
-
-<option value="HG" <?php if($category=="HG") echo "selected"; ?>>High Grade</option>
-<option value="RG" <?php if($category=="RG") echo "selected"; ?>>Real Grade</option>
-<option value="MG" <?php if($category=="MG") echo "selected"; ?>>Master Grade</option>
-<option value="PG" <?php if($category=="PG") echo "selected"; ?>>Perfect Grade</option>
-<option value="Figure" <?php if($category=="Figure") echo "selected"; ?>>Anime Figure</option>
+<option value="cl" <?php if($category=="cl") echo "selected"; ?>>Tất cả</option>
+<?php foreach($grade_options as $g): ?>
+  <option value="<?php echo htmlspecialchars($g); ?>" <?php if($category===$g) echo "selected"; ?>><?php echo htmlspecialchars($g); ?></option>
+<?php endforeach; ?>
 
 </select><br>
 

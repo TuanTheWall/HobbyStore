@@ -8,6 +8,13 @@ if(!isset($_SESSION['admin'])){
 
 $conn = mysqli_connect("localhost","root","","hobbystore");
 
+// Load danh mục động từ database
+$grade_options = [];
+$grade_query = mysqli_query($conn, "SELECT DISTINCT Grade FROM product_list ORDER BY Grade");
+while($grade_row = mysqli_fetch_assoc($grade_query)){
+    $grade_options[] = $grade_row['Grade'];
+}
+
 $fname = $_GET['fname'] ?? "";
 $category = $_GET['chat'] ?? "";
 $from = $_GET['from'] ?? "";
@@ -55,45 +62,6 @@ $result = mysqli_query($conn,$sql);
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Josefin Sans", sans-serif; }
   body { background-color: #f5f5f5; }
-
-  /* ===== MODAL ===== */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-  }
-  .modal-overlay.active { display: flex; }
-
-  .modal-box {
-    background: #fff;
-    border-radius: 12px;
-    padding: 28px 32px;
-    width: 700px;
-    max-width: 95vw;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-    position: relative;
-  }
-  .modal-box h3 {
-    font-size: 20px;
-    margin-bottom: 16px;
-    color: #22314e;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 10px;
-  }
-  .modal-close {
-    position: absolute;
-    top: 14px; right: 18px;
-    background: none; border: none;
-    font-size: 24px; cursor: pointer;
-    color: #666;
-  }
-  .modal-close:hover { color: red; }
 
   .modal-table {
     width: 100%;
@@ -159,12 +127,10 @@ include "menucard.php";
   <input type="text" name="fname" value="<?php echo $fname ?>" placeholder="Name" style="font-size:20px;width:220px;height:38px;"><br>
   <label style="font-size:25px;">Danh mục</label><br>
   <select name="chat">
-    <option value="cl">Tất cả</option>
-    <option value="HG" <?php if($category=="HG") echo "selected"; ?>>High Grade</option>
-    <option value="RG" <?php if($category=="RG") echo "selected"; ?>>Real Grade</option>
-    <option value="MG" <?php if($category=="MG") echo "selected"; ?>>Master Grade</option>
-    <option value="PG" <?php if($category=="PG") echo "selected"; ?>>Perfect Grade</option>
-    <option value="Figure" <?php if($category=="Figure") echo "selected"; ?>>Anime Figure</option>
+    <option value="cl" <?php if($category=="cl") echo "selected"; ?>>Tất cả</option>
+    <?php foreach($grade_options as $g): ?>
+      <option value="<?php echo htmlspecialchars($g); ?>" <?php if($category===$g) echo "selected"; ?>><?php echo htmlspecialchars($g); ?></option>
+    <?php endforeach; ?>
   </select><br>
   <label style="font-size:25px;">Từ</label><br>
   <input type="date" name="from" value="<?php echo $from ?>">
@@ -270,42 +236,34 @@ while ($row = mysqli_fetch_assoc($result)) {
 <?php } ?>
 </div>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="dongModal(event)">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <h3 id="modalTitle">Chi tiết</h3>
-    <div id="modalContent"><div class="loading">Đang tải...</div></div>
-  </div>
-</div>
-
 <script>
 function xemChiTiet(loai, productId, productName) {
-  document.getElementById('modalTitle').textContent =
-    loai === 'nhap'
-      ? 'Phiếu nhập — ' + productName
-      : 'Đơn hàng đã giao — ' + productName;
-
-  document.getElementById('modalContent').innerHTML = '<div class="loading">Đang tải...</div>';
-  document.getElementById('modalOverlay').classList.add('active');
+  // Hiển thị loading
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.textContent = 'Đang tải...';
+  btn.disabled = true;
 
   fetch('baocao_detail.php?loai=' + loai + '&product_id=' + encodeURIComponent(productId))
-    .then(r => r.text())
-    .then(html => { document.getElementById('modalContent').innerHTML = html; })
-    .catch(() => { document.getElementById('modalContent').innerHTML = '<div class="modal-empty">Lỗi tải dữ liệu.</div>'; });
+    .then(r => r.json())
+    .then(data => {
+      if (data.redirect) {
+        window.location.href = data.redirect;
+      } else {
+        alert(data.error || 'Có lỗi xảy ra');
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    })
+    .catch(() => {
+      alert('Lỗi tải dữ liệu');
+      btn.textContent = originalText;
+      btn.disabled = false;
+    });
 }
 
 function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('active');
 }
-
-function dongModal(e) {
-  if (e.target === document.getElementById('modalOverlay')) closeModal();
-}
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeModal();
-});
 </script>
 
 </body>
