@@ -96,6 +96,119 @@ nav.navbar {
   border-radius:5px !important; padding:8px 12px !important;
   color:black !important; text-decoration:none !important; font-weight:700 !important;
 }
+<?php
+$conn = new mysqli("localhost","root","","hobbystore");
+if ($conn->connect_error) {
+    die("Kết nối thất bại: " . $conn->connect_error);
+}
+
+// Load Grade và Producer từ database - phù hợp với suasp.php
+$grades = [];
+$grade_result = $conn->query("SELECT name FROM categories ORDER BY ID ASC");
+if($grade_result){
+    while($row = $grade_result->fetch_assoc()){
+        $grades[] = $row['name'];
+    }
+}
+
+$producers = [];
+$producer_result = $conn->query("SELECT DISTINCT Producer FROM product_list WHERE Producer IS NOT NULL AND Producer != '' ORDER BY Producer");
+if($producer_result){
+    while($row = $producer_result->fetch_assoc()){
+        $producers[] = $row['Producer'];
+    }
+}
+
+$error = '';
+$success = '';
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $id          = trim($_POST['product_id']);
+    $name        = trim($_POST['fname']);
+    $grade       = trim($_POST['chat'] ?? '');
+    $producer    = trim($_POST['hang'] ?? '');
+    $price       = 0;
+    $origin      = trim($_POST['origin']);
+    $description = trim($_POST['description']);
+    $info        = trim($_POST['info']);
+    $image_name  = '';
+
+    /* upload ảnh */
+    if(isset($_FILES['image']) && $_FILES['image']['error'] === 0){
+        $allowed = ['jpg','jpeg','png','webp','gif'];
+        $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+        if(in_array($ext, $allowed)){
+            $image_name = basename($_FILES['image']['name']);
+            $target = "assets/img/" . $image_name;
+            if(!move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+                $error = "Lỗi upload ảnh!";
+            }
+        } else {
+            $error = "Định dạng ảnh không hợp lệ!";
+        }
+    }
+
+    if(empty($error)){
+        $id_safe    = $conn->real_escape_string($id);
+        $name_safe  = $conn->real_escape_string($name);
+        $grade_safe = $conn->real_escape_string($grade);
+        $prod_safe  = $conn->real_escape_string($producer);
+        $orig_safe  = $conn->real_escape_string($origin);
+        $desc_safe  = $conn->real_escape_string($description);
+        $info_safe  = $conn->real_escape_string($info);
+        $img_safe   = $conn->real_escape_string($image_name);
+
+        $sql = "INSERT INTO product_list (ProductID, ProductName, Grade, Producer, Product_source, Product_description, Product_detail, Product_image, Price, Profit, Quantity)
+                VALUES ('$id_safe','$name_safe','$grade_safe','$prod_safe','$orig_safe','$desc_safe','$info_safe','$img_safe','$price',0.30,0)";
+
+        if($conn->query($sql)){
+            header("Location: quanlysp.php");
+            exit;
+        } else {
+            $error = "Lỗi thêm sản phẩm: " . $conn->error;
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thêm sản phẩm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/product-page.css">
+  <link rel="stylesheet" href="assets/css/view-cart.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+nav.navbar {
+  display:flex !important; justify-content:space-between !important;
+  align-items:center !important; background-color:cyan !important;
+  height:80px !important; min-height:80px !important;
+  padding:0 24px !important; box-sizing:border-box !important;
+  gap:12px; z-index:50;
+}
+.navbar .navbar-logo {
+  width:64px !important; height:64px !important;
+  min-width:64px !important; min-height:64px !important;
+  border-radius:50% !important; object-fit:cover !important;
+  display:inline-block !important; filter:none !important;
+  -webkit-filter:none !important; mix-blend-mode:normal !important;
+  background:transparent !important; opacity:1 !important;
+}
+.nav-left { display:flex !important; align-items:center !important; gap:18px; }
+.nav-left .nav-home { text-decoration:none; color:black; font-size:20px; font-weight:600; }
+.nav-right { display:flex !important; align-items:center !important; gap:14px; }
+.nav-right .hello { font-weight:600; color:black; }
+.logout-btn {
+  background-color:rgb(221,99,225) !important; border:2px solid black !important;
+  border-radius:5px !important; padding:8px 12px !important;
+  color:black !important; text-decoration:none !important; font-weight:700 !important;
+}
 .nav-left a:hover, .nav-right a:hover, .nav-right .hello:hover { color:red !important; }
 .overview-menu { padding:30px; background-color:white; }
 .overview-menu h2 { font-size:22px; color:black; margin-bottom:20px; }
@@ -213,20 +326,22 @@ textarea::placeholder { color:gray; font-style:italic; }
 
         <label for="chat">Chọn dòng</label>
         <select id="chat" name="chat" style="font-size:20px;width:600px;">
-          <option value="cl">[Chọn dòng]</option>
-          <option value="hg">High Grade</option>
-          <option value="rg">Real Grade</option>
-          <option value="mg">Master Grade</option>
-          <option value="pg">Perfect Grade</option>
-          <option value="ag">Anime Figure</option>
+          <option value="">[Chọn dòng]</option>
+          <?php foreach($grades as $g): 
+              $grade_value = htmlspecialchars($g);
+          ?>
+            <option value="<?php echo $grade_value; ?>"><?php echo $grade_value; ?></option>
+          <?php endforeach; ?>
         </select><br>
 
         <label for="hang">Chọn hãng</label>
         <select id="hang" name="hang" style="font-size:20px;width:600px;">
-          <option value="hang">[Chọn hãng]</option>
-          <option value="bandai">Bandai</option>
-          <option value="sega">Sega</option>
-          <option value="banpresto">Banpresto</option>
+          <option value="">[Chọn hãng]</option>
+          <?php foreach($producers as $p): 
+              $producer_value = htmlspecialchars($p);
+          ?>
+            <option value="<?php echo $producer_value; ?>"><?php echo $producer_value; ?></option>
+          <?php endforeach; ?>
         </select><br>
 
 
