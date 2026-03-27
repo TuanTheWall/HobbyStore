@@ -99,7 +99,7 @@ if(!$stmt){
 
 
 
-$price  = (float)$product['Price'];
+$price  = (float)$product['cotton_price']; // ví dụ: 5000001
 $profit = (float)$product['Profit']; // ví dụ: 0.3 = 30%
 
 $sell_price = $price * (1 + $profit);
