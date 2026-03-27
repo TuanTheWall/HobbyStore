@@ -161,9 +161,9 @@ if ($error === '') {
       <h2>Tìm kiếm nâng cao</h2>
       <form action="index.php" method="get">
         <label>Giá từ:</label>
-        <input type="text" name="price_min" class="price-input" placeholder="VD: 500.000">
+        <input type="number" name="price_min" placeholder="VD: 500000">
         <label>Giá đến:</label>
-        <input type="text" name="price_max" class="price-input" placeholder="VD: 1.000.000">
+        <input type="number" name="price_max" placeholder="VD: 1000000">
         <label>Chọn dòng:</label>
         <select name="grade">
             <option value="">-- Chọn dòng --</option>
@@ -245,7 +245,7 @@ $is_search = $error === '' && (
 
 <?php
     // ===== 6. TÍNH GIÁ BÁN =====
-    $price  = (float)$row['Price'];
+    $price  = (float)$row['cost_price'];
     $profit = (float)$row['Profit']; // ví dụ 0.3
 
     $sell_price = $price * (1 + $profit);
@@ -253,36 +253,13 @@ $is_search = $error === '' && (
 
 <div class="product-card">
     <a href="product.php?id=<?= $row['ProductID'] ?>">
-        <?php
-$image = $row['Product_image'];
-
-// Nếu là link online (https://...)
-if (filter_var($image, FILTER_VALIDATE_URL)) {
-    $img_src = $image;
-
-// Nếu là đường dẫn ổ cứng (D:\...)
-} elseif (preg_match('/^[A-Z]:\\\\/i', $image)) {
-
-    // ⚠️ CHỈNH LẠI theo máy bạn
-    // Ví dụ: D:\product_img → http://localhost/product_img
-    $img_src = str_replace("D:\\product_img\\", "http://localhost/product_img/", $image);
-    $img_src = str_replace("\\", "/", $img_src);
-
-// Nếu là đường dẫn tương đối (uploads/... hoặc assets/img/...)
-} else {
-    $img_src = $image;
-}
-?>
-
-<img src="<?= htmlspecialchars($img_src) ?>"
-     onerror="this.src='assets/img/default.png'"
-     alt="">
+        <img src="assets/img/<?= $row['Product_image'] ?>" alt="">
     </a>
 
     <h3><?= $row['ProductName'] ?></h3>
 
     <p class="price">
-        <?= number_format($sell_price, 0, ',', '.') ?> VNĐ
+        <?= number_format($sell_price) ?> VNĐ
     </p>
 
     <?php
@@ -363,29 +340,6 @@ $base_url = '?' . http_build_query($query_string);
     popup.addEventListener('click', (e) => {
       if (e.target === popup) popup.style.display = 'none';
     });
-    function formatNumber(value) {
-  return value.replace(/\D/g, "") // chỉ giữ số
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
-function unformatNumber(value) {
-  return value.replace(/\./g, "");
-}
-
-document.querySelectorAll('.price-input').forEach(input => {
-
-  // Khi nhập
-  input.addEventListener('input', (e) => {
-    let raw = unformatNumber(e.target.value);
-    e.target.value = formatNumber(raw);
-  });
-
-  // Khi submit form → bỏ dấu chấm để gửi đúng số
-  input.form.addEventListener('submit', () => {
-    input.value = unformatNumber(input.value);
-  });
-
-});
 </script>
 
 </body>
