@@ -17,8 +17,8 @@ while($grade_row = mysqli_fetch_assoc($grade_query)){
 
 $fname    = $_GET['fname'] ?? "";
 $category = $_GET['chat']  ?? "";
-$from     = $_GET['from']  ?? "";
-$to       = $_GET['to']    ?? "";
+$to       = $_GET['to']    ?? date("Y-m-d");
+$from     = $_GET['from']  ?? date("Y-m-d", strtotime("-7 days"));
 
 # Pagination
 $limit = 5;
