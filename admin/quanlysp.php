@@ -23,11 +23,9 @@ if(!empty($fname)){
     $fname_safe = $conn->real_escape_string($fname);
     $where .= " AND ProductName LIKE '%$fname_safe%'";
 }
-$grade_map = [
-    'hg' => 'HG', 'rg' => 'RG', 'mg' => 'MG', 'pg' => 'PG', 'ag' => 'Figure',
-];
-if($grade !== 'cl' && isset($grade_map[$grade])){
-    $where .= " AND Grade='" . $grade_map[$grade] . "'";
+if($grade !== 'cl' && !empty($grade)){
+    $grade_safe = $conn->real_escape_string($grade);
+    $where .= " AND Grade='$grade_safe'";
 }
 $hang_map = [
     'bandai' => 'Bandai', 'sega' => 'SEGA', 'banpresto' => 'Banpresto',
@@ -191,13 +189,17 @@ td img { width:80px; }
     <input style="color:gray;" type="text" id="fname" name="fname" placeholder="Tên sản phẩm" value="<?php echo htmlspecialchars($fname); ?>">
     <label style="font-size:25px;" for="chat">Tìm theo dòng:</label>
     <select id="chat" name="chat">
-      <option value="cl" <?php echo $grade=='cl'?'selected':''; ?>>Tất cả</option>
-      <option value="hg" <?php echo $grade=='hg'?'selected':''; ?>>High Grade</option>
-      <option value="rg" <?php echo $grade=='rg'?'selected':''; ?>>Real Grade</option>
-      <option value="mg" <?php echo $grade=='mg'?'selected':''; ?>>Master Grade</option>
-      <option value="pg" <?php echo $grade=='pg'?'selected':''; ?>>Perfect Grade</option>
-      <option value="ag" <?php echo $grade=='ag'?'selected':''; ?>>Anime Figure</option>
-    </select>
+  <option value="cl" <?php echo $grade=='cl'?'selected':''; ?>>Tất cả</option>
+  <?php
+  $cate_q = $conn->query("SELECT name FROM categories ORDER BY ID");
+  while($c = $cate_q->fetch_assoc()):
+  ?>
+    <option value="<?= htmlspecialchars($c['name']) ?>"
+      <?= ($grade === $c['name']) ? 'selected' : '' ?>>
+      <?= htmlspecialchars($c['name']) ?>
+    </option>
+  <?php endwhile; ?>
+</select>
     <label style="font-size:25px;" for="hang">Tìm theo hãng:</label>
     <select id="hang" name="hang">
       <option value="hang" <?php echo $hang=='hang'?'selected':''; ?>>Tất cả</option>
