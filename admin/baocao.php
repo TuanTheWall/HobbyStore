@@ -15,14 +15,14 @@ while($grade_row = mysqli_fetch_assoc($grade_query)){
     $grade_options[] = $grade_row['Grade'];
 }
 
-$fname = $_GET['fname'] ?? "";
-$category = $_GET['chat'] ?? "";
-$from = $_GET['from'] ?? "";
-$to = $_GET['to'] ?? "";
+$fname    = $_GET['fname'] ?? "";
+$category = $_GET['chat']  ?? "";
+$from     = $_GET['from']  ?? "";
+$to       = $_GET['to']    ?? "";
 
 # Pagination
 $limit = 5;
-$page = $_GET['page'] ?? 1;
+$page  = $_GET['page'] ?? 1;
 $start = ($page-1)*$limit;
 
 $sql = "
@@ -32,10 +32,10 @@ LEFT JOIN history h ON p.ProductID = h.ProductID
 WHERE 1
 ";
 
-if($fname!=""){
+if($fname != ""){
     $sql .= " AND p.ProductName LIKE '%$fname%'";
 }
-if($category!="" && $category!="cl"){
+if($category != "" && $category != "cl"){
     $sql .= " AND p.Grade='$category'";
 }
 if($from != ""){
@@ -45,12 +45,12 @@ if($to != ""){
     $sql .= " AND h.update_date <= '$to'";
 }
 
-$total_query = mysqli_query($conn,$sql);
-$total_rows = mysqli_num_rows($total_query);
-$total_page = ceil($total_rows/$limit);
+$total_query = mysqli_query($conn, $sql);
+$total_rows  = mysqli_num_rows($total_query);
+$total_page  = ceil($total_rows / $limit);
 
 $sql .= " LIMIT $start,$limit";
-$result = mysqli_query($conn,$sql);
+$result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -63,47 +63,21 @@ $result = mysqli_query($conn,$sql);
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Josefin Sans", sans-serif; }
   body { background-color: #f5f5f5; }
 
-  .modal-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 15px;
-  }
-  .modal-table th {
-    background: #22314e;
-    color: #fff;
-    padding: 10px 12px;
-    text-align: left;
-  }
-  .modal-table td {
-    padding: 9px 12px;
-    border-bottom: 1px solid #eee;
-  }
+  .modal-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .modal-table th { background: #22314e; color: #fff; padding: 10px 12px; text-align: left; }
+  .modal-table td { padding: 9px 12px; border-bottom: 1px solid #eee; }
   .modal-table tr:hover td { background: #f0f7ff; }
+  .modal-empty { text-align: center; color: #888; padding: 30px 0; font-size: 16px; }
 
-  .modal-empty {
-    text-align: center;
-    color: #888;
-    padding: 30px 0;
-    font-size: 16px;
-  }
-
-  /* Nút xem chi tiết */
   .btn-detail {
-    display: inline-block;
-    margin-top: 6px;
-    padding: 4px 12px;
-    font-size: 13px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.2s;
+    display: inline-block; margin-top: 6px; padding: 4px 12px;
+    font-size: 13px; border: none; border-radius: 5px; cursor: pointer;
+    font-weight: 600; transition: 0.2s;
   }
   .btn-detail.nhap { background: #d4edda; color: #1a6630; }
   .btn-detail.nhap:hover { background: #b8dfc4; }
   .btn-detail.xuat { background: #fde8d8; color: #a0410d; }
   .btn-detail.xuat:hover { background: #f9cfb5; }
-
   .loading { text-align: center; padding: 20px; color: #888; }
 </style>
 </head>
@@ -158,49 +132,41 @@ $stt = $start + 1;
 while ($row = mysqli_fetch_assoc($result)) {
     $product_id = $row['ProductID'];
 
-    $q = mysqli_query($conn, "
-        SELECT import_num, export_num, quantity
-        FROM history
-        WHERE ProductID = '$product_id'
-        ORDER BY update_date DESC
-        LIMIT 1
+    // ── Tồn cuối kỳ = số thực tế trong product_list (trigger luôn giữ đúng) ──
+    $toncuoi = (int)$row['Quantity'];
+
+    // ── Tổng nhập trong kỳ (lọc theo from/to nếu có) ──
+    $where_nhap = "product_id = '$product_id'";
+    if ($from != "") $where_nhap .= " AND pr.import_date >= '$from'";
+    if ($to   != "") $where_nhap .= " AND pr.import_date <= '$to'";
+
+    $q_nhap = mysqli_query($conn, "
+        SELECT COALESCE(SUM(pri.quantity), 0) AS tong_nhap
+        FROM purchase_receipt_items pri
+        JOIN purchase_receipts pr ON pri.receipt_code = pr.receipt_code
+        WHERE $where_nhap
     ");
-    $data = mysqli_fetch_assoc($q);
+    $nhap_data = mysqli_fetch_assoc($q_nhap);
+    $import    = (int)$nhap_data['tong_nhap'];
 
-    $q_product = mysqli_query($conn, "SELECT Quantity FROM product_list WHERE ProductID = '$product_id'");
-    $product = mysqli_fetch_assoc($q_product);
-    $product_quantity = $product ? $product['Quantity'] : 0;
-
-    if ($data) {
-        $tondau = $data['quantity'];
-        $import = $data['import_num'];
-        $export = $data['export_num'];
-        if ($tondau == 0 && $product_quantity != 0) {
-            $tondau = $product_quantity;
-        }
-    } else {
-        $tondau = $product_quantity;
-        $import = 0;
-        $export = 0;
-    }
-
-    $toncuoi = $tondau + $import - $export;
-    $pid_safe = htmlspecialchars($product_id);
-
-    // Tính xuất trong kỳ trực tiếp từ order_item (có lọc ngày nếu có)
+    // ── Tổng xuất trong kỳ (chỉ đơn Đã giao, lọc theo from/to nếu có) ──
     $where_xuat = "oi.ProductID = '$product_id' AND o.status = 'Đã giao'";
     if ($from != "") $where_xuat .= " AND o.order_date >= '$from'";
     if ($to   != "") $where_xuat .= " AND o.order_date <= '$to'";
 
-    $q_xuat = mysqli_query($conn, "
-        SELECT COUNT(*) as cnt, COALESCE(SUM(oi.quantity), 0) as tong_xuat
+    $q_xuat   = mysqli_query($conn, "
+        SELECT COALESCE(SUM(oi.quantity), 0) AS tong_xuat
         FROM order_item oi
         JOIN orders o ON oi.id_order = o.id_order
         WHERE $where_xuat
     ");
     $xuat_data = mysqli_fetch_assoc($q_xuat);
-    $has_xuat  = $xuat_data['cnt'] > 0;
-    $export    = (int)$xuat_data['tong_xuat']; // ghi đè export từ history
+    $export    = (int)$xuat_data['tong_xuat'];
+
+    // ── Tồn đầu kỳ = Tồn cuối kỳ - Nhập trong kỳ + Xuất trong kỳ ──
+    $tondau = $toncuoi - $import + $export;
+
+    $pid_safe = htmlspecialchars($product_id);
 ?>
 <tr>
   <td><?php echo $stt++ ?></td>
@@ -215,7 +181,7 @@ while ($row = mysqli_fetch_assoc($result)) {
   </td>
   <td>
     <?php echo $export ?>
-    <?php if($has_xuat): ?>
+    <?php if($export > 0): ?>
       <br><button class="btn-detail xuat" onclick="xemChiTiet('xuat','<?php echo $pid_safe ?>','<?php echo htmlspecialchars($row['ProductName']) ?>')">Xem đơn hàng</button>
     <?php endif; ?>
   </td>
@@ -225,20 +191,19 @@ while ($row = mysqli_fetch_assoc($result)) {
 </table>
 
 <div class="pagination" style="margin-top:100px;margin-bottom:50px;">
-<?php if($page>1){ ?>
-  <a href="?page=<?php echo $page-1 ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>">&laquo;</a>
-<?php } ?>
-<?php for($i=1;$i<=$total_page;$i++){ ?>
-  <a href="?page=<?php echo $i ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>" class="<?php if($i==$page) echo 'active'; ?>"><?php echo $i ?></a>
-<?php } ?>
-<?php if($page<$total_page){ ?>
-  <a href="?page=<?php echo $page+1 ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>">&raquo;</a>
-<?php } ?>
+<?php if($page > 1): ?>
+  <a href="?page=<?php echo $page-1 ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>&from=<?php echo $from ?>&to=<?php echo $to ?>">&laquo;</a>
+<?php endif; ?>
+<?php for($i=1; $i<=$total_page; $i++): ?>
+  <a href="?page=<?php echo $i ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>&from=<?php echo $from ?>&to=<?php echo $to ?>" class="<?php if($i==$page) echo 'active'; ?>"><?php echo $i ?></a>
+<?php endfor; ?>
+<?php if($page < $total_page): ?>
+  <a href="?page=<?php echo $page+1 ?>&fname=<?php echo $fname ?>&chat=<?php echo $category ?>&from=<?php echo $from ?>&to=<?php echo $to ?>">&raquo;</a>
+<?php endif; ?>
 </div>
 
 <script>
 function xemChiTiet(loai, productId, productName) {
-  // Hiển thị loading
   const btn = event.target;
   const originalText = btn.textContent;
   btn.textContent = 'Đang tải...';
@@ -260,9 +225,6 @@ function xemChiTiet(loai, productId, productName) {
       btn.textContent = originalText;
       btn.disabled = false;
     });
-}
-
-function closeModal() {
 }
 </script>
 
