@@ -151,14 +151,18 @@ $sell_price = $price * (1 + $profit);
         <label>Giá đến:</label>
         <input type="number" name="price_max" placeholder="VD: 1000000">
         <label>Chọn dòng:</label>
-        <select name="grade">
-            <option value="">-- Chọn dòng --</option>
-            <option value="HG">High Grade</option>
-            <option value="RG">Real Grade</option>
-            <option value="MG">Master Grade</option>
-            <option value="PG">Perfect Grade</option>
-            <option value="Figure">Anime Figure</option>
-        </select>
+        
+<select name="grade">
+    <option value="">-- Chọn dòng --</option>
+    <?php
+    $cate_q = $conn->query("SELECT name FROM categories ORDER BY ID");
+    while($c = $cate_q->fetch_assoc()):
+    ?>
+        <option value="<?= htmlspecialchars($c['name']) ?>">
+            <?= htmlspecialchars($c['name']) ?>
+        </option>
+    <?php endwhile; ?>
+</select>
         <label>Chọn hãng:</label>
         <select name="brand">
           <option value="">-- Chọn hãng --</option>

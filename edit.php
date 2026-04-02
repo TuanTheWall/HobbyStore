@@ -100,15 +100,19 @@ if(isset($_POST['save'])){
         <label>Giá đến:</label>
         <<input type="text" name="price_max" class="price-input" placeholder="VD: 1000000">
 
+        
         <label>Chọn dòng:</label>
-        <select name="grade">
-          <option value="">-- Chọn dòng --</option>
-          <option value="hg">High Grade</option>
-          <option value="rg">Real Grade</option>
-          <option value="mg">Master Grade</option>
-          <option value="pg">Perfect Grade</option>
-          <option value="anime">Anime Figure</option>
-        </select>
+<select name="grade">
+    <option value="">-- Chọn dòng --</option>
+    <?php
+    $cate_q = $conn->query("SELECT name FROM categories ORDER BY ID");
+    while($c = $cate_q->fetch_assoc()):
+    ?>
+        <option value="<?= htmlspecialchars($c['name']) ?>">
+            <?= htmlspecialchars($c['name']) ?>
+        </option>
+    <?php endwhile; ?>
+</select>
 
         <label>Chọn hãng:</label>
         <select name="brand">

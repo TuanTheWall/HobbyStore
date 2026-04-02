@@ -538,14 +538,20 @@ margin-left:-960px;
         <label>Giá đến:</label>
         <input type="text" name="price_max" id="price_max" placeholder="VD: 2.000.000" inputmode="numeric">
         <label>Chọn dòng:</label>
-        <select name="grade">
-            <option value="">-- Chọn dòng --</option>
-            <option value="HG">High Grade</option>
-            <option value="RG">Real Grade</option>
-            <option value="MG">Master Grade</option>
-            <option value="PG">Perfect Grade</option>
-            <option value="Figure">Anime Figure</option>
-        </select>
+        <label>Chọn dòng:</label>
+<select name="grade">
+    <option value="">-- Chọn dòng --</option>
+    <?php
+    // Reset lại result vì đã dùng ở trên
+    $cate_result->data_seek(0);
+    while($c = $cate_result->fetch_assoc()):
+    ?>
+        <option value="<?= htmlspecialchars($c['name']) ?>"
+            <?= ($grade === $c['name']) ? 'selected' : '' ?>>
+            <?= htmlspecialchars($c['name']) ?>
+        </option>
+    <?php endwhile; ?>
+</select>
         <label>Chọn hãng:</label>
         <select name="brand">
           <option value="">-- Chọn hãng --</option>

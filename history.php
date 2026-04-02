@@ -1,10 +1,15 @@
 <?php
 session_start();
+$conn = new mysqli("localhost","root","","hobbystore");
+mysqli_set_charset($conn,"utf8mb4");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <style>
+  .tren { z-index: 100; }
+</style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thông tin cá nhân</title>
@@ -56,20 +61,24 @@ session_start();
       <h2>Tìm kiếm nâng cao</h2>
       <form action="index.php" method="get">
         <label>Giá từ:</label>
-        <input type="text" name="price_min" class="price-input" placeholder="VD: 500000">
+        <input type="number" name="price_min" placeholder="VD: 500000">
 
         <label>Giá đến:</label>
-        <input type="text" name="price_max" class="price-input" placeholder="VD: 1.000.000">
+        <input type="number" name="price_max" placeholder="VD: 1000000">
 
+    
         <label>Chọn dòng:</label>
-        <select name="grade">
-          <option value="">-- Chọn dòng --</option>
-          <option value="hg">High Grade</option>
-          <option value="rg">Real Grade</option>
-          <option value="mg">Master Grade</option>
-          <option value="pg">Perfect Grade</option>
-          <option value="anime">Anime Figure</option>
-        </select>
+<select name="grade">
+  <option value="">-- Chọn dòng --</option>
+  <?php
+  $cate_q = $conn->query("SELECT name FROM categories ORDER BY ID");
+  while($c = $cate_q->fetch_assoc()):
+  ?>
+    <option value="<?= htmlspecialchars($c['name']) ?>">
+      <?= htmlspecialchars($c['name']) ?>
+    </option>
+  <?php endwhile; ?>
+</select>
 
         <label>Chọn hãng:</label>
         <select name="brand">
@@ -202,29 +211,6 @@ closePopup.addEventListener('click', () => {
 
 popup.addEventListener('click', (e) => {
   if (e.target === popup) popup.style.display = 'none';
-});
-function formatNumber(value) {
-  return value.replace(/\D/g, "") // chỉ giữ số
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
-function unformatNumber(value) {
-  return value.replace(/\./g, "");
-}
-
-document.querySelectorAll('.price-input').forEach(input => {
-
-  // Khi nhập
-  input.addEventListener('input', (e) => {
-    let raw = unformatNumber(e.target.value);
-    e.target.value = formatNumber(raw);
-  });
-
-  // Khi submit form → bỏ dấu chấm để gửi đúng số
-  input.form.addEventListener('submit', () => {
-    input.value = unformatNumber(input.value);
-  });
-
 });
   </script>
 </body>
