@@ -8,27 +8,15 @@ if(!isset($_SESSION['admin'])){
 
 $conn = mysqli_connect("localhost","root","","hobbystore");
 
-$id = $_GET['name'] ?? "";
+$id = $_GET['id'] ?? '';
 
-# Kiểm tra danh mục có sản phẩm không
-$check = mysqli_query($conn,
-"SELECT * FROM product_list WHERE Grade='$id'"
-);
-
-if(mysqli_num_rows($check) > 0){
-
-echo "<script>
-alert('Không thể xóa danh mục vì đang có sản phẩm!');
-window.location='quanlydm.php';
-</script>";
-
-exit();
-
+if($id === ''){
+    header("Location: quanlydm.php");
+    exit();
 }
 
-# Xóa danh mục
-$sql = "DELETE FROM categories WHERE id='$id'";
-mysqli_query($conn,$sql);
+$sql = "DELETE FROM categories WHERE ID='$id'";
+mysqli_query($conn, $sql);
 
 header("Location: quanlydm.php");
 exit();

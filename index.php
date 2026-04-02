@@ -2,7 +2,8 @@
 session_start();
 require_once "config.php";
 $cate_sql = "SELECT * FROM categories";
-$cate_result = $conn->query($cate_sql);
+$cate_result = $conn->query($cate_sql);      // dùng cho popup
+$cate_result2 = $conn->query($cate_sql); // dùng cho category grid
 $limit = 10;
 $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $start = ($page - 1) * $limit;
@@ -541,11 +542,7 @@ margin-left:-960px;
         <label>Chọn dòng:</label>
 <select name="grade">
     <option value="">-- Chọn dòng --</option>
-    <?php
-    // Reset lại result vì đã dùng ở trên
-    $cate_result->data_seek(0);
-    while($c = $cate_result->fetch_assoc()):
-    ?>
+<?php while($c = $cate_result2->fetch_assoc()): ?>
         <option value="<?= htmlspecialchars($c['name']) ?>"
             <?= ($grade === $c['name']) ? 'selected' : '' ?>>
             <?= htmlspecialchars($c['name']) ?>
