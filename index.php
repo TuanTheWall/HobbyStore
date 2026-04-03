@@ -576,6 +576,7 @@ margin-left:-960px;
   <?php
     $query = $_GET;
     $query['grade'] = $c['name']; // gán vào filter
+    unset($query['page']);
   ?>
 
   <a href="index.php?<?= http_build_query($query) ?>" class="category-item">
