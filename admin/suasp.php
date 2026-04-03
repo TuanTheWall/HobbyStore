@@ -1,58 +1,97 @@
 <?php
 session_start();
-if(!isset($_SESSION['admin'])){ header("Location: adminlogin.php"); exit(); }
+
+if(!isset($_SESSION['admin'])){
+    header("Location: adminlogin.php");
+    exit();
+}
 
 $conn = new mysqli("localhost","root","","hobbystore");
-if($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
+$conn->set_charset("utf8mb4");
 
-$id = isset($_GET['id']) ? $conn->real_escape_string($_GET['id']) : '';
-if(empty($id)){ header("Location: quanlysp.php"); exit; }
+if($conn->connect_error){
+    die("Kết nối thất bại: " . $conn->connect_error);
+}
 
-/* lưu thay đổi */
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+if(!isset($_GET['id'])){
+    header("Location: quanlysp.php");
+    exit();
+}
+
+$id = $conn->real_escape_string($_GET['id']);
+
+// Lấy thông tin sản phẩm
+$product = $conn->query("SELECT * FROM product_list WHERE ProductID='$id'")->fetch_assoc();
+if(!$product){
+    die("Không tìm thấy sản phẩm");
+}
+
+// Kiểm tra sản phẩm có trong phiếu nhập không
+$check_nhap = $conn->query("SELECT COUNT(*) as cnt FROM purchase_receipt_items WHERE product_id='$id'");
+$has_nhap   = $check_nhap->fetch_assoc()['cnt'] > 0;
+
+// Kiểm tra sản phẩm có trong đơn hàng không
+$check_order = $conn->query("SELECT COUNT(*) as cnt FROM order_item WHERE ProductID='$id'");
+$has_order   = $check_order->fetch_assoc()['cnt'] > 0;
+
+$can_delete = !$has_nhap && !$has_order;
+
+$error   = '';
+$success = '';
+
+// ── XỬ LÝ XÓA ──
+if(isset($_POST['delete_product'])){
+    if($can_delete){
+        $conn->query("DELETE FROM product_list WHERE ProductID='$id'");
+        header("Location: quanlysp.php");
+        exit();
+    } else {
+        $error = "Không thể xóa vì sản phẩm đã có phiếu nhập hoặc đơn hàng liên quan.";
+    }
+}
+
+// ── XỬ LÝ LƯU THAY ĐỔI ──
+if(isset($_POST['save'])){
     $name        = $conn->real_escape_string($_POST['ProductName']);
     $grade       = $conn->real_escape_string($_POST['Grade']);
     $producer    = $conn->real_escape_string($_POST['Producer']);
-    $price       = (int)$_POST['Price'];
+    $quantity    = (int)$_POST['Quantity'];
     $source      = $conn->real_escape_string($_POST['Product_source']);
     $desc        = $conn->real_escape_string($_POST['Product_description']);
     $detail      = $conn->real_escape_string($_POST['Product_detail']);
-    $qty         = (int)$_POST['Quantity'];
+    $old_image   = $conn->real_escape_string($_POST['old_image']);
 
-    $image = $conn->real_escape_string($_POST['old_image']);
-    if(!empty($_FILES['Product_image']['name'])){
-        $ext      = pathinfo($_FILES['Product_image']['name'], PATHINFO_EXTENSION);
-        $newname  = uniqid('sp_') . '.' . $ext;
-        move_uploaded_file($_FILES['Product_image']['tmp_name'], "assets/img/" . $newname);
-        $image = $newname;
+    // Xử lý upload ảnh
+    $image = $old_image;
+    if(isset($_FILES['Product_image']) && $_FILES['Product_image']['error'] === 0){
+        $ext       = pathinfo($_FILES['Product_image']['name'], PATHINFO_EXTENSION);
+        $new_name  = uniqid() . '.' . $ext;
+        $upload_to = "assets/img/" . $new_name;
+        if(move_uploaded_file($_FILES['Product_image']['tmp_name'], $upload_to)){
+            $image = $new_name;
+        }
     }
 
-    $conn->query("UPDATE product_list SET
-        ProductName='$name',
-        Grade='$grade',
-        Producer='$producer',
-        Price=$price,
-        Product_source='$source',
-        Product_description='$desc',
-        Product_detail='$detail',
-        Product_image='$image',
-        Quantity=$qty
-        WHERE ProductID='$id'");
+    $conn->query("
+        UPDATE product_list SET
+            ProductName        = '$name',
+            Grade              = '$grade',
+            Producer           = '$producer',
+            Quantity           = $quantity,
+            Product_source     = '$source',
+            Product_description= '$desc',
+            Product_detail     = '$detail',
+            Product_image      = '$image'
+        WHERE ProductID = '$id'
+    ");
 
-    header("Location: quanlysp.php");
-    exit;
+    // Reload lại dữ liệu mới
+    $product = $conn->query("SELECT * FROM product_list WHERE ProductID='$id'")->fetch_assoc();
+    $success = "Lưu thay đổi thành công!";
 }
 
-/* lấy dữ liệu sản phẩm */
-$row = $conn->query("SELECT * FROM product_list WHERE ProductID='$id'")->fetch_assoc();
-if(!$row){ header("Location: quanlysp.php"); exit; }
-
-/* lấy danh mục từ DB */
-$grades = [];
-$grade_result = $conn->query("SELECT name FROM categories ORDER BY ID ASC");
-while($g = $grade_result->fetch_assoc()){
-    $grades[] = $g['name'];
-}
+// Load danh mục
+$cate_result = $conn->query("SELECT name FROM categories ORDER BY ID");
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -97,15 +136,33 @@ while($g = $grade_result->fetch_assoc()){
     .btn-secondary:hover { background-color:#5a6268; }
     .btn-gradient { background:linear-gradient(90deg,#00c6ff,#0072ff); color:white; font-weight:600; }
     .btn-gradient:hover { opacity:0.9; }
-    .form-buttons { display:flex; justify-content:center; gap:1.5rem; margin-top:2.5rem; padding-top:2rem; border-top:1px solid #dee2e6; }
+    .btn-danger { background-color:#dc3545; color:white; font-weight:600; }
+    .btn-danger:hover { background-color:#bb2d3b; }
+    .btn-danger:disabled { background-color:#ccc; color:#666; cursor:not-allowed; opacity:1; }
+    .form-buttons { display:flex; justify-content:center; gap:1.5rem; margin-top:2.5rem; padding-top:2rem; border-top:1px solid #dee2e6; flex-wrap:wrap; }
     .img-preview { width:150px; height:200px; object-fit:cover; border-radius:8px; border:1px solid #ccc; margin-top:10px; display:block; }
     .form-row { display:flex; gap:1rem; }
     .form-row .form-group { flex:1; }
+    .alert { padding:12px 16px; border-radius:8px; margin-bottom:16px; font-weight:600; }
+    .alert-danger  { background:#fde8e8; color:#c0392b; border:1px solid #f5c6cb; }
+    .alert-success { background:#d4edda; color:#155724; border:1px solid #c3e6cb; }
+    .delete-note { font-size:13px; color:#888; margin-top:6px; }
   </style>
 </head>
 <body>
 
-<?php include "navbar.php"; ?>
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="admin.php" class="logo-link">
+      <img src="assets/img/logo.png" alt="Logo" class="navbar-logo">
+    </a>
+    <a href="admin.php" class="nav-home">Trang chủ</a>
+  </div>
+  <div class="nav-right">
+    <span class="hello">Xin chào, Admin</span>
+    <a href="adminlogin.php" class="logout-btn">Đăng xuất</a>
+  </div>
+</nav>
 
 <section class="overview-menu">
   <h2>Mục quản lý</h2>
@@ -129,26 +186,40 @@ while($g = $grade_result->fetch_assoc()){
     <div class="card">
       <div class="card-header">
         <h4>Thông tin sản phẩm</h4>
-        <p>Cập nhật các thông tin của sản phẩm — ID: <b><?php echo htmlspecialchars($id); ?></b></p>
+        <p>Cập nhật các thông tin của sản phẩm — ID: <b><?= htmlspecialchars($id) ?></b></p>
       </div>
+
+      <?php if($error): ?>
+        <div class="alert alert-danger"><?= $error ?></div>
+      <?php endif; ?>
+      <?php if($success): ?>
+        <div class="alert alert-success"><?= $success ?></div>
+      <?php endif; ?>
+
       <div class="card-body">
+        <!-- Form lưu thay đổi -->
         <form method="post" enctype="multipart/form-data">
-          <input type="hidden" name="old_image" value="<?php echo htmlspecialchars($row['Product_image']); ?>">
+          <input type="hidden" name="save" value="1">
+          <input type="hidden" name="old_image" value="<?= htmlspecialchars($product['Product_image']) ?>">
 
           <div class="form-group">
             <label class="form-label">Tên sản phẩm <span style="color:#dc3545;">*</span></label>
-            <input type="text" class="form-control" name="ProductName" value="<?php echo htmlspecialchars($row['ProductName']); ?>" required>
+            <input type="text" class="form-control" name="ProductName" value="<?= htmlspecialchars($product['ProductName']) ?>" required>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Dòng (Grade) <span style="color:#dc3545;">*</span></label>
               <select class="form-control" name="Grade" required>
-                <?php foreach($grades as $g): ?>
-                <option value="<?php echo htmlspecialchars($g); ?>" <?php echo $row['Grade']===$g ? 'selected' : ''; ?>>
-                  <?php echo htmlspecialchars($g); ?>
-                </option>
-                <?php endforeach; ?>
+                <?php
+                $cate_result->data_seek(0);
+                while($c = $cate_result->fetch_assoc()):
+                ?>
+                  <option value="<?= htmlspecialchars($c['name']) ?>"
+                    <?= ($product['Grade'] === $c['name']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($c['name']) ?>
+                  </option>
+                <?php endwhile; ?>
               </select>
             </div>
             <div class="form-group">
@@ -158,44 +229,37 @@ while($g = $grade_result->fetch_assoc()){
                 $producers = ['Bandai','SEGA','Banpresto'];
                 foreach($producers as $p):
                 ?>
-                <option value="<?php echo $p; ?>" <?php echo $row['Producer']===$p?'selected':''; ?>><?php echo $p; ?></option>
+                  <option value="<?= $p ?>" <?= ($product['Producer']===$p)?'selected':'' ?>><?= $p ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
           </div>
 
           <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Giá bán (VNĐ) <span style="color:#dc3545;">*</span></label>
-              <input type="text" class="form-control" id="priceDisplay" 
-                placeholder="Nhập giá..."
-                value="<?php echo number_format($row['Price'], 0, ',', '.'); ?> VNĐ">
-              <input type="hidden" name="Price" id="priceRaw" value="<?php echo $row['Price']; ?>">
-            </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label class="form-label">Số lượng <span style="color:#dc3545;">*</span></label>
-              <input type="number" class="form-control" name="Quantity" value="<?php echo $row['Quantity']; ?>" min="0" required>
-            </div>
+              <input type="number" class="form-control" name="Quantity" value="<?= $product['Quantity'] ?>" min="0" required>
+            </div> -->
           </div>
 
           <div class="form-group">
             <label class="form-label">Nguồn gốc</label>
-            <input type="text" class="form-control" name="Product_source" value="<?php echo htmlspecialchars($row['Product_source'] ?? ''); ?>">
+            <input type="text" class="form-control" name="Product_source" value="<?= htmlspecialchars($product['Product_source']) ?>">
           </div>
 
           <div class="form-group">
             <label class="form-label">Mô tả ngắn</label>
-            <textarea class="form-control" name="Product_description" rows="3"><?php echo htmlspecialchars($row['Product_description'] ?? ''); ?></textarea>
+            <textarea class="form-control" name="Product_description" rows="3"><?= htmlspecialchars($product['Product_description']) ?></textarea>
           </div>
 
           <div class="form-group">
             <label class="form-label">Chi tiết sản phẩm</label>
-            <textarea class="form-control" name="Product_detail" rows="3"><?php echo htmlspecialchars($row['Product_detail'] ?? ''); ?></textarea>
+            <textarea class="form-control" name="Product_detail" rows="3"><?= htmlspecialchars($product['Product_detail']) ?></textarea>
           </div>
 
           <div class="form-group">
             <label class="form-label">Hình ảnh <small style="color:#999;">(để trống nếu không đổi)</small></label>
-            <img id="imgPreview" src="assets/img/<?php echo htmlspecialchars($row['Product_image']); ?>" class="img-preview" alt="Ảnh sản phẩm">
+            <img id="imgPreview" src="assets/img/<?= htmlspecialchars($product['Product_image']) ?>" class="img-preview" alt="Ảnh sản phẩm">
             <input type="file" class="form-control" name="Product_image" accept="image/*" style="margin-top:10px;" onchange="previewImg(this)">
           </div>
 
@@ -205,6 +269,26 @@ while($g = $grade_result->fetch_assoc()){
             </a>
             <button type="submit" class="btn btn-gradient">Lưu thay đổi</button>
           </div>
+        </form>
+
+        <!-- Form xóa riêng biệt -->
+        <form method="post" style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #dee2e6; text-align:center;">
+          <input type="hidden" name="delete_product" value="1">
+          <?php if($can_delete): ?>
+            <button type="submit" class="btn btn-danger"
+              onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này? Hành động không thể hoàn tác!')">
+              Xóa sản phẩm
+            </button>
+          <?php else: ?>
+            <button type="button" class="btn btn-danger" disabled>Xóa sản phẩm</button>
+            <p class="delete-note">
+              ⚠️ Không thể xóa vì sản phẩm đã có
+              <?= $has_nhap ? 'phiếu nhập' : '' ?>
+              <?= ($has_nhap && $has_order) ? ' và ' : '' ?>
+              <?= $has_order ? 'đơn hàng' : '' ?>
+              liên quan.
+            </p>
+          <?php endif; ?>
         </form>
       </div>
     </div>
@@ -219,31 +303,6 @@ function previewImg(input){
     reader.readAsDataURL(input.files[0]);
   }
 }
-
-const priceDisplay = document.getElementById('priceDisplay');
-const priceRaw     = document.getElementById('priceRaw');
-
-priceDisplay.addEventListener('input', function(){
-  let raw = this.value.replace(/[^\d]/g, '');
-  priceRaw.value = raw;
-  if(raw.length > 0){
-    this.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
-  } else {
-    this.value = '';
-  }
-});
-
-priceDisplay.addEventListener('focus', function(){
-  let raw = priceRaw.value;
-  this.value = raw ? raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
-});
-
-priceDisplay.addEventListener('blur', function(){
-  let raw = priceRaw.value;
-  if(raw){
-    this.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
-  }
-});
 </script>
 </body>
 </html>
