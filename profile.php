@@ -137,7 +137,7 @@ $user = $result->fetch_assoc();
             <a href="profile.php">Thông tin cá nhân</a>
             <a href="history.php">Lịch sử mua hàng</a>
             <a href="edit.php">Chỉnh sửa</a>
-            <a href="logout.php">Đăng xuất</a>
+            <a href="logoutindex.php">Đăng xuất</a>
         </div>
 </body>
         <script>
