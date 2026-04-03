@@ -11,7 +11,7 @@ $user_id = $_SESSION['user_id'];
 
 $sql = "SELECT * FROM customers WHERE customer_id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);
+$stmt->bind_param("s", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
