@@ -51,6 +51,15 @@ if(!empty($date_from)) $qp[] = "date_from=".urlencode($date_from);
 if(!empty($date_to))   $qp[] = "date_to=".urlencode($date_to);
 if(!empty($status_f))  $qp[] = "sanpham=".urlencode($status_f);
 $qs = count($qp) ? '&'.implode('&',$qp) : '';
+
+/* định nghĩa flow trạng thái */
+$next_status = [
+    'Chờ xử lý'  => ['label' => 'Xác nhận',   'value' => 'Đã xác nhận', 'class' => 'btn-confirm'],
+    'Đã xác nhận' => ['label' => 'Đang giao',  'value' => 'Đang giao',   'class' => 'btn-delivering'],
+    'Đang giao'   => ['label' => 'Đã giao',    'value' => 'Đã giao',     'class' => 'btn-deliver'],
+    'Đã giao'     => null, // không có nút tiếp theo
+    'Đã huỷ'      => null, // không có nút tiếp theo
+];
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -90,28 +99,21 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
     tbody tr:hover { background:#fafcff; }
     .btn { padding:8px 12px; border-radius:8px; border:none; cursor:pointer; font-weight:700; font-size:13px; margin-right:4px; margin-bottom:4px; }
     .btn:active { transform:translateY(1px); }
-    .btn-deliver  { background:#28a745; color:#fff; }
-    .btn-cancel   { background:#e94b3c; color:#fff; }
-    .btn-detail   { background:#f59e0b; color:#111; }
-    .btn-pending  { background:#ffcc00; color:#111; }
+    .btn-deliver    { background:#28a745; color:#fff; }
+    .btn-cancel     { background:#e94b3c; color:#fff; }
+    .btn-detail     { background:#f59e0b; color:#111; }
     .btn-delivering { background:#17a2b8; color:#fff; }
-    .btn-confirm  { background:#0d6efd; color:#fff; }
+    .btn-confirm    { background:#0d6efd; color:#fff; }
     .status-badge { padding:6px 8px; border-radius:8px; font-weight:700; font-size:13px; display:inline-block; }
-    .status-pending   { background:#fff7e6; color:#b36b00; }
-    .status-shipped   { background:#e8f8f0; color:#14723b; }
-    .status-cancel    { background:#fff0f0; color:#b33; }
+    .status-pending    { background:#fff7e6; color:#b36b00; }
+    .status-shipped    { background:#e8f8f0; color:#14723b; }
+    .status-cancel     { background:#fff0f0; color:#b33; }
     .status-delivering { background:#e0f7fa; color:#006064; }
     .pagination { text-align:center; margin-top:20px; margin-bottom:50px; }
     .pagination a { color:black; text-decoration:none; padding:8px 15px; display:inline-block; }
     .pagination a.active { background-color:green; font-weight:bold; border-radius:5px; }
     .pagination a:hover:not(.active) { background-color:gray; border-radius:5px; }
     .muted { color:#667; font-size:13px; }
-    .modal-back { position:fixed; inset:0; background:rgba(12,18,30,0.45); display:none; align-items:center; justify-content:center; z-index:1000; }
-    .modal { background:#fff; border-radius:12px; width:700px; max-width:calc(100% - 48px); padding:25px; box-shadow:0 20px 60px rgba(75,73,73,0.25); max-height:90vh; overflow:auto; }
-    .modal h3 { margin:0 0 8px 0; font-size:18px; color:#0b5ed7; }
-    .modal table { width:100%; border-collapse:collapse; margin-top:12px; font-size:14px; }
-    .modal table th, .modal table td { padding:8px 10px; border-bottom:1px dashed #eef2f6; text-align:left; }
-    .close-btn { background:#f1f3f5; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; float:right; }
   </style>
 </head>
 <body>
@@ -174,25 +176,25 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
     </thead>
     <tbody>
     <?php while($row = $result->fetch_assoc()):
-        /* lấy danh sách sản phẩm của đơn */
         $oid = $conn->real_escape_string($row['id_order']);
-        $items_res = $conn->query("SELECT p.ProductName, oi.quantity, p.Price
+        $items_res = $conn->query("SELECT p.ProductName, oi.quantity
                                    FROM order_item oi
                                    JOIN product_list p ON oi.ProductID = p.ProductID
                                    WHERE oi.id_order='$oid'");
         $items = [];
         while($it = $items_res->fetch_assoc()) $items[] = $it;
+        $product_names = implode('<br>', array_map(fn($i) => htmlspecialchars($i['ProductName']) . ' x' . $i['quantity'], $items));
 
-        $product_names = implode('<br>', array_map(fn($i) => htmlspecialchars($i['ProductName']), $items));
-
-        /* badge class */
         $badge = 'status-pending';
         if($row['status']==='Đã giao' || $row['status']==='Đã xác nhận') $badge = 'status-shipped';
         elseif($row['status']==='Đang giao') $badge = 'status-delivering';
         elseif($row['status']==='Đã huỷ') $badge = 'status-cancel';
 
-        /* encode items for modal */
-        $items_json = htmlspecialchars(json_encode($items, JSON_UNESCAPED_UNICODE), ENT_QUOTES);
+        $current_status = $row['status'];
+        $next = $next_status[$current_status] ?? null;
+
+        // Nút hủy hiện khi chưa Đã giao và chưa Đã huỷ
+        $show_cancel = ($current_status !== 'Đã giao' && $current_status !== 'Đã huỷ');
     ?>
     <tr>
       <td><?php echo htmlspecialchars($row['id_order']); ?></td>
@@ -203,34 +205,33 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
       <td><?php echo $product_names; ?></td>
       <td><?php echo $row['total'] ? number_format($row['total'],0,',','.') . 'đ' : '—'; ?></td>
       <td class="muted"><?php echo date('d/m/Y', strtotime($row['order_date'])); ?></td>
-      <td><span class="status-badge <?php echo $badge; ?>"><?php echo htmlspecialchars($row['status']); ?></span></td>
+      <td><span class="status-badge <?php echo $badge; ?>"><?php echo htmlspecialchars($current_status); ?></span></td>
       <td style="text-align:right">
-        <!-- Các nút đổi trạng thái -->
         <form method="post" style="display:inline;">
           <input type="hidden" name="id_order" value="<?php echo htmlspecialchars($row['id_order']); ?>">
           <input type="hidden" name="update_status" value="1">
-          <button type="submit" name="status" value="Chờ xử lý"   class="btn btn-pending">Chờ xử lý</button>
-          <button type="submit" name="status" value="Đang giao"    class="btn btn-delivering">Đang giao</button>
-          <button type="submit" name="status" value="Đã xác nhận"  class="btn btn-confirm">Đã xác nhận</button>
-          <button type="submit" name="status" value="Đã giao"      class="btn btn-deliver">Đã giao</button>
-          <button type="submit" name="status" value="Đã huỷ"
-            onclick="return confirm('Bạn chắc chắn muốn huỷ đơn <?php echo $row['id_order']; ?>?')"
-            class="btn btn-cancel">Huỷ</button>
+
+          <?php if($next): ?>
+            <button type="submit" name="status" value="<?php echo $next['value']; ?>"
+              class="btn <?php echo $next['class']; ?>">
+              <?php echo $next['label']; ?>
+            </button>
+          <?php endif; ?>
+
+          <?php if($show_cancel): ?>
+            <button type="submit" name="status" value="Đã huỷ"
+              class="btn btn-cancel"
+              onclick="return confirm('Bạn chắc chắn muốn huỷ đơn <?php echo $row['id_order']; ?>?')">
+              Huỷ đơn
+            </button>
+          <?php endif; ?>
         </form>
-        <button class="btn btn-detail"
-          onclick="openModal(
-            '<?php echo htmlspecialchars($row['id_order']); ?>',
-            '<?php echo htmlspecialchars($row['receiver_name'] ?? $row['username']); ?>',
-            '<?php echo htmlspecialchars($row['email']); ?>',
-            '<?php echo htmlspecialchars($row['receiver_phone'] ?? ''); ?>',   
-            '<?php echo htmlspecialchars($row['receiver_address'] ?? ''); ?>',
-            '<?php echo htmlspecialchars($row['order_date']); ?>',
-            '<?php echo htmlspecialchars($row['status']); ?>',
-            '<?php echo $row['total'] ? number_format($row['total'],0,',','.') . 'đ' : '—'; ?>',
-            '<?php echo htmlspecialchars($row['payment_method'] ?? ''); ?>',
-            '<?php echo htmlspecialchars($row['note'] ?? ''); ?>',
-            <?php echo $items_json; ?>
-          )">Xem chi tiết</button>
+
+        <a href="order_detail_page.php?id=<?php echo urlencode($row['id_order']); ?>"
+           class="btn btn-detail"
+           style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">
+          Xem chi tiết
+        </a>
       </td>
     </tr>
     <?php endwhile; ?>
@@ -246,49 +247,5 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
   <a href="shiping.php?page=<?php echo $total_pages.$qs; ?>">&raquo;</a>
 </div>
 
-<!-- MODAL -->
-<div class="modal-back" id="modalBack">
-  <div class="modal">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-      <h3>Chi tiết đơn hàng</h3>
-      <button class="close-btn" onclick="closeModal()">Đóng</button>
-    </div>
-    <div id="modalBody"></div>
-  </div>
-</div>
-
-<script>
-function openModal(id, name, email, phone, address, date, status, total, payment, note, items)  {
-  let productsHtml = '<table><thead><tr><th>Sản phẩm</th><th>Số lượng</th><th>Đơn giá</th></tr></thead><tbody>';
-  items.forEach(p => {
-    const price = p.Price ? Number(p.Price).toLocaleString('vi-VN') + 'đ' : '—';
-    productsHtml += `<tr><td>${p.ProductName}</td><td>${p.quantity}</td><td>${price}</td></tr>`;
-  });
-  productsHtml += '</tbody></table>';
-
-  document.getElementById('modalBody').innerHTML = `
-    <div style="margin-bottom:8px"><strong>Mã đơn:</strong> ${id}</div>
-    <div style="margin-bottom:8px"><strong>Khách hàng:</strong> ${name} <span class="muted">${email}</span></div>
-    <div style="margin-bottom:8px"><strong>Số điện thoại:</strong> ${phone || '—'}</div>
-    <div style="margin-bottom:8px"><strong>Địa chỉ:</strong> ${address || '—'}</div>
-    <div style="margin-bottom:8px"><strong>Ngày đặt:</strong> ${date}</div>
-    <div style="margin-bottom:8px"><strong>Trạng thái:</strong> ${status}</div>
-    <div style="margin-bottom:8px"><strong>Thanh toán:</strong> ${payment || '—'}</div>
-    <div style="margin-bottom:8px"><strong>Ghi chú:</strong> ${note || '—'}</div>
-    <h4 style="margin-top:12px;margin-bottom:8px;color:#333">Danh sách sản phẩm</h4>
-    ${productsHtml}
-    <p style="text-align:right;margin-top:12px;font-weight:700;">Tổng: ${total}</p>
-  `;
-  document.getElementById('modalBack').style.display = 'flex';
-}
-
-function closeModal() {
-  document.getElementById('modalBack').style.display = 'none';
-}
-
-window.addEventListener('click', function(e){
-  if(e.target === document.getElementById('modalBack')) closeModal();
-});
-</script>
 </body>
 </html>
