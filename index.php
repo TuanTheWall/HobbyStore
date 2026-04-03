@@ -538,7 +538,7 @@ margin-left:-960px;
         <input type="text" name="price_min" id="price_min" placeholder="VD: 1.000.000" inputmode="numeric">
         <label>Giá đến:</label>
         <input type="text" name="price_max" id="price_max" placeholder="VD: 2.000.000" inputmode="numeric">
-        <label>Chọn dòng:</label>
+        
         <label>Chọn dòng:</label>
 <select name="grade">
     <option value="">-- Chọn dòng --</option>
