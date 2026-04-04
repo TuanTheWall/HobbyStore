@@ -2,10 +2,13 @@
 $conn = new mysqli("localhost","root","","hobbystore");
 if($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
 
-/* xóa khách hàng */
+/* xóa khách hàng — chỉ cho xóa nếu chưa có đơn hàng */
 if(isset($_GET['xoa'])){
     $id = $conn->real_escape_string($_GET['xoa']);
-    $conn->query("DELETE FROM customers WHERE customer_id='$id'");
+    $has_order = $conn->query("SELECT COUNT(*) as cnt FROM orders WHERE customer_id='$id'")->fetch_assoc()['cnt'];
+    if($has_order == 0){
+        $conn->query("DELETE FROM customers WHERE customer_id='$id'");
+    }
     header("Location: customer.php");
     exit;
 }
@@ -19,6 +22,22 @@ if(isset($_GET['toggle'])){
     header("Location: customer.php" . (isset($_SERVER['QUERY_STRING']) ? '?' . preg_replace('/toggle=[^&]*&?/','',$_SERVER['QUERY_STRING']) : ''));
     exit;
 }
+
+/* reset mật khẩu về mặc định */
+if(isset($_GET['reset_pw'])){
+    $id = $conn->real_escape_string($_GET['reset_pw']);
+    
+    // Lấy SĐT của khách
+    $phone = $conn->query("SELECT phone FROM customers WHERE customer_id='$id'")->fetch_assoc()['phone'];
+    
+    // $new_pw = password_hash($phone, PASSWORD_DEFAULT);
+    $conn->query("UPDATE customers SET password='$phone' WHERE customer_id='$id'");
+    header("Location: customer.php?msg=reset_ok");
+    exit;
+}
+
+
+$msg = $_GET['msg'] ?? '';
 
 /* tìm kiếm */
 $fname    = isset($_GET['fname'])   ? $_GET['fname']   : '';
@@ -43,7 +62,6 @@ $total_pages = max(1, ceil($total_rows / $per_page));
 
 $result = $conn->query("SELECT * FROM customers $where ORDER BY register_date DESC LIMIT $per_page OFFSET $offset");
 
-/* query string cho pagination */
 $qp = [];
 if(!empty($fname))    $qp[] = "fname=".urlencode($fname);
 if(!empty($status_f)) $qp[] = "sanpham=".urlencode($status_f);
@@ -83,10 +101,11 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
     th { background-color:#96dee0; color:rgb(0,0,0); }
     tr:hover { background-color:#f1f1f1; }
     .btn { padding:6px 12px; border:none; border-radius:5px; cursor:pointer; color:white; font-size:14px; }
-    .btn-edit   { background-color:orange; }
-    .btn-delete { background-color:red; }
-    .btn-lock   { background-color:rgb(43,244,255); color:black; }
-    .btn-unlock { background-color:green; }
+    .btn-delete  { background-color:red; }
+    .btn-lock    { background-color:rgb(43,244,255); color:black; }
+    .btn-unlock  { background-color:green; }
+    .btn-reset   { background-color:#f59e0b; color:#111; }
+    .btn-disabled { background-color:#ccc; color:#666; cursor:not-allowed; }
     .pagination { text-align:center; }
     .pagination a { color:black; text-decoration:none; padding:8px 15px; display:inline-block; }
     .pagination a.active { background-color:green; font-weight:bold; border-radius:5px; }
@@ -98,6 +117,8 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
     .search-advanced button:hover { background-color:darkblue; }
     .badge-active { background:#e8f8f0; color:#14723b; padding:4px 10px; border-radius:8px; font-weight:700; }
     .badge-locked { background:#fff0f0; color:#b33; padding:4px 10px; border-radius:8px; font-weight:700; }
+    .alert-success { background:#d4edda; color:#155724; border:1px solid #c3e6cb; padding:12px 20px; border-radius:8px; margin:0 30px 10px 30px; font-weight:600; }
+    .delete-note { font-size:12px; color:#999; margin-top:3px; }
   </style>
 </head>
 <body>
@@ -125,6 +146,13 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
     <a href="quanlynhaphang.php"><div class="menu-card"><h3>Quản lý nhập hàng</h3></div></a>
   </div>
 </section>
+
+
+<?php if($msg === 'reset_ok'): ?>
+  <div class="alert-success">✅ Reset mật khẩu thành công! Mật khẩu mới là số điện thoại của khách.</div>
+<?php endif; ?>
+
+
 
 <form action="customer.php" method="get" class="search-advanced">
   <label for="fname">Tìm theo họ tên</label>
@@ -154,7 +182,9 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
       </tr>
     </thead>
     <tbody>
-    <?php while($row = $result->fetch_assoc()): ?>
+    <?php while($row = $result->fetch_assoc()):
+        $has_order = $conn->query("SELECT COUNT(*) as cnt FROM orders WHERE customer_id='{$row['customer_id']}'")->fetch_assoc()['cnt'];
+    ?>
     <tr>
       <td><?php echo htmlspecialchars($row['username'] ?? $row['customer_id']); ?></td>
       <td><?php echo htmlspecialchars($row['phone']); ?></td>
@@ -169,9 +199,7 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
         <?php endif; ?>
       </td>
       <td>
-        <a href="edit.php?id=<?php echo urlencode($row['customer_id']); ?>">
-          <button class="btn btn-edit">Sửa</button>
-        </a>
+        <!-- Khóa / Mở khóa -->
         <a href="customer.php?toggle=<?php echo urlencode($row['customer_id']).$qs; ?>&page=<?php echo $page; ?>">
           <?php if($row['status'] === 'Hoạt động'): ?>
             <button class="btn btn-lock">Khóa</button>
@@ -179,10 +207,22 @@ $qs = count($qp) ? '&'.implode('&',$qp) : '';
             <button class="btn btn-unlock">Mở khóa</button>
           <?php endif; ?>
         </a>
-        <a href="customer.php?xoa=<?php echo urlencode($row['customer_id']); ?>"
-           onclick="return confirm('Bạn có chắc muốn xóa khách hàng này không?')">
-          <button class="btn btn-delete">Xóa</button>
+
+        <!-- Reset mật khẩu -->
+        <a href="customer.php?reset_pw=<?php echo urlencode($row['customer_id']); ?>&page=<?php echo $page.$qs; ?>"
+           onclick="return confirm('Reset mật khẩu về SĐT của khách này?')">
+          <button class="btn btn-reset">Reset MK</button>
         </a>
+
+        <!-- Xóa — chỉ cho xóa nếu chưa có đơn hàng -->
+        <?php if($has_order == 0): ?>
+          <a href="customer.php?xoa=<?php echo urlencode($row['customer_id']); ?>"
+             onclick="return confirm('Bạn có chắc muốn xóa khách hàng này không?')">
+            <button class="btn btn-delete">Xóa</button>
+          </a>
+        <?php else: ?>
+          <button class="btn btn-disabled" disabled title="Không thể xóa vì đã có đơn hàng">Xóa</button>
+        <?php endif; ?>
       </td>
     </tr>
     <?php endwhile; ?>

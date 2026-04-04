@@ -12,9 +12,10 @@ if(isset($_POST['update_status'])){
 }
 
 /* tìm kiếm */
-$date_from = isset($_GET['date_from']) ? $_GET['date_from'] : '';
-$date_to   = isset($_GET['date_to'])   ? $_GET['date_to']   : '';
-$status_f  = isset($_GET['sanpham'])   ? $_GET['sanpham']   : '';
+$date_from  = isset($_GET['date_from']) ? $_GET['date_from'] : '';
+$date_to    = isset($_GET['date_to'])   ? $_GET['date_to']   : '';
+$status_f   = isset($_GET['sanpham'])   ? $_GET['sanpham']   : '';
+$id_order_f = isset($_GET['id_order'])  ? $_GET['id_order']  : '';
 
 $where = "WHERE 1=1";
 if(!empty($date_from)) $where .= " AND o.order_date >= '" . $conn->real_escape_string($date_from) . "'";
@@ -22,6 +23,9 @@ if(!empty($date_to))   $where .= " AND o.order_date <= '" . $conn->real_escape_s
 $status_map = ['dxn'=>'Đã xác nhận','dg'=>'Đã giao','cxl'=>'Chờ xử lý','dh'=>'Đã huỷ','dag'=>'Đang giao'];
 if(!empty($status_f) && isset($status_map[$status_f])){
     $where .= " AND o.status='" . $status_map[$status_f] . "'";
+}
+if(!empty($id_order_f)){
+    $where .= " AND o.id_order LIKE '%" . $conn->real_escape_string($id_order_f) . "%'";
 }
 
 /* phân trang */
@@ -47,9 +51,10 @@ $result = $conn->query($sql);
 
 /* query string cho pagination */
 $qp = [];
-if(!empty($date_from)) $qp[] = "date_from=".urlencode($date_from);
-if(!empty($date_to))   $qp[] = "date_to=".urlencode($date_to);
-if(!empty($status_f))  $qp[] = "sanpham=".urlencode($status_f);
+if(!empty($date_from))  $qp[] = "date_from=".urlencode($date_from);
+if(!empty($date_to))    $qp[] = "date_to=".urlencode($date_to);
+if(!empty($status_f))   $qp[] = "sanpham=".urlencode($status_f);
+if(!empty($id_order_f)) $qp[] = "id_order=".urlencode($id_order_f);
 $qs = count($qp) ? '&'.implode('&',$qp) : '';
 
 /* định nghĩa flow trạng thái */
@@ -143,6 +148,8 @@ $next_status = [
 </section>
 
 <form action="shiping.php" method="get" class="search-advanced">
+  <label>Mã đơn hàng</label>
+  <input type="text" name="id_order" value="<?php echo htmlspecialchars($id_order_f); ?>" placeholder="VD: DH001">
   <label>Từ</label>
   <input type="date" name="date_from" value="<?php echo htmlspecialchars($date_from); ?>">
   <label>Đến</label>
