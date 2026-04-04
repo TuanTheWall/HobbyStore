@@ -268,6 +268,13 @@ value="<?= $user_info['phone'] ?>" required>
 form.addEventListener("submit", function (e) {
   if(!form.dataset.confirmed){
     e.preventDefault();
+
+    // Đọc giá trị từ form thay vì dùng giá trị cứng
+    document.querySelector('#orderSummary p:nth-child(1)').innerHTML = '<strong>Tên:</strong> ' + form.querySelector('[name="name"]').value;
+    document.querySelector('#orderSummary p:nth-child(2)').innerHTML = '<strong>Địa chỉ:</strong> ' + form.querySelector('[name="address"]').value;
+    document.querySelector('#orderSummary p:nth-child(3)').innerHTML = '<strong>Số điện thoại:</strong> ' + form.querySelector('[name="phone"]').value;
+    document.querySelector('#orderSummary p:nth-child(4)').innerHTML = '<strong>Phương thức thanh toán:</strong> ' + form.querySelector('[name="payment_method"] option:checked').text;
+
     orderConfirmPopup.style.display = "flex";
   }
 });
