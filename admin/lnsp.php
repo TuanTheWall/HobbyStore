@@ -377,9 +377,9 @@ background:#96dee0;
   <a href="lndm.php">
     <p>TỶ LỆ LỢI NHUẬN THEO DANH MỤC</p>
   </a>
-  <a href="lnsp.php">
+  <!-- <a href="lnsp.php">
     <p class="underline-text" style="color:red;">TỶ LỆ LỢI NHUẬN THEO SẢN PHẨM</p>
-  </a>
+  </a> -->
   <a href="ln.php">
     <p>GIÁ BÁN</p>
   </a>

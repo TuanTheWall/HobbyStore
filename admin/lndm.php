@@ -7,10 +7,14 @@ if ($conn->connect_error) {
 
 /* cập nhật profit */
 if(isset($_POST['grade'])){
-    $grade = $_POST['grade'];
-    $profit = $_POST['profit']/100;
-    $sql_update = "UPDATE product_list SET Profit='$profit' WHERE Grade='$grade'";
-    $conn->query($sql_update);
+    $grade  = $conn->real_escape_string($_POST['grade']);
+    $profit = $_POST['profit'] / 100;
+    $conn->query("
+        UPDATE product_list 
+        SET Profit = '$profit',
+            Price  = ROUND(cost_price * (1 + $profit))
+        WHERE Grade = '$grade'
+    ");
 }
 
 /* lấy giá trị tìm kiếm */
@@ -24,7 +28,7 @@ if($page < 1) $page = 1;
 $start = ($page - 1) * $limit;
 
 /* lấy danh mục với filter */
-$sql = "SELECT Grade, Profit FROM product_list WHERE 1";
+$sql = "SELECT Grade, MIN(Profit) as Profit FROM product_list WHERE 1";
 
 if($fname != ""){
     $sql .= " AND Grade LIKE '%$fname%'";
@@ -402,9 +406,9 @@ background:#96dee0;
 	<a href="lndm.php">
 		<p class="underline-text" style="color:red;">TỶ LỆ LỢI NHUẬN THEO DANH MỤC</p>
 	</a>
-	<a href="lnsp.php">
+	<!-- <a href="lnsp.php">
 		<p >TỶ LỆ LỢI NHUẬN THEO SẢN PHẨM<p>
-	</a>
+	</a> -->
 	<a href="ln.php">
 		<p>GIÁ BÁN<p>
 	</a>
