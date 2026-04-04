@@ -1,45 +1,51 @@
 <?php
-// baocao_detail.php — trả về JSON với thông tin để redirect đến trang chi tiết
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
 $conn = mysqli_connect("localhost","root","","hobbystore");
-$conn->set_charset("utf8");
+mysqli_set_charset($conn, "utf8");
 
-$loai       = $_GET['loai'] ?? '';
-$product_id = $conn->real_escape_string($_GET['product_id'] ?? '');
+$loai       = $_GET['loai']       ?? '';
+$product_id = mysqli_real_escape_string($conn, $_GET['product_id'] ?? '');
+$from       = mysqli_real_escape_string($conn, $_GET['from'] ?? '');
+$to         = mysqli_real_escape_string($conn, $_GET['to']   ?? '');
 
-if ($loai === 'nhap') {
+if($loai === 'nhap'){
+    $where = "pri.product_id = '$product_id'";
+    if($from != "") $where .= " AND pr.import_date >= '$from'";
+    if($to   != "") $where .= " AND pr.import_date <= '$to'";
+
     $sql = "
-        SELECT pr.receipt_code
+        SELECT pr.receipt_code, pr.import_date,
+               SUM(pri.quantity) as tong_sl,
+               SUM(pri.quantity * pri.price) as tong_tien
         FROM purchase_receipt_items pri
         JOIN purchase_receipts pr ON pri.receipt_code = pr.receipt_code
-        WHERE pri.product_id = '$product_id'
+        WHERE $where
+        GROUP BY pr.receipt_code, pr.import_date
         ORDER BY pr.import_date DESC
-        LIMIT 1
     ";
-    $result = $conn->query($sql);
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        echo json_encode(['redirect' => 'receipt_detail_page.php?code=' . urlencode($row['receipt_code']) . '&from=baocao']);
-    } else {
-        echo json_encode(['error' => 'Không tìm thấy phiếu nhập']);
-    }
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while($r = mysqli_fetch_assoc($result)) $rows[] = $r;
+    echo json_encode(['type' => 'nhap', 'data' => $rows], JSON_UNESCAPED_UNICODE);
 
-} elseif ($loai === 'xuat') {
+} elseif($loai === 'xuat'){
+    $where = "oi.ProductID = '$product_id' AND o.status = 'Đã giao'";
+    if($from != "") $where .= " AND o.order_date >= '$from'";
+    if($to   != "") $where .= " AND o.order_date <= '$to'";
+
     $sql = "
-        SELECT o.id_order
+        SELECT o.id_order, o.order_date,
+               o.receiver_name, o.receiver_phone,
+               oi.quantity
         FROM order_item oi
         JOIN orders o ON oi.id_order = o.id_order
-        WHERE oi.ProductID = '$product_id' AND o.status = 'Đã giao'
+        WHERE $where
         ORDER BY o.order_date DESC
-        LIMIT 1
     ";
-    $result = $conn->query($sql);
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        echo json_encode(['redirect' => 'order_detail_page.php?id=' . urlencode($row['id_order']) . '&from=baocao']);
-    } else {
-        echo json_encode(['error' => 'Không tìm thấy đơn hàng']);
-    }
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while($r = mysqli_fetch_assoc($result)) $rows[] = $r;
+    echo json_encode(['type' => 'xuat', 'data' => $rows], JSON_UNESCAPED_UNICODE);
 
 } else {
     echo json_encode(['error' => 'Yêu cầu không hợp lệ']);
